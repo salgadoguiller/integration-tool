@@ -158,6 +158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\InterfaceDatabase.cs" />
     <Compile Include="Models\Permission.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
