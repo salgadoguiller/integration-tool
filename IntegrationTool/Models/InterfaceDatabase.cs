@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationTool.Models
 {
-    interface InterfaceDatabase
+    public interface InterfaceDatabase
     {      
         void openConnection();
         void closeConnection();

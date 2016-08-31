@@ -56,3 +56,6 @@ C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\System.Web.WebPage
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\System.Web.WebPages.Razor.xml
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\nunit.framework.dll
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\nunit.framework.xml
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\MySql.Data.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\nunit.framework.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\nunit.framework.xml

@@ -9,13 +9,13 @@ using NUnit.Framework;
 namespace IntegrationTool.Tests
 {
     [TestFixture]
-    class TestMysqlDatabase
+    class MysqlDatabaseTest
     {
         [Test]
         public void pruebaDeConexion()
         {
-            MySqlDatabase patito = new MySqlDatabase("","prueba", "localhost", "root", "","3306");
-            string gg =patito.executeQuery("select * from prueba2");           
+            MySqlDatabase mySql = new MySqlDatabase("","prueba", "localhost", "root", "","3306");
+            string result = mySql.executeQuery("select * from prueba2");           
         }
     }
 }
