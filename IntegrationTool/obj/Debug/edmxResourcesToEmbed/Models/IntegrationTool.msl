@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IntegrationToolModelStoreContainer" CdmEntityContainer="IntegrationToolEntities">
+    <EntitySetMapping Name="ActiveDirectoryParameters">
+      <EntityTypeMapping TypeName="IntegrationToolModel.ActiveDirectoryParameter">
+        <MappingFragment StoreEntitySet="ActiveDirectoryParameters">
+          <ScalarProperty Name="ActiveDirectoryId" ColumnName="ActiveDirectoryId" />
+          <ScalarProperty Name="ADPath" ColumnName="ADPath" />
+          <ScalarProperty Name="ADDomain" ColumnName="ADDomain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendars">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Calendar">
+        <MappingFragment StoreEntitySet="Calendars">
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="ExecutionStartDate" ColumnName="ExecutionStartDate" />
+          <ScalarProperty Name="NextExecutionDate" ColumnName="NextExecutionDate" />
+          <ScalarProperty Name="Emails" ColumnName="Emails" />
+          <ScalarProperty Name="IntegrationId" ColumnName="IntegrationId" />
+          <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatabaseParameters">
+      <EntityTypeMapping TypeName="IntegrationToolModel.DatabaseParameter">
+        <MappingFragment StoreEntitySet="DatabaseParameters">
+          <ScalarProperty Name="DatabaseParametersId" ColumnName="DatabaseParametersId" />
+          <ScalarProperty Name="Ip" ColumnName="Ip" />
+          <ScalarProperty Name="Instance" ColumnName="Instance" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlatFileParameters">
+      <EntityTypeMapping TypeName="IntegrationToolModel.FlatFileParameter">
+        <MappingFragment StoreEntitySet="FlatFileParameters">
+          <ScalarProperty Name="FlatFileParameterId" ColumnName="FlatFileParameterId" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="IntegrationId" ColumnName="IntegrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Headers">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Header">
+        <MappingFragment StoreEntitySet="Headers">
+          <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HeadersQueryTypes">
+      <EntityTypeMapping TypeName="IntegrationToolModel.HeadersQueryType">
+        <MappingFragment StoreEntitySet="HeadersQueryType">
+          <ScalarProperty Name="HeaderQueryTypeId" ColumnName="HeaderQueryTypeId" />
+          <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
+          <ScalarProperty Name="QueryTypeId" ColumnName="QueryTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntegrationLogs">
+      <EntityTypeMapping TypeName="IntegrationToolModel.IntegrationLog">
+        <MappingFragment StoreEntitySet="IntegrationLogs">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+          <ScalarProperty Name="IntegrationId" ColumnName="IntegrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Integrations">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Integration">
+        <MappingFragment StoreEntitySet="Integrations">
+          <ScalarProperty Name="IntegrationId" ColumnName="IntegrationId" />
+          <ScalarProperty Name="IntegrationDate" ColumnName="IntegrationDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="WebServiceId" ColumnName="WebServiceId" />
+          <ScalarProperty Name="DatabaseParametersId" ColumnName="DatabaseParametersId" />
+          <ScalarProperty Name="ServerSMTPParametersId" ColumnName="ServerSMTPParametersId" />
+          <ScalarProperty Name="IntegrationTypeId" ColumnName="IntegrationTypeId" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntegrationsTypes">
+      <EntityTypeMapping TypeName="IntegrationToolModel.IntegrationsType">
+        <MappingFragment StoreEntitySet="IntegrationsType">
+          <ScalarProperty Name="IntegrationTypeId" ColumnName="IntegrationTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Permission">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Queries">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Query">
+        <MappingFragment StoreEntitySet="Queries">
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="Query1" ColumnName="Query" />
+          <ScalarProperty Name="QueryTypeId" ColumnName="QueryTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QueriesTypes">
+      <EntityTypeMapping TypeName="IntegrationToolModel.QueriesType">
+        <MappingFragment StoreEntitySet="QueriesType">
+          <ScalarProperty Name="QueryTypeId" ColumnName="QueryTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recurrences">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Recurrence">
+        <MappingFragment StoreEntitySet="Recurrences">
+          <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
+          <ScalarProperty Name="NameRecurrence" ColumnName="NameRecurrence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resources">
+      <EntityTypeMapping TypeName="IntegrationToolModel.Resource">
+        <MappingFragment StoreEntitySet="Resources">
+          <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerSMTPParameters">
+      <EntityTypeMapping TypeName="IntegrationToolModel.ServerSMTPParameter">
+        <MappingFragment StoreEntitySet="ServerSMTPParameters">
+          <ScalarProperty Name="ServerSMTPParametersId" ColumnName="ServerSMTPParametersId" />
+          <ScalarProperty Name="NameServerSMTP" ColumnName="NameServerSMTP" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
+          <ScalarProperty Name="UsernameSMTP" ColumnName="UsernameSMTP" />
+          <ScalarProperty Name="PasswordSMTP" ColumnName="PasswordSMTP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IntegrationToolModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemLogs">
+      <EntityTypeMapping TypeName="IntegrationToolModel.SystemLog">
+        <MappingFragment StoreEntitySet="SystemLogs">
+          <ScalarProperty Name="SystemLogId" ColumnName="SystemLogId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+          <ScalarProperty Name="IntegrationId" ColumnName="IntegrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IntegrationToolModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersTypes">
+      <EntityTypeMapping TypeName="IntegrationToolModel.UsersType">
+        <MappingFragment StoreEntitySet="UsersType">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebServices">
+      <EntityTypeMapping TypeName="IntegrationToolModel.WebService">
+        <MappingFragment StoreEntitySet="WebServices">
+          <ScalarProperty Name="WebServiceId" ColumnName="WebServiceId" />
+          <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
