@@ -21,7 +21,6 @@ C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\bi
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\bin\System.Web.WebPages.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\bin\System.Web.WebPages.Deployment.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\bin\System.Web.WebPages.Razor.xml
-C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\obj\Debug\IntegrationTool.csprojResolveAssemblyReference.cache
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\obj\Debug\IntegrationTool.dll
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\obj\Debug\IntegrationTool.pdb
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool\bin\EntityFramework.dll
@@ -59,3 +58,50 @@ C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\nunit.framework.xm
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\MySql.Data.dll
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\nunit.framework.dll
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\nunit.framework.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\IntegrationTool.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\IntegrationTool.pdb
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Antlr3.Runtime.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\EntityFramework.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Microsoft.Owin.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\MySql.Data.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Newtonsoft.Json.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\nunit.framework.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Owin.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Net.Http.Formatting.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Helpers.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Http.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Http.WebHost.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Mvc.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Optimization.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Razor.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.Deployment.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.Razor.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\WebGrease.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Antlr3.Runtime.pdb
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\EntityFramework.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Microsoft.Owin.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\Newtonsoft.Json.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\nunit.framework.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Optimization.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Net.Http.Formatting.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Helpers.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Http.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Http.WebHost.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Mvc.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.Razor.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.Deployment.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\bin\System.Web.WebPages.Razor.xml
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\obj\Debug\IntegrationTool.csprojResolveAssemblyReference.cache
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\obj\Debug\IntegrationTool.dll
+C:\Users\gcrescencio\Desktop\integrationtool\IntegrationTool\obj\Debug\IntegrationTool.pdb
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Antlr3.Runtime.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Microsoft.Owin.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Owin.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\System.Web.Optimization.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\WebGrease.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Antlr3.Runtime.pdb
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Microsoft.Owin.xml
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\System.Web.Optimization.xml

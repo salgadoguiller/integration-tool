@@ -65,3 +65,5 @@ C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Te
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\bin\Debug\EntityFramework.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\obj\Debug\IntegrationTool.Tests.pdb
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\bin\Debug\System.Web.Optimization.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\bin\Debug\System.Web.Optimization.xml
