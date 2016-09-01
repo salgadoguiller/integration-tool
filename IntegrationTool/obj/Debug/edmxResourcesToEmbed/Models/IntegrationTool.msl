@@ -31,6 +31,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Engine" ColumnName="Engine" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

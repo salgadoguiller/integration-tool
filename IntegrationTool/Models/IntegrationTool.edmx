@@ -124,6 +124,8 @@
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="Username" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Engine" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Port" Type="varchar" Nullable="false" MaxLength="45" />
         </EntityType>
         <EntityType Name="FlatFileParameters">
           <Key>
@@ -601,6 +603,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Engine" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Port" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="DatabaseParameters" ToRole="Integrations" />
         </EntityType>
         <EntityType Name="FlatFileParameter">
@@ -1020,6 +1024,8 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

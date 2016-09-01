@@ -121,6 +121,8 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
     <Property Name="Username" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+    <Property Name="Engine" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+    <Property Name="Port" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="DatabaseParameters" ToRole="Integrations" />
   </EntityType>
   <EntityType Name="FlatFileParameter">
