@@ -22,7 +22,7 @@ namespace IntegrationTool.Models
             return activeDirectories;
         }
 
-        public void setActiveDirectory(string domain, string path)
+        public void saveActiveDirectory(string domain, string path)
         {
             ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
             ad.ADPath = domain;
