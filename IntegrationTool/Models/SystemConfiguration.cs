@@ -18,7 +18,7 @@ namespace IntegrationTool.Models
         {
             List<ActiveDirectoryParameter> activeDirectories = (from ad in SystemConfigurationDB.ActiveDirectoryParameters
                                                 select ad).ToList();
-
+       
             return activeDirectories;
         }
     }
