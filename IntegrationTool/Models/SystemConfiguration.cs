@@ -30,6 +30,42 @@ namespace IntegrationTool.Models
 
             SystemConfigurationDB.ActiveDirectoryParameters.Add(ad);
             SystemConfigurationDB.SaveChanges();
-        }        
+        }
+
+        public List<ServerSMTPParameter> getServersSMTP()
+        {
+            List<ServerSMTPParameter> serverSmtp = (from server in SystemConfigurationDB.ServerSMTPParameters
+                                                                select server).ToList();
+            return serverSmtp;
+        }
+
+        public void saveServersSMPT(string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
+        {           
+            ServerSMTPParameter serverSmtp = new ServerSMTPParameter();
+            serverSmtp.NameServerSMTP = NameServerSMTP;
+            serverSmtp.Port = Port;
+            serverSmtp.UsernameSMTP = UsernameSMTP;
+            serverSmtp.PasswordSMTP = PasswordSMTP;
+
+            SystemConfigurationDB.ServerSMTPParameters.Add(serverSmtp);
+            SystemConfigurationDB.SaveChanges();      
+        }
+
+        public List<ServerSMTPParameter> getFlatFiles()
+        {
+            List<ServerSMTPParameter> serverSmtp = (from server in SystemConfigurationDB.ServerSMTPParameters
+                                                    select server).ToList();
+            return serverSmtp;
+        }
+
+        public void saveFlatFiles(string location)
+        {           
+            FlatFileParameter flatFile = new FlatFileParameter();
+
+            flatFile.Location = location;
+           
+            SystemConfigurationDB.FlatFileParameters.Add(flatFile);
+            SystemConfigurationDB.SaveChanges();
+        }   
     }
 }

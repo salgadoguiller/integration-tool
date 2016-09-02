@@ -15,7 +15,7 @@
         var data = $.param(req);
 
         $http.post('Configuration/saveServerSmtp', data, config).success(function (resp) {
-            $scope.response = resp.Port + resp.NameServerSMTP + resp.UsernameSMTP + resp.PasswordSMTP;
+            $scope.response = resp.message;
             $scope.message = 1;
         }).error(function (resp) {
             $scope.response = resp;

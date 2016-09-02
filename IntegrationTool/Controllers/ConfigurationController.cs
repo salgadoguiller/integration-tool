@@ -55,18 +55,15 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveServerSmtp()
         {
-            Response.ContentType = "application/json; charset=utf-8";
-          
-            ServerSMTPParameter serverSmtp = new ServerSMTPParameter();
 
-            serverSmtp.NameServerSMTP = Request.Form["NameServerSMTP"];
-            serverSmtp.Port = Request.Form["Port"]; 
-            serverSmtp.UsernameSMTP = Request.Form["UsernameSMTP"];
-            serverSmtp.PasswordSMTP = Request.Form["PasswordSMTP"];
-         
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(serverSmtp);
+            connectModel();
+            systemConfigurationModel.saveServersSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+
+            string json = "{\"message\":\"Configuration Server SMTP Success.\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
-            Response.End();              
+            Response.End();
         }
 
         [HttpGet]
@@ -85,6 +82,20 @@ namespace IntegrationTool.Controllers
         public ActionResult flatfiles()
         {
             return View();
+        }
+
+        [HttpPost]
+        public void saveFlatFiles()
+        {
+
+            connectModel();
+            systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
+
+            string json = "{\"message\":\"Configuration Flat Files Success.\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
         }
 
         [HttpGet]
