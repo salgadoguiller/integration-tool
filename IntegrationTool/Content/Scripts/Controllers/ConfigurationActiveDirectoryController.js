@@ -4,7 +4,8 @@
     $scope.request = {};
     $scope.sendRequest = sendRequest;
 
-    function sendRequest(req) {
+    function sendRequest(req)
+    {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
