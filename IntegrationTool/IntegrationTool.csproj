@@ -243,7 +243,12 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryController.js" />
-    <Content Include="Content\Scripts\Controllers\MainController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationDataBasesController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationWebServicesController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />

@@ -1,7 +1,12 @@
 ﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute']);
 
-IntegrationToolApp.controller('MainController', MainController);
 IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
+IntegrationToolApp.controller('ConfigurationServerSMTPController', ConfigurationServerSMTPController);
+IntegrationToolApp.controller('ConfigurationDataBasesController', ConfigurationDataBasesController);
+IntegrationToolApp.controller('ConfigurationWebServicesController', ConfigurationWebServicesController);
+IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationFlatFilesController);
+IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
+IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
 
 var configFunction = function ($routeProvider) {
     $routeProvider
@@ -13,22 +18,28 @@ var configFunction = function ($routeProvider) {
             controller: 'ConfigurationActiveDirectoryController'
         })
         .when('/Configuration/serversmtp', {
-            templateUrl: '/Configuration/serversmtp'
+            templateUrl: '/Configuration/serversmtp',
+            controller: 'ConfigurationServerSMTPController'
         })
         .when('/Configuration/databases', {
-            templateUrl: '/Configuration/databases'
+            templateUrl: '/Configuration/databases',
+            controller: 'ConfigurationDataBasesController'
         })
         .when('/Configuration/webservices', {
-            templateUrl: '/Configuration/webservices'
+            templateUrl: '/Configuration/webservices',
+            controller: 'ConfigurationWebServicesController'
         })
         .when('/Configuration/flatfiles', {
-            templateUrl: '/Configuration/flatfiles'
+            templateUrl: '/Configuration/flatfiles',
+            controller: 'ConfigurationFlatFilesController'
         })
         .when('/Configuration/queries', {
-            templateUrl: '/Configuration/queries'
+            templateUrl: '/Configuration/queries',
+            controller: 'ConfigurationQueriesController'
         })
         .when('/Configuration/headers', {
-            templateUrl: '/Configuration/headers'
+            templateUrl: '/Configuration/headers',
+            controller: 'ConfigurationHeadersController'
         });
 }
 configFunction.$inject = ['$routeProvider'];
