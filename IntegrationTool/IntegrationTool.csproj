@@ -215,6 +215,7 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SystemConfiguration.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>

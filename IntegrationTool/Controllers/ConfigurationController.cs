@@ -10,6 +10,13 @@ namespace IntegrationTool.Controllers
 {
     public class ConfigurationController : Controller
     {
+        private SystemConfiguration systemConfigurationModel;
+
+        private void connectModel()
+        {
+            systemConfigurationModel = new SystemConfiguration();
+        }
+
         [HttpGet]
         public ActionResult activedirectory()
         {
@@ -19,6 +26,9 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveActiveDirectory()
         {
+            connectModel();
+            systemConfigurationModel.getActiveDirectories();
+            
             /*
             string json = "{\"message\":\"Configuration Active Directory Success.\"}";
             Response.Clear();
