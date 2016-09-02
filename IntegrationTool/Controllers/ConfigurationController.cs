@@ -26,16 +26,14 @@ namespace IntegrationTool.Controllers
             Response.Write(json);
             Response.End(); 
             */
-
-            /*
+           
             Response.ContentType = "application/json; charset=utf-8";
             ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
             ad.ADDomain = Request.Form["ADDomain"];
             ad.ADPath = Request.Form["ADPath"];
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(ad);
             Response.Write(json);
-            Response.End();
-            */
+            Response.End();        
 
             /*
             string json = "{\"name\":\"Joe\"}";
@@ -50,6 +48,23 @@ namespace IntegrationTool.Controllers
         public ActionResult serversmtp()
         {
             return View();
+        }
+
+        [HttpPost]
+        public void saveServerSmtp()
+        {
+            Response.ContentType = "application/json; charset=utf-8";
+          
+            ServerSMTPParameter serverSmtp = new ServerSMTPParameter();
+
+            serverSmtp.NameServerSMTP = Request.Form["NameServerSMTP"];
+            serverSmtp.Port = Request.Form["Port"]; 
+            serverSmtp.UsernameSMTP = Request.Form["UsernameSMTP"];
+            serverSmtp.PasswordSMTP = Request.Form["PasswordSMTP"];
+         
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(serverSmtp);
+            Response.Write(json);
+            Response.End();              
         }
 
         [HttpGet]

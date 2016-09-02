@@ -106,3 +106,12 @@ C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bi
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Microsoft.Owin.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\System.Web.Optimization.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\obj\Debug\IntegrationTool.csprojResolveAssemblyReference.cache
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Antlr3.Runtime.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Microsoft.Owin.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\MySql.Data.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Owin.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\System.Web.Optimization.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\WebGrease.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Antlr3.Runtime.pdb
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Microsoft.Owin.xml
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\System.Web.Optimization.xml
