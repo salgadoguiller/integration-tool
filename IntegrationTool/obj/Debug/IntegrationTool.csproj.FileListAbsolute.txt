@@ -105,3 +105,4 @@ C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bi
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Antlr3.Runtime.pdb
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\Microsoft.Owin.xml
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\bin\System.Web.Optimization.xml
+C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool\obj\Debug\IntegrationTool.csprojResolveAssemblyReference.cache

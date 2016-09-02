@@ -8,12 +8,8 @@ namespace IntegrationTool.Controllers
 {
     public class MainController : Controller
     {
+        [HttpGet]
         public ActionResult index()
-        {
-            return View();
-        }
-
-        public ActionResult test()
         {
             return View();
         }

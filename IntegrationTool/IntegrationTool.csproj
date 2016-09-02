@@ -347,13 +347,22 @@
     <Content Include="Views\Configuration\serversmtp.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\database.cshtml" />
+    <Content Include="Views\Configuration\databases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Main\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Main\test.cshtml" />
+    <Content Include="Views\Configuration\webservices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\flatfiles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\queries.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\headers.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

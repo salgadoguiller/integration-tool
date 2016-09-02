@@ -2,11 +2,11 @@
     <section class="content-header">
       <div class="col-md-10 col-md-offset-1">
         <h1>
-          Configuration Server SMTP
+          Configuration Queries
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
-          <li class="active">Server SMTP</li>
+          <li class="active">Queries</li>
         </ol>
       </div>
     </section>
@@ -25,25 +25,24 @@
             <!-- form start -->
             <form role="form">
               <div class="box-body">
+
                 <div class="form-group">
-                  <label for="NameServer">Name Server</label>
-                  <input type="text" class="form-control" id="NameServer" placeholder="Enter Name Server">
+                  <label>Type Queries</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected" disabled>Select</option>
+                    <option>User</option>
+                    <option>Course</option>
+                    <option>Institution</option>
+                    <option>...</option>
+                  </select>
                 </div>
+
+                <label for="Queries">Query</label>
                 <div class="form-group">
-                  <label for="ServerSMTP">Port</label>
-                  <input type="text" class="form-control" id="ServerSMTP" placeholder="Enter Port">
-                </div>
-                <div class="form-group">
-                  <label for="UsernameSMTP">Username</label>
-                  <input type="text" class="form-control" id="UsernameSMTP" placeholder="Enter Username">
-                </div>
-                <div class="form-group">
-                  <label for="Password">Password</label>
-                  <input type="password" class="form-control" id="Password" placeholder="Enter Password">
+                  <textarea name="Queries" id="Queries" class="form-control" rows="3"></textarea>
                 </div>
               </div>
               <!-- /.box-body -->
-
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>

@@ -8,20 +8,46 @@ namespace IntegrationTool.Controllers
 {
     public class ConfigurationController : Controller
     {
+        [HttpGet]
         public ActionResult activedirectory()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult serversmtp()
         {
             return View();
         }
 
-        public ActionResult database()
+        [HttpGet]
+        public ActionResult databases()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult webservices()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult flatfiles()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult queries()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult headers()
+        {
+            return View();
+        }
     }
 }

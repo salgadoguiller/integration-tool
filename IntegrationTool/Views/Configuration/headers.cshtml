@@ -2,11 +2,11 @@
     <section class="content-header">
       <div class="col-md-10 col-md-offset-1">
         <h1>
-          Configuration Server SMTP
+          Configuration Headers
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
-          <li class="active">Server SMTP</li>
+          <li class="active">Headers</li>
         </ol>
       </div>
     </section>
@@ -26,20 +26,18 @@
             <form role="form">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="NameServer">Name Server</label>
-                  <input type="text" class="form-control" id="NameServer" placeholder="Enter Name Server">
+                  <label>Type Headers</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Select</option>
+                    <option>User</option>
+                    <option>Course</option>
+                    <option>Institution</option>
+                    <option>...</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="ServerSMTP">Port</label>
-                  <input type="text" class="form-control" id="ServerSMTP" placeholder="Enter Port">
-                </div>
-                <div class="form-group">
-                  <label for="UsernameSMTP">Username</label>
-                  <input type="text" class="form-control" id="UsernameSMTP" placeholder="Enter Username">
-                </div>
-                <div class="form-group">
-                  <label for="Password">Password</label>
-                  <input type="password" class="form-control" id="Password" placeholder="Enter Password">
+                  <label for="HeaderName">Name</label>
+                  <input type="text" class="form-control" id="HeaderName" placeholder="Enter Name">
                 </div>
               </div>
               <!-- /.box-body -->

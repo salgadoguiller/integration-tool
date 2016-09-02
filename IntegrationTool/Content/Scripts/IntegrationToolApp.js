@@ -3,15 +3,30 @@
 IntegrationToolApp.controller('MainController', MainController);
 
 var configFunction = function ($routeProvider) {
-    $routeProvider.
-        when('/Configuration/activedirectory', {
+    $routeProvider
+        .when('/Main/index', {
+            templateUrl: '/Main/index'
+        })
+        .when('/Configuration/activedirectory', {
             templateUrl: '/Configuration/activedirectory'
         })
         .when('/Configuration/serversmtp', {
             templateUrl: '/Configuration/serversmtp'
         })
-        .when('/Configuration/database', {
-            templateUrl: '/Configuration/database'
+        .when('/Configuration/databases', {
+            templateUrl: '/Configuration/databases'
+        })
+        .when('/Configuration/webservices', {
+            templateUrl: '/Configuration/webservices'
+        })
+        .when('/Configuration/flatfiles', {
+            templateUrl: '/Configuration/flatfiles'
+        })
+        .when('/Configuration/queries', {
+            templateUrl: '/Configuration/queries'
+        })
+        .when('/Configuration/headers', {
+            templateUrl: '/Configuration/headers'
         });
 }
 configFunction.$inject = ['$routeProvider'];
