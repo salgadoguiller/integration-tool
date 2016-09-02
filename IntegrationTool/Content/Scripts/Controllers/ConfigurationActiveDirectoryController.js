@@ -15,7 +15,7 @@
         var data = $.param(req);
 
         $http.post('Configuration/saveActiveDirectory', data, config).success(function (resp) {
-            $scope.response = resp.ADDomain + resp.ADPath;
+            $scope.response = resp.message;
             $scope.message = 1;
         }).error(function (resp) {
             $scope.response = resp;

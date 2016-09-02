@@ -27,30 +27,22 @@ namespace IntegrationTool.Controllers
         public void saveActiveDirectory()
         {
             connectModel();
-            systemConfigurationModel.getActiveDirectories();
-            
-            /*
+            systemConfigurationModel.saveActiveDirectory(Request.Form["ADDomain"], Request.Form["ADPath"]);
+
             string json = "{\"message\":\"Configuration Active Directory Success.\"}";
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
-            Response.End(); 
-            */
+            Response.End();
+
+            // Select and return activeDirectories
+            /*
+            List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
            
             Response.ContentType = "application/json; charset=utf-8";
-            ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
-            ad.ADDomain = Request.Form["ADDomain"];
-            ad.ADPath = Request.Form["ADPath"];
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(ad);
-            Response.Write(json);
-            Response.End();        
-
-            /*
-            string json = "{\"name\":\"Joe\"}";
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End(); 
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories);
+            Response.Write(response);
+            Response.End();
             */
         }
 

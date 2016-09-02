@@ -21,5 +21,15 @@ namespace IntegrationTool.Models
        
             return activeDirectories;
         }
+
+        public void saveActiveDirectory(string domain, string path)
+        {
+            ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
+            ad.ADPath = domain;
+            ad.ADDomain = path;
+
+            SystemConfigurationDB.ActiveDirectoryParameters.Add(ad);
+            SystemConfigurationDB.SaveChanges();
+        }        
     }
 }
