@@ -1,4 +1,5 @@
 IntegrationTool.v11.suo
 IntegrationTool/bin/IntegrationTool.dll
 IntegrationTool/bin/IntegrationTool.pdb
-IntegrationTool/obj/Debug/
+IntegrationTool/obj/
+IntegrationTool.Tests/obj/
