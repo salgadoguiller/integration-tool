@@ -1,6 +1,7 @@
 ﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute']);
 
 IntegrationToolApp.controller('MainController', MainController);
+IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
 
 var configFunction = function ($routeProvider) {
     $routeProvider
@@ -8,7 +9,8 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Main/index'
         })
         .when('/Configuration/activedirectory', {
-            templateUrl: '/Configuration/activedirectory'
+            templateUrl: '/Configuration/activedirectory',
+            controller: 'ConfigurationActiveDirectoryController'
         })
         .when('/Configuration/serversmtp', {
             templateUrl: '/Configuration/serversmtp'

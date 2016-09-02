@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using IntegrationTool.Models;
 
 namespace IntegrationTool.Controllers
 {
@@ -12,6 +14,36 @@ namespace IntegrationTool.Controllers
         public ActionResult activedirectory()
         {
             return View();
+        }
+
+        [HttpPost]
+        public void saveActiveDirectory()
+        {
+            /*
+            string json = "{\"message\":\"Configuration Active Directory Success.\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End(); 
+            */
+
+            /*
+            Response.ContentType = "application/json; charset=utf-8";
+            ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
+            ad.ADDomain = Request.Form["ADDomain"];
+            ad.ADPath = Request.Form["ADPath"];
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(ad);
+            Response.Write(json);
+            Response.End();
+            */
+
+            /*
+            string json = "{\"name\":\"Joe\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End(); 
+            */
         }
 
         [HttpGet]

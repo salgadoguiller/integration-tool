@@ -1,48 +1,55 @@
-﻿<!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="col-md-10 col-md-offset-1">
-        <h1>
-          Configuration Active Directory
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
-          <li class="active">Active Directory</li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-10 col-md-offset-1">
-          <!-- general form elements -->
-          <div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">Form</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="ADPath">Active Directory Path</label>
-                  <input type="text" class="form-control" id="ADPath" placeholder="Enter path">
-                </div>
-                <div class="form-group">
-                  <label for="ADDomain">Active Directory Domain</label>
-                  <input type="text" class="form-control" id="ADDomain" placeholder="Enter Domain">
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-          <!-- /.box -->
+﻿    <div ngController="ConfigurationActiveDirectoryController">
+        <br />
+        <div ng-show="message === 1" class="alert alert-success alert-dismissible col-md-10 col-md-offset-1" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><strong></strong> {{response}}
         </div>
-      </div>
-    </section>
-    <!-- /.content -->
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="col-md-10 col-md-offset-1">
+            <h1>
+              Configuration Active Directory
+            </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
+              <li class="active">Active Directory</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-10 col-md-offset-1">
+              <!-- general form elements -->
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Form</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" ng-submit="sendRequest(request)">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="ADPath">Active Directory Path</label>
+                      <input ng-model="request.ADPath" type="text" class="form-control" id="ADPath" placeholder="Enter path">
+                    </div>
+                    <div class="form-group">
+                      <label for="ADDomain">Active Directory Domain</label>
+                      <input ng-model="request.ADDomain" type="text" class="form-control" id="ADDomain" placeholder="Enter Domain">
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.box -->
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+    </div>

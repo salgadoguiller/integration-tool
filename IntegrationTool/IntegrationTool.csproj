@@ -59,8 +59,8 @@
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework">
@@ -240,7 +240,9 @@
     <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\Bootstrap\js\npm.js" />
     <Content Include="Content\Images\boxed-bg.jpg" />
+    <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryController.js" />
     <Content Include="Content\Scripts\Controllers\MainController.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
