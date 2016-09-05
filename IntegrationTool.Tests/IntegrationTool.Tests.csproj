@@ -103,6 +103,7 @@
     <Compile Include="SqlServerDataBaseTest.cs" />
     <Compile Include="MysqlDatabaseTest.cs" />
     <Compile Include="SystemConfigurationDBTest.cs" />
+    <Compile Include="WriteFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

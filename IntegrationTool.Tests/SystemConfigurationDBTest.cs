@@ -15,7 +15,7 @@ namespace IntegrationTool.Tests
         public void sqlServerDataBase_Connect_ReturnQueryResult(string domain, string path)
         {
             SystemConfiguration systemConfigurationModel = new SystemConfiguration();
-            systemConfigurationModel.setActiveDirectory(domain, path);
+            systemConfigurationModel.saveActiveDirectory(domain, path);
         }
     }
 }
