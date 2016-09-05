@@ -51,13 +51,6 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();      
         }
 
-        public List<QueriesType> getTypeQueries()
-        {
-            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
-                                   select queryType).ToList();
-            return queries;
-        }
-
         public List<Query> getQueries()
         {
             List<Query> queries = (from query in SystemConfigurationDB.Queries
@@ -137,11 +130,46 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();
         }
 
+        public List<Header> getHeaders()
+        {
+            List<Header> headers = SystemConfigurationDB.Headers.ToList();
+
+            return headers;
+        }
+
+        public void saveHeaders(string queryTypeId, string name)
+        {
+            string[] headersName = name.Split('|');
+
+            foreach (string headerName in headersName)
+            {
+                Header header = new Header();
+                header.Name = headerName;
+
+                SystemConfigurationDB.Headers.Add(header);
+                SystemConfigurationDB.SaveChanges();
+
+                HeadersQueryType headerQueryType = new HeadersQueryType();
+                headerQueryType.QueryTypeId = Convert.ToInt32(queryTypeId);
+                headerQueryType.HeaderId = header.HeaderId;
+
+                SystemConfigurationDB.HeadersQueryTypes.Add(headerQueryType);
+                SystemConfigurationDB.SaveChanges();
+            }
+        }
+
         public List<Engine> getDataBaseEngines()
         {
             List<Engine> engines = (from dbEngine in SystemConfigurationDB.Engines
                                     select dbEngine).ToList();
             return engines;
+        }
+
+        public List<QueriesType> getTypeQueries()
+        {
+            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
+                                         select queryType).ToList();
+            return queries;
         }
     }
 }

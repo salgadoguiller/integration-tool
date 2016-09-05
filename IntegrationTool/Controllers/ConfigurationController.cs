@@ -40,13 +40,6 @@ namespace IntegrationTool.Controllers
             string json = "{\"message\":\"Configuration Active Directory Success.\"}";
 
             response(json);
-            
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-            */
 
             // Select and return activeDirectories
             /*
@@ -75,13 +68,6 @@ namespace IntegrationTool.Controllers
             string json = "{\"message\":\"Configuration Server SMTP Success.\"}";
 
             response(json);
-
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-            */
         }
 
         [HttpGet]
@@ -99,13 +85,6 @@ namespace IntegrationTool.Controllers
             string json = "{\"message\":\"Configuration Database Success.\"}";
 
             response(json);
-
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-            */
         }
 
         [HttpGet]
@@ -123,13 +102,6 @@ namespace IntegrationTool.Controllers
             string json = "{\"message\":\"Configuration Web Service Success.\"}";
 
             response(json);
-
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-            */
         }
 
         [HttpGet]
@@ -141,20 +113,12 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveFlatFiles()
         {
-
             connectModel();
             systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
 
             string json = "{\"message\":\"Configuration Flat Files Success.\"}";
 
             response(json);
-
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-             * */
         }
 
         [HttpGet]
@@ -172,29 +136,6 @@ namespace IntegrationTool.Controllers
             string json = "{\"message\":\"Configuration Queries Success.\"}";
 
             response(json);
-
-            /*
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-             * */
-        }
-
-        [HttpPost]
-        public void getTypeQueries()
-        {
-
-            connectModel();
-            List<QueriesType> queriesTypes =  systemConfigurationModel.getTypeQueries();
-
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
-                new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-
-            response(json);
         }
 
         [HttpGet]
@@ -203,12 +144,39 @@ namespace IntegrationTool.Controllers
             return View();
         }
 
+        [HttpPost]
+        public void saveHeaders()
+        {
+            connectModel();
+            systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+
+            string json = "{\"message\":\"Configuration Headers Success.\"}";
+
+            response(json);
+        }
+
+        [HttpPost]
         public void getDataBaseEngines()
         {
             connectModel();
             List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
 
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(engines, 
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            response(json);
+        }
+
+        public void getTypeQueries()
+        {
+
+            connectModel();
+            List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
                 new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
