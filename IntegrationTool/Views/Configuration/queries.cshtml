@@ -1,4 +1,10 @@
-﻿<!-- Content Header (Page header) -->
+﻿   <div ngController="ConfigurationQueriesController">
+    <br />
+    <div ng-show="message === 1" class="alert alert-success alert-dismissible col-md-10 col-md-offset-1" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="fa fa-check-circle" aria-hidden="true"></span><strong></strong> {{response}}
+    </div>
+<!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="col-md-10 col-md-offset-1">
         <h1>
@@ -23,23 +29,20 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" ng-submit="sendRequest(request)">
               <div class="box-body">
 
                 <div class="form-group">
-                  <label>Type Queries</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Select</option>
-                    <option>User</option>
-                    <option>Course</option>
-                    <option>Institution</option>
-                    <option>...</option>
+                  <label for="typeQueries">Type Queries</label>
+                  <select class="form-control select2" name="typeQueries" ng-model="request.typeQueries" style="width: 100%;">
+                    <option selected="selected" disabled value="">Select</option>
+                    <option ng-repeat="queryType in queriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
                   </select>
                 </div>
 
                 <label for="Queries">Query</label>
                 <div class="form-group">
-                  <textarea name="Queries" id="Queries" class="form-control" rows="3"></textarea>
+                  <textarea name="Queries" ng-model="request.Queries" id="Queries" class="form-control" rows="3"></textarea>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -52,4 +55,5 @@
         </div>
       </div>
     </section>
-    <!-- /.content -->
+   <!-- /.content -->
+   </div>

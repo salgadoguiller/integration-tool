@@ -163,6 +163,40 @@ namespace IntegrationTool.Controllers
             return View();
         }
 
+        [HttpPost]
+        public void saveQueries()
+        {
+            connectModel();
+            systemConfigurationModel.saveQueries(Request.Form["Queries"], Request.Form["typeQueries"]);
+
+            string json = "{\"message\":\"Configuration Queries Success.\"}";
+
+            response(json);
+
+            /*
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+             * */
+        }
+
+        [HttpPost]
+        public void getTypeQueries()
+        {
+
+            connectModel();
+            List<QueriesType> queriesTypes =  systemConfigurationModel.getTypeQueries();
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            response(json);
+        }
+
         [HttpGet]
         public ActionResult headers()
         {

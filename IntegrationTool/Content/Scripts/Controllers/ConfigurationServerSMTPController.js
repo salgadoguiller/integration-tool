@@ -17,6 +17,13 @@
         $http.post('Configuration/saveServerSmtp', data, config).success(function (resp) {
             $scope.response = resp.message;
             $scope.message = 1;
+            $scope.request =
+            {
+                'NameServerSMTP': '',
+                'Port': '',
+                'UsernameSMTP': '',
+                'PasswordSMTP':''
+            }
         }).error(function (resp) {
             $scope.response = resp;
             $scope.message = 2;
