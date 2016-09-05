@@ -51,6 +51,30 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();      
         }
 
+        public List<QueriesType> getTypeQueries()
+        {
+            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
+                                   select queryType).ToList();
+            return queries;
+        }
+
+        public List<Query> getQueries()
+        {
+            List<Query> queries = (from query in SystemConfigurationDB.Queries
+                                                 select query).ToList();
+            return queries;
+        }
+
+        public void saveQueries(string queryUser,string queryTypeUser)
+        {        
+            Query query = new Query();
+            query.Query1 = queryUser;
+            query.QueryTypeId = Convert.ToInt32(queryTypeUser);
+
+            SystemConfigurationDB.Queries.Add(query);
+            SystemConfigurationDB.SaveChanges();
+        }
+
         public List<FlatFileParameter> getFlatFiles()
         {
             List<FlatFileParameter> flatFiles = (from ff in SystemConfigurationDB.FlatFileParameters
