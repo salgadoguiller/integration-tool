@@ -158,6 +158,9 @@
     <Compile Include="Models\DatabaseParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Engine.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FlatFileParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -212,9 +215,6 @@
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SqlServerDataBase.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>IntegrationTool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SystemConfiguration.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
@@ -318,27 +318,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\IntegrationTool.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\IntegrationTool.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\IntegrationTool.edmx.diagram">
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\IntegrationTool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\Bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\Bootstrap\css\bootstrap.min.css.map" />
   </ItemGroup>
@@ -371,6 +350,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Configuration\headers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\IntegrationTool.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\IntegrationTool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IntegrationTool.edmx.diagram">
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\IntegrationTool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

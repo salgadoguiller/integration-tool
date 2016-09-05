@@ -4,6 +4,7 @@
     <EntitySet Name="ActiveDirectoryParameters" EntityType="IntegrationToolModel.Store.ActiveDirectoryParameters" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Calendars" EntityType="IntegrationToolModel.Store.Calendars" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DatabaseParameters" EntityType="IntegrationToolModel.Store.DatabaseParameters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Engines" EntityType="IntegrationToolModel.Store.Engines" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FlatFileParameters" EntityType="IntegrationToolModel.Store.FlatFileParameters" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Headers" EntityType="IntegrationToolModel.Store.Headers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HeadersQueryType" EntityType="IntegrationToolModel.Store.HeadersQueryType" store:Type="Tables" Schema="dbo" />
@@ -16,7 +17,6 @@
     <EntitySet Name="Recurrences" EntityType="IntegrationToolModel.Store.Recurrences" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Resources" EntityType="IntegrationToolModel.Store.Resources" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ServerSMTPParameters" EntityType="IntegrationToolModel.Store.ServerSMTPParameters" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="IntegrationToolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SystemLogs" EntityType="IntegrationToolModel.Store.SystemLogs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="IntegrationToolModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsersType" EntityType="IntegrationToolModel.Store.UsersType" store:Type="Tables" Schema="dbo" />
@@ -29,9 +29,9 @@
       <End Role="Recurrences" EntitySet="Recurrences" />
       <End Role="Calendars" EntitySet="Calendars" />
     </AssociationSet>
-    <AssociationSet Name="FK_FlatFileParametersIntegrations_IntegrationId" Association="IntegrationToolModel.Store.FK_FlatFileParametersIntegrations_IntegrationId">
-      <End Role="Integrations" EntitySet="Integrations" />
-      <End Role="FlatFileParameters" EntitySet="FlatFileParameters" />
+    <AssociationSet Name="FK_DatabaseParametersEngines_EngineId" Association="IntegrationToolModel.Store.FK_DatabaseParametersEngines_EngineId">
+      <End Role="Engines" EntitySet="Engines" />
+      <End Role="DatabaseParameters" EntitySet="DatabaseParameters" />
     </AssociationSet>
     <AssociationSet Name="FK_HeadersQueryTypeHeaders_HeaderId" Association="IntegrationToolModel.Store.FK_HeadersQueryTypeHeaders_HeaderId">
       <End Role="Headers" EntitySet="Headers" />
@@ -47,6 +47,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_IntegrationsDatabaseParameters_DatabaseParametersId" Association="IntegrationToolModel.Store.FK_IntegrationsDatabaseParameters_DatabaseParametersId">
       <End Role="DatabaseParameters" EntitySet="DatabaseParameters" />
+      <End Role="Integrations" EntitySet="Integrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntegrationsFlatFileParameters_FlatFileParametersId" Association="IntegrationToolModel.Store.FK_IntegrationsFlatFileParameters_FlatFileParametersId">
+      <End Role="FlatFileParameters" EntitySet="FlatFileParameters" />
       <End Role="Integrations" EntitySet="Integrations" />
     </AssociationSet>
     <AssociationSet Name="FK_IntegrationsIntegrationsType_IntegrationTypeId" Association="IntegrationToolModel.Store.FK_IntegrationsIntegrationsType_IntegrationTypeId">
@@ -115,20 +119,26 @@
     </Key>
     <Property Name="DatabaseParametersId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Ip" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="Port" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="Instance" Type="varchar" MaxLength="45" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
     <Property Name="Username" Type="varchar" Nullable="false" MaxLength="45" />
     <Property Name="Password" Type="varchar" Nullable="false" MaxLength="45" />
-    <Property Name="Engine" Type="varchar" Nullable="false" MaxLength="45" />
-    <Property Name="Port" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="EngineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Engines">
+    <Key>
+      <PropertyRef Name="EngineId" />
+    </Key>
+    <Property Name="EngineId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
   </EntityType>
   <EntityType Name="FlatFileParameters">
     <Key>
-      <PropertyRef Name="FlatFileParameterId" />
+      <PropertyRef Name="FlatFileParametersId" />
     </Key>
-    <Property Name="FlatFileParameterId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FlatFileParametersId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Location" Type="varchar(max)" Nullable="false" />
-    <Property Name="IntegrationId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Headers">
     <Key>
@@ -164,6 +174,7 @@
     <Property Name="WebServiceId" Type="int" Nullable="false" />
     <Property Name="DatabaseParametersId" Type="int" Nullable="false" />
     <Property Name="ServerSMTPParametersId" Type="int" Nullable="false" />
+    <Property Name="FlatFileParametersId" Type="int" Nullable="false" />
     <Property Name="IntegrationTypeId" Type="int" Nullable="false" />
     <Property Name="QueryId" Type="int" Nullable="false" />
   </EntityType>
@@ -221,16 +232,6 @@
     <Property Name="UsernameSMTP" Type="varchar" Nullable="false" MaxLength="45" />
     <Property Name="PasswordSMTP" Type="varchar" Nullable="false" MaxLength="45" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="SystemLogs">
     <Key>
       <PropertyRef Name="SystemLogId" />
@@ -263,7 +264,7 @@
     <Key>
       <PropertyRef Name="WebServiceId" />
     </Key>
-    <Property Name="WebServiceId" Type="int" Nullable="false" />
+    <Property Name="WebServiceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Endpoint" Type="varchar(max)" Nullable="false" />
     <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
@@ -292,15 +293,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FlatFileParametersIntegrations_IntegrationId">
-    <End Role="Integrations" Type="IntegrationToolModel.Store.Integrations" Multiplicity="1" />
-    <End Role="FlatFileParameters" Type="IntegrationToolModel.Store.FlatFileParameters" Multiplicity="*" />
+  <Association Name="FK_DatabaseParametersEngines_EngineId">
+    <End Role="Engines" Type="IntegrationToolModel.Store.Engines" Multiplicity="1" />
+    <End Role="DatabaseParameters" Type="IntegrationToolModel.Store.DatabaseParameters" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Integrations">
-        <PropertyRef Name="IntegrationId" />
+      <Principal Role="Engines">
+        <PropertyRef Name="EngineId" />
       </Principal>
-      <Dependent Role="FlatFileParameters">
-        <PropertyRef Name="IntegrationId" />
+      <Dependent Role="DatabaseParameters">
+        <PropertyRef Name="EngineId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -349,6 +350,18 @@
       </Principal>
       <Dependent Role="Integrations">
         <PropertyRef Name="DatabaseParametersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntegrationsFlatFileParameters_FlatFileParametersId">
+    <End Role="FlatFileParameters" Type="IntegrationToolModel.Store.FlatFileParameters" Multiplicity="1" />
+    <End Role="Integrations" Type="IntegrationToolModel.Store.Integrations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FlatFileParameters">
+        <PropertyRef Name="FlatFileParametersId" />
+      </Principal>
+      <Dependent Role="Integrations">
+        <PropertyRef Name="FlatFileParametersId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

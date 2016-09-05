@@ -17,6 +17,14 @@ namespace IntegrationTool.Controllers
             systemConfigurationModel = new SystemConfiguration();
         }
 
+        private void response(string json)
+        {
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+        }
+
         [HttpGet]
         public ActionResult activedirectory()
         {
@@ -30,10 +38,15 @@ namespace IntegrationTool.Controllers
             systemConfigurationModel.saveActiveDirectory(Request.Form["ADDomain"], Request.Form["ADPath"]);
 
             string json = "{\"message\":\"Configuration Active Directory Success.\"}";
+
+            response(json);
+            
+            /*
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
             Response.End();
+            */
 
             // Select and return activeDirectories
             /*
@@ -57,13 +70,18 @@ namespace IntegrationTool.Controllers
         {
 
             connectModel();
-            systemConfigurationModel.saveServersSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+            systemConfigurationModel.saveServerSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
 
             string json = "{\"message\":\"Configuration Server SMTP Success.\"}";
+
+            response(json);
+
+            /*
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
             Response.End();
+            */
         }
 
         [HttpGet]
@@ -72,10 +90,46 @@ namespace IntegrationTool.Controllers
             return View();
         }
 
+        [HttpPost]
+        public void saveDataBase()
+        {
+            connectModel();
+            systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["Engine"], Request.Form["Port"]);
+
+            string json = "{\"message\":\"Configuration Database Success.\"}";
+
+            response(json);
+
+            /*
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+            */
+        }
+
         [HttpGet]
         public ActionResult webservices()
         {
             return View();
+        }
+
+        [HttpPost]
+        public void saveWebService()
+        {
+            connectModel();
+            systemConfigurationModel.saveWebService(Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
+
+            string json = "{\"message\":\"Configuration Web Service Success.\"}";
+
+            response(json);
+
+            /*
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+            */
         }
 
         [HttpGet]
@@ -92,10 +146,15 @@ namespace IntegrationTool.Controllers
             systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
 
             string json = "{\"message\":\"Configuration Flat Files Success.\"}";
+
+            response(json);
+
+            /*
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
             Response.End();
+             * */
         }
 
         [HttpGet]

@@ -1,72 +1,79 @@
-﻿<!-- Content Header (Page header) -->
+﻿<div ngController="ConfigurationDataBasesController">
+    <br />
+    <div ng-show="message === 1" class="alert alert-success alert-dismissible col-md-10 col-md-offset-1" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="fa fa-check-circle" aria-hidden="true"></span><strong></strong> {{response}}
+    </div>
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1">
         <h1>
-          Configuration Database
+            Configuration Database
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
-          <li class="active">Databases</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
+            <li class="active">Databases</li>
         </ol>
-      </div>
+        </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
+        <div class="row">
         <!-- left column -->
         <div class="col-md-10 col-md-offset-1">
-          <!-- general form elements -->
-          <div class="box box-danger">
+            <!-- general form elements -->
+            <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Form</h3>
+                <h3 class="box-title">Form</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label>Database Engine</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Select</option>
-                    <option>SQLServer</option>
-                    <option>MySQL</option>
-                  </select>
+            <form role="form" ng-submit="sendRequest(request)">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Database Engine</label>
+                        <select class="form-control select2" style="width: 100%;" ng-model="request.Engine" required>
+                        <option selected="selected">Select</option>
+                        <option>SQLServer</option>
+                        <option>MySQL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="DBIP">Database IP</label>
+                        <input type="text" class="form-control" id="DBIP" placeholder="Enter IP" ng-model="request.Ip" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="DBPort">Database Port</label>
+                        <input type="text" class="form-control" id="DBPort" placeholder="Enter Port" ng-model="request.Port" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="DBInstance">Database Instance</label>
+                        <input type="text" class="form-control" id="DBInstance" placeholder="Enter Instance" ng-model="request.Instance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="DBName">Database Name</label>
+                        <input type="text" class="form-control" id="DBName" placeholder="Enter Name" ng-model="request.Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Username">Usename</label>
+                        <input type="text" class="form-control" id="Username" placeholder="Enter Username" ng-model="request.Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" id="Password" placeholder="Enter Password" ng-model="request.Password" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="DBIP">Database IP</label>
-                  <input type="text" class="form-control" id="DBIP" placeholder="Enter IP">
-                </div>
-                <div class="form-group">
-                  <label for="DBPort">Database Port</label>
-                  <input type="text" class="form-control" id="DBPort" placeholder="Enter Port">
-                </div>
-                <div class="form-group">
-                  <label for="DBInstance">Database Instance</label>
-                  <input type="text" class="form-control" id="DBInstance" placeholder="Enter Instance">
-                </div>
-                <div class="form-group">
-                  <label for="DBName">Database Name</label>
-                  <input type="text" class="form-control" id="DBName" placeholder="Enter Name">
-                </div>
-                <div class="form-group">
-                  <label for="Username">Usename</label>
-                  <input type="text" class="form-control" id="Username" placeholder="Enter Username">
-                </div>
-                <div class="form-group">
-                  <label for="Password">Password</label>
-                  <input type="password" class="form-control" id="Password" placeholder="Enter Password">
-                </div>
-              </div>
-              <!-- /.box-body -->
+                <!-- /.box-body -->
 
-              <div class="box-footer">
+                <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+                </div>
             </form>
-          </div>
-          <!-- /.box -->
+            </div>
+            <!-- /.box -->
         </div>
-      </div>
+        </div>
     </section>
     <!-- /.content -->
+</div>

@@ -17,7 +17,6 @@ namespace IntegrationTool.Models
         public Integration()
         {
             this.Calendars = new HashSet<Calendar>();
-            this.FlatFileParameters = new HashSet<FlatFileParameter>();
             this.IntegrationLogs = new HashSet<IntegrationLog>();
             this.SystemLogs = new HashSet<SystemLog>();
         }
@@ -28,12 +27,13 @@ namespace IntegrationTool.Models
         public int WebServiceId { get; set; }
         public int DatabaseParametersId { get; set; }
         public int ServerSMTPParametersId { get; set; }
+        public int FlatFileParametersId { get; set; }
         public int IntegrationTypeId { get; set; }
         public int QueryId { get; set; }
     
         public virtual ICollection<Calendar> Calendars { get; set; }
         public virtual DatabaseParameter DatabaseParameter { get; set; }
-        public virtual ICollection<FlatFileParameter> FlatFileParameters { get; set; }
+        public virtual FlatFileParameter FlatFileParameter { get; set; }
         public virtual ICollection<IntegrationLog> IntegrationLogs { get; set; }
         public virtual IntegrationsType IntegrationsType { get; set; }
         public virtual Query Query { get; set; }

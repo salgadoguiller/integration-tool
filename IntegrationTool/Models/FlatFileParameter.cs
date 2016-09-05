@@ -14,10 +14,14 @@ namespace IntegrationTool.Models
     
     public partial class FlatFileParameter
     {
-        public int FlatFileParameterId { get; set; }
-        public string Location { get; set; }
-        public int IntegrationId { get; set; }
+        public FlatFileParameter()
+        {
+            this.Integrations = new HashSet<Integration>();
+        }
     
-        public virtual Integration Integration { get; set; }
+        public int FlatFileParametersId { get; set; }
+        public string Location { get; set; }
+    
+        public virtual ICollection<Integration> Integrations { get; set; }
     }
 }
