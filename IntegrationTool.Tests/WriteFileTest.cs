@@ -30,6 +30,13 @@ namespace IntegrationTool.Tests
             file.writeFileByString2(headers, resultQuery, location,nameIntegration);
         }
 
+        [Test]
+        public void writeFileinExcel()
+        {
+            WriteFileController file = new WriteFileController();
+            file.writeIntegrationinExcel("external_course_key|course_id|course_name|term_key|duration|master_course_key|new_data_source_key", "CHE101002|CHE101002|General Chemistry 2 002|201206|t|CHE101M|201206_COURSES", @"C:\Users\cturcios\Desktop", "COURSES");
+        }
+
        
     }
 }

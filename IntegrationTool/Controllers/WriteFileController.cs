@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.IO;
+using DocumentFormat.OpenXml;
+using ClosedXML.Excel;
 
 namespace IntegrationTool.Controllers
 {
@@ -69,24 +71,25 @@ namespace IntegrationTool.Controllers
             }            
         }
 
-       /* public void writeIntegrationinExcel(string headers,string resulQuery,string locationToSave,string nameIntegration)
+        public void writeIntegrationinExcel(string headers,string resultQuery,string locationToSave,string nameIntegration)
         {
-            var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add(nameIntegration+"-Integrations");
-        
+            string[] alphabet = { "A","B","C","D","E","F","G","H","I","J","k","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};                   
             string [] header = headers.Split('|');
+            string[] query = resultQuery.Split('|');
 
-            for (int i = 0; i < header.Length; i++)
-            {
-                 worksheet.Cell("A"+i).Value = header[i];
-            }
-
-            worksheet.Columns().AdjustToContents();
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add(nameIntegration + "-Integrations");
            
+            for (int i = 0; i < header.Length; i++)
+            {              
+                worksheet.Cell(alphabet[i]+"1").Value = header[i];
+                worksheet.Cell(alphabet[i] + "2").Value = query[i];              
+            }
+           
+            worksheet.Columns().AdjustToContents();          
             string path = locationToSave+@"\"+nameIntegration + returnDatetimeNow() + ".xlsx";
-
             workbook.SaveAs(path);       
-        }*/
+        }
 
         public string returnDatetimeNow()
         {

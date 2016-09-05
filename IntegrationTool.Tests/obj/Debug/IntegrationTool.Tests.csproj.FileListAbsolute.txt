@@ -69,3 +69,6 @@ C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Te
 C:\Users\gcrescencio\Desktop\Integration Tool\integrationtool\IntegrationTool.Tests\bin\Debug\System.Web.Optimization.xml
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\System.Web.Optimization.dll
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\System.Web.Optimization.xml
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.xml
