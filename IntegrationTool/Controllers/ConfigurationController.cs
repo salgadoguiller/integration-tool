@@ -94,7 +94,7 @@ namespace IntegrationTool.Controllers
         public void saveDataBase()
         {
             connectModel();
-            systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["Engine"], Request.Form["Port"]);
+            systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["EngineId"], Request.Form["Port"]);
 
             string json = "{\"message\":\"Configuration Database Success.\"}";
 
@@ -167,6 +167,20 @@ namespace IntegrationTool.Controllers
         public ActionResult headers()
         {
             return View();
+        }
+
+        public void getDataBaseEngines()
+        {
+            connectModel();
+            List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(engines, 
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            response(json);
         }
     }
 }

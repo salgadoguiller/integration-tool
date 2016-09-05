@@ -3,6 +3,9 @@
     $scope.response = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
+    $scope.dataBaseEngines = [];
+
+    getDataBaseEngines();
 
     function getDataBaseEngines() {
         var config = {
@@ -13,10 +16,11 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getDataBaseEnginesEngines', data, config).success(function (resp) {
-
+        $http.post('Configuration/getDataBaseEngines', data, config).success(function (resp) {
+            $scope.dataBaseEngines = resp;
         }).error(function (resp) {
-
+            $scope.response = resp;
+            $scope.message = 2;
         });
     }
 
@@ -32,6 +36,7 @@
         $http.post('Configuration/saveDataBase', data, config).success(function (resp) {
             $scope.response = resp.message;
             $scope.message = 1;
+            $scope.request = {};
         }).error(function (resp) {
             $scope.response = resp;
             $scope.message = 2;

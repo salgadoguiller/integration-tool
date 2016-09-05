@@ -17,6 +17,7 @@
         $http.post('Configuration/saveActiveDirectory', data, config).success(function (resp) {
             $scope.response = resp.message;
             $scope.message = 1;
+            $scope.request = {};
         }).error(function (resp) {
             $scope.response = resp;
             $scope.message = 2;

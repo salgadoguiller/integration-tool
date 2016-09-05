@@ -75,7 +75,7 @@ namespace IntegrationTool.Models
             return databases;
         }
 
-        public void saveDatabase(string ip, string instance, string name, string username, string password, string engine, string port)
+        public void saveDatabase(string ip, string instance, string name, string username, string password, string engineId, string port)
         {
             DatabaseParameter db = new DatabaseParameter();
             db.Ip = ip;
@@ -83,8 +83,13 @@ namespace IntegrationTool.Models
             db.Name = name;
             db.Username = username;
             db.Password = password;
-            //db.Engine = engine;
             db.Port = port;
+
+            int intEngineId = Convert.ToInt32(engineId);
+
+            // Engine engine = SystemConfigurationDB.Engines.Where(param => param.EngineId == intEngineId).ToList()[0];
+
+            db.EngineId = intEngineId;
 
             SystemConfigurationDB.DatabaseParameters.Add(db);
             SystemConfigurationDB.SaveChanges();
@@ -106,6 +111,13 @@ namespace IntegrationTool.Models
 
             SystemConfigurationDB.WebServices.Add(webService);
             SystemConfigurationDB.SaveChanges();
+        }
+
+        public List<Engine> getDataBaseEngines()
+        {
+            List<Engine> engines = (from dbEngine in SystemConfigurationDB.Engines
+                                    select dbEngine).ToList();
+            return engines;
         }
     }
 }
