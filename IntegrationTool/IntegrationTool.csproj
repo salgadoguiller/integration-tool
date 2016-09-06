@@ -250,9 +250,11 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
+    <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
+    <Content Include="Content\Stylesheets\Styles\Style.css" />
     <Content Include="Content\Template\css\template.css" />
     <Content Include="Content\Template\css\template.min.css" />
     <Content Include="Content\Template\css\skins\skin-black-light.css" />
@@ -306,7 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Stylesheets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

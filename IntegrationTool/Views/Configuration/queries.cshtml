@@ -1,17 +1,15 @@
-﻿   <div ngController="ConfigurationQueriesController">
+﻿<div ngController="ConfigurationQueriesController">
     <br />
-    <div ng-show="message === 1" class="alert alert-success alert-dismissible col-md-10 col-md-offset-1" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <span class="fa fa-check-circle" aria-hidden="true"></span><strong></strong> {{response}}
-    </div>
-<!-- Content Header (Page header) -->
+    <feedback type=typeMessage message=message></feedback>
+
+    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="col-md-10 col-md-offset-1">
         <h1>
           Configuration Queries
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Configuration</a></li>
+          <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
           <li class="active">Queries</li>
         </ol>
       </div>
@@ -29,20 +27,32 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" ng-submit="sendRequest(request)">
+            <form name="form" role="form" ng-submit="sendRequest(request, form)" novalidate>
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="typeQueries">Type Queries</label>
-                  <select class="form-control select2" name="typeQueries" ng-model="request.typeQueries" style="width: 100%;">
+                  <label for="typeQueries">Query Type</label>
+                  <select class="form-control select2" name="TypeQuery" ng-model="request.typeQueries" style="width: 100%;" required>
                     <option selected="selected" disabled value="">Select</option>
                     <option ng-repeat="queryType in queriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
                   </select>
+                  <div ng-if="form.TypeQuery.$touched || form.$submitted">
+                    <div ng-messages="form.TypeQuery.$error" role="alert">
+                        <div class="help-block error-text" ng-message="required">* Query type is required.</div>
+                    </div>
+                  </div>
                 </div>
 
-                <label for="Queries">Query</label>
                 <div class="form-group">
-                  <textarea name="Queries" ng-model="request.Queries" id="Queries" class="form-control" rows="3"></textarea>
+                    <label for="Queries">Query</label>
+                    <div class="form-group">
+                      <textarea name="Queries" ng-model="request.Queries" id="Queries" name="Queries" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div ng-if="form.Queries.$touched || form.$submitted">
+                        <div ng-messages="form.Queries.$error" role="alert">
+                            <div class="help-block error-text" ng-message="required">* Query is required.</div>
+                        </div>
+                    </div>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -56,4 +66,4 @@
       </div>
     </section>
    <!-- /.content -->
-   </div>
+</div>

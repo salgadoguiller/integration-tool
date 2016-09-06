@@ -7,15 +7,20 @@ namespace IntegrationTool
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/Content/IntegrationToolAppControllers")
+                .IncludeDirectory("~/Content/Scripts/Controllers/", "*.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/IntegrationToolAppDirectives")
+                .IncludeDirectory("~/Content/Scripts/Directives/", "*.js"));
+
             bundles.Add(new ScriptBundle("~/Content/IntegrationToolApp")
-                .IncludeDirectory("~/Content/Scripts/Controllers", "*.js")
                 .Include("~/Content/Scripts/IntegrationToolApp.js"));
 
             bundles.Add(new ScriptBundle("~/Content/Plugins")
-                .IncludeDirectory("~/Content/Scripts/Plugins", "*.js"));
+                .IncludeDirectory("~/Content/Scripts/Plugins/", "*.js"));
 
-            bundles.Add(new StyleBundle("~/Content/Stylesheets")
-                .IncludeDirectory("~/Content/Stylesheets", "*.css"));
+            bundles.Add(new StyleBundle("~/Content/Styles")
+                .Include("~/Content/Stylesheets/Styles/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/CSSBootstrap")
                 .Include("~/Content/Bootstrap/css/bootstrap.min.css"));

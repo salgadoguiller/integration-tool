@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages']);
 
 IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
 IntegrationToolApp.controller('ConfigurationServerSMTPController', ConfigurationServerSMTPController);
@@ -7,6 +7,8 @@ IntegrationToolApp.controller('ConfigurationWebServicesController', Configuratio
 IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationFlatFilesController);
 IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
 IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
+
+IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
 var configFunction = function ($routeProvider) {
     $routeProvider

@@ -1,7 +1,9 @@
 ﻿var ConfigurationDataBasesController = function ($scope, $http) {
-    $scope.message = 0;
-    $scope.response = "";
+    $scope.typeMessage = 0;
+    $scope.message = "";
     $scope.request = {};
+    $scope.regexIP = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    $scope.regexPort = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
     $scope.dataBaseEngines = [];
 
@@ -19,12 +21,18 @@
         $http.post('Configuration/getDataBaseEngines', data, config).success(function (resp) {
             $scope.dataBaseEngines = resp;
         }).error(function (resp) {
-            $scope.response = resp;
-            $scope.message = 2;
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
         });
     }
 
-    function sendRequest(req) {
+    function sendRequest(req, form) {
+        if (!form.$valid) {
+            $scope.message = "Error: Invalid form, please try again.";
+            $scope.typeMessage = "danger";
+            return false;
+        }
+
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -34,12 +42,14 @@
         var data = $.param(req);
 
         $http.post('Configuration/saveDataBase', data, config).success(function (resp) {
-            $scope.response = resp.message;
-            $scope.message = 1;
+            $scope.message = "Success: " + resp.message;
+            $scope.typeMessage = "success";
             $scope.request = {};
+            form.$setPristine();
+            form.$setUntouched();
         }).error(function (resp) {
-            $scope.response = resp;
-            $scope.message = 2;
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
         });
     }
 }
