@@ -115,3 +115,5 @@ C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\WebGrease.dll
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Antlr3.Runtime.pdb
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\Microsoft.Owin.xml
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\System.Web.Optimization.xml
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\DocumentFormat.OpenXml.dll
+C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool\bin\ClosedXML.dll
