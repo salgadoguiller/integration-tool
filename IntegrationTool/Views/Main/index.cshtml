@@ -8,14 +8,16 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
         <link rel="icon" type="image/png" href="../Content/Images/favicon.png" />
-      
-        <!-- Font Awesome -->
+
+
+        @Styles.Render("~/Content/CSSBootstrap")
+
+         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-      
-        @Styles.Render("~/Content/CSSTemplate")
-        @Styles.Render("~/Content/CSSBootstrap")
+
+        @Styles.Render("~/Content/CSSTemplate")      
         @Styles.Render("~/Content/Styles")
 
 
@@ -215,6 +217,8 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
 
+       
+
         @Scripts.Render("~/Content/Plugins")
 
         @Scripts.Render("~/Content/JSBootstrap")
@@ -228,13 +232,6 @@
         @Scripts.Render("~/Content/IntegrationToolApp")
 
       
-
-        <script>
-            $(function ()
-            {
-                $("#example1").dataTable();
-               
-            });
-        </script>
+       
     </body>
 </html>

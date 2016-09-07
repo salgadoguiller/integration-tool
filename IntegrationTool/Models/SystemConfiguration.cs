@@ -47,6 +47,8 @@ namespace IntegrationTool.Models
             serverSmtp.UsernameSMTP = UsernameSMTP;
             serverSmtp.PasswordSMTP = PasswordSMTP;
 
+           
+
             SystemConfigurationDB.ServerSMTPParameters.Add(serverSmtp);
             SystemConfigurationDB.SaveChanges();      
         }

@@ -258,11 +258,12 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
-    <Content Include="Content\Scripts\Plugins\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\Plugins\3dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
-    <Content Include="Content\Scripts\Plugins\jquery.dataTables.min.js" />
+    <Content Include="Content\Scripts\Plugins\2jquery.dataTables.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
     <Content Include="Content\Stylesheets\Styles\Style.css" />
@@ -301,10 +302,11 @@
     <Content Include="Content\Template\js\demo.js" />
     <Content Include="Content\Template\js\pages\dashboard.js" />
     <Content Include="Content\Template\js\pages\dashboard2.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Scripts\Plugins\fastclick\fastclick.js" />
     <Content Include="Content\Scripts\Plugins\fastclick\fastclick.min.js" />
-    <Content Include="Content\Scripts\Plugins\jquery-2.2.3.min.js" />
+    <Content Include="Content\Scripts\Plugins\1jquery-2.2.3.min.js" />
     <Content Include="Content\Scripts\Plugins\jQuery\jquery-2.2.3.min.js" />
     <Content Include="Content\Scripts\Plugins\slimScroll\jquery.slimscroll.js" />
     <Content Include="Content\Scripts\Plugins\slimScroll\jquery.slimscroll.min.js" />
@@ -386,6 +388,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Configuration\activedirectorymain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

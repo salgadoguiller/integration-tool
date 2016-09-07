@@ -20,7 +20,7 @@ namespace IntegrationTool
                 .IncludeDirectory("~/Content/Scripts/Plugins/", "*.js"));
 
             bundles.Add(new StyleBundle("~/Content/Styles")
-                .Include("~/Content/Stylesheets/Styles/style.css"));
+                .IncludeDirectory("~/Content/Stylesheets/Styles/", "*.css"));
 
             bundles.Add(new StyleBundle("~/Content/CSSBootstrap")
                 .Include("~/Content/Bootstrap/css/bootstrap.min.css"));

@@ -7,6 +7,7 @@ IntegrationToolApp.controller('ConfigurationWebServicesController', Configuratio
 IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationFlatFilesController);
 IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
 IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
+IntegrationToolApp.controller('ConfigurationActiveDirectoryMainController', ConfigurationActiveDirectoryMainController);
 
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
@@ -17,7 +18,7 @@ var configFunction = function ($routeProvider) {
         })
         .when('/Configuration/activedirectorymain', {
             templateUrl: '/Configuration/activedirectorymain',
-            controller: ''
+            controller: 'ConfigurationActiveDirectoryMainController'
         })
         .when('/Configuration/activedirectory', {
             templateUrl: '/Configuration/activedirectory',
