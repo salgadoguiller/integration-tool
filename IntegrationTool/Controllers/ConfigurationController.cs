@@ -26,6 +26,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult activedirectorymain()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult activedirectory()
         {
             return View();

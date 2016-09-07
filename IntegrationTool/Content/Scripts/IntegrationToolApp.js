@@ -15,6 +15,10 @@ var configFunction = function ($routeProvider) {
         .when('/Main/index', {
             templateUrl: '/Main/index'
         })
+        .when('/Configuration/activedirectorymain', {
+            templateUrl: '/Configuration/activedirectorymain',
+            controller: ''
+        })
         .when('/Configuration/activedirectory', {
             templateUrl: '/Configuration/activedirectory',
             controller: 'ConfigurationActiveDirectoryController'

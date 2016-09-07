@@ -121,7 +121,7 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="/#/Configuration/activedirectory"><i class="fa fa-circle-o"></i>Active Directory</a></li>
+                    <li><a href="/#/Configuration/activedirectorymain"><i class="fa fa-circle-o"></i>Active Directory</a></li>
                     <li><a href="/#/Configuration/serversmtp"><i class="fa fa-circle-o"></i>Server SMTP</a></li>
                     <li><a href="/#/Configuration/databases"><i class="fa fa-circle-o"></i>Databases</a></li>
                     <li><a href="/#/Configuration/webservices"><i class="fa fa-circle-o"></i>Web Services</a></li>
@@ -210,6 +210,7 @@
         </div>
         <!-- ./wrapper -->
 
+      
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
@@ -225,5 +226,15 @@
         @Scripts.Render("~/Content/IntegrationToolAppDirectives")
         
         @Scripts.Render("~/Content/IntegrationToolApp")
+
+      
+
+        <script>
+            $(function ()
+            {
+                $("#example1").dataTable();
+               
+            });
+        </script>
     </body>
 </html>

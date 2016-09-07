@@ -260,8 +260,11 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
+    <Content Include="Content\Scripts\Plugins\dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
+    <Content Include="Content\Scripts\Plugins\jquery.dataTables.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
+    <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
     <Content Include="Content\Stylesheets\Styles\Style.css" />
     <Content Include="Content\Template\css\template.css" />
     <Content Include="Content\Template\css\template.min.css" />
@@ -380,6 +383,9 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\activedirectorymain.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

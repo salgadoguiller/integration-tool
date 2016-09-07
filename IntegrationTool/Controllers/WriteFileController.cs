@@ -31,7 +31,7 @@ namespace IntegrationTool.Controllers
             }
         }*/
 
-        public void writeFileByString(string headers, string resultQuery, string locationToSave)
+        /*public void writeFileByString(string headers, string resultQuery, string locationToSave)
         {
             FileStream fs = null;
 
@@ -57,7 +57,7 @@ namespace IntegrationTool.Controllers
                     file.Write(resultQuery);
                 }
             }
-        }
+        }*/
 
         public void writeFileByString2(string headers, string resultQuery, string locationToSave,string nameIntegration)
         {           
@@ -72,23 +72,15 @@ namespace IntegrationTool.Controllers
         }
 
         public void writeIntegrationinExcel(string headers,string resultQuery,string locationToSave,string nameIntegration)
-        {
-            string[] alphabet = { "A","B","C","D","E","F","G","H","I","J","k","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};                   
-            string [] header = headers.Split('|');
-            string[] query = resultQuery.Split('|');
+        {         
+            StringBuilder csvContent = new StringBuilder();
+            string header =headers.Replace("|", ",");
+            string query=resultQuery.Replace("|",",");
 
-            var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add(nameIntegration + "-Integrations");
-           
-            for (int i = 0; i < header.Length; i++)
-            {              
-                worksheet.Cell(alphabet[i]+"1").Value = header[i];
-                worksheet.Cell(alphabet[i] + "2").Value = query[i];              
-            }
-           
-            worksheet.Columns().AdjustToContents();          
-            string path = locationToSave+@"\"+nameIntegration + returnDatetimeNow() + ".xlsx";
-            workbook.SaveAs(path);       
+            csvContent.AppendLine(header);
+            csvContent.AppendLine(query);          
+            string path = locationToSave+@"\"+nameIntegration + returnDatetimeNow() + ".csv";
+            File.AppendAllText(path,csvContent.ToString());
         }
 
         public string returnDatetimeNow()
