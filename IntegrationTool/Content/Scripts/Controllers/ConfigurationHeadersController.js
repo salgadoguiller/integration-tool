@@ -17,7 +17,12 @@
         var data = $.param({});
 
         $http.post('Configuration/getTypeQueries', data, config).success(function (resp) {
-            $scope.QueriesType = resp;
+            if (resp.type !== 'danger') {
+                $scope.QueriesType = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
@@ -40,8 +45,8 @@
         var data = $.param(req);
 
         $http.post('Configuration/saveHeaders', data, config).success(function (resp) {
-            $scope.message = "Success: " + resp.message;
-            $scope.typeMessage = "success";
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
             $scope.request = {};
             form.$setPristine();
             form.$setUntouched();

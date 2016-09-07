@@ -34,12 +34,21 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveActiveDirectory()
         {
-            connectModel();
-            systemConfigurationModel.saveActiveDirectory(Request.Form["ADDomain"], Request.Form["ADPath"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveActiveDirectory(Request.Form["ADDomain"], Request.Form["ADPath"]);
 
-            string json = "{\"message\":\"Configuration Active Directory Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Active Directory Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+            }
+            
 
-            response(json);
+            response(resp);
 
             // Select and return activeDirectories
             /*
@@ -61,13 +70,20 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveServerSmtp()
         {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveServerSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
 
-            connectModel();
-            systemConfigurationModel.saveServerSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Server SMTP Unsuccessful. Please try again.\"}";
+            }
 
-            string json = "{\"message\":\"Configuration Server SMTP Success.\"}";
-
-            response(json);
+            response(resp);
         }
 
         [HttpGet]
@@ -79,12 +95,20 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveDataBase()
         {
-            connectModel();
-            systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["EngineId"], Request.Form["Port"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["EngineId"], Request.Form["Port"]);
 
-            string json = "{\"message\":\"Configuration Database Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         [HttpGet]
@@ -96,12 +120,20 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveWebService()
         {
-            connectModel();
-            systemConfigurationModel.saveWebService(Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveWebService(Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
 
-            string json = "{\"message\":\"Configuration Web Service Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Web Service Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Web Service Unsuccessful. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         [HttpGet]
@@ -113,12 +145,20 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveFlatFiles()
         {
-            connectModel();
-            systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
 
-            string json = "{\"message\":\"Configuration Flat Files Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Flat File Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Flat File Unsuccessful. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         [HttpGet]
@@ -130,12 +170,20 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveQueries()
         {
-            connectModel();
-            systemConfigurationModel.saveQueries(Request.Form["Queries"], Request.Form["typeQueries"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveQueries(Request.Form["Queries"], Request.Form["typeQueries"]);
 
-            string json = "{\"message\":\"Configuration Queries Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Query Unsuccessful. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         [HttpGet]
@@ -147,42 +195,65 @@ namespace IntegrationTool.Controllers
         [HttpPost]
         public void saveHeaders()
         {
-            connectModel();
-            systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
 
-            string json = "{\"message\":\"Configuration Headers Success.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         [HttpPost]
         public void getDataBaseEngines()
         {
-            connectModel();
-            List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(engines, 
-                new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(engines,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the engines. Please try again.\"}";
+            }
 
-            response(json);
+            response(resp);
         }
 
         public void getTypeQueries()
         {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
 
-            connectModel();
-            List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the type queries. Please try again.\"}";
+            }
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
-                new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-
-            response(json);
+            response(resp);
         }
     }
 }
