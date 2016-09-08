@@ -259,6 +259,9 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPMainController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesMainController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigurationQueriesMainController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\3dataTables.bootstrap.min.js" />
@@ -400,6 +403,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\serversmtpmain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\flatfilesmain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\queriesmain.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

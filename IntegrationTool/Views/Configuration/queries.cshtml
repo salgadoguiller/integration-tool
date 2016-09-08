@@ -27,39 +27,68 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form name="form" role="form" ng-submit="sendRequest(request, form)" novalidate>
-              <div class="box-body">
+              <form name="form" role="form" ng-submit="sendRequest(request, form)" novalidate>
+                  <div class="box-body">
 
-                <div class="form-group">
-                  <label for="typeQueries">Query Type</label>
-                  <select class="form-control select2" name="TypeQuery" ng-model="request.typeQueries" style="width: 100%;" required>
-                    <option selected="selected" disabled value="">Select</option>
-                    <option ng-repeat="queryType in queriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
-                  </select>
-                  <div ng-if="form.TypeQuery.$touched || form.$submitted">
-                    <div ng-messages="form.TypeQuery.$error" role="alert">
-                        <div class="help-block error-text" ng-message="required">* Query type is required.</div>
-                    </div>
+                      <div class="form-group">
+                          <label for="typeQueries">Query Type</label>
+                          <select class="form-control select2" name="TypeQuery" ng-model="request.typeQueries" style="width: 100%;" required>
+                              <option selected="selected" disabled value="">Select</option>
+                              <option ng-repeat="queryType in queriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
+                          </select>
+                          <div ng-if="form.TypeQuery.$touched || form.$submitted">
+                              <div ng-messages="form.TypeQuery.$error" role="alert">
+                                  <div class="help-block error-text" ng-message="required">* Query type is required.</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="Queries">Query</label>
+                          <div class="form-group">
+                              <textarea name="Queries" ng-model="request.Queries" id="Queries" name="Queries" class="form-control" rows="3" required></textarea>
+                          </div>
+                          <div ng-if="form.Queries.$touched || form.$submitted">
+                              <div ng-messages="form.Queries.$error" role="alert">
+                                  <div class="help-block error-text" ng-message="required">* Query is required.</div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </form>
 
-                <div class="form-group">
-                    <label for="Queries">Query</label>
-                    <div class="form-group">
-                      <textarea name="Queries" ng-model="request.Queries" id="Queries" name="Queries" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <div ng-if="form.Queries.$touched || form.$submitted">
-                        <div ng-messages="form.Queries.$error" role="alert">
-                            <div class="help-block error-text" ng-message="required">* Query is required.</div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
+
+             <table id="Datable" class="table table-bordered table-striped">                    
+                    <thead>
+                    <tr>
+                      <th>Query Type</th>
+                      <th>Query</th>
+                      <th>Admin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="queryType in queriesType" >
+                      <td>{{queryType.Name}}</td>
+                      <td>{{queryType.QueryTypeId}}</td>
+                        <td><span class="label label-success"><a href="/#/Configuration/queries">Edit</a></span><span> </span><span class="label label-danger">Delete</span></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Query Type</th>
+                        <th>Query</th>
+                        <th>Admin</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+
+
           </div>
           <!-- /.box -->
         </div>
