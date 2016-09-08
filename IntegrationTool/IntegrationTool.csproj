@@ -259,13 +259,10 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
-<<<<<<< HEAD
     <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPMainController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesMainController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesMainController.js" />
-=======
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
->>>>>>> origin/master
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\3dataTables.bootstrap.min.js" />
@@ -421,6 +418,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

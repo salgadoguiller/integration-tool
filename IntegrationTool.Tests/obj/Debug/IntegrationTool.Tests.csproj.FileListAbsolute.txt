@@ -72,3 +72,6 @@ C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\System
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.dll
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\DocumentFormat.OpenXml.dll
 C:\Users\cturcios\Desktop\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.xml
+C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool.Tests\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\IntegrationTool.Tests\bin\Debug\ClosedXML.xml
