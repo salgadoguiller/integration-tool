@@ -1,5 +1,7 @@
-IntegrationTool.v11.suo
-IntegrationTool/bin/IntegrationTool.dll
-IntegrationTool/bin/IntegrationTool.pdb
-IntegrationTool/obj/
-IntegrationTool.Tests/obj/
+*.suo
+IntegrationTool/IntegrationTool/bin/IntegrationTool.dll
+IntegrationTool/IntegrationTool/bin/IntegrationTool.pdb
+IntegrationTool/IntegrationTool/obj/
+IntegrationTool/IntegrationTool.Tests/obj/
+IntegrationToolService/IntegrationToolService/obj/
+ClassLibrary/ClassLibrary/obj/

@@ -1,10 +1,4 @@
 ﻿var ConfigurationQueriesMainController = function ($scope, $http) {
-
-    $("#example1")
-      .DataTable({
-          responsive: false
-      });
-
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listQueries = [];
