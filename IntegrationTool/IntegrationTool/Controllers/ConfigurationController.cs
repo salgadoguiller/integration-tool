@@ -25,18 +25,99 @@ namespace IntegrationTool.Controllers
             Response.End();
         }
 
+        // ================================================================================================================
+        // Retornan formularios para insertar o actualizar parametros del sistema.
+        // ================================================================================================================
         [HttpGet]
-        public ActionResult activedirectorymain()
+        public ActionResult formActiveDirectory()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult activedirectory()
+        public ActionResult formServerSMTP()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult formDatabase()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formWebService()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formFlatFile()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formQuery()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formHeaders()
+        {
+            return View();
+        }
+
+        // ================================================================================================================
+        // Lista parametros del sistema.
+        // ================================================================================================================
+        [HttpGet]
+        public ActionResult listActiveDirectories()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listDatabases()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listFlatFiles()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listHeaders()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listQueries()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listServerSMTP()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listWebServices()
+        {
+            return View();
+        }
+
+        // ================================================================================================================
+        // Almacena en base de datos parametros del sistema.
+        // ================================================================================================================
         [HttpPost]
         public void saveActiveDirectory()
         {
@@ -67,18 +148,6 @@ namespace IntegrationTool.Controllers
             */
         }
 
-        [HttpGet]
-        public ActionResult serversmtpmain()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult serversmtp()
-        {
-            return View();
-        }
-
         [HttpPost]
         public void saveServerSmtp()
         {
@@ -96,12 +165,6 @@ namespace IntegrationTool.Controllers
             }
 
             response(resp);
-        }
-
-        [HttpGet]
-        public ActionResult databases()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -123,12 +186,6 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpGet]
-        public ActionResult webservices()
-        {
-            return View();
-        }
-
         [HttpPost]
         public void saveWebService()
         {
@@ -148,20 +205,8 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpGet]
-        public ActionResult flatfilesmain()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult flatfiles()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public void saveFlatFiles()
+        public void saveFlatFile()
         {
             string resp = "";
             try
@@ -179,26 +224,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpGet]
-        public ActionResult queriesmain()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult queries()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public void saveQueries()
+        public void saveQuery()
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.saveQueries(Request.Form["Queries"], Request.Form["typeQueries"]);
+                systemConfigurationModel.saveQuery(Request.Form["Queries"], Request.Form["typeQueries"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
@@ -210,15 +243,60 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpPost]
+        public void saveHeaders()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Obtiene y retorna parametros del sistema.
+        // ================================================================================================================
+        [HttpPost]
+        public void getDataBaseEngines()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(engines,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the engines. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
         public void getTypeQueries()
         {
             string resp = "";
             try
             {
                 connectModel();
-                List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
+                List<QueriesType> typeQueries = systemConfigurationModel.getTypeQueries();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(typeQueries,
                     new JsonSerializerSettings()
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -248,47 +326,21 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the type queries. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the queries. Please try again.\"}";
             }
 
             response(resp);
         }
 
-        [HttpGet]
-        public ActionResult headers()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public void saveHeaders()
+        public void getlistActiveDirectories()
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+                List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
 
-                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpPost]
-        public void getDataBaseEngines()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(engines,
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories,
                     new JsonSerializerSettings()
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -296,11 +348,263 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the engines. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the active directories. Please try again.\"}";
             }
 
             response(resp);
         }
 
+        public void getListFlatFiles()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<FlatFileParameter> flatFiles = systemConfigurationModel.getFlatFiles();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFiles,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat files. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getListServersSMTP()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<ServerSMTPParameter> serverSMTP = systemConfigurationModel.getServersSMTP();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the servers SMTP. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getListDatabases()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<DatabaseParameter> databases = systemConfigurationModel.getDatabases();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(databases,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the databases. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getListHeaders()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Header> headers = systemConfigurationModel.getHeaders();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(headers,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the headers. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getListWebServices()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<WebService> webServices = systemConfigurationModel.getWebServices();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(webServices,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the web services. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Eliminar parametros del sistema
+        // ================================================================================================================
+        [HttpPost]
+        public void deleteActiveDirectory()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteActiveDirectory(Convert.ToInt32(Request.Form["ActiveDirectoryId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Active directory deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the active directory. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteDataBase()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteDataBase(Convert.ToInt32(Request.Form["DatabaseParametersId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Database deleted Successfully.\"}";
+
+            }
+            catch (Exception )
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the database. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteFlatFile()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Flat file deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the flat file. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteHeader()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteHeader(Convert.ToInt32(Request.Form["HeaderId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Header deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the header. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteQuery()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteQuery(Convert.ToInt32(Request.Form["QueryId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Query deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the query. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteServerSMTP()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteServerSMTP(Convert.ToInt32(Request.Form["ServerSMTPParametersId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Server SMTP deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the server SMTP. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void deleteWebService()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deleteWebService(Convert.ToInt32(Request.Form["WebServiceId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Web service deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the web service. Please try again.\"}";
+            }
+
+            response(resp);
+        }
     }
 }

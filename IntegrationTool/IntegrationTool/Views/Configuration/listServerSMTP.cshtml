@@ -1,13 +1,30 @@
-﻿ 
-<!-- Main content -->
+﻿<div>
+    <br />
+    <feedback type=typeMessage message=message></feedback>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="col-md-10 col-md-offset-1">
+        <h1>
+            List Servers SMTP
+        </h1>
+        <ol class="breadcrumb">
+            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
+            <li class="active">List Servers SMTP</li>
+        </ol>
+        </div>
+    </section>  
+    
+    <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-10 col-md-offset-1">
 
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title">Servers SMTP</h3>
+              <a href="/#/Configuration/formServerSMTP" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -18,17 +35,15 @@
                   <th>Port</th>
                   <th>Username</th>
                   <th>Password</th>
-                  <th>Admin</th>
+                  <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
+                <tr ng-repeat="serverSMTP in listServersSMTP">
+                  <td>{{serverSMTP.NameServerSMTP}}</td>
+                  <td>{{serverSMTP.Port}}</td>
+                  <td>{{serverSMTP.UsernameSMTP}}</td>
+                  <td>{{serverSMTP.PasswordSMTP}}</td>
                   <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
                 </tr>
                 </tbody>
@@ -38,7 +53,7 @@
                   <th>Port</th>
                   <th>Username</th>
                   <th>Password</th>
-                  <th>Admin</th>
+                  <th>Options</th>
                 </tr>
                 </tfoot>
               </table>
@@ -51,7 +66,8 @@
       </div>
       <!-- /.row -->
     </section>
-<!-- /.content -->
+    <!-- /.content -->
+</div>
 
 
 

@@ -1,11 +1,29 @@
-﻿<!-- Main content -->
+﻿<div>
+    <br />
+    <feedback type=typeMessage message=message></feedback>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="col-md-10 col-md-offset-1">
+        <h1>
+            List Queries
+        </h1>
+        <ol class="breadcrumb">
+            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
+            <li class="active">List Queries</li>
+        </ol>
+        </div>
+    </section>
+
+    <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-10 col-md-offset-1">
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title">Queries</h3>
+                <a href="/#/Configuration/formQuery" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -14,21 +32,21 @@
                     <tr >
                       <th>Query Type</th>
                       <th>Query</th>
-                      <th>Admin</th>
+                      <th>Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="query in listQueries">
-                       <td>{{query.QueryTypeId}}</td>
+                       <td>{{query.QueriesType.Name}}</td>
                        <td>{{query.Query1}}</td>
-                        <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
+                       <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>Query Type</th>
                         <th>Query</th>
-                        <th>Admin</th>
+                        <th>Options</th>
                     </tr>
                     </tfoot>
                 </table>
@@ -41,7 +59,5 @@
       </div>
       <!-- /.row -->
     </section>
-<!-- /.content -->
-
-
-
+    <!-- /.content -->
+</div>

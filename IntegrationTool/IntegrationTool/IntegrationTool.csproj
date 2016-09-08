@@ -258,10 +258,13 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationQueriesMainController.js" />
+    <Content Include="Content\Scripts\Controllers\ListWebServicesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListHeadersController.js" />
+    <Content Include="Content\Scripts\Controllers\ListDatabasesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListActiveDirectoriesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListServerSMTPController.js" />
+    <Content Include="Content\Scripts\Controllers\ListFlatFilesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
@@ -347,28 +350,28 @@
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\activedirectory.cshtml" />
+    <Content Include="Views\Configuration\formActiveDirectory.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\serversmtp.cshtml" />
+    <Content Include="Views\Configuration\formServerSMTP.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\databases.cshtml" />
+    <Content Include="Views\Configuration\formDatabase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Main\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\webservices.cshtml" />
+    <Content Include="Views\Configuration\formWebService.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\flatfiles.cshtml" />
+    <Content Include="Views\Configuration\formFlatFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\queries.cshtml" />
+    <Content Include="Views\Configuration\formQuery.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\headers.cshtml" />
+    <Content Include="Views\Configuration\formHeaders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">
@@ -392,7 +395,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\activedirectorymain.cshtml" />
+    <Content Include="Views\Configuration\listActiveDirectories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -407,13 +410,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\serversmtpmain.cshtml" />
+    <Content Include="Views\Configuration\listServerSMTP.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\flatfilesmain.cshtml" />
+    <Content Include="Views\Configuration\listFlatFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\queriesmain.cshtml" />
+    <Content Include="Views\Configuration\listQueries.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listDatabases.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listHeaders.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listWebServices.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

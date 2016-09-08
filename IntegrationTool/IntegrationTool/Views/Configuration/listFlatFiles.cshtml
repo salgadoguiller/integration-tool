@@ -1,13 +1,30 @@
-﻿ 
-<!-- Main content -->
+﻿<div>
+    <br />
+    <feedback type=typeMessage message=message></feedback>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="col-md-10 col-md-offset-1">
+        <h1>
+            List Flat Files
+        </h1>
+        <ol class="breadcrumb">
+            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
+            <li class="active">List Flat Files</li>
+        </ol>
+        </div>
+    </section> 
+    
+    <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-10 col-md-offset-1">
 
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title">Flat Files</h3>
+                <a href="/#/Configuration/formFlatFile" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -15,19 +32,19 @@
                 <thead>
                 <tr>
                   <th>Location</th>
-                  <th>Admin</th>
+                  <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>C:\\root</td>                  
+                <tr ng-repeat="flatFile in listFlatFiles">
+                  <td>{{flatFile.Location}}</td>                  
                   <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>Location</th>                 
-                  <th>Admin</th>
+                  <th>Options</th>
                 </tr>
                 </tfoot>
               </table>
@@ -40,8 +57,8 @@
       </div>
       <!-- /.row -->
     </section>
-<!-- /.content -->
-
+    <!-- /.content -->
+</div>
 
 
 

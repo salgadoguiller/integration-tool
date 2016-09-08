@@ -56,39 +56,10 @@
                       </div>
                   </div>
                   <!-- /.box-body -->
-                  <div class="box-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                  <div class="box-footer" ng-controller="AlertController">
+                    <button type="button" class="btn btn-primary" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="$parent.form.$submitted = true; sendRequest(request, form)" sweet-on-cancel="return">Submit</button>
                   </div>
               </form>
-
-
-             <table id="Datable" class="table table-bordered table-striped">                    
-                    <thead>
-                    <tr>
-                      <th>Query Type</th>
-                      <th>Query</th>
-                      <th>Admin</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="queryType in queriesType" >
-                      <td>{{queryType.Name}}</td>
-                      <td>{{queryType.QueryTypeId}}</td>
-                        <td><span class="label label-success"><a href="/#/Configuration/queries">Edit</a></span><span> </span><span class="label label-danger">Delete</span></td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Query Type</th>
-                        <th>Query</th>
-                        <th>Admin</th>
-                    </tr>
-                    </tfoot>
-                </table>
-
-
-
-
           </div>
           <!-- /.box -->
         </div>
