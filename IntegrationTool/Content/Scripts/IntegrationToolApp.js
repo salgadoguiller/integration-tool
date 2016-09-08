@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert']);
 
 IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
 IntegrationToolApp.controller('ConfigurationServerSMTPController', ConfigurationServerSMTPController);
@@ -8,11 +8,15 @@ IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationF
 IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
 IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
 IntegrationToolApp.controller('ConfigurationActiveDirectoryMainController', ConfigurationActiveDirectoryMainController);
+<<<<<<< HEAD
 IntegrationToolApp.controller('ConfigurationServerSMTPMainController', ConfigurationServerSMTPMainController);
 IntegrationToolApp.controller('ConfigurationFlatFilesMainController', ConfigurationFlatFilesMainController);
 IntegrationToolApp.controller('ConfigurationQueriesMainController', ConfigurationQueriesMainController);
 
 
+=======
+IntegrationToolApp.controller('AlertController', AlertController);
+>>>>>>> origin/master
 
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 

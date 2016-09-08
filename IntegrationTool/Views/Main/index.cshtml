@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Sweet Alert -->
+        <link rel="stylesheet" href="//rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
 
         @Styles.Render("~/Content/CSSTemplate")      
         @Styles.Render("~/Content/Styles")
@@ -209,15 +211,14 @@
                immediately after the control sidebar -->
         </div>
         <!-- ./wrapper -->
+       
+        @Scripts.Render("~/Content/Plugins")
 
-      
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
-
-       
-
-        @Scripts.Render("~/Content/Plugins")
+        <script src="//rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>
+        <script src="//rawgit.com/tushariscoolster/ng-sweet-alert/master/ng-sweet-alert.js"></script>
 
         @Scripts.Render("~/Content/JSBootstrap")
 

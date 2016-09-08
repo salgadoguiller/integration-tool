@@ -1,6 +1,5 @@
 ﻿var ConfigurationActiveDirectoryMainController = function($scope, $http) {
-
-    $("#example1")
+    $("#datatable")
         .DataTable({
             responsive: false
         });

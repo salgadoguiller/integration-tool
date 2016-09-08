@@ -259,15 +259,20 @@
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
+<<<<<<< HEAD
     <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPMainController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesMainController.js" />
     <Content Include="Content\Scripts\Controllers\ConfigurationQueriesMainController.js" />
+=======
+    <Content Include="Content\Scripts\Controllers\AlertController.js" />
+>>>>>>> origin/master
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\3dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\2jquery.dataTables.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
+    <Content Include="Content\Scripts\Plugins\sweetalert.min.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
     <Content Include="Content\Stylesheets\Styles\Style.css" />
     <Content Include="Content\Template\css\template.css" />
