@@ -68,6 +68,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult serversmtpmain()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult serversmtp()
         {
             return View();
@@ -143,6 +149,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult flatfilesmain()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult flatfiles()
         {
             return View();
@@ -168,6 +180,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult queriesmain()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult queries()
         {
             return View();
@@ -187,6 +205,50 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Configuration Query Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getTypeQueries()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the type queries. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        public void getlistQueries()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Query> queries = systemConfigurationModel.getQueries();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the type queries. Please try again.\"}";
             }
 
             response(resp);
@@ -240,26 +302,5 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        public void getTypeQueries()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                List<QueriesType> queriesTypes = systemConfigurationModel.getTypeQueries();
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queriesTypes,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the type queries. Please try again.\"}";
-            }
-
-            response(resp);
-        }
     }
 }

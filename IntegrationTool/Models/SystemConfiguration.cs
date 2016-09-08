@@ -47,17 +47,20 @@ namespace IntegrationTool.Models
             serverSmtp.UsernameSMTP = UsernameSMTP;
             serverSmtp.PasswordSMTP = PasswordSMTP;
 
-           
-
             SystemConfigurationDB.ServerSMTPParameters.Add(serverSmtp);
             SystemConfigurationDB.SaveChanges();      
         }
 
         public List<Query> getQueries()
         {
-            List<Query> queries = (from query in SystemConfigurationDB.Queries
-                                                 select query).ToList();
-            return queries;
+            /*List<Query> queries = (from query in SystemConfigurationDB.Queries
+                                                 select query).ToList();*/
+
+            List<Query> queries2 = (from query in SystemConfigurationDB.Queries join query2 in
+            SystemConfigurationDB.QueriesTypes on query.QueryTypeId equals query2.QueryTypeId
+                                   select query   ).ToList();
+
+            return queries2;
         }
 
         public void saveQueries(string queryUser,string queryTypeUser)

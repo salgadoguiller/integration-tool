@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert']);
 
 IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
 IntegrationToolApp.controller('ConfigurationServerSMTPController', ConfigurationServerSMTPController);
@@ -8,6 +8,15 @@ IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationF
 IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
 IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
 IntegrationToolApp.controller('ConfigurationActiveDirectoryMainController', ConfigurationActiveDirectoryMainController);
+<<<<<<< HEAD
+IntegrationToolApp.controller('ConfigurationServerSMTPMainController', ConfigurationServerSMTPMainController);
+IntegrationToolApp.controller('ConfigurationFlatFilesMainController', ConfigurationFlatFilesMainController);
+IntegrationToolApp.controller('ConfigurationQueriesMainController', ConfigurationQueriesMainController);
+
+
+=======
+IntegrationToolApp.controller('AlertController', AlertController);
+>>>>>>> origin/master
 
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
@@ -24,6 +33,10 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Configuration/activedirectory',
             controller: 'ConfigurationActiveDirectoryController'
         })
+        .when('/Configuration/serversmtpmain', {
+            templateUrl: '/Configuration/serversmtpmain',
+            controller: 'ConfigurationServerSMTPMainController'
+        })
         .when('/Configuration/serversmtp', {
             templateUrl: '/Configuration/serversmtp',
             controller: 'ConfigurationServerSMTPController'
@@ -36,6 +49,10 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Configuration/webservices',
             controller: 'ConfigurationWebServicesController'
         })
+        .when('/Configuration/flatfilesmain', {
+            templateUrl: '/Configuration/flatfilesmain',
+            controller: 'ConfigurationFlatFilesMainController'
+        })
         .when('/Configuration/flatfiles', {
             templateUrl: '/Configuration/flatfiles',
             controller: 'ConfigurationFlatFilesController'
@@ -43,6 +60,10 @@ var configFunction = function ($routeProvider) {
         .when('/Configuration/queries', {
             templateUrl: '/Configuration/queries',
             controller: 'ConfigurationQueriesController'
+        })
+        .when('/Configuration/queriesmain', {
+            templateUrl: '/Configuration/queriesmain',
+            controller: 'ConfigurationQueriesMainController'
         })
         .when('/Configuration/headers', {
             templateUrl: '/Configuration/headers',

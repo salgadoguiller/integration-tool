@@ -1,13 +1,18 @@
 ﻿
 var ConfigurationQueriesController = function ($scope, $http) {
+
+
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
     $scope.queriesType = [];
+  
+   
 
     getQueriesType();
 
+    
     function getQueriesType() {
         var config = {
             headers: {
