@@ -5,16 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using IntegrationTool.Models;
+using ClassLibrary;
 
 namespace IntegrationTool.Controllers
 {
     public class ConfigurationController : Controller
     {
         private SystemConfiguration systemConfigurationModel;
+        private Encrypt encryptor;
 
         private void connectModel()
         {
             systemConfigurationModel = new SystemConfiguration();
+            encryptor = new Encrypt();
         }
 
         private void response(string json)
@@ -125,7 +128,8 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveActiveDirectory(Request.Form["ADDomain"], Request.Form["ADPath"]);
+
+                systemConfigurationModel.saveActiveDirectory(encryptor.encryptData(Request.Form["ADDomain"]), encryptor.encryptData(Request.Form["ADPath"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Active Directory Successful.\"}";
             }
@@ -155,7 +159,8 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveServerSMPT(Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+                systemConfigurationModel.saveServerSMPT(encryptor.encryptData(Request.Form["NameServerSMTP"]), encryptor.encryptData(Request.Form["Port"]),
+                                                        encryptor.encryptData(Request.Form["UsernameSMTP"]), encryptor.encryptData(Request.Form["PasswordSMTP"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
             }
@@ -174,13 +179,17 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveDatabase(Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Request.Form["EngineId"], Request.Form["Port"]);
+                systemConfigurationModel.saveDatabase(encryptor.encryptData(Request.Form["Ip"]), encryptor.encryptData(Request.Form["Instance"]),
+                                                    encryptor.encryptData(Request.Form["Name"]), encryptor.encryptData(Request.Form["Username"]),
+                                                    encryptor.encryptData(Request.Form["Password"]), Request.Form["EngineId"],
+                                                    encryptor.encryptData(Request.Form["Port"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -193,7 +202,8 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveWebService(Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
+                systemConfigurationModel.saveWebService(encryptor.encryptData(Request.Form["Endpoint"]), encryptor.encryptData(Request.Form["Username"]),
+                                                        encryptor.encryptData(Request.Form["Password"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Web Service Successful.\"}";
             }
@@ -212,7 +222,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveFlatFiles(Request.Form["Location"]);
+                systemConfigurationModel.saveFlatFiles(encryptor.encryptData(Request.Form["Location"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Flat File Successful.\"}";
             }
@@ -231,7 +241,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveQuery(Request.Form["Query1"], Request.Form["QueryTypeId"]);
+                systemConfigurationModel.saveQuery(encryptor.encryptData(Request.Form["Query1"]), Request.Form["QueryTypeId"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
@@ -250,7 +260,8 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"],
+                                                    encryptor.encryptData(Request.Form["Name"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
             }
@@ -272,7 +283,9 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateActiveDirectory(Convert.ToInt32(Request.Form["ActiveDirectoryId"]), Request.Form["ADDomain"], Request.Form["ADPath"]);
+                systemConfigurationModel.updateActiveDirectory(Convert.ToInt32(Request.Form["ActiveDirectoryId"]),
+                                                                encryptor.encryptData(Request.Form["ADDomain"]),
+                                                                encryptor.encryptData(Request.Form["ADPath"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Active Directory Successful.\"}";
             }
@@ -302,7 +315,11 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateServerSMPT(Convert.ToInt32(Request.Form["ServerSMTPParametersId"]), Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+                systemConfigurationModel.updateServerSMPT(Convert.ToInt32(Request.Form["ServerSMTPParametersId"]),
+                                                            encryptor.encryptData(Request.Form["NameServerSMTP"]),
+                                                            encryptor.encryptData(Request.Form["Port"]),
+                                                            encryptor.encryptData(Request.Form["UsernameSMTP"]),
+                                                            encryptor.encryptData(Request.Form["PasswordSMTP"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
             }
@@ -321,7 +338,14 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateDatabase(Convert.ToInt32(Request.Form["DatabaseParametersId"]), Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Convert.ToInt32(Request.Form["EngineId"]), Request.Form["Port"]);
+                systemConfigurationModel.updateDatabase(Convert.ToInt32(Request.Form["DatabaseParametersId"]),
+                                                        encryptor.encryptData(Request.Form["Ip"]),
+                                                        encryptor.encryptData(Request.Form["Instance"]),
+                                                        encryptor.encryptData(Request.Form["Name"]),
+                                                        encryptor.encryptData(Request.Form["Username"]),
+                                                        encryptor.encryptData(Request.Form["Password"]),
+                                                        Convert.ToInt32(Request.Form["EngineId"]),
+                                                        encryptor.encryptData(Request.Form["Port"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
             }
@@ -340,7 +364,10 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateWebService(Convert.ToInt32(Request.Form["WebServiceId"]), Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
+                systemConfigurationModel.updateWebService(Convert.ToInt32(Request.Form["WebServiceId"]),
+                                                        encryptor.encryptData(Request.Form["Endpoint"]),
+                                                        encryptor.encryptData(Request.Form["Username"]),
+                                                        encryptor.encryptData(Request.Form["Password"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Web Service Successful.\"}";
             }
@@ -359,7 +386,8 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]), Request.Form["Location"]);
+                systemConfigurationModel.updateFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]),
+                                                        encryptor.encryptData(Request.Form["Location"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Flat File Successful.\"}";
             }
@@ -378,7 +406,9 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateQuery(Convert.ToInt32(Request.Form["QueryId"]), Request.Form["Query1"], Convert.ToInt32(Request.Form["QueryTypeId"]));
+                systemConfigurationModel.updateQuery(Convert.ToInt32(Request.Form["QueryId"]),
+                                                    encryptor.encryptData(Request.Form["Query1"]), 
+                                                    Convert.ToInt32(Request.Form["QueryTypeId"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
@@ -397,7 +427,9 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateHeader(Convert.ToInt32(Request.Form["HeaderId"]), Convert.ToInt32(Request.Form["QueryTypeId"]), Request.Form["Name"]);
+                systemConfigurationModel.updateHeader(Convert.ToInt32(Request.Form["HeaderId"]), 
+                                                    Convert.ToInt32(Request.Form["QueryTypeId"]),
+                                                    encryptor.encryptData(Request.Form["Name"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
             }
@@ -467,6 +499,11 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<Query> queries = systemConfigurationModel.getQueries();
 
+                foreach (Query query in queries)
+                {
+                    query.Query1 = encryptor.decryptData(query.Query1);
+                }
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
                     new JsonSerializerSettings()
                     {
@@ -489,6 +526,12 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
+
+                foreach (ActiveDirectoryParameter activeDirectory in activeDirectories)
+                {
+                    activeDirectory.ADDomain = encryptor.decryptData(activeDirectory.ADDomain);
+                    activeDirectory.ADPath = encryptor.decryptData(activeDirectory.ADPath);
+                }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories,
                     new JsonSerializerSettings()
@@ -513,6 +556,11 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<FlatFileParameter> flatFiles = systemConfigurationModel.getFlatFiles();
 
+                foreach (FlatFileParameter flatFile in flatFiles)
+                {
+                    flatFile.Location = encryptor.decryptData(flatFile.Location);
+                }
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFiles,
                     new JsonSerializerSettings()
                     {
@@ -535,6 +583,14 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 List<ServerSMTPParameter> serverSMTP = systemConfigurationModel.getServersSMTP();
+
+                foreach (ServerSMTPParameter server in serverSMTP)
+                {
+                    server.NameServerSMTP = encryptor.decryptData(server.NameServerSMTP);
+                    server.Port = encryptor.decryptData(server.Port);
+                    server.UsernameSMTP = encryptor.decryptData(server.UsernameSMTP);
+                    server.PasswordSMTP = encryptor.decryptData(server.PasswordSMTP);
+                }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
                     new JsonSerializerSettings()
@@ -559,6 +615,16 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<DatabaseParameter> databases = systemConfigurationModel.getDatabases();
 
+                foreach (DatabaseParameter database in databases)
+                {
+                    database.Ip = encryptor.decryptData(database.Ip);
+                    database.Port = encryptor.decryptData(database.Port);
+                    database.Instance = encryptor.decryptData(database.Instance);
+                    database.Name = encryptor.decryptData(database.Name);
+                    database.Username = encryptor.decryptData(database.Username);
+                    database.Password = encryptor.decryptData(database.Password);
+                }
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(databases,
                     new JsonSerializerSettings()
                     {
@@ -581,6 +647,11 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 List<Header> headers = systemConfigurationModel.getHeaders();
+
+                foreach (Header header in headers)
+                {
+                    header.Name = encryptor.decryptData(header.Name);
+                }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(headers,
                     new JsonSerializerSettings()
@@ -605,6 +676,13 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<WebService> webServices = systemConfigurationModel.getWebServices();
 
+                foreach (WebService webService in webServices)
+                {
+                    webService.Endpoint = encryptor.decryptData(webService.Endpoint);
+                    webService.Username = encryptor.decryptData(webService.Username);
+                    webService.Password = encryptor.decryptData(webService.Password);
+                }
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(webServices,
                     new JsonSerializerSettings()
                     {
@@ -627,6 +705,9 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 ActiveDirectoryParameter activeDirectory = systemConfigurationModel.getActiveDirectory(id);
+
+                activeDirectory.ADDomain = encryptor.decryptData(activeDirectory.ADDomain);
+                activeDirectory.ADPath = encryptor.decryptData(activeDirectory.ADPath);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectory,
                     new JsonSerializerSettings()
@@ -651,6 +732,13 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 DatabaseParameter database = systemConfigurationModel.getDatabase(id);
 
+                database.Ip = encryptor.decryptData(database.Ip);
+                database.Port = encryptor.decryptData(database.Port);
+                database.Instance = encryptor.decryptData(database.Instance);
+                database.Name = encryptor.decryptData(database.Name);
+                database.Username = encryptor.decryptData(database.Username);
+                database.Password = encryptor.decryptData(database.Password);
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(database,
                     new JsonSerializerSettings()
                     {
@@ -673,6 +761,8 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 FlatFileParameter flatFile = systemConfigurationModel.getFlatFile(id);
+
+                flatFile.Location = encryptor.decryptData(flatFile.Location);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFile,
                     new JsonSerializerSettings()
@@ -697,6 +787,8 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 Header header = systemConfigurationModel.getHeader(id);
 
+                header.Name = encryptor.decryptData(header.Name);
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(header,
                     new JsonSerializerSettings()
                     {
@@ -719,6 +811,8 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 Query query = systemConfigurationModel.getQuery(id);
+
+                query.Query1 = encryptor.decryptData(query.Query1);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(query,
                     new JsonSerializerSettings()
@@ -743,6 +837,11 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 ServerSMTPParameter serverSMTP = systemConfigurationModel.getServerSMTP(id);
 
+                serverSMTP.NameServerSMTP = encryptor.decryptData(serverSMTP.NameServerSMTP);
+                serverSMTP.Port = encryptor.decryptData(serverSMTP.Port);
+                serverSMTP.UsernameSMTP = encryptor.decryptData(serverSMTP.UsernameSMTP);
+                serverSMTP.PasswordSMTP = encryptor.decryptData(serverSMTP.PasswordSMTP);
+
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
                     new JsonSerializerSettings()
                     {
@@ -765,6 +864,10 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 WebService webService = systemConfigurationModel.getWebService(id);
+
+                webService.Endpoint = encryptor.decryptData(webService.Endpoint);
+                webService.Username = encryptor.decryptData(webService.Username);
+                webService.Password = encryptor.decryptData(webService.Password);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(webService,
                     new JsonSerializerSettings()
