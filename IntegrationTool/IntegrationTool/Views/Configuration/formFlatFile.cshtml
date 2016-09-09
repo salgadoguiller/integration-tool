@@ -40,8 +40,8 @@
                 </div>
               </div>
               <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="box-footer" ng-controller="AlertController">
+                <button type="button" class="btn btn-primary" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="$parent.form.$submitted = true; sendRequest(request, form)" sweet-on-cancel="return">Submit</button>
               </div>
             </form>
           </div>

@@ -1,13 +1,13 @@
-﻿var ConfigurationHeadersController = function ($scope, $http) {
+﻿var ListFlatFilesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
-    $scope.request = {};
-    $scope.sendRequest = sendRequest;
-    $scope.QueriesType = [];
+    $scope.listFlatFiles = [];
+    $scope.deleteFlatFile = deleteFlatFile;
+    $scope.editFlatFile = editFlatFile;
 
-    getQueriesType();
+    getListFlatFiles();
 
-    function getQueriesType() {
+    function getListFlatFiles() {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -16,9 +16,9 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getTypeQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getListFlatFiles', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                $scope.QueriesType = resp;
+                $scope.listFlatFiles = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
@@ -29,32 +29,28 @@
         });
     }
 
-    function sendRequest(req, form) {
-        if (!form.$valid) {
-            $scope.message = "Error: Invalid form, please try again.";
-            $scope.typeMessage = "danger";
-            return false;
-        }
-
+    function deleteFlatFile(FlatFileParametersId) {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         }
 
-        var data = $.param(req);
+        var data = $.param({});
 
-        $http.post('Configuration/saveHeaders', data, config).success(function (resp) {
+        $http.delete('Configuration/deleteFlatFile?id=' + FlatFileParametersId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
-            $scope.request = {};
-            form.$setPristine();
-            form.$setUntouched();
+            getListFlatFiles();
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
         });
     }
+
+    function editFlatFile(id) {
+        $location.url('/Configuration/formFlatFile/' + id);
+    }
 }
 
-ConfigurationHeadersController.$inject = ['$scope', '$http'];
+ListFlatFilesController.$inject = ['$scope', '$http', '$location'];

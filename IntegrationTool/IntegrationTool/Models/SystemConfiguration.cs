@@ -14,14 +14,117 @@ namespace IntegrationTool.Models
             SystemConfigurationDB = new IntegrationToolEntities();
         }
 
+        // ================================================================================================================
+        // Obtener parametros del sistema.
+        // ================================================================================================================
         public List<ActiveDirectoryParameter> getActiveDirectories()
         {
             List<ActiveDirectoryParameter> activeDirectories = (from ad in SystemConfigurationDB.ActiveDirectoryParameters
                                                 select ad).ToList();
-       
             return activeDirectories;
         }
 
+        public List<ServerSMTPParameter> getServersSMTP()
+        {
+            List<ServerSMTPParameter> serverSmtp = (from server in SystemConfigurationDB.ServerSMTPParameters
+                                                    select server).ToList();
+            return serverSmtp;
+        }
+
+        public List<Query> getQueries()
+        {
+            List<Query> queries = (from query in SystemConfigurationDB.Queries
+                                                 select query).ToList();
+            return queries;
+        }
+
+        public List<FlatFileParameter> getFlatFiles()
+        {
+            List<FlatFileParameter> flatFiles = (from ff in SystemConfigurationDB.FlatFileParameters
+                                                 select ff).ToList();
+            return flatFiles;
+        }
+
+        public List<DatabaseParameter> getDatabases()
+        {
+            List<DatabaseParameter> databases = (from db in SystemConfigurationDB.DatabaseParameters
+                                                 select db).ToList();
+            return databases;
+        }
+
+        public List<WebService> getWebServices()
+        {
+            List<WebService> webServices = (from ws in SystemConfigurationDB.WebServices
+                                            select ws).ToList();
+            return webServices;
+        }
+
+        public List<Header> getHeaders()
+        {
+            List<Header> headers = SystemConfigurationDB.Headers.ToList();
+
+            return headers;
+        }
+
+        public List<Engine> getDataBaseEngines()
+        {
+            List<Engine> engines = (from dbEngine in SystemConfigurationDB.Engines
+                                    select dbEngine).ToList();
+            return engines;
+        }
+
+        public List<QueriesType> getTypeQueries()
+        {
+            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
+                                         select queryType).ToList();
+            return queries;
+        }
+
+        public ActiveDirectoryParameter getActiveDirectory(int id)
+        {
+            ActiveDirectoryParameter activeDirectory = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == id).ToList()[0];
+            return activeDirectory;
+        }
+
+        public DatabaseParameter getDatabase(int id)
+        {
+            DatabaseParameter dataBase = SystemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == id).ToList()[0];
+            return dataBase;
+        }
+
+        public FlatFileParameter getFlatFile(int id)
+        {
+            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+            return flatFile;
+        }
+
+        public Header getHeader(int id)
+        {
+            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
+            return header;
+        }
+
+        public Query getQuery(int id)
+        {
+            Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
+            return query;
+        }
+
+        public ServerSMTPParameter getServerSMTP(int id)
+        {
+            ServerSMTPParameter serverSMTP = SystemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == id).ToList()[0];
+            return serverSMTP;
+        }
+
+        public WebService getWebService(int id)
+        {
+            WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == id).ToList()[0];
+            return webService;
+        }
+
+        // ================================================================================================================
+        // Almacenar parametros del sistema.
+        // ================================================================================================================
         public void saveActiveDirectory(string domain, string path)
         {
             ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
@@ -30,13 +133,6 @@ namespace IntegrationTool.Models
 
             SystemConfigurationDB.ActiveDirectoryParameters.Add(ad);
             SystemConfigurationDB.SaveChanges();
-        }
-
-        public List<ServerSMTPParameter> getServersSMTP()
-        {
-            List<ServerSMTPParameter> serverSmtp = (from server in SystemConfigurationDB.ServerSMTPParameters
-                                                                select server).ToList();
-            return serverSmtp;
         }
 
         public void saveServerSMPT(string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
@@ -51,19 +147,7 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();      
         }
 
-        public List<Query> getQueries()
-        {
-            /*List<Query> queries = (from query in SystemConfigurationDB.Queries
-                                                 select query).ToList();*/
-
-            List<Query> queries2 = (from query in SystemConfigurationDB.Queries join query2 in
-            SystemConfigurationDB.QueriesTypes on query.QueryTypeId equals query2.QueryTypeId
-                                   select query   ).ToList();
-
-            return queries2;
-        }
-
-        public void saveQueries(string queryUser,string queryTypeUser)
+        public void saveQuery(string queryUser,string queryTypeUser)
         {        
             Query query = new Query();
             query.Query1 = queryUser;
@@ -71,13 +155,6 @@ namespace IntegrationTool.Models
 
             SystemConfigurationDB.Queries.Add(query);
             SystemConfigurationDB.SaveChanges();
-        }
-
-        public List<FlatFileParameter> getFlatFiles()
-        {
-            List<FlatFileParameter> flatFiles = (from ff in SystemConfigurationDB.FlatFileParameters
-                                                    select ff).ToList();
-            return flatFiles;
         }
 
         public void saveFlatFiles(string location)
@@ -88,13 +165,6 @@ namespace IntegrationTool.Models
            
             SystemConfigurationDB.FlatFileParameters.Add(flatFile);
             SystemConfigurationDB.SaveChanges();
-        }
-
-        public List<DatabaseParameter> getDatabases()
-        {
-            List<DatabaseParameter> databases = (from db in SystemConfigurationDB.DatabaseParameters
-                                                                select db).ToList();
-            return databases;
         }
 
         public void saveDatabase(string ip, string instance, string name, string username, string password, string engineId, string port)
@@ -117,13 +187,6 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();
         }
 
-        public List<WebService> getWebServices()
-        {
-            List<WebService> webServices = (from ws in SystemConfigurationDB.WebServices
-                                                 select ws).ToList();
-            return webServices;
-        }
-
         public void saveWebService(string endpoint, string username, string password)
         {
             WebService webService = new WebService();
@@ -135,13 +198,6 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();
         }
 
-        public List<Header> getHeaders()
-        {
-            List<Header> headers = SystemConfigurationDB.Headers.ToList();
-
-            return headers;
-        }
-
         public void saveHeaders(string queryTypeId, string name)
         {
             string[] headersName = name.Split('|');
@@ -150,31 +206,145 @@ namespace IntegrationTool.Models
             {
                 Header header = new Header();
                 header.Name = headerName;
+                header.QueryTypeId = Convert.ToInt32(queryTypeId);
 
                 SystemConfigurationDB.Headers.Add(header);
-                SystemConfigurationDB.SaveChanges();
-
-                HeadersQueryType headerQueryType = new HeadersQueryType();
-                headerQueryType.QueryTypeId = Convert.ToInt32(queryTypeId);
-                headerQueryType.HeaderId = header.HeaderId;
-
-                SystemConfigurationDB.HeadersQueryTypes.Add(headerQueryType);
                 SystemConfigurationDB.SaveChanges();
             }
         }
 
-        public List<Engine> getDataBaseEngines()
+        // ================================================================================================================
+        // Actualizar parametros del sistema.
+        // ================================================================================================================
+        public void updateActiveDirectory(int id, string domain, string path)
         {
-            List<Engine> engines = (from dbEngine in SystemConfigurationDB.Engines
-                                    select dbEngine).ToList();
-            return engines;
+            ActiveDirectoryParameter ad = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == id).ToList()[0];
+            ad.ADPath = domain;
+            ad.ADDomain = path;
+
+            SystemConfigurationDB.SaveChanges();
         }
 
-        public List<QueriesType> getTypeQueries()
+        public void updateDatabase(int id, string ip, string instance, string name, string username, string password, int engineId, string port)
         {
-            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
-                                         select queryType).ToList();
-            return queries;
+            DatabaseParameter db = SystemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == id).ToList()[0];
+            db.Ip = ip;
+            db.Instance = instance;
+            db.Name = name;
+            db.Username = username;
+            db.Password = password;
+            db.Port = port;
+            db.EngineId = engineId;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateFlatFile(int id, string location)
+        {
+            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+
+            flatFile.Location = location;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateHeader(int id, int queryTypeId, string name)
+        {
+            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
+
+            header.Name = name;
+            header.QueryTypeId = queryTypeId;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateQuery(int id, string queryString, int queryTypeId)
+        {
+            Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
+            query.Query1 = queryString;
+            query.QueryTypeId = queryTypeId;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateServerSMPT(int id, string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
+        {
+            ServerSMTPParameter serverSmtp = SystemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == id).ToList()[0];
+            serverSmtp.NameServerSMTP = NameServerSMTP;
+            serverSmtp.Port = Port;
+            serverSmtp.UsernameSMTP = UsernameSMTP;
+            serverSmtp.PasswordSMTP = PasswordSMTP;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateWebService(int id, string endpoint, string username, string password)
+        {
+            WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == id).ToList()[0];
+            webService.Endpoint = endpoint;
+            webService.Username = username;
+            webService.Password = password;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        // ================================================================================================================
+        // Eliminar parametros del sistema.
+        // ================================================================================================================
+        public void deleteActiveDirectory(int activeDirectoryId)
+        {
+            ActiveDirectoryParameter activeDirectory = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == activeDirectoryId).ToList()[0];
+
+            SystemConfigurationDB.ActiveDirectoryParameters.Remove(activeDirectory);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteDataBase(int dataBaseId)
+        {
+            DatabaseParameter database = SystemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == dataBaseId).ToList()[0];
+
+            SystemConfigurationDB.DatabaseParameters.Remove(database);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteFlatFile(int flatFileIdId)
+        {
+            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == flatFileIdId).ToList()[0];
+
+            SystemConfigurationDB.FlatFileParameters.Remove(flatFile);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteHeader(int headerId)
+        {
+            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == headerId).ToList()[0];
+
+            SystemConfigurationDB.Headers.Remove(header);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteQuery(int queryId)
+        {
+            Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == queryId).ToList()[0];
+
+            SystemConfigurationDB.Queries.Remove(query);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteServerSMTP(int serverSMTPId)
+        {
+            ServerSMTPParameter serverSMTP = SystemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == serverSMTPId).ToList()[0];
+
+            SystemConfigurationDB.ServerSMTPParameters.Remove(serverSMTP);
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void deleteWebService(int webServiceId)
+        {
+            WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == webServiceId).ToList()[0];
+
+            SystemConfigurationDB.WebServices.Remove(webService);
+            SystemConfigurationDB.SaveChanges();
         }
     }
 }

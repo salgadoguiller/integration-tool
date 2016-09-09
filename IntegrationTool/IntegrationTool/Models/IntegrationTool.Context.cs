@@ -31,7 +31,6 @@ namespace IntegrationTool.Models
         public DbSet<Engine> Engines { get; set; }
         public DbSet<FlatFileParameter> FlatFileParameters { get; set; }
         public DbSet<Header> Headers { get; set; }
-        public DbSet<HeadersQueryType> HeadersQueryTypes { get; set; }
         public DbSet<IntegrationLog> IntegrationLogs { get; set; }
         public DbSet<Integration> Integrations { get; set; }
         public DbSet<IntegrationsType> IntegrationsTypes { get; set; }
@@ -41,6 +40,7 @@ namespace IntegrationTool.Models
         public DbSet<Recurrence> Recurrences { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ServerSMTPParameter> ServerSMTPParameters { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<SystemLog> SystemLogs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UsersType> UsersTypes { get; set; }

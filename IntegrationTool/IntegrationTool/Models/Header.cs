@@ -14,14 +14,10 @@ namespace IntegrationTool.Models
     
     public partial class Header
     {
-        public Header()
-        {
-            this.HeadersQueryTypes = new HashSet<HeadersQueryType>();
-        }
-    
         public int HeaderId { get; set; }
         public string Name { get; set; }
+        public int QueryTypeId { get; set; }
     
-        public virtual ICollection<HeadersQueryType> HeadersQueryTypes { get; set; }
+        public virtual QueriesType QueriesType { get; set; }
     }
 }

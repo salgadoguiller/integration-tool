@@ -1,19 +1,22 @@
 ﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert']);
 
-IntegrationToolApp.controller('ConfigurationActiveDirectoryController', ConfigurationActiveDirectoryController);
-IntegrationToolApp.controller('ConfigurationServerSMTPController', ConfigurationServerSMTPController);
-IntegrationToolApp.controller('ConfigurationDataBasesController', ConfigurationDataBasesController);
-IntegrationToolApp.controller('ConfigurationWebServicesController', ConfigurationWebServicesController);
-IntegrationToolApp.controller('ConfigurationFlatFilesController', ConfigurationFlatFilesController);
-IntegrationToolApp.controller('ConfigurationQueriesController', ConfigurationQueriesController);
-IntegrationToolApp.controller('ConfigurationHeadersController', ConfigurationHeadersController);
-IntegrationToolApp.controller('ConfigurationActiveDirectoryMainController', ConfigurationActiveDirectoryMainController);
-IntegrationToolApp.controller('ConfigurationServerSMTPMainController', ConfigurationServerSMTPMainController);
-IntegrationToolApp.controller('ConfigurationFlatFilesMainController', ConfigurationFlatFilesMainController);
-IntegrationToolApp.controller('ConfigurationQueriesMainController', ConfigurationQueriesMainController);
+IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
+IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
+IntegrationToolApp.controller('FormFlatFileController', FormFlatFileController);
+IntegrationToolApp.controller('FormHeadersController', FormHeadersController);
+IntegrationToolApp.controller('FormQueryController', FormQueryController);
+IntegrationToolApp.controller('FormServerSMTPController', FormServerSMTPController);
+IntegrationToolApp.controller('FormWebServiceController', FormWebServiceController);
+
+IntegrationToolApp.controller('ListActiveDirectoriesController', ListActiveDirectoriesController);
+IntegrationToolApp.controller('ListDatabasesController', ListDatabasesController);
+IntegrationToolApp.controller('ListFlatFilesController', ListFlatFilesController);
+IntegrationToolApp.controller('ListHeadersController', ListHeadersController);
+IntegrationToolApp.controller('ListQueriesController', ListQueriesController);
+IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPController);
+IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
-
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
 var configFunction = function ($routeProvider) {
@@ -21,49 +24,61 @@ var configFunction = function ($routeProvider) {
         .when('/Main/index', {
             templateUrl: '/Main/index'
         })
-        .when('/Configuration/activedirectorymain', {
-            templateUrl: '/Configuration/activedirectorymain',
-            controller: 'ConfigurationActiveDirectoryMainController'
+        .when('/Configuration/listActiveDirectories', {
+            templateUrl: '/Configuration/listActiveDirectories',
+            controller: 'ListActiveDirectoriesController'
         })
-        .when('/Configuration/activedirectory', {
-            templateUrl: '/Configuration/activedirectory',
-            controller: 'ConfigurationActiveDirectoryController'
+        .when('/Configuration/listDatabases', {
+            templateUrl: '/Configuration/listDatabases',
+            controller: 'ListDatabasesController'
         })
-        .when('/Configuration/serversmtpmain', {
-            templateUrl: '/Configuration/serversmtpmain',
-            controller: 'ConfigurationServerSMTPMainController'
+        .when('/Configuration/listFlatFiles', {
+            templateUrl: '/Configuration/listFlatFiles',
+            controller: 'ListFlatFilesController'
         })
-        .when('/Configuration/serversmtp', {
-            templateUrl: '/Configuration/serversmtp',
-            controller: 'ConfigurationServerSMTPController'
+        .when('/Configuration/listHeaders', {
+            templateUrl: '/Configuration/listHeaders',
+            controller: 'ListHeadersController'
         })
-        .when('/Configuration/databases', {
-            templateUrl: '/Configuration/databases',
-            controller: 'ConfigurationDataBasesController'
+        .when('/Configuration/listQueries', {
+            templateUrl: '/Configuration/listQueries',
+            controller: 'ListQueriesController'
         })
-        .when('/Configuration/webservices', {
-            templateUrl: '/Configuration/webservices',
-            controller: 'ConfigurationWebServicesController'
+        .when('/Configuration/listServerSMTP', {
+            templateUrl: '/Configuration/listServerSMTP',
+            controller: 'ListServerSMTPController'
         })
-        .when('/Configuration/flatfilesmain', {
-            templateUrl: '/Configuration/flatfilesmain',
-            controller: 'ConfigurationFlatFilesMainController'
+        .when('/Configuration/listWebServices', {
+            templateUrl: '/Configuration/listWebServices',
+            controller: 'ListWebServicesController'
         })
-        .when('/Configuration/flatfiles', {
-            templateUrl: '/Configuration/flatfiles',
-            controller: 'ConfigurationFlatFilesController'
+        .when('/Configuration/formActiveDirectory/:id', {
+            templateUrl: '/Configuration/formActiveDirectory',
+            controller: 'FormActiveDirectoryController'
         })
-        .when('/Configuration/queries', {
-            templateUrl: '/Configuration/queries',
-            controller: 'ConfigurationQueriesController'
+        .when('/Configuration/formDatabase/:id', {
+            templateUrl: '/Configuration/formDatabase',
+            controller: 'FormDataBaseController'
         })
-        .when('/Configuration/queriesmain', {
-            templateUrl: '/Configuration/queriesmain',
-            controller: 'ConfigurationQueriesMainController'
+        .when('/Configuration/formFlatFile/:id', {
+            templateUrl: '/Configuration/formFlatFile',
+            controller: 'FormFlatFileController'
         })
-        .when('/Configuration/headers', {
-            templateUrl: '/Configuration/headers',
-            controller: 'ConfigurationHeadersController'
+        .when('/Configuration/formHeaders/:id', {
+            templateUrl: '/Configuration/formHeaders',
+            controller: 'FormHeadersController'
+        })
+        .when('/Configuration/formQuery/:id', {
+            templateUrl: '/Configuration/formQuery',
+            controller: 'FormQueryController'
+        })
+        .when('/Configuration/formServerSMTP/:id', {
+            templateUrl: '/Configuration/formServerSMTP',
+            controller: 'FormServerSMTPController'
+        })
+        .when('/Configuration/formWebService/:id', {
+            templateUrl: '/Configuration/formWebService',
+            controller: 'FormWebServiceController'
         });
 }
 configFunction.$inject = ['$routeProvider'];

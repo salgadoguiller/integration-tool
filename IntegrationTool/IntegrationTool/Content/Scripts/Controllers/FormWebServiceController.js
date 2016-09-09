@@ -1,15 +1,16 @@
-﻿var ConfigurationDataBasesController = function ($scope, $http) {
+﻿var FormWebServiceController = function ($scope, $http, $routeParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
-    $scope.regexIP = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-    $scope.regexPort = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
-    $scope.dataBaseEngines = [];
 
-    getDataBaseEngines();
+    loadInfo();
 
-    function getDataBaseEngines() {
+    function loadInfo() {
+        if ($routeParams.id == -1) {
+            return;
+        }
+
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -18,10 +19,10 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getDataBaseEngines', data, config).success(function (resp) {
+        $http.get('Configuration/getWebService?id=' + $routeParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                $scope.dataBaseEngines = resp;
-            }else {
+                $scope.request = resp;
+            } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
             }
@@ -46,7 +47,14 @@
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveDataBase', data, config).success(function (resp) {
+        if ($routeParams.id == -1)
+            put(data, config, form);
+        else
+            post(data, config, form);
+    }
+
+    function put(data, config, form) {
+        $http.put('Configuration/saveWebService', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};
@@ -57,6 +65,20 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function post(data, config, form) {
+        $http.post('Configuration/updateWebService', data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            $scope.request = {};
+            loadInfo();
+            form.$setPristine();
+            form.$setUntouched();
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+    }
 }
 
-ConfigurationDataBasesController.$inject = ['$scope', '$http'];
+FormWebServiceController.$inject = ['$scope', '$http', '$routeParams'];

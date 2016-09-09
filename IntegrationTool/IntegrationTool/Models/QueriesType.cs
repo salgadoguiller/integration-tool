@@ -16,14 +16,14 @@ namespace IntegrationTool.Models
     {
         public QueriesType()
         {
-            this.HeadersQueryTypes = new HashSet<HeadersQueryType>();
+            this.Headers = new HashSet<Header>();
             this.Queries = new HashSet<Query>();
         }
     
         public int QueryTypeId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<HeadersQueryType> HeadersQueryTypes { get; set; }
+        public virtual ICollection<Header> Headers { get; set; }
         public virtual ICollection<Query> Queries { get; set; }
     }
 }

@@ -176,9 +176,6 @@
     <Compile Include="Models\Header.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeadersQueryType.cs">
-      <DependentUpon>IntegrationTool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Integration.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -224,6 +221,9 @@
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SqlServerDataBase.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SystemConfiguration.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
@@ -252,17 +252,20 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationDataBasesController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationWebServicesController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationQueriesController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationHeadersController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationActiveDirectoryMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationServerSMTPMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationFlatFilesMainController.js" />
-    <Content Include="Content\Scripts\Controllers\ConfigurationQueriesMainController.js" />
+    <Content Include="Content\Scripts\Controllers\FormActiveDirectoryController.js" />
+    <Content Include="Content\Scripts\Controllers\FormServerSMTPController.js" />
+    <Content Include="Content\Scripts\Controllers\FormDataBaseController.js" />
+    <Content Include="Content\Scripts\Controllers\FormWebServiceController.js" />
+    <Content Include="Content\Scripts\Controllers\FormFlatFileController.js" />
+    <Content Include="Content\Scripts\Controllers\FormQueryController.js" />
+    <Content Include="Content\Scripts\Controllers\FormHeadersController.js" />
+    <Content Include="Content\Scripts\Controllers\ListWebServicesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListHeadersController.js" />
+    <Content Include="Content\Scripts\Controllers\ListDatabasesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListActiveDirectoriesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListServerSMTPController.js" />
+    <Content Include="Content\Scripts\Controllers\ListFlatFilesController.js" />
+    <Content Include="Content\Scripts\Controllers\ListQueriesController.js" />
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
@@ -348,28 +351,61 @@
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\activedirectory.cshtml" />
+    <Content Include="Views\Configuration\formActiveDirectory.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\serversmtp.cshtml" />
+    <Content Include="Views\Configuration\formServerSMTP.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\databases.cshtml" />
+    <Content Include="Views\Configuration\formDatabase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Main\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\webservices.cshtml" />
+    <Content Include="Views\Configuration\formWebService.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\flatfiles.cshtml" />
+    <Content Include="Views\Configuration\formFlatFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\queries.cshtml" />
+    <Content Include="Views\Configuration\formQuery.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\headers.cshtml" />
+    <Content Include="Views\Configuration\formHeaders.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listActiveDirectories.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listServerSMTP.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listFlatFiles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listQueries.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listDatabases.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listHeaders.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listWebServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">
@@ -391,30 +427,6 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Configuration\activedirectorymain.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Configuration\serversmtpmain.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Configuration\flatfilesmain.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Configuration\queriesmain.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

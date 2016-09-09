@@ -31,10 +31,10 @@
               <div class="box-body">
                 <div class="form-group">
                     <label>Query Type</label>
-                    <select class="form-control select2" name="QueryType" style="width: 100%;" ng-model="request.QueryTypeId" required>
-                        <option selected disabled value="">Select</option>
-                        <option ng-repeat="queryType in QueriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
-                    </select>
+                     <select class="form-control select2" name="QueryType" ng-model="request.QueryTypeId" style="width: 100%;" required>
+                        <option selected="selected" disabled value="">Select</option>
+                        <option ng-repeat="typeQuery in typeQueries" value="{{typeQuery.QueryTypeId}}">{{typeQuery.Name}}</option>
+                     </select>
                     <div ng-if="form.QueryType.$touched || form.$submitted">
                         <div ng-messages="form.QueryType.$error" role="alert">
                             <div class="help-block error-text" ng-message="required">* Query type is required.</div>
@@ -56,8 +56,8 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="box-footer" ng-controller="AlertController">
+                <button type="button" class="btn btn-primary" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="$parent.form.$submitted = true; sendRequest(request, form)" sweet-on-cancel="return">Submit</button>
               </div>
             </form>
           </div>

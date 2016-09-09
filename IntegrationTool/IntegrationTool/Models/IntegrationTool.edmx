@@ -12,7 +12,6 @@
           <EntitySet Name="Engines" EntityType="IntegrationToolModel.Store.Engines" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FlatFileParameters" EntityType="IntegrationToolModel.Store.FlatFileParameters" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Headers" EntityType="IntegrationToolModel.Store.Headers" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="HeadersQueryType" EntityType="IntegrationToolModel.Store.HeadersQueryType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="IntegrationLogs" EntityType="IntegrationToolModel.Store.IntegrationLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Integrations" EntityType="IntegrationToolModel.Store.Integrations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="IntegrationsType" EntityType="IntegrationToolModel.Store.IntegrationsType" store:Type="Tables" Schema="dbo" />
@@ -22,6 +21,7 @@
           <EntitySet Name="Recurrences" EntityType="IntegrationToolModel.Store.Recurrences" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Resources" EntityType="IntegrationToolModel.Store.Resources" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ServerSMTPParameters" EntityType="IntegrationToolModel.Store.ServerSMTPParameters" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="IntegrationToolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemLogs" EntityType="IntegrationToolModel.Store.SystemLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="IntegrationToolModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UsersType" EntityType="IntegrationToolModel.Store.UsersType" store:Type="Tables" Schema="dbo" />
@@ -38,13 +38,9 @@
             <End Role="Engines" EntitySet="Engines" />
             <End Role="DatabaseParameters" EntitySet="DatabaseParameters" />
           </AssociationSet>
-          <AssociationSet Name="FK_HeadersQueryTypeHeaders_HeaderId" Association="IntegrationToolModel.Store.FK_HeadersQueryTypeHeaders_HeaderId">
-            <End Role="Headers" EntitySet="Headers" />
-            <End Role="HeadersQueryType" EntitySet="HeadersQueryType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HeadersQueryTypeQueriesType_QueryTypeId" Association="IntegrationToolModel.Store.FK_HeadersQueryTypeQueriesType_QueryTypeId">
+          <AssociationSet Name="FK_HeadersQueriesType_QueryTypeId" Association="IntegrationToolModel.Store.FK_HeadersQueriesType_QueryTypeId">
             <End Role="QueriesType" EntitySet="QueriesType" />
-            <End Role="HeadersQueryType" EntitySet="HeadersQueryType" />
+            <End Role="Headers" EntitySet="Headers" />
           </AssociationSet>
           <AssociationSet Name="FK_IntegrationLogsIntegrations_IntegrationId" Association="IntegrationToolModel.Store.FK_IntegrationLogsIntegrations_IntegrationId">
             <End Role="Integrations" EntitySet="Integrations" />
@@ -151,13 +147,6 @@
           </Key>
           <Property Name="HeaderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
-        </EntityType>
-        <EntityType Name="HeadersQueryType">
-          <Key>
-            <PropertyRef Name="HeaderQueryTypeId" />
-          </Key>
-          <Property Name="HeaderQueryTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="HeaderId" Type="int" Nullable="false" />
           <Property Name="QueryTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="IntegrationLogs">
@@ -237,6 +226,16 @@
           <Property Name="UsernameSMTP" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="PasswordSMTP" Type="varchar" Nullable="false" MaxLength="45" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="SystemLogs">
           <Key>
             <PropertyRef Name="SystemLogId" />
@@ -310,26 +309,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HeadersQueryTypeHeaders_HeaderId">
-          <End Role="Headers" Type="IntegrationToolModel.Store.Headers" Multiplicity="1" />
-          <End Role="HeadersQueryType" Type="IntegrationToolModel.Store.HeadersQueryType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Headers">
-              <PropertyRef Name="HeaderId" />
-            </Principal>
-            <Dependent Role="HeadersQueryType">
-              <PropertyRef Name="HeaderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HeadersQueryTypeQueriesType_QueryTypeId">
+        <Association Name="FK_HeadersQueriesType_QueryTypeId">
           <End Role="QueriesType" Type="IntegrationToolModel.Store.QueriesType" Multiplicity="1" />
-          <End Role="HeadersQueryType" Type="IntegrationToolModel.Store.HeadersQueryType" Multiplicity="*" />
+          <End Role="Headers" Type="IntegrationToolModel.Store.Headers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QueriesType">
               <PropertyRef Name="QueryTypeId" />
             </Principal>
-            <Dependent Role="HeadersQueryType">
+            <Dependent Role="Headers">
               <PropertyRef Name="QueryTypeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -502,7 +489,6 @@
           <EntitySet Name="Engines" EntityType="IntegrationToolModel.Engine" />
           <EntitySet Name="FlatFileParameters" EntityType="IntegrationToolModel.FlatFileParameter" />
           <EntitySet Name="Headers" EntityType="IntegrationToolModel.Header" />
-          <EntitySet Name="HeadersQueryTypes" EntityType="IntegrationToolModel.HeadersQueryType" />
           <EntitySet Name="IntegrationLogs" EntityType="IntegrationToolModel.IntegrationLog" />
           <EntitySet Name="Integrations" EntityType="IntegrationToolModel.Integration" />
           <EntitySet Name="IntegrationsTypes" EntityType="IntegrationToolModel.IntegrationsType" />
@@ -512,6 +498,7 @@
           <EntitySet Name="Recurrences" EntityType="IntegrationToolModel.Recurrence" />
           <EntitySet Name="Resources" EntityType="IntegrationToolModel.Resource" />
           <EntitySet Name="ServerSMTPParameters" EntityType="IntegrationToolModel.ServerSMTPParameter" />
+          <EntitySet Name="sysdiagrams" EntityType="IntegrationToolModel.sysdiagram" />
           <EntitySet Name="SystemLogs" EntityType="IntegrationToolModel.SystemLog" />
           <EntitySet Name="Users" EntityType="IntegrationToolModel.User" />
           <EntitySet Name="UsersTypes" EntityType="IntegrationToolModel.UsersType" />
@@ -536,13 +523,9 @@
             <End Role="FlatFileParameters" EntitySet="FlatFileParameters" />
             <End Role="Integrations" EntitySet="Integrations" />
           </AssociationSet>
-          <AssociationSet Name="FK_HeadersQueryTypeHeaders_HeaderId" Association="IntegrationToolModel.FK_HeadersQueryTypeHeaders_HeaderId">
-            <End Role="Headers" EntitySet="Headers" />
-            <End Role="HeadersQueryType" EntitySet="HeadersQueryTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HeadersQueryTypeQueriesType_QueryTypeId" Association="IntegrationToolModel.FK_HeadersQueryTypeQueriesType_QueryTypeId">
+          <AssociationSet Name="FK_HeadersQueriesType_QueryTypeId" Association="IntegrationToolModel.FK_HeadersQueriesType_QueryTypeId">
             <End Role="QueriesType" EntitySet="QueriesTypes" />
-            <End Role="HeadersQueryType" EntitySet="HeadersQueryTypes" />
+            <End Role="Headers" EntitySet="Headers" />
           </AssociationSet>
           <AssociationSet Name="FK_IntegrationLogsIntegrations_IntegrationId" Association="IntegrationToolModel.FK_IntegrationLogsIntegrations_IntegrationId">
             <End Role="Integrations" EntitySet="Integrations" />
@@ -647,17 +630,8 @@
           </Key>
           <Property Name="HeaderId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="HeadersQueryTypes" Relationship="IntegrationToolModel.FK_HeadersQueryTypeHeaders_HeaderId" FromRole="Headers" ToRole="HeadersQueryType" />
-        </EntityType>
-        <EntityType Name="HeadersQueryType">
-          <Key>
-            <PropertyRef Name="HeaderQueryTypeId" />
-          </Key>
-          <Property Name="HeaderQueryTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="HeaderId" Type="Int32" Nullable="false" />
           <Property Name="QueryTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Header" Relationship="IntegrationToolModel.FK_HeadersQueryTypeHeaders_HeaderId" FromRole="HeadersQueryType" ToRole="Headers" />
-          <NavigationProperty Name="QueriesType" Relationship="IntegrationToolModel.FK_HeadersQueryTypeQueriesType_QueryTypeId" FromRole="HeadersQueryType" ToRole="QueriesType" />
+          <NavigationProperty Name="QueriesType" Relationship="IntegrationToolModel.FK_HeadersQueriesType_QueryTypeId" FromRole="Headers" ToRole="QueriesType" />
         </EntityType>
         <EntityType Name="IntegrationLog">
           <Key>
@@ -727,7 +701,7 @@
           </Key>
           <Property Name="QueryTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="HeadersQueryTypes" Relationship="IntegrationToolModel.FK_HeadersQueryTypeQueriesType_QueryTypeId" FromRole="QueriesType" ToRole="HeadersQueryType" />
+          <NavigationProperty Name="Headers" Relationship="IntegrationToolModel.FK_HeadersQueriesType_QueryTypeId" FromRole="QueriesType" ToRole="Headers" />
           <NavigationProperty Name="Queries" Relationship="IntegrationToolModel.FK_QueriesQueriesType_QueryTypeId" FromRole="QueriesType" ToRole="Queries" />
         </EntityType>
         <EntityType Name="Recurrence">
@@ -756,6 +730,16 @@
           <Property Name="UsernameSMTP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="PasswordSMTP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsServerSMTPParameters_ServerSMTPParametersId" FromRole="ServerSMTPParameters" ToRole="Integrations" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="SystemLog">
           <Key>
@@ -860,26 +844,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HeadersQueryTypeHeaders_HeaderId">
-          <End Role="Headers" Type="IntegrationToolModel.Header" Multiplicity="1" />
-          <End Role="HeadersQueryType" Type="IntegrationToolModel.HeadersQueryType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Headers">
-              <PropertyRef Name="HeaderId" />
-            </Principal>
-            <Dependent Role="HeadersQueryType">
-              <PropertyRef Name="HeaderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HeadersQueryTypeQueriesType_QueryTypeId">
+        <Association Name="FK_HeadersQueriesType_QueryTypeId">
           <End Role="QueriesType" Type="IntegrationToolModel.QueriesType" Multiplicity="1" />
-          <End Role="HeadersQueryType" Type="IntegrationToolModel.HeadersQueryType" Multiplicity="*" />
+          <End Role="Headers" Type="IntegrationToolModel.Header" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QueriesType">
               <PropertyRef Name="QueryTypeId" />
             </Principal>
-            <Dependent Role="HeadersQueryType">
+            <Dependent Role="Headers">
               <PropertyRef Name="QueryTypeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1078,14 +1050,6 @@
               <MappingFragment StoreEntitySet="Headers">
                 <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HeadersQueryTypes">
-            <EntityTypeMapping TypeName="IntegrationToolModel.HeadersQueryType">
-              <MappingFragment StoreEntitySet="HeadersQueryType">
-                <ScalarProperty Name="HeaderQueryTypeId" ColumnName="HeaderQueryTypeId" />
-                <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
                 <ScalarProperty Name="QueryTypeId" ColumnName="QueryTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1173,6 +1137,17 @@
                 <ScalarProperty Name="Port" ColumnName="Port" />
                 <ScalarProperty Name="UsernameSMTP" ColumnName="UsernameSMTP" />
                 <ScalarProperty Name="PasswordSMTP" ColumnName="PasswordSMTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IntegrationToolModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,19 +1,13 @@
-﻿
-var ConfigurationQueriesController = function ($scope, $http) {
-
-
+﻿var ListWebServicesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
-    $scope.request = {};
-    $scope.sendRequest = sendRequest;
-    $scope.queriesType = [];
-  
-   
+    $scope.listWebServices = [];
+    $scope.deleteWebService = deleteWebService;
+    $scope.editWebService = editWebService;
 
-    getQueriesType();
+    getListWebServices();
 
-    
-    function getQueriesType() {
+    function getListWebServices() {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -22,9 +16,9 @@ var ConfigurationQueriesController = function ($scope, $http) {
 
         var data = $.param({});
 
-        $http.post('Configuration/getTypeQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getListWebServices', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                $scope.queriesType = resp;
+                $scope.listWebServices = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
@@ -35,36 +29,27 @@ var ConfigurationQueriesController = function ($scope, $http) {
         });
     }
 
-
-    function sendRequest(req, form) {
-        if (!form.$valid) {
-            $scope.message = "Error: Invalid form, please try again.";
-            $scope.typeMessage = "danger";
-            return false;
-        }
-
+    function deleteWebService(WebServiceId) {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         }
 
-        var data = $.param(req);
+        var data = $.param({});
 
-        $http.post('Configuration/saveQueries', data, config).success(function (resp) {
+        $http.delete('Configuration/deleteWebService?id=' + WebServiceId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
-            $scope.request = {};
-            form.$setPristine();
-            form.$setUntouched();
+            getListWebServices();
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
         });
     }
 
+    function editWebService(id) {
+        $location.url('/Configuration/formWebService/' + id);
+    }
 }
-
-ConfigurationQueriesController.$inject = ['$scope', '$http'];
-
-
+ListWebServicesController.$inject = ['$scope', '$http', '$location'];
