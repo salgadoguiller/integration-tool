@@ -151,6 +151,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\Curl.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\WriteFileController.cs" />
     <Compile Include="Global.asax.cs">

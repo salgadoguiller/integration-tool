@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class Class1
+    public interface InterfaceDatabase
     {
+        void openConnection();
+        void closeConnection();
+        string executeQuery(string query);
     }
 }

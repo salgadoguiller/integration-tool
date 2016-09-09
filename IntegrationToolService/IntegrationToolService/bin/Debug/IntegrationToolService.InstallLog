@@ -48,3 +48,66 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\cturcios\Desktop\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
    assemblypath = C:\Users\cturcios\Desktop\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Uninstalling assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Removing EventLog source IntegrationTool.
+Service IntegrationTool is being removed from the system...
+Service IntegrationTool was successfully removed from the system.
+Installing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Installing service IntegrationTool...
+Service IntegrationTool has been successfully installed.
+Creating EventLog source IntegrationTool in log Application...
+Committing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Uninstalling assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Removing EventLog source IntegrationTool.
+Service IntegrationTool is being removed from the system...
+Service IntegrationTool was successfully removed from the system.
+Installing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Installing service IntegrationTool...
+Service IntegrationTool has been successfully installed.
+Creating EventLog source IntegrationTool in log Application...
+Committing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Uninstalling assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Removing EventLog source IntegrationTool.
+Service IntegrationTool is being removed from the system...
+Service IntegrationTool was successfully removed from the system.
+Installing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
+Installing service IntegrationTool...
+Service IntegrationTool has been successfully installed.
+Creating EventLog source IntegrationTool in log Application...
+Committing assembly 'C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.InstallLog
+   assemblypath = C:\Users\cturcios\Desktop\IntegrationTool\IntegrationToolService\IntegrationToolService\bin\Debug\IntegrationToolService.exe
