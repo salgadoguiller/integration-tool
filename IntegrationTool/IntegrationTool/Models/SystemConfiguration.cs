@@ -206,15 +206,9 @@ namespace IntegrationTool.Models
             {
                 Header header = new Header();
                 header.Name = headerName;
+                header.QueryTypeId = Convert.ToInt32(queryTypeId);
 
                 SystemConfigurationDB.Headers.Add(header);
-                SystemConfigurationDB.SaveChanges();
-
-                HeadersQueryType headerQueryType = new HeadersQueryType();
-                headerQueryType.QueryTypeId = Convert.ToInt32(queryTypeId);
-                headerQueryType.HeaderId = header.HeaderId;
-
-                SystemConfigurationDB.HeadersQueryTypes.Add(headerQueryType);
                 SystemConfigurationDB.SaveChanges();
             }
         }
@@ -256,7 +250,12 @@ namespace IntegrationTool.Models
 
         public void updateHeader(int id, int queryTypeId, string name)
         {
+            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
 
+            header.Name = name;
+            header.QueryTypeId = queryTypeId;
+
+            SystemConfigurationDB.SaveChanges();
         }
 
         public void updateQuery(int id, string queryString, int queryTypeId)

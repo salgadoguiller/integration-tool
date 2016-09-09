@@ -39,7 +39,7 @@
                 <tbody>
                 <tr ng-repeat="header in listHeaders">
                     <td>{{header.Name}}</td>
-                    <td><span ng-repeat="type in header.HeadersQueryTypes">{{type.QueriesType.Name}}</span></td>
+                    <td>{{header.QueriesType.Name}}</td>
                     <td>
                         <div ng-controller="AlertController">
                             <button class="btn btn-xs btn-success" ng-click="editHeader(header.HeaderId)">Edit</button>

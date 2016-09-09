@@ -175,9 +175,6 @@
     <Compile Include="Models\Header.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeadersQueryType.cs">
-      <DependentUpon>IntegrationTool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Integration.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -223,6 +220,9 @@
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SqlServerDataBase.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SystemConfiguration.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
@@ -374,27 +374,6 @@
     <Content Include="Views\Configuration\formHeaders.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\IntegrationTool.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\IntegrationTool.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\IntegrationTool.edmx.diagram">
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\IntegrationTool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Configuration\listActiveDirectories.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +405,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Configuration\listWebServices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\IntegrationTool.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\IntegrationTool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IntegrationTool.edmx.diagram">
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\IntegrationTool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

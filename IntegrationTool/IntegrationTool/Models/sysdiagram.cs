@@ -12,13 +12,12 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HeadersQueryType
+    public partial class sysdiagram
     {
-        public int HeaderQueryTypeId { get; set; }
-        public int HeaderId { get; set; }
-        public int QueryTypeId { get; set; }
-    
-        public virtual Header Header { get; set; }
-        public virtual QueriesType QueriesType { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

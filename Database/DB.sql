@@ -258,25 +258,10 @@ CREATE TABLE IntegrationLogs (
 CREATE TABLE Headers (
   HeaderId INT NOT NULL IDENTITY(1,1),
   Name VARCHAR(45) NOT NULL,
-  CONSTRAINT PK_Header
-    PRIMARY KEY (HeaderId));
-
-
--- -----------------------------------------------------
--- Table HeadersQueryType
--- -----------------------------------------------------
-CREATE TABLE HeadersQueryType (
-  HeaderQueryTypeId INT NOT NULL IDENTITY(1,1),
-  HeaderId INT NOT NULL,
   QueryTypeId INT NOT NULL,
-  CONSTRAINT PK_HeaderQueryType
-    PRIMARY KEY (HeaderQueryTypeId),
-  CONSTRAINT FK_HeadersQueryTypeHeaders_HeaderId
-    FOREIGN KEY (HeaderId)
-    REFERENCES Headers (HeaderId)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT FK_HeadersQueryTypeQueriesType_QueryTypeId
+  CONSTRAINT PK_Header
+    PRIMARY KEY (HeaderId),
+  CONSTRAINT FK_HeadersQueriesType_QueryTypeId
     FOREIGN KEY (QueryTypeId)
     REFERENCES QueriesType (QueryTypeId)
     ON DELETE NO ACTION

@@ -19,6 +19,7 @@
         $http.get('Configuration/getListHeaders', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listHeaders = resp;
+                console.log(resp);
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
