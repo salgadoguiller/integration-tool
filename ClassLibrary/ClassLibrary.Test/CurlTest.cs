@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IntegrationTool.Controllers;
 using NUnit.Framework;
+using ClassLibrary;
 
 
 namespace IntegrationTool.Tests
@@ -17,7 +17,6 @@ namespace IntegrationTool.Tests
         {
             Curl curl= new Curl();
             curl.IntegrationWithCurl("curl --help");
-             
         }
     }
 }

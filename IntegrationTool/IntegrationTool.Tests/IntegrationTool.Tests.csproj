@@ -106,13 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurlTest.cs" />
-    <Compile Include="DataBaseFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlServerDataBaseTest.cs" />
-    <Compile Include="MysqlDatabaseTest.cs" />
-    <Compile Include="SystemConfigurationDBTest.cs" />
-    <Compile Include="WriteFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

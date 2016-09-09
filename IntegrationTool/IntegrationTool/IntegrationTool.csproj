@@ -46,6 +46,9 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ClassLibrary">
+      <HintPath>..\..\ClassLibrary\ClassLibrary\bin\Debug\ClassLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\..\ClosedXML.dll</HintPath>
     </Reference>
@@ -151,7 +154,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\Curl.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\WriteFileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,7 +165,6 @@
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataBaseFactory.cs" />
     <Compile Include="Models\DatabaseParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -200,8 +201,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\InterfaceDatabase.cs" />
-    <Compile Include="Models\MySqlDatabase.cs" />
     <Compile Include="Models\Permission.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -220,7 +219,6 @@
     <Compile Include="Models\ServerSMTPParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SqlServerDataBase.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>

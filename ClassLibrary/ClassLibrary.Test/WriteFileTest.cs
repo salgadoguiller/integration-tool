@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using  NUnit.Framework;
-using IntegrationTool.Controllers;
+using NUnit.Framework;
+using ClassLibrary;
 
 namespace IntegrationTool.Tests
 {
@@ -15,7 +15,7 @@ namespace IntegrationTool.Tests
         public void WriteInFile2(string headers, string resultQuery, string location,string nameIntegration)
         {
             WriteFileController file = new WriteFileController();
-            file.writeFileByString2(headers, resultQuery, location,nameIntegration);
+            file.writeFileinFlatFile(headers, resultQuery, location,nameIntegration);
         }
 
         [Test]
