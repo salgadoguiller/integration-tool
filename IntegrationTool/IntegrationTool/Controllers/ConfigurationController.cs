@@ -467,34 +467,35 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
         // Eliminar parametros del sistema
         // ================================================================================================================
-        [HttpPost]
-        public void deleteActiveDirectory()
+        [HttpDelete]
+        public void deleteActiveDirectory(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteActiveDirectory(Convert.ToInt32(Request.Form["ActiveDirectoryId"]));
+                systemConfigurationModel.deleteActiveDirectory(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Active directory deleted Successfully.\"}";
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the active directory. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the active directory. Please try again.\"}";
             }
 
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteDataBase()
+        [HttpDelete]
+        public void deleteDataBase(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteDataBase(Convert.ToInt32(Request.Form["DatabaseParametersId"]));
+                systemConfigurationModel.deleteDataBase(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Database deleted Successfully.\"}";
 
@@ -507,14 +508,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteFlatFile()
+        [HttpDelete]
+        public void deleteFlatFile(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]));
+                systemConfigurationModel.deleteFlatFile(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Flat file deleted Successfully.\"}";
 
@@ -527,14 +528,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteHeader()
+        [HttpDelete]
+        public void deleteHeader(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteHeader(Convert.ToInt32(Request.Form["HeaderId"]));
+                systemConfigurationModel.deleteHeader(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Header deleted Successfully.\"}";
 
@@ -547,14 +548,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteQuery()
+        [HttpDelete]
+        public void deleteQuery(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteQuery(Convert.ToInt32(Request.Form["QueryId"]));
+                systemConfigurationModel.deleteQuery(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Query deleted Successfully.\"}";
 
@@ -567,14 +568,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteServerSMTP()
+        [HttpDelete]
+        public void deleteServerSMTP(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteServerSMTP(Convert.ToInt32(Request.Form["ServerSMTPParametersId"]));
+                systemConfigurationModel.deleteServerSMTP(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Server SMTP deleted Successfully.\"}";
 
@@ -587,14 +588,14 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
-        public void deleteWebService()
+        [HttpDelete]
+        public void deleteWebService(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                systemConfigurationModel.deleteWebService(Convert.ToInt32(Request.Form["WebServiceId"]));
+                systemConfigurationModel.deleteWebService(id);
 
                 resp = "{\"type\":\"success\", \"message\":\"Web service deleted Successfully.\"}";
 

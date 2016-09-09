@@ -38,7 +38,12 @@
                 <tbody>
                 <tr ng-repeat="flatFile in listFlatFiles">
                   <td>{{flatFile.Location}}</td>                  
-                  <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
+                  <td>
+                    <div ng-controller="AlertController">
+                        <button class="btn btn-xs btn-success"">Edit</button> 
+                        <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteFlatFile(flatFile.FlatFileParametersId)" sweet-on-cancel="return">Delete</button>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
                 <tfoot>

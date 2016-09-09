@@ -2,6 +2,7 @@
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listWebServices = [];
+    $scope.deleteWebService = deleteWebService;
 
     getListWebServices();
 
@@ -21,6 +22,25 @@
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
             }
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+    }
+
+    function deleteWebService(WebServiceId) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.delete('Configuration/deleteWebService?id=' + WebServiceId, data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            getListWebServices();
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";

@@ -35,9 +35,9 @@
             }
         }
 
-        var data = $.param({ 'ActiveDirectoryId': ActiveDirectoryId });
+        var data = $.param({});
 
-        $http.post('Configuration/deleteActiveDirectory', data, config).success(function (resp) {
+        $http.delete('Configuration/deleteActiveDirectory?id=' + ActiveDirectoryId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             getListActiveDirectories();

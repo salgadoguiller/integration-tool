@@ -40,7 +40,12 @@
                 <tr ng-repeat="header in listHeaders">
                     <td>{{header.Name}}</td>
                     <td><span ng-repeat="type in header.HeadersQueryTypes">{{type.QueriesType.Name}}</span></td>
-                    <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
+                    <td>
+                        <div ng-controller="AlertController">
+                            <button class="btn btn-xs btn-success"">Edit</button> 
+                            <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteHeader(header.HeaderId)" sweet-on-cancel="return">Delete</button>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
                 <tfoot>

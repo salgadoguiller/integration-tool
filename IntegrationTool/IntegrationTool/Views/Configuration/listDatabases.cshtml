@@ -50,7 +50,12 @@
                     <td>{{database.Username}}</td>
                     <td>{{database.Password}}</td>
                     <td>{{database.Engine.Name}}</td>
-                    <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
+                    <td>
+                        <div ng-controller="AlertController">
+                            <button class="btn btn-xs btn-success"">Edit</button> 
+                            <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteDatabase(database.DatabaseParametersId)" sweet-on-cancel="return">Delete</button>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
                 <tfoot>

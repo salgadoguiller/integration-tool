@@ -39,7 +39,12 @@
                     <tr ng-repeat="query in listQueries">
                        <td>{{query.QueriesType.Name}}</td>
                        <td>{{query.Query1}}</td>
-                       <td><span class="label label-success">Edit</span><span> </span><span class="label label-danger">Delete</span></td>
+                       <td>
+                            <div ng-controller="AlertController">
+                                <button class="btn btn-xs btn-success"">Edit</button> 
+                                <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteQuery(query.QueryId)" sweet-on-cancel="return">Delete</button>
+                            </div>
+                       </td>
                     </tr>
                     </tbody>
                     <tfoot>
