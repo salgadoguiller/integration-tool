@@ -7,11 +7,8 @@ var ConfigurationQueriesController = function ($scope, $http) {
     $scope.request = {};
     $scope.sendRequest = sendRequest;
     $scope.queriesType = [];
-  
-   
 
     getQueriesType();
-
     
     function getQueriesType() {
         var config = {
@@ -22,7 +19,7 @@ var ConfigurationQueriesController = function ($scope, $http) {
 
         var data = $.param({});
 
-        $http.post('Configuration/getTypeQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getTypeQueries', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.queriesType = resp;
             } else {
@@ -51,7 +48,7 @@ var ConfigurationQueriesController = function ($scope, $http) {
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveQuery', data, config).success(function (resp) {
+        $http.put('Configuration/saveQuery', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

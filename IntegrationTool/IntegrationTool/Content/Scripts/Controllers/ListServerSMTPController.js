@@ -15,7 +15,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getListServersSMTP', data, config).success(function (resp) {
+        $http.get('Configuration/getListServersSMTP', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listServersSMTP = resp;
             } else {

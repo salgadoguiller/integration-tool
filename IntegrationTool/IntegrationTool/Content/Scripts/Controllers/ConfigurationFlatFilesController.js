@@ -20,7 +20,7 @@ var ConfigurationFlatFilesController = function ($scope, $http) {
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveFlatFile', data, config).success(function (resp) {
+        $http.put('Configuration/saveFlatFile', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

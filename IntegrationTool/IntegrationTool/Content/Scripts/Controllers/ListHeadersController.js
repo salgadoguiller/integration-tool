@@ -15,7 +15,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getListHeaders', data, config).success(function (resp) {
+        $http.get('Configuration/getListHeaders', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listHeaders = resp;
             } else {

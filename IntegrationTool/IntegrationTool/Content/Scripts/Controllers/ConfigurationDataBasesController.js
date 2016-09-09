@@ -18,7 +18,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getDataBaseEngines', data, config).success(function (resp) {
+        $http.get('Configuration/getDataBaseEngines', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.dataBaseEngines = resp;
             }else {
@@ -46,7 +46,7 @@
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveDataBase', data, config).success(function (resp) {
+        $http.put('Configuration/saveDataBase', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

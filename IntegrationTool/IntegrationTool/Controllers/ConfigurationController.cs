@@ -118,7 +118,7 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
         // Almacena en base de datos parametros del sistema.
         // ================================================================================================================
-        [HttpPost]
+        [HttpPut]
         public void saveActiveDirectory()
         {
             string resp = "";
@@ -148,7 +148,7 @@ namespace IntegrationTool.Controllers
             */
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveServerSmtp()
         {
             string resp = "";
@@ -167,7 +167,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveDataBase()
         {
             string resp = "";
@@ -186,7 +186,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveWebService()
         {
             string resp = "";
@@ -205,7 +205,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveFlatFile()
         {
             string resp = "";
@@ -224,7 +224,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveQuery()
         {
             string resp = "";
@@ -243,7 +243,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void saveHeaders()
         {
             string resp = "";
@@ -265,7 +265,7 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
         // Obtiene y retorna parametros del sistema.
         // ================================================================================================================
-        [HttpPost]
+        [HttpGet]
         public void getDataBaseEngines()
         {
             string resp = "";
@@ -288,6 +288,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getTypeQueries()
         {
             string resp = "";
@@ -310,6 +311,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getlistQueries()
         {
             string resp = "";
@@ -332,6 +334,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getlistActiveDirectories()
         {
             string resp = "";
@@ -354,6 +357,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getListFlatFiles()
         {
             string resp = "";
@@ -376,6 +380,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getListServersSMTP()
         {
             string resp = "";
@@ -398,6 +403,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getListDatabases()
         {
             string resp = "";
@@ -420,6 +426,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getListHeaders()
         {
             string resp = "";
@@ -442,6 +449,7 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
         public void getListWebServices()
         {
             string resp = "";

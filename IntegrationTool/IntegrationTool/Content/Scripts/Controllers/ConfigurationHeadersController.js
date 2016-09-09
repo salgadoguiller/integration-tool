@@ -16,7 +16,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getTypeQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getTypeQueries', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.QueriesType = resp;
             } else {
@@ -44,7 +44,7 @@
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveHeaders', data, config).success(function (resp) {
+        $http.put('Configuration/saveHeaders', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

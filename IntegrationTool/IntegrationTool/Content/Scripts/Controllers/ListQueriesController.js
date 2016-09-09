@@ -15,7 +15,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getlistQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getlistQueries', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listQueries = resp;
             } else {

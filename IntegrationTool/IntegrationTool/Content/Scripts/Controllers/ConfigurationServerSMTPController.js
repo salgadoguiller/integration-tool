@@ -20,7 +20,7 @@
 
         var data = $.param(req);
 
-        $http.post('Configuration/saveServerSmtp', data, config).success(function (resp) {
+        $http.put('Configuration/saveServerSmtp', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

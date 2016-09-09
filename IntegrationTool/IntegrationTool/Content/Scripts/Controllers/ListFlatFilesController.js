@@ -15,7 +15,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getListFlatFiles', data, config).success(function (resp) {
+        $http.get('Configuration/getListFlatFiles', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listFlatFiles = resp;
             } else {

@@ -15,7 +15,7 @@
 
         var data = $.param({});
 
-        $http.post('Configuration/getlistActiveDirectories', data, config).success(function (resp) {
+        $http.get('Configuration/getlistActiveDirectories', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listActiveDirectories = resp;
             } else {
