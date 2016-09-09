@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionDatabase.cs" />
     <Compile Include="GenerateIntegration.cs" />
     <Compile Include="IntegrationTool.cs">
       <SubType>Component</SubType>
@@ -63,7 +62,6 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WriteFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

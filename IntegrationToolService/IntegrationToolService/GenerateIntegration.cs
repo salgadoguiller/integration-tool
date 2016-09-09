@@ -87,6 +87,7 @@ namespace IntegrationToolService
 
         private void executeIntegration(int integrationId)
         {
+            obtainDatabaseParameters(integrationId);           
             string location= obtainLocationFileToSave(integrationId);
             writeFileController.writeFileinFlatFile("","",location,"");
            
@@ -138,6 +139,24 @@ namespace IntegrationToolService
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
             CloseConecction();
+        }  
+
+        private void obtainDatabaseParameters(int integrationId)
+        {
+            DataBaseFactory dataBase = new DataBaseFactory();
+
+            string query =
+                "SELECT  dbo.DatabaseParameters.Ip, dbo.DatabaseParameters.Port, dbo.DatabaseParameters.Instance, dbo.DatabaseParameters.Name, dbo.DatabaseParameters.Username," +
+                "dbo.DatabaseParameters.Password, dbo.Engines.Name AS NameEngine, dbo.Integrations.IntegrationId" +
+                "FROM dbo.DatabaseParameters INNER JOIN" +
+                "dbo.Engines ON dbo.DatabaseParameters.EngineId = dbo.Engines.EngineId INNER JOIN" +
+                "dbo.Integrations ON dbo.DatabaseParameters.DatabaseParametersId = dbo.Integrations.DatabaseParametersId" +
+                "where IntegrationId ="+ integrationId;
+
+            DataTable table = DataTable(query);
+                
+            dataBase.createDataBase(Convert.ToString(table.Rows[0]["Ip"]), Convert.ToString(table.Rows[0]["Port"]), Convert.ToString(table.Rows[0]["Name"]),
+                Convert.ToString(table.Rows[0]["Instance"]), Convert.ToString(table.Rows[0]["Username"]), Convert.ToString(table.Rows[0]["Password"]), Convert.ToString(table.Rows[0]["NameEngine"]));          
         }
     }
 }

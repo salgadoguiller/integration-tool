@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\obj\Debug\ClassLibrary.Test.csprojResolveAssemblyReference.cache
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\ClassLibrary.Test.dll.config
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\ClassLibrary.Test.dll
@@ -9,3 +10,6 @@ C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\Class
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\MySql.Data.dll
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\ClassLibrary.pdb
 C:\Users\gcrescencio\Desktop\Integration Tool\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\nunit.framework.xml
+=======
+C:\Users\cturcios\Desktop\IntegrationTool\ClassLibrary\ClassLibrary.Test\bin\Debug\ClassLibrary.Test.exe.config
+>>>>>>> origin/master
