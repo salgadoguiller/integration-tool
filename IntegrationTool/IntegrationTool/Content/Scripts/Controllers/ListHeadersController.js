@@ -1,8 +1,9 @@
-﻿var ListHeadersController = function ($scope, $http) {
+﻿var ListHeadersController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listHeaders = [];
     $scope.deleteHeader = deleteHeader;
+    $scope.editHeader = editHeader;
 
     getListHeaders();
 
@@ -46,5 +47,9 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editHeader(id) {
+        $location.url('/Configuration/formHeaders/' + id);
+    }
 }
-ListHeadersController.$inject = ['$scope', '$http'];
+ListHeadersController.$inject = ['$scope', '$http', '$location'];

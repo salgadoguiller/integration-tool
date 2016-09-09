@@ -1,8 +1,9 @@
-﻿var ListQueriesController = function ($scope, $http) {
+﻿var ListQueriesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listQueries = [];
     $scope.deleteQuery = deleteQuery;
+    $scope.editQuery = editQuery;
 
     getlistQueries();
 
@@ -46,5 +47,9 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editQuery(id) {
+        $location.url('/Configuration/formQuery/' + id);
+    }
 }
-ListQueriesController.$inject = ['$scope', '$http'];
+ListQueriesController.$inject = ['$scope', '$http', '$location'];

@@ -231,7 +231,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveQuery(Request.Form["Queries"], Request.Form["typeQueries"]);
+                systemConfigurationModel.saveQuery(Request.Form["Query1"], Request.Form["QueryTypeId"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
@@ -251,6 +251,153 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"], Request.Form["Name"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Actualiza en base de datos parametros del sistema.
+        // ================================================================================================================
+        [HttpPost]
+        public void updateActiveDirectory()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateActiveDirectory(Convert.ToInt32(Request.Form["ActiveDirectoryId"]), Request.Form["ADDomain"], Request.Form["ADPath"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Active Directory Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+            }
+
+
+            response(resp);
+
+            // Select and return activeDirectories
+            /*
+            List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
+           
+            Response.ContentType = "application/json; charset=utf-8";
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories);
+            Response.Write(response);
+            Response.End();
+            */
+        }
+
+        [HttpPost]
+        public void updateServerSmtp()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateServerSMPT(Convert.ToInt32(Request.Form["ServerSMTPParametersId"]), Request.Form["NameServerSMTP"], Request.Form["Port"], Request.Form["UsernameSMTP"], Request.Form["PasswordSMTP"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Server SMTP Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updateDataBase()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateDatabase(Convert.ToInt32(Request.Form["DatabaseParametersId"]), Request.Form["Ip"], Request.Form["Instance"], Request.Form["Name"], Request.Form["Username"], Request.Form["Password"], Convert.ToInt32(Request.Form["EngineId"]), Request.Form["Port"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updateWebService()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateWebService(Convert.ToInt32(Request.Form["WebServiceId"]), Request.Form["Endpoint"], Request.Form["Username"], Request.Form["Password"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Web Service Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Web Service Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updateFlatFile()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]), Request.Form["Location"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Flat File Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Flat File Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updateQuery()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateQuery(Convert.ToInt32(Request.Form["QueryId"]), Request.Form["Query1"], Convert.ToInt32(Request.Form["QueryTypeId"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Query Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updateHeader()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updateHeader(Convert.ToInt32(Request.Form["HeaderId"]), Convert.ToInt32(Request.Form["QueryTypeId"]), Request.Form["Name"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
             }
@@ -467,6 +614,167 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the web services. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getActiveDirectory(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                ActiveDirectoryParameter activeDirectory = systemConfigurationModel.getActiveDirectory(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectory,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the active directory. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getDatabase(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                DatabaseParameter database = systemConfigurationModel.getDatabase(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(database,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the database. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getFlatFile(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                FlatFileParameter flatFile = systemConfigurationModel.getFlatFile(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFile,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat file. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getHeader(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                Header header = systemConfigurationModel.getHeader(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(header,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the header. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getQuery(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                Query query = systemConfigurationModel.getQuery(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(query,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the query. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getServerSMTP(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                ServerSMTPParameter serverSMTP = systemConfigurationModel.getServerSMTP(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the server SMTP. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getWebService(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                WebService webService = systemConfigurationModel.getWebService(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(webService,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the web service. Please try again.\"}";
             }
 
             response(resp);

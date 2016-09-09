@@ -1,8 +1,9 @@
-﻿var ListDatabasesController = function ($scope, $http) {
+﻿var ListDatabasesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listDatabases = [];
     $scope.deleteDatabase = deleteDatabase;
+    $scope.editDatabase = editDatabase;
 
     getListDatabases();
 
@@ -46,5 +47,9 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editDatabase(id) {
+        $location.url('/Configuration/formDatabase/' + id);
+    }
 }
-ListDatabasesController.$inject = ['$scope', '$http'];
+ListDatabasesController.$inject = ['$scope', '$http', '$location'];

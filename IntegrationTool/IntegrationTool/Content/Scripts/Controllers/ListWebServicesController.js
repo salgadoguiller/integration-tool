@@ -1,8 +1,9 @@
-﻿var ListWebServicesController = function ($scope, $http) {
+﻿var ListWebServicesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listWebServices = [];
     $scope.deleteWebService = deleteWebService;
+    $scope.editWebService = editWebService;
 
     getListWebServices();
 
@@ -46,5 +47,9 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editWebService(id) {
+        $location.url('/Configuration/formWebService/' + id);
+    }
 }
-ListWebServicesController.$inject = ['$scope', '$http'];
+ListWebServicesController.$inject = ['$scope', '$http', '$location'];

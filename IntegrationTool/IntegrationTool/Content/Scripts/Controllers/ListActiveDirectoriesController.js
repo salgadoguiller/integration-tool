@@ -1,8 +1,9 @@
-﻿var ListActiveDirectoriesController = function ($scope, $http) {
+﻿var ListActiveDirectoriesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listActiveDirectories = [];
     $scope.deleteActiveDirectory = deleteActiveDirectory;
+    $scope.editActiveDirectory = editActiveDirectory;
 
     getListActiveDirectories();
 
@@ -46,5 +47,9 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editActiveDirectory(id) {
+        $location.url('/Configuration/formActiveDirectory/' + id );
+    }
 }
-ListActiveDirectoriesController.$inject = ['$scope', '$http'];
+ListActiveDirectoriesController.$inject = ['$scope', '$http', '$location'];

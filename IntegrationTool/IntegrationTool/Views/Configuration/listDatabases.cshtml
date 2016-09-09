@@ -24,7 +24,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Databases</h3>
-              <a href="/#/Configuration/formDatabase" class="pull-right btn btn-xs btn-success">Add</a>
+              <a href="/#/Configuration/formDatabase/-1" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -52,7 +52,7 @@
                     <td>{{database.Engine.Name}}</td>
                     <td>
                         <div ng-controller="AlertController">
-                            <button class="btn btn-xs btn-success"">Edit</button> 
+                            <button class="btn btn-xs btn-success" ng-click="editDatabase(database.DatabaseParametersId)">Edit</button> 
                             <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteDatabase(database.DatabaseParametersId)" sweet-on-cancel="return">Delete</button>
                         </div>
                     </td>

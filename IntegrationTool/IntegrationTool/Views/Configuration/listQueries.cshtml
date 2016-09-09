@@ -23,7 +23,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Queries</h3>
-                <a href="/#/Configuration/formQuery" class="pull-right btn btn-xs btn-success">Add</a>
+                <a href="/#/Configuration/formQuery/-1" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -41,7 +41,7 @@
                        <td>{{query.Query1}}</td>
                        <td>
                             <div ng-controller="AlertController">
-                                <button class="btn btn-xs btn-success"">Edit</button> 
+                                <button class="btn btn-xs btn-success" ng-click="editQuery(query.QueryId)">Edit</button>
                                 <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteQuery(query.QueryId)" sweet-on-cancel="return">Delete</button>
                             </div>
                        </td>

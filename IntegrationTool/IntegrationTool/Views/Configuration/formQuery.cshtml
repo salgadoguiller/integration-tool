@@ -31,13 +31,13 @@
                   <div class="box-body">
 
                       <div class="form-group">
-                          <label for="typeQueries">Query Type</label>
-                          <select class="form-control select2" name="TypeQuery" ng-model="request.typeQueries" style="width: 100%;" required>
+                          <label for="QueryType">Query Type</label>
+                          <select class="form-control select2" name="QueryType" ng-model="request.QueryTypeId" style="width: 100%;" required>
                               <option selected="selected" disabled value="">Select</option>
-                              <option ng-repeat="queryType in queriesType" value="{{queryType.QueryTypeId}}">{{queryType.Name}}</option>
+                              <option ng-repeat="typeQuery in typeQueries" value="{{typeQuery.QueryTypeId}}">{{typeQuery.Name}}</option>
                           </select>
                           <div ng-if="form.TypeQuery.$touched || form.$submitted">
-                              <div ng-messages="form.TypeQuery.$error" role="alert">
+                              <div ng-messages="form.QueryType.$error" role="alert">
                                   <div class="help-block error-text" ng-message="required">* Query type is required.</div>
                               </div>
                           </div>
@@ -46,7 +46,7 @@
                       <div class="form-group">
                           <label for="Queries">Query</label>
                           <div class="form-group">
-                              <textarea name="Queries" ng-model="request.Queries" id="Queries" name="Queries" class="form-control" rows="3" required></textarea>
+                              <textarea name="Queries" ng-model="request.Query1" id="Queries" name="Queries" class="form-control" rows="3" required></textarea>
                           </div>
                           <div ng-if="form.Queries.$touched || form.$submitted">
                               <div ng-messages="form.Queries.$error" role="alert">

@@ -1,8 +1,9 @@
-﻿var ListServerSMTPController = function ($scope, $http) {
+﻿var ListServerSMTPController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listServersSMTP = [];
     $scope.deleteServerSMTP = deleteServerSMTP;
+    $scope.editServerSMTP = editServerSMTP;
 
     getListServersSMTP();
 
@@ -46,6 +47,10 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editServerSMTP(id) {
+        $location.url('/Configuration/formServerSMTP/' + id);
+    }
 }
 
-ListServerSMTPController.$inject = ['$scope', '$http'];
+ListServerSMTPController.$inject = ['$scope', '$http', '$location'];

@@ -14,6 +14,9 @@ namespace IntegrationTool.Models
             SystemConfigurationDB = new IntegrationToolEntities();
         }
 
+        // ================================================================================================================
+        // Obtener parametros del sistema.
+        // ================================================================================================================
         public List<ActiveDirectoryParameter> getActiveDirectories()
         {
             List<ActiveDirectoryParameter> activeDirectories = (from ad in SystemConfigurationDB.ActiveDirectoryParameters
@@ -77,6 +80,51 @@ namespace IntegrationTool.Models
             return queries;
         }
 
+        public ActiveDirectoryParameter getActiveDirectory(int id)
+        {
+            ActiveDirectoryParameter activeDirectory = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == id).ToList()[0];
+            return activeDirectory;
+        }
+
+        public DatabaseParameter getDatabase(int id)
+        {
+            DatabaseParameter dataBase = SystemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == id).ToList()[0];
+            return dataBase;
+        }
+
+        public FlatFileParameter getFlatFile(int id)
+        {
+            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+            return flatFile;
+        }
+
+        public Header getHeader(int id)
+        {
+            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
+            return header;
+        }
+
+        public Query getQuery(int id)
+        {
+            Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
+            return query;
+        }
+
+        public ServerSMTPParameter getServerSMTP(int id)
+        {
+            ServerSMTPParameter serverSMTP = SystemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == id).ToList()[0];
+            return serverSMTP;
+        }
+
+        public WebService getWebService(int id)
+        {
+            WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == id).ToList()[0];
+            return webService;
+        }
+
+        // ================================================================================================================
+        // Almacenar parametros del sistema.
+        // ================================================================================================================
         public void saveActiveDirectory(string domain, string path)
         {
             ActiveDirectoryParameter ad = new ActiveDirectoryParameter();
@@ -171,6 +219,79 @@ namespace IntegrationTool.Models
             }
         }
 
+        // ================================================================================================================
+        // Actualizar parametros del sistema.
+        // ================================================================================================================
+        public void updateActiveDirectory(int id, string domain, string path)
+        {
+            ActiveDirectoryParameter ad = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == id).ToList()[0];
+            ad.ADPath = domain;
+            ad.ADDomain = path;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateDatabase(int id, string ip, string instance, string name, string username, string password, int engineId, string port)
+        {
+            DatabaseParameter db = SystemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == id).ToList()[0];
+            db.Ip = ip;
+            db.Instance = instance;
+            db.Name = name;
+            db.Username = username;
+            db.Password = password;
+            db.Port = port;
+            db.EngineId = engineId;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateFlatFile(int id, string location)
+        {
+            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+
+            flatFile.Location = location;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateHeader(int id, int queryTypeId, string name)
+        {
+
+        }
+
+        public void updateQuery(int id, string queryString, int queryTypeId)
+        {
+            Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
+            query.Query1 = queryString;
+            query.QueryTypeId = queryTypeId;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateServerSMPT(int id, string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
+        {
+            ServerSMTPParameter serverSmtp = SystemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == id).ToList()[0];
+            serverSmtp.NameServerSMTP = NameServerSMTP;
+            serverSmtp.Port = Port;
+            serverSmtp.UsernameSMTP = UsernameSMTP;
+            serverSmtp.PasswordSMTP = PasswordSMTP;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        public void updateWebService(int id, string endpoint, string username, string password)
+        {
+            WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == id).ToList()[0];
+            webService.Endpoint = endpoint;
+            webService.Username = username;
+            webService.Password = password;
+
+            SystemConfigurationDB.SaveChanges();
+        }
+
+        // ================================================================================================================
+        // Eliminar parametros del sistema.
+        // ================================================================================================================
         public void deleteActiveDirectory(int activeDirectoryId)
         {
             ActiveDirectoryParameter activeDirectory = SystemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == activeDirectoryId).ToList()[0];

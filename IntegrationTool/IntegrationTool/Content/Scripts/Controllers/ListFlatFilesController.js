@@ -1,8 +1,9 @@
-﻿var ListFlatFilesController = function ($scope, $http) {
+﻿var ListFlatFilesController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listFlatFiles = [];
     $scope.deleteFlatFile = deleteFlatFile;
+    $scope.editFlatFile = editFlatFile;
 
     getListFlatFiles();
 
@@ -46,6 +47,10 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editFlatFile(id) {
+        $location.url('/Configuration/formFlatFile/' + id);
+    }
 }
 
-ListFlatFilesController.$inject = ['$scope', '$http'];
+ListFlatFilesController.$inject = ['$scope', '$http', '$location'];

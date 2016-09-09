@@ -24,7 +24,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Servers SMTP</h3>
-              <a href="/#/Configuration/formServerSMTP" class="pull-right btn btn-xs btn-success">Add</a>
+              <a href="/#/Configuration/formServerSMTP/-1" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -46,7 +46,7 @@
                   <td>{{serverSMTP.PasswordSMTP}}</td>
                   <td>
                     <div ng-controller="AlertController">
-                        <button class="btn btn-xs btn-success"">Edit</button> 
+                        <button class="btn btn-xs btn-success" ng-click="editServerSMTP(serverSMTP.ServerSMTPParametersId)">Edit</button>
                         <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteServerSMTP(serverSMTP.ServerSMTPParametersId)" sweet-on-cancel="return">Delete</button>
                     </div>
                   </td>
