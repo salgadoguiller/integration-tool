@@ -4,22 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-<<<<<<< HEAD
     <ProjectGuid>{595BF793-B4E0-44B6-9D5A-151DBD39B012}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClassLibrary.Test</RootNamespace>
     <AssemblyName>ClassLibrary.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-=======
-    <ProjectGuid>{F8764E90-8613-48C1-ACEF-8CF580225735}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{595BF793-B4E0-44B6-9D5A-151DBD39B012}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClassLibrary.Test</RootNamespace>
     <AssemblyName>ClassLibrary.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
->>>>>>> origin/master
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,7 +38,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-<<<<<<< HEAD
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
@@ -65,10 +62,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-=======
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
->>>>>>> origin/master
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
