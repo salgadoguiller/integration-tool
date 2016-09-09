@@ -13,6 +13,7 @@ namespace ClassLibrary.Test
     {
         [TestCase("ASDFGHJKLÑ")]
         [TestCase("LAUREATE INTERNATIONAL UNIVERSITIES")]
+        [TestCase("LNO HONDURAS")]
         public void Encrypt_Encrypt_ReturnDataEncrypted(string data)
         {
             Encrypt encrypt = new Encrypt();
