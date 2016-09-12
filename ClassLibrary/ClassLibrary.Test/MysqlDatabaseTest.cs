@@ -15,7 +15,8 @@ namespace IntegrationTool.Tests
         public void mySqlDataBase_Connect_ReturnQueryResult()
         {
             MySqlDatabase mySql = new MySqlDatabase("","prueba", "localhost", "root", "","3306");
-            string result = mySql.executeQuery("select * from prueba2");           
+            string result = mySql.executeQuery("select * from prueba2");       
+            Console.WriteLine(result);
         }
     }
 }

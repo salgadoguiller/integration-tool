@@ -26,7 +26,7 @@ namespace ClassLibrary
             this.nameDataBase = nameDataBase;
             this.serverInstance = serverInstance;
             this.username = username;
-            this.password = password;
+            this.password = password;          
         }
 
         public void openConnection()
@@ -47,14 +47,21 @@ namespace ClassLibrary
 
         public string executeQuery(string query)
         {
-            SqlCommand queryCommand = new SqlCommand(query, con);
+            
+            //openConnection();
 
+            SqlCommand queryCommand = new SqlCommand(query, con);
             SqlDataReader reader = queryCommand.ExecuteReader();
+            
+            closeConnection();
+        
 
             if (reader.Read())
                 return reader.GetString(0);
             else
                 throw new Exception();
+
+           
         }
     }
 }
