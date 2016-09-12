@@ -12,18 +12,12 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class QueriesType
+    public partial class sysdiagram
     {
-        public QueriesType()
-        {
-            this.Headers = new HashSet<Header>();
-            this.Queries = new HashSet<Query>();
-        }
-    
-        public int QueryTypeId { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Header> Headers { get; set; }
-        public virtual ICollection<Query> Queries { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

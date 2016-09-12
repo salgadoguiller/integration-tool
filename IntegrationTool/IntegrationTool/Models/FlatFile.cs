@@ -12,19 +12,16 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IntegrationsType
+    public partial class FlatFile
     {
-        public IntegrationsType()
+        public FlatFile()
         {
             this.Integrations = new HashSet<Integration>();
-            this.Queries = new HashSet<Query>();
         }
     
-        public int IntegrationTypeId { get; set; }
+        public int FlatFileId { get; set; }
         public string Name { get; set; }
-        public string Identifier { get; set; }
     
         public virtual ICollection<Integration> Integrations { get; set; }
-        public virtual ICollection<Query> Queries { get; set; }
     }
 }

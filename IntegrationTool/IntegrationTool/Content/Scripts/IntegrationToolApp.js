@@ -3,7 +3,6 @@
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
 IntegrationToolApp.controller('FormFlatFileController', FormFlatFileController);
-IntegrationToolApp.controller('FormHeadersController', FormHeadersController);
 IntegrationToolApp.controller('FormQueryController', FormQueryController);
 IntegrationToolApp.controller('FormServerSMTPController', FormServerSMTPController);
 IntegrationToolApp.controller('FormWebServiceController', FormWebServiceController);
@@ -11,10 +10,11 @@ IntegrationToolApp.controller('FormWebServiceController', FormWebServiceControll
 IntegrationToolApp.controller('ListActiveDirectoriesController', ListActiveDirectoriesController);
 IntegrationToolApp.controller('ListDatabasesController', ListDatabasesController);
 IntegrationToolApp.controller('ListFlatFilesController', ListFlatFilesController);
-IntegrationToolApp.controller('ListHeadersController', ListHeadersController);
 IntegrationToolApp.controller('ListQueriesController', ListQueriesController);
 IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPController);
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
+
+IntegrationToolApp.controller('IntegrationManualController', IntegrationManualController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -35,10 +35,6 @@ var configFunction = function ($routeProvider) {
         .when('/Configuration/listFlatFiles', {
             templateUrl: '/Configuration/listFlatFiles',
             controller: 'ListFlatFilesController'
-        })
-        .when('/Configuration/listHeaders', {
-            templateUrl: '/Configuration/listHeaders',
-            controller: 'ListHeadersController'
         })
         .when('/Configuration/listQueries', {
             templateUrl: '/Configuration/listQueries',
@@ -64,10 +60,6 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Configuration/formFlatFile',
             controller: 'FormFlatFileController'
         })
-        .when('/Configuration/formHeaders/:id', {
-            templateUrl: '/Configuration/formHeaders',
-            controller: 'FormHeadersController'
-        })
         .when('/Configuration/formQuery/:id', {
             templateUrl: '/Configuration/formQuery',
             controller: 'FormQueryController'
@@ -79,6 +71,10 @@ var configFunction = function ($routeProvider) {
         .when('/Configuration/formWebService/:id', {
             templateUrl: '/Configuration/formWebService',
             controller: 'FormWebServiceController'
+        })
+        .when('/Integration/manual', {
+            templateUrl: '/Integration/manual',
+            controller: 'IntegrationManualController'
         });
 }
 configFunction.$inject = ['$routeProvider'];

@@ -17,7 +17,7 @@
         <!-- Sweet Alert -->
         <link rel="stylesheet" href="//rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
 
-        @Styles.Render("~/Content/CSSTemplate")      
+        @Styles.Render("~/Content/CSSTemplate")
         @Styles.Render("~/Content/Styles")
 
 
@@ -82,7 +82,7 @@
                   </li>
                   <!-- Control Sidebar Toggle Button -->
                   <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                   </li>
                 </ul>
               </div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="pull-left info">
                   <p>User-Laureate</p>
-                  <a href="#"><i class="fa fa-circle text-success"></i>Administrator</a>
+                  <a><i class="fa fa-circle text-success"></i>Administrator</a>
                 </div>
               </div>
 
@@ -126,14 +126,13 @@
                     <li><a href="/#/Configuration/listActiveDirectories"><i class="fa fa-circle-o"></i>Active Directory</a></li>
                       <li><a href="/#/Configuration/listDatabases"><i class="fa fa-circle-o"></i>Databases</a></li>
                       <li><a href="/#/Configuration/listFlatFiles"><i class="fa fa-circle-o"></i>Flat Files</a></li>
-                      <li><a href="/#/Configuration/listHeaders"><i class="fa fa-circle-o"></i>Headers</a></li>
                       <li><a href="/#/Configuration/listQueries"><i class="fa fa-circle-o"></i>Queries</a></li>
                     <li><a href="/#/Configuration/listServerSMTP"><i class="fa fa-circle-o"></i>Server SMTP</a></li>
                     <li><a href="/#/Configuration/listWebServices"><i class="fa fa-circle-o"></i>Web Services</a></li>
                   </ul>
                 </li>
                 <li class="treeview">
-                  <a href="#">
+                  <a>
                     <i class="fa fa-files-o"></i>
                     <span>Integrations</span>
                     <span class="pull-right-container">
@@ -141,13 +140,13 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Automatic</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Manual</a></li>
+                    <li><a><i class="fa fa-circle-o"></i>Automatic</a></li>
+                    <li><a href="/#/Integration/manual"><i class="fa fa-circle-o"></i>Manual</a></li>
                   </ul>
                 </li>
 
                 <li class="treeview">
-                  <a href="#">
+                  <a>
                     <i class="fa fa-users"></i>
                     <span>Users</span>
                     <span class="pull-right-container">
@@ -155,18 +154,18 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Locals</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Active Directory</a></li>
+                    <li><a><i class="fa fa-circle-o"></i>Locals</a></li>
+                    <li><a><i class="fa fa-circle-o"></i>Active Directory</a></li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#">
+                  <a>
                     <i class="fa fa-file"></i> <span>Reports</span>
                   </a>
                 </li>
 
                 <li class="treeview">
-                  <a href="#">
+                  <a>
                     <i class="fa fa-laptop"></i>
                     <span>Logs</span>
                     <span class="pull-right-container">
@@ -174,11 +173,11 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Integrations</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>System</a></li>
+                    <li><a><i class="fa fa-circle-o"></i>Integrations</a></li>
+                    <li><a><i class="fa fa-circle-o"></i>System</a></li>
                   </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+                <li><a><i class="fa fa-book"></i> <span>Documentation</span></a></li>
               </ul>
             </section>
             <!-- /.sidebar -->
@@ -211,7 +210,7 @@
                immediately after the control sidebar -->
         </div>
         <!-- ./wrapper -->
-       
+
         @Scripts.Render("~/Content/Plugins")
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
@@ -227,10 +226,10 @@
         @Scripts.Render("~/Content/IntegrationToolAppControllers")
 
         @Scripts.Render("~/Content/IntegrationToolAppDirectives")
-        
+
         @Scripts.Render("~/Content/IntegrationToolApp")
 
-      
-       
+
+
     </body>
 </html>

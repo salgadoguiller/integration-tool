@@ -9,8 +9,8 @@
             List Queries
         </h1>
         <ol class="breadcrumb">
-            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
-            <li class="active">List Queries</li>
+            <li class="breadcrumb-item"><i class="fa fa-cog"></i> Configuration</li>
+            <li class="breadcrumb-item active"> List Queries</li>
         </ol>
         </div>
     </section>
@@ -32,13 +32,15 @@
                     <tr >
                       <th>Query Type</th>
                       <th>Query</th>
+                      <th>Query Description</th>
                       <th>Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="query in listQueries">
-                       <td>{{query.QueriesType.Name}}</td>
+                       <td>{{query.IntegrationsType.Name}}</td>
                        <td>{{query.Query1}}</td>
+                       <td>{{query.Description}}</td>
                        <td>
                             <div ng-controller="AlertController">
                                 <button class="btn btn-xs btn-success" ng-click="editQuery(query.QueryId)">Edit</button>
@@ -51,6 +53,7 @@
                     <tr>
                         <th>Query Type</th>
                         <th>Query</th>
+                        <th>Query Description</th>
                         <th>Options</th>
                     </tr>
                     </tfoot>

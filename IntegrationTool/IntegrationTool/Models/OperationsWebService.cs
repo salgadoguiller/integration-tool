@@ -12,16 +12,10 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FlatFileParameter
+    public partial class OperationsWebService
     {
-        public FlatFileParameter()
-        {
-            this.Integrations = new HashSet<Integration>();
-        }
-    
-        public int FlatFileParametersId { get; set; }
-        public string Location { get; set; }
-    
-        public virtual ICollection<Integration> Integrations { get; set; }
+        public int OperationWebServiceId { get; set; }
+        public string Name { get; set; }
+        public string Identifier { get; set; }
     }
 }

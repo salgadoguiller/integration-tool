@@ -4,6 +4,7 @@
     $scope.request = {};
     $scope.regex = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
+    $scope.type = $routeParams.id;
 
     loadInfo();
 

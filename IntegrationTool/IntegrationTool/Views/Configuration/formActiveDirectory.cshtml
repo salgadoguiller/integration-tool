@@ -9,8 +9,10 @@
             Configuration Active Directory
         </h1>
         <ol class="breadcrumb">
-            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
-            <li class="active">Active Directory</li>
+            <li class="breadcrumb-item"><i class="fa fa-cog"></i> Configuration</li>
+            <li class="breadcrumb-item active"><a href="/#/Configuration/listActiveDirectories"> List Active Directories</a></li>
+            <li ng-if="type == -1" class="breadcrumb-item active"> Create </li>
+            <li ng-if="type != -1" class="breadcrumb-item active"> Update</li>
         </ol>
         </div>
     </section>

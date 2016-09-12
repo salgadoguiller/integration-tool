@@ -241,33 +241,13 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveQuery(encryptor.encryptData(Request.Form["Query1"]), Request.Form["QueryTypeId"]);
+                systemConfigurationModel.saveQuery(encryptor.encryptData(Request.Form["Query1"]), encryptor.encryptData(Request.Form["Description"]), Request.Form["IntegrationTypeId"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Configuration Query Unsuccessful. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpPut]
-        public void saveHeaders()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                systemConfigurationModel.saveHeaders(Request.Form["QueryTypeId"],
-                                                    encryptor.encryptData(Request.Form["Name"]));
-
-                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -386,7 +366,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.updateFlatFile(Convert.ToInt32(Request.Form["FlatFileParametersId"]),
+                systemConfigurationModel.updateFlatFile(Convert.ToInt32(Request.Form["FlatFileParameterId"]),
                                                         encryptor.encryptData(Request.Form["Location"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Flat File Successful.\"}";
@@ -407,35 +387,15 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 systemConfigurationModel.updateQuery(Convert.ToInt32(Request.Form["QueryId"]),
-                                                    encryptor.encryptData(Request.Form["Query1"]), 
-                                                    Convert.ToInt32(Request.Form["QueryTypeId"]));
+                                                    encryptor.encryptData(Request.Form["Query1"]),
+                                                    encryptor.encryptData(Request.Form["Description"]),
+                                                    Convert.ToInt32(Request.Form["IntegrationTypeId"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Configuration Query Unsuccessful. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpPost]
-        public void updateHeader()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                systemConfigurationModel.updateHeader(Convert.ToInt32(Request.Form["HeaderId"]), 
-                                                    Convert.ToInt32(Request.Form["QueryTypeId"]),
-                                                    encryptor.encryptData(Request.Form["Name"]));
-
-                resp = "{\"type\":\"success\", \"message\":\"Configuration Headers Successful.\"}";
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration Headers Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -468,15 +428,15 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
-        public void getTypeQueries()
+        public void getIntegrationsType()
         {
             string resp = "";
             try
             {
                 connectModel();
-                List<QueriesType> typeQueries = systemConfigurationModel.getTypeQueries();
+                List<IntegrationsType> integrationsType = systemConfigurationModel.getIntegrationsType();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(typeQueries,
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationsType,
                     new JsonSerializerSettings()
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -502,6 +462,7 @@ namespace IntegrationTool.Controllers
                 foreach (Query query in queries)
                 {
                     query.Query1 = encryptor.decryptData(query.Query1);
+                    query.Description = encryptor.decryptData(query.Description);
                 }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
@@ -554,9 +515,9 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                List<FlatFileParameter> flatFiles = systemConfigurationModel.getFlatFiles();
+                List<FlatFilesParameter> flatFiles = systemConfigurationModel.getFlatFiles();
 
-                foreach (FlatFileParameter flatFile in flatFiles)
+                foreach (FlatFilesParameter flatFile in flatFiles)
                 {
                     flatFile.Location = encryptor.decryptData(flatFile.Location);
                 }
@@ -631,37 +592,9 @@ namespace IntegrationTool.Controllers
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the databases. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpGet]
-        public void getListHeaders()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                List<Header> headers = systemConfigurationModel.getHeaders();
-
-                foreach (Header header in headers)
-                {
-                    header.Name = encryptor.decryptData(header.Name);
-                }
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(headers,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the headers. Please try again.\"}";
             }
 
             response(resp);
@@ -760,7 +693,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                FlatFileParameter flatFile = systemConfigurationModel.getFlatFile(id);
+                FlatFilesParameter flatFile = systemConfigurationModel.getFlatFile(id);
 
                 flatFile.Location = encryptor.decryptData(flatFile.Location);
 
@@ -779,31 +712,6 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
-        public void getHeader(int id)
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                Header header = systemConfigurationModel.getHeader(id);
-
-                header.Name = encryptor.decryptData(header.Name);
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(header,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the header. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpGet]
         public void getQuery(int id)
         {
             string resp = "";
@@ -813,6 +721,7 @@ namespace IntegrationTool.Controllers
                 Query query = systemConfigurationModel.getQuery(id);
 
                 query.Query1 = encryptor.decryptData(query.Query1);
+                query.Description = encryptor.decryptData(query.Description);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(query,
                     new JsonSerializerSettings()
@@ -883,6 +792,58 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
+        [HttpGet]
+        public void getQueriesByIntegrationType(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Query> queries = systemConfigurationModel.getQueriesByIntegrationType(id);
+
+                foreach (Query query in queries)
+                {
+                    query.Query1 = encryptor.decryptData(query.Query1);
+                    query.Description = encryptor.decryptData(query.Description);
+                }
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the queries. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getOperationsWebServices()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<OperationsWebService> operations = systemConfigurationModel.getOperationsWebServices();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(operations,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the operations web services. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
         // ================================================================================================================
         // Eliminar parametros del sistema
         // ================================================================================================================
@@ -942,26 +903,6 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the flat file. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpDelete]
-        public void deleteHeader(int id)
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                systemConfigurationModel.deleteHeader(id);
-
-                resp = "{\"type\":\"success\", \"message\":\"Header deleted Successfully.\"}";
-
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the header. Please try again.\"}";
             }
 
             response(resp);

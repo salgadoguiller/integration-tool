@@ -9,8 +9,10 @@
           Configuration Queries
         </h1>
         <ol class="breadcrumb">
-          <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
-          <li class="active">Queries</li>
+          <li class="breadcrumb-item"><i class="fa fa-cog"></i> Configuration</li>
+          <li class="breadcrumb-item active"><a href="/#/Configuration/listQueries"> List Queries</a></li>
+          <li ng-if="type == -1" class="breadcrumb-item active"> Create </li>
+          <li ng-if="type != -1" class="breadcrumb-item active"> Update</li>
         </ol>
       </div>
     </section>
@@ -32,9 +34,9 @@
 
                       <div class="form-group">
                           <label for="QueryType">Query Type</label>
-                          <select class="form-control select2" name="QueryType" ng-model="request.QueryTypeId" style="width: 100%;" required>
+                          <select class="form-control select2" name="QueryType" ng-model="request.IntegrationTypeId" style="width: 100%;" required>
                               <option selected="selected" disabled value="">Select</option>
-                              <option ng-repeat="typeQuery in typeQueries" value="{{typeQuery.QueryTypeId}}">{{typeQuery.Name}}</option>
+                              <option ng-repeat="integrationType in integrationsType" value="{{integrationType.IntegrationTypeId}}">{{integrationType.Name}}</option>
                           </select>
                           <div ng-if="form.TypeQuery.$touched || form.$submitted">
                               <div ng-messages="form.QueryType.$error" role="alert">
@@ -51,6 +53,18 @@
                           <div ng-if="form.Queries.$touched || form.$submitted">
                               <div ng-messages="form.Queries.$error" role="alert">
                                   <div class="help-block error-text" ng-message="required">* Query is required.</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="Queries">Query Description</label>
+                          <div class="form-group">
+                              <textarea name="QueryDescription" ng-model="request.Description" id="QueryDescription" class="form-control" rows="3" required></textarea>
+                          </div>
+                          <div ng-if="form.QueryDescription.$touched || form.$submitted">
+                              <div ng-messages="form.QueryDescription.$error" role="alert">
+                                  <div class="help-block error-text" ng-message="required">* Query Description is required.</div>
                               </div>
                           </div>
                       </div>

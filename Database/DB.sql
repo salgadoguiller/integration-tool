@@ -41,32 +41,6 @@ CREATE TABLE DatabaseParameters (
 
 
 -- -----------------------------------------------------
--- Table QueriesType
--- -----------------------------------------------------
-CREATE TABLE QueriesType (
-  QueryTypeId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(80) NOT NULL,
-  CONSTRAINT PK_QueryType
-    PRIMARY KEY (QueryTypeId));
-
-
--- -----------------------------------------------------
--- Table Queries
--- -----------------------------------------------------
-CREATE TABLE Queries (
-  QueryId INT NOT NULL IDENTITY(1,1),
-  Query VARCHAR(MAX) NOT NULL,
-  QueryTypeId INT NOT NULL,
-  CONSTRAINT PK_Query
-    PRIMARY KEY (QueryId),
-  CONSTRAINT FK_QueriesQueriesType_QueryTypeId
-    FOREIGN KEY (QueryTypeId)
-    REFERENCES QueriesType (QueryTypeId)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
 -- Table Resource
 -- -----------------------------------------------------
 CREATE TABLE Resources (
@@ -119,13 +93,42 @@ CREATE TABLE WebServices (
 
 
 -- -----------------------------------------------------
+-- Table OperationsWebServices
+-- -----------------------------------------------------
+CREATE TABLE OperationsWebServices (
+  OperationWebServiceId INT NOT NULL IDENTITY(1,1),
+  Name VARCHAR(50) NOT NULL,
+  Identifier VARCHAR(50) NOT NULL,
+  CONSTRAINT OperationWebServiceId
+    PRIMARY KEY (OperationWebServiceId));
+
+
+-- -----------------------------------------------------
 -- Table IntegrationsType
 -- -----------------------------------------------------
 CREATE TABLE IntegrationsType (
   IntegrationTypeId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(20) NOT NULL,
+  Name VARCHAR(50) NOT NULL,
+  Identifier VARCHAR(50) NOT NULL,
   CONSTRAINT PK_IntegrationType
     PRIMARY KEY (IntegrationTypeId));
+
+
+-- -----------------------------------------------------
+-- Table Queries
+-- -----------------------------------------------------
+CREATE TABLE Queries (
+  QueryId INT NOT NULL IDENTITY(1,1),
+  Query VARCHAR(MAX) NOT NULL,
+  Description VARCHAR(MAX) NOT NULL,
+  IntegrationTypeId INT NOT NULL,
+  CONSTRAINT PK_Query
+    PRIMARY KEY (QueryId),
+  CONSTRAINT FK_QueriesIntegrationsType_IntegrationTypeId
+    FOREIGN KEY (IntegrationTypeId)
+    REFERENCES IntegrationsType (IntegrationTypeId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -142,13 +145,23 @@ CREATE TABLE ServerSMTPParameters (
 
 
 -- -----------------------------------------------------
--- Table FlatFileParameters
+-- Table FlatFilesParameters
 -- -----------------------------------------------------
-CREATE TABLE FlatFileParameters (
-  FlatFileParametersId INT NOT NULL IDENTITY(1,1),
+CREATE TABLE FlatFilesParameters (
+  FlatFileParameterId INT NOT NULL IDENTITY(1,1),
   Location VARCHAR(MAX) NOT NULL,
-  CONSTRAINT PK_FlatFileParameters
-    PRIMARY KEY (FlatFileParametersId));
+  CONSTRAINT PK_FlatFilesParameters
+    PRIMARY KEY (FlatFileParameterId));
+
+
+-- -----------------------------------------------------
+-- Table FlatFiles
+-- -----------------------------------------------------
+CREATE TABLE FlatFiles (
+  FlatFileId INT NOT NULL IDENTITY(1,1),
+  Name VARCHAR(100) NOT NULL,
+  CONSTRAINT PK_FlatFiles
+    PRIMARY KEY (FlatFileId));
 
 
 -- -----------------------------------------------------
@@ -161,7 +174,8 @@ CREATE TABLE Integrations (
   WebServiceId INT NOT NULL,
   DatabaseParametersId INT NOT NULL,
   ServerSMTPParametersId INT NOT NULL,
-  FlatFileParametersId INT NOT NULL,
+  FlatFileId INT NOT NULL,
+  FlatFileParameterId INT NOT NULL,
   IntegrationTypeId INT NOT NULL,
   QueryId INT NOT NULL,
   CONSTRAINT PK_Integration
@@ -186,9 +200,14 @@ CREATE TABLE Integrations (
     REFERENCES ServerSMTPParameters (ServerSMTPParametersId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT FK_IntegrationsFlatFileParameters_FlatFileParametersId
-    FOREIGN KEY (FlatFileParametersId)
-    REFERENCES FlatFileParameters (FlatFileParametersId)
+  CONSTRAINT FK_IntegrationsFlatFiles_FlatFileId
+    FOREIGN KEY (FlatFileId)
+    REFERENCES FlatFiles (FlatFileId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_IntegrationsFlatFilesParameters_FlatFileParameterId
+    FOREIGN KEY (FlatFileParameterId)
+    REFERENCES FlatFilesParameters (FlatFileParameterId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT FK_IntegrationsIntegrationsType_IntegrationTypeId
@@ -199,6 +218,23 @@ CREATE TABLE Integrations (
   CONSTRAINT FK_IntegrationsQueries_QueryId
     FOREIGN KEY (QueryId)
     REFERENCES Queries (QueryId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+-- -----------------------------------------------------
+-- Table QueryParameters
+-- -----------------------------------------------------
+CREATE TABLE QueryParameters (
+  QueryParameterId INT NOT NULL IDENTITY(1,1),
+  Name VARCHAR(100) NOT NULL,
+  Value VARCHAR(max) NOT NULL,
+  IntegrationId INT NOT NULL,
+  CONSTRAINT PK_QueryParameters
+    PRIMARY KEY (QueryParameterId),
+  CONSTRAINT FK_QueryParametersIntegrations_IntegrationId
+    FOREIGN KEY (IntegrationId)
+    REFERENCES Integrations (IntegrationId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -248,22 +284,6 @@ CREATE TABLE IntegrationLogs (
   CONSTRAINT FK_IntegrationLogsIntegrations_IntegrationId
     FOREIGN KEY (IntegrationId)
     REFERENCES Integrations (IntegrationId)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table Headers
--- -----------------------------------------------------
-CREATE TABLE Headers (
-  HeaderId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(80) NOT NULL,
-  QueryTypeId INT NOT NULL,
-  CONSTRAINT PK_Header
-    PRIMARY KEY (HeaderId),
-  CONSTRAINT FK_HeadersQueriesType_QueryTypeId
-    FOREIGN KEY (QueryTypeId)
-    REFERENCES QueriesType (QueryTypeId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

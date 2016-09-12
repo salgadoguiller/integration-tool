@@ -3,9 +3,10 @@
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
-    $scope.typeQueries = [];
+    $scope.integrationsType = [];
+    $scope.type = $routeParams.id;
 
-    getQueriesType();
+    getIntegrationsType();
     
     loadInfo();
 
@@ -35,7 +36,7 @@
         });
     }
 
-    function getQueriesType() {
+    function getIntegrationsType() {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -44,9 +45,9 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getTypeQueries', data, config).success(function (resp) {
+        $http.get('Configuration/getIntegrationsType', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                $scope.typeQueries = resp;
+                $scope.integrationsType = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;

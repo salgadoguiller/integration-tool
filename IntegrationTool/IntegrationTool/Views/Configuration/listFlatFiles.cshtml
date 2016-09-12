@@ -9,8 +9,8 @@
             List Flat Files
         </h1>
         <ol class="breadcrumb">
-            <li><a><i class="fa fa-dashboard"></i> Configuration</a></li>
-            <li class="active">List Flat Files</li>
+            <li class="breadcrumb-item"><i class="fa fa-cog"></i> Configuration</li>
+            <li class="breadcrumb-item active"> List Flat Files</li>
         </ol>
         </div>
     </section> 
@@ -40,8 +40,8 @@
                   <td>{{flatFile.Location}}</td>                  
                   <td>
                     <div ng-controller="AlertController">
-                        <button class="btn btn-xs btn-success" ng-click="editFlatFile(flatFile.FlatFileParametersId)">Edit</button> 
-                        <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteFlatFile(flatFile.FlatFileParametersId)" sweet-on-cancel="return">Delete</button>
+                        <button class="btn btn-xs btn-success" ng-click="editFlatFile(flatFile.FlatFileParameterId)">Edit</button> 
+                        <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteFlatFile(flatFile.FlatFileParameterId)" sweet-on-cancel="return">Delete</button>
                     </div>
                   </td>
                 </tr>

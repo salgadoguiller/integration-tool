@@ -6,6 +6,7 @@
     $scope.regexPort = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
     $scope.dataBaseEngines = [];
+    $scope.type = $routeParams.id;
 
     getDataBaseEngines();
 

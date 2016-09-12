@@ -21,9 +21,10 @@ namespace IntegrationTool.Models
     
         public int QueryId { get; set; }
         public string Query1 { get; set; }
-        public int QueryTypeId { get; set; }
+        public string Description { get; set; }
+        public int IntegrationTypeId { get; set; }
     
         public virtual ICollection<Integration> Integrations { get; set; }
-        public virtual QueriesType QueriesType { get; set; }
+        public virtual IntegrationsType IntegrationsType { get; set; }
     }
 }

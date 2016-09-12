@@ -12,19 +12,13 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IntegrationsType
+    public partial class QueryParameter
     {
-        public IntegrationsType()
-        {
-            this.Integrations = new HashSet<Integration>();
-            this.Queries = new HashSet<Query>();
-        }
-    
-        public int IntegrationTypeId { get; set; }
+        public int QueryParameterId { get; set; }
         public string Name { get; set; }
-        public string Identifier { get; set; }
+        public string Value { get; set; }
+        public int IntegrationId { get; set; }
     
-        public virtual ICollection<Integration> Integrations { get; set; }
-        public virtual ICollection<Query> Queries { get; set; }
+        public virtual Integration Integration { get; set; }
     }
 }

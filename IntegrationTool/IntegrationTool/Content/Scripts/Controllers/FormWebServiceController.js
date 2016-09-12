@@ -3,6 +3,7 @@
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
+    $scope.type = $routeParams.id;
 
     loadInfo();
 

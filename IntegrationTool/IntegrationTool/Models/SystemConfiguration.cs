@@ -38,9 +38,9 @@ namespace IntegrationTool.Models
             return queries;
         }
 
-        public List<FlatFileParameter> getFlatFiles()
+        public List<FlatFilesParameter> getFlatFiles()
         {
-            List<FlatFileParameter> flatFiles = (from ff in SystemConfigurationDB.FlatFileParameters
+            List<FlatFilesParameter> flatFiles = (from ff in SystemConfigurationDB.FlatFilesParameters
                                                  select ff).ToList();
             return flatFiles;
         }
@@ -59,13 +59,6 @@ namespace IntegrationTool.Models
             return webServices;
         }
 
-        public List<Header> getHeaders()
-        {
-            List<Header> headers = SystemConfigurationDB.Headers.ToList();
-
-            return headers;
-        }
-
         public List<Engine> getDataBaseEngines()
         {
             List<Engine> engines = (from dbEngine in SystemConfigurationDB.Engines
@@ -73,11 +66,11 @@ namespace IntegrationTool.Models
             return engines;
         }
 
-        public List<QueriesType> getTypeQueries()
+        public List<IntegrationsType> getIntegrationsType()
         {
-            List<QueriesType> queries = (from queryType in SystemConfigurationDB.QueriesTypes
-                                         select queryType).ToList();
-            return queries;
+            List<IntegrationsType> integrationsType = (from it in SystemConfigurationDB.IntegrationsTypes
+                                         select it).ToList();
+            return integrationsType;
         }
 
         public ActiveDirectoryParameter getActiveDirectory(int id)
@@ -92,16 +85,10 @@ namespace IntegrationTool.Models
             return dataBase;
         }
 
-        public FlatFileParameter getFlatFile(int id)
+        public FlatFilesParameter getFlatFile(int id)
         {
-            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+            FlatFilesParameter flatFile = SystemConfigurationDB.FlatFilesParameters.Where(param => param.FlatFileParameterId == id).ToList()[0];
             return flatFile;
-        }
-
-        public Header getHeader(int id)
-        {
-            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
-            return header;
         }
 
         public Query getQuery(int id)
@@ -120,6 +107,18 @@ namespace IntegrationTool.Models
         {
             WebService webService = SystemConfigurationDB.WebServices.Where(param => param.WebServiceId == id).ToList()[0];
             return webService;
+        }
+
+        public List<Query> getQueriesByIntegrationType(int id)
+        {
+            List<Query> queries = SystemConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
+            return queries;
+        }
+
+        public List<OperationsWebService> getOperationsWebServices()
+        {
+            List<OperationsWebService> operations = SystemConfigurationDB.OperationsWebServices.ToList();
+            return operations;
         }
 
         // ================================================================================================================
@@ -147,11 +146,12 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();      
         }
 
-        public void saveQuery(string queryUser,string queryTypeUser)
+        public void saveQuery(string queryString, string description, string integrationType)
         {        
             Query query = new Query();
-            query.Query1 = queryUser;
-            query.QueryTypeId = Convert.ToInt32(queryTypeUser);
+            query.Query1 = queryString;
+            query.Description = description;
+            query.IntegrationTypeId = Convert.ToInt32(integrationType);
 
             SystemConfigurationDB.Queries.Add(query);
             SystemConfigurationDB.SaveChanges();
@@ -159,11 +159,11 @@ namespace IntegrationTool.Models
 
         public void saveFlatFiles(string location)
         {           
-            FlatFileParameter flatFile = new FlatFileParameter();
+            FlatFilesParameter flatFile = new FlatFilesParameter();
 
             flatFile.Location = location;
            
-            SystemConfigurationDB.FlatFileParameters.Add(flatFile);
+            SystemConfigurationDB.FlatFilesParameters.Add(flatFile);
             SystemConfigurationDB.SaveChanges();
         }
 
@@ -198,21 +198,6 @@ namespace IntegrationTool.Models
             SystemConfigurationDB.SaveChanges();
         }
 
-        public void saveHeaders(string queryTypeId, string name)
-        {
-            string[] headersName = name.Split('|');
-
-            foreach (string headerName in headersName)
-            {
-                Header header = new Header();
-                header.Name = headerName;
-                header.QueryTypeId = Convert.ToInt32(queryTypeId);
-
-                SystemConfigurationDB.Headers.Add(header);
-                SystemConfigurationDB.SaveChanges();
-            }
-        }
-
         // ================================================================================================================
         // Actualizar parametros del sistema.
         // ================================================================================================================
@@ -241,28 +226,19 @@ namespace IntegrationTool.Models
 
         public void updateFlatFile(int id, string location)
         {
-            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == id).ToList()[0];
+            FlatFilesParameter flatFile = SystemConfigurationDB.FlatFilesParameters.Where(param => param.FlatFileParameterId == id).ToList()[0];
 
             flatFile.Location = location;
 
             SystemConfigurationDB.SaveChanges();
         }
 
-        public void updateHeader(int id, int queryTypeId, string name)
-        {
-            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == id).ToList()[0];
-
-            header.Name = name;
-            header.QueryTypeId = queryTypeId;
-
-            SystemConfigurationDB.SaveChanges();
-        }
-
-        public void updateQuery(int id, string queryString, int queryTypeId)
+        public void updateQuery(int id, string queryString, string description, int integrationTypeId)
         {
             Query query = SystemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
             query.Query1 = queryString;
-            query.QueryTypeId = queryTypeId;
+            query.Description = description;
+            query.IntegrationTypeId = integrationTypeId;
 
             SystemConfigurationDB.SaveChanges();
         }
@@ -309,17 +285,9 @@ namespace IntegrationTool.Models
 
         public void deleteFlatFile(int flatFileIdId)
         {
-            FlatFileParameter flatFile = SystemConfigurationDB.FlatFileParameters.Where(param => param.FlatFileParametersId == flatFileIdId).ToList()[0];
+            FlatFilesParameter flatFile = SystemConfigurationDB.FlatFilesParameters.Where(param => param.FlatFileParameterId == flatFileIdId).ToList()[0];
 
-            SystemConfigurationDB.FlatFileParameters.Remove(flatFile);
-            SystemConfigurationDB.SaveChanges();
-        }
-
-        public void deleteHeader(int headerId)
-        {
-            Header header = SystemConfigurationDB.Headers.Where(param => param.HeaderId == headerId).ToList()[0];
-
-            SystemConfigurationDB.Headers.Remove(header);
+            SystemConfigurationDB.FlatFilesParameters.Remove(flatFile);
             SystemConfigurationDB.SaveChanges();
         }
 
