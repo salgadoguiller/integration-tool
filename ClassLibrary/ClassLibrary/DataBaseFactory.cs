@@ -8,7 +8,7 @@ namespace ClassLibrary
 {
     public class DataBaseFactory
     {
-        public InterfaceDatabase createDataBase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, string engine)
+        public InterfaceDatabase createInstanceDataBase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, string engine)
         {
             if (engine == "SqlServer")
                 return new SqlServerDatabase(ip, port, nameDataBase, serverInstance, username, password);

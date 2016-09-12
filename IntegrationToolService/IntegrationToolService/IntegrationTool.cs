@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using ClassLibrary;
 
-
 namespace IntegrationToolService
 {
     public partial class IntegrationTool : ServiceBase
@@ -35,7 +34,7 @@ namespace IntegrationToolService
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {                
            GenerateIntegration coneDatabase = new GenerateIntegration();
-            coneDatabase.ObtainQueryToVerifyTimeToExecutionIntegration();
+           coneDatabase.ObtainQueryToVerifyTimeToExecutionIntegration();
         }
     }
 }
