@@ -14,7 +14,7 @@
 -- -----------------------------------------------------
 CREATE TABLE Engines (
   EngineId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
+  Name VARCHAR(80) NOT NULL,
   CONSTRAINT PK_Engines
     PRIMARY KEY (EngineId));
 
@@ -24,12 +24,12 @@ CREATE TABLE Engines (
 -- -----------------------------------------------------
 CREATE TABLE DatabaseParameters (
   DatabaseParametersId INT NOT NULL IDENTITY(1,1),
-  Ip VARCHAR(15) NOT NULL,
-  Port VARCHAR(15) NOT NULL,
-  Instance VARCHAR(45),
-  Name VARCHAR(45) NOT NULL,
-  Username VARCHAR(45) NOT NULL,
-  Password VARCHAR(45) NOT NULL,
+  Ip VARCHAR(30) NOT NULL,
+  Port VARCHAR(20) NOT NULL,
+  Instance VARCHAR(80),
+  Name VARCHAR(80) NOT NULL,
+  Username VARCHAR(80) NOT NULL,
+  Password VARCHAR(80) NOT NULL,
   EngineId INT NOT NULL,
   CONSTRAINT PK_DatabaseParameter
     PRIMARY KEY (DatabaseParametersId),
@@ -45,7 +45,7 @@ CREATE TABLE DatabaseParameters (
 -- -----------------------------------------------------
 CREATE TABLE QueriesType (
   QueryTypeId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
+  Name VARCHAR(80) NOT NULL,
   CONSTRAINT PK_QueryType
     PRIMARY KEY (QueryTypeId));
 
@@ -71,7 +71,7 @@ CREATE TABLE Queries (
 -- -----------------------------------------------------
 CREATE TABLE Resources (
   ResourceId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
+  Name VARCHAR(80) NOT NULL,
   CONSTRAINT PK_Resource
     PRIMARY KEY (ResourceId));
 
@@ -81,7 +81,7 @@ CREATE TABLE Resources (
 -- -----------------------------------------------------
 CREATE TABLE UsersType (
   UserTypeId INT NOT NULL IDENTITY(1,1),
-  Type VARCHAR(45) NOT NULL,
+  Type VARCHAR(20) NOT NULL,
   CONSTRAINT PK_UserType
     PRIMARY KEY (UserTypeId));
 
@@ -91,11 +91,11 @@ CREATE TABLE UsersType (
 -- -----------------------------------------------------
 CREATE TABLE Users (
   UserId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
-  Username VARCHAR(45) NOT NULL,
-  Password VARCHAR(45) NOT NULL,
-  Email VARCHAR(45) NOT NULL,
-  Domain VARCHAR(45) NULL,
+  Name VARCHAR(80) NOT NULL,
+  Username VARCHAR(80) NOT NULL,
+  Password VARCHAR(80) NOT NULL,
+  Email VARCHAR(80) NOT NULL,
+  Domain VARCHAR(80) NULL,
   UserTypeId INT NOT NULL,
   CONSTRAINT PK_User
     PRIMARY KEY (UserId),
@@ -112,8 +112,8 @@ CREATE TABLE Users (
 CREATE TABLE WebServices (
   WebServiceId INT NOT NULL IDENTITY(1,1),
   Endpoint VARCHAR(MAX) NOT NULL,
-  Username VARCHAR(100) NOT NULL,
-  Password VARCHAR(100) NOT NULL,
+  Username VARCHAR(80) NOT NULL,
+  Password VARCHAR(80) NOT NULL,
   CONSTRAINT PK_WebService
     PRIMARY KEY (WebServiceId));
 
@@ -123,7 +123,7 @@ CREATE TABLE WebServices (
 -- -----------------------------------------------------
 CREATE TABLE IntegrationsType (
   IntegrationTypeId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
+  Name VARCHAR(20) NOT NULL,
   CONSTRAINT PK_IntegrationType
     PRIMARY KEY (IntegrationTypeId));
 
@@ -133,10 +133,10 @@ CREATE TABLE IntegrationsType (
 -- -----------------------------------------------------
 CREATE TABLE ServerSMTPParameters (
   ServerSMTPParametersId INT NOT NULL IDENTITY(1,1),
-  NameServerSMTP VARCHAR(45) NOT NULL,
-  Port VARCHAR(45) NOT NULL,
-  UsernameSMTP VARCHAR(45) NOT NULL,
-  PasswordSMTP VARCHAR(45) NOT NULL,
+  NameServerSMTP VARCHAR(80) NOT NULL,
+  Port VARCHAR(80) NOT NULL,
+  UsernameSMTP VARCHAR(80) NOT NULL,
+  PasswordSMTP VARCHAR(80) NOT NULL,
   CONSTRAINT PK_EmailParameter
     PRIMARY KEY (ServerSMTPParametersId));
 
@@ -209,7 +209,7 @@ CREATE TABLE Integrations (
 CREATE TABLE ActiveDirectoryParameters (
   ActiveDirectoryId INT NOT NULL IDENTITY(1,1),
   ADPath VARCHAR(MAX) NOT NULL,
-  ADDomain VARCHAR(45) NOT NULL,
+  ADDomain VARCHAR(80) NOT NULL,
   CONSTRAINT PK_ActiveDirectoryParameter
     PRIMARY KEY (ActiveDirectoryId));
 
@@ -257,7 +257,7 @@ CREATE TABLE IntegrationLogs (
 -- -----------------------------------------------------
 CREATE TABLE Headers (
   HeaderId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(45) NOT NULL,
+  Name VARCHAR(80) NOT NULL,
   QueryTypeId INT NOT NULL,
   CONSTRAINT PK_Header
     PRIMARY KEY (HeaderId),
@@ -273,7 +273,7 @@ CREATE TABLE Headers (
 -- -----------------------------------------------------
 CREATE TABLE Recurrences (
   RecurrenceId INT NOT NULL IDENTITY(1,1),
-  NameRecurrence VARCHAR(45) NOT NULL,
+  NameRecurrence VARCHAR(20) NOT NULL,
   CONSTRAINT PK_Recurrence
     PRIMARY KEY (RecurrenceId));
 

@@ -40,7 +40,6 @@ namespace IntegrationTool.Models
         public DbSet<Recurrence> Recurrences { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ServerSMTPParameter> ServerSMTPParameters { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<SystemLog> SystemLogs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UsersType> UsersTypes { get; set; }

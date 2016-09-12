@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a7065f4acad34753a87010ccb2c49efb" Name="Diagram1">
+      <Diagram DiagramId="731fe5f88064444d905e31b8dc686165" Name="Diagram1">
         <EntityTypeShape EntityType="IntegrationToolModel.ActiveDirectoryParameter" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Calendar" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.DatabaseParameter" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="IntegrationToolModel.Recurrence" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Resource" Width="1.5" PointX="3" PointY="29.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.ServerSMTPParameter" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.SystemLog" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.User" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.UsersType" Width="1.5" PointX="0.75" PointY="23.625" IsExpanded="true" />

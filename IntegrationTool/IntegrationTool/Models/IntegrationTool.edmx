@@ -21,7 +21,6 @@
           <EntitySet Name="Recurrences" EntityType="IntegrationToolModel.Store.Recurrences" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Resources" EntityType="IntegrationToolModel.Store.Resources" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ServerSMTPParameters" EntityType="IntegrationToolModel.Store.ServerSMTPParameters" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="IntegrationToolModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemLogs" EntityType="IntegrationToolModel.Store.SystemLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="IntegrationToolModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UsersType" EntityType="IntegrationToolModel.Store.UsersType" store:Type="Tables" Schema="dbo" />
@@ -101,7 +100,7 @@
           </Key>
           <Property Name="ActiveDirectoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ADPath" Type="varchar(max)" Nullable="false" />
-          <Property Name="ADDomain" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="ADDomain" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <EntityType Name="Calendars">
           <Key>
@@ -119,12 +118,12 @@
             <PropertyRef Name="DatabaseParametersId" />
           </Key>
           <Property Name="DatabaseParametersId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Ip" Type="varchar" Nullable="false" MaxLength="15" />
-          <Property Name="Port" Type="varchar" Nullable="false" MaxLength="15" />
-          <Property Name="Instance" Type="varchar" MaxLength="45" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Ip" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Port" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Instance" Type="varchar" MaxLength="80" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="EngineId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Engines">
@@ -132,7 +131,7 @@
             <PropertyRef Name="EngineId" />
           </Key>
           <Property Name="EngineId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <EntityType Name="FlatFileParameters">
           <Key>
@@ -146,7 +145,7 @@
             <PropertyRef Name="HeaderId" />
           </Key>
           <Property Name="HeaderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="QueryTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="IntegrationLogs">
@@ -177,7 +176,7 @@
             <PropertyRef Name="IntegrationTypeId" />
           </Key>
           <Property Name="IntegrationTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -200,41 +199,31 @@
             <PropertyRef Name="QueryTypeId" />
           </Key>
           <Property Name="QueryTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <EntityType Name="Recurrences">
           <Key>
             <PropertyRef Name="RecurrenceId" />
           </Key>
           <Property Name="RecurrenceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NameRecurrence" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="NameRecurrence" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Resources">
           <Key>
             <PropertyRef Name="ResourceId" />
           </Key>
           <Property Name="ResourceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <EntityType Name="ServerSMTPParameters">
           <Key>
             <PropertyRef Name="ServerSMTPParametersId" />
           </Key>
           <Property Name="ServerSMTPParametersId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NameServerSMTP" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Port" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="UsernameSMTP" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="PasswordSMTP" Type="varchar" Nullable="false" MaxLength="45" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="NameServerSMTP" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Port" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="UsernameSMTP" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="PasswordSMTP" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <EntityType Name="SystemLogs">
           <Key>
@@ -250,11 +239,11 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Domain" Type="varchar" MaxLength="45" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Domain" Type="varchar" MaxLength="80" />
           <Property Name="UserTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsersType">
@@ -262,7 +251,7 @@
             <PropertyRef Name="UserTypeId" />
           </Key>
           <Property Name="UserTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="WebServices">
           <Key>
@@ -270,8 +259,8 @@
           </Key>
           <Property Name="WebServiceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Endpoint" Type="varchar(max)" Nullable="false" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="80" />
         </EntityType>
         <Association Name="FK_CalendarsIntegrations_IntegrationId">
           <End Role="Integrations" Type="IntegrationToolModel.Store.Integrations" Multiplicity="1" />
@@ -498,7 +487,6 @@
           <EntitySet Name="Recurrences" EntityType="IntegrationToolModel.Recurrence" />
           <EntitySet Name="Resources" EntityType="IntegrationToolModel.Resource" />
           <EntitySet Name="ServerSMTPParameters" EntityType="IntegrationToolModel.ServerSMTPParameter" />
-          <EntitySet Name="sysdiagrams" EntityType="IntegrationToolModel.sysdiagram" />
           <EntitySet Name="SystemLogs" EntityType="IntegrationToolModel.SystemLog" />
           <EntitySet Name="Users" EntityType="IntegrationToolModel.User" />
           <EntitySet Name="UsersTypes" EntityType="IntegrationToolModel.UsersType" />
@@ -578,7 +566,7 @@
           </Key>
           <Property Name="ActiveDirectoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="ADPath" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="ADDomain" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="ADDomain" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Calendar">
           <Key>
@@ -598,12 +586,12 @@
             <PropertyRef Name="DatabaseParametersId" />
           </Key>
           <Property Name="DatabaseParametersId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Ip" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Port" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Instance" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Ip" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Port" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Instance" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="EngineId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Engine" Relationship="IntegrationToolModel.FK_DatabaseParametersEngines_EngineId" FromRole="DatabaseParameters" ToRole="Engines" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="DatabaseParameters" ToRole="Integrations" />
@@ -613,7 +601,7 @@
             <PropertyRef Name="EngineId" />
           </Key>
           <Property Name="EngineId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="DatabaseParameters" Relationship="IntegrationToolModel.FK_DatabaseParametersEngines_EngineId" FromRole="Engines" ToRole="DatabaseParameters" />
         </EntityType>
         <EntityType Name="FlatFileParameter">
@@ -629,7 +617,7 @@
             <PropertyRef Name="HeaderId" />
           </Key>
           <Property Name="HeaderId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="QueryTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="QueriesType" Relationship="IntegrationToolModel.FK_HeadersQueriesType_QueryTypeId" FromRole="Headers" ToRole="QueriesType" />
         </EntityType>
@@ -672,7 +660,7 @@
             <PropertyRef Name="IntegrationTypeId" />
           </Key>
           <Property Name="IntegrationTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsIntegrationsType_IntegrationTypeId" FromRole="IntegrationsType" ToRole="Integrations" />
         </EntityType>
         <EntityType Name="Permission">
@@ -700,7 +688,7 @@
             <PropertyRef Name="QueryTypeId" />
           </Key>
           <Property Name="QueryTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Headers" Relationship="IntegrationToolModel.FK_HeadersQueriesType_QueryTypeId" FromRole="QueriesType" ToRole="Headers" />
           <NavigationProperty Name="Queries" Relationship="IntegrationToolModel.FK_QueriesQueriesType_QueryTypeId" FromRole="QueriesType" ToRole="Queries" />
         </EntityType>
@@ -709,7 +697,7 @@
             <PropertyRef Name="RecurrenceId" />
           </Key>
           <Property Name="RecurrenceId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NameRecurrence" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="NameRecurrence" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Calendars" Relationship="IntegrationToolModel.FK_CalendarsRecurrences_RecurrenceId" FromRole="Recurrences" ToRole="Calendars" />
         </EntityType>
         <EntityType Name="Resource">
@@ -717,7 +705,7 @@
             <PropertyRef Name="ResourceId" />
           </Key>
           <Property Name="ResourceId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Permissions" Relationship="IntegrationToolModel.FK_PermissionsResources_ResourceId" FromRole="Resources" ToRole="Permissions" />
         </EntityType>
         <EntityType Name="ServerSMTPParameter">
@@ -725,21 +713,11 @@
             <PropertyRef Name="ServerSMTPParametersId" />
           </Key>
           <Property Name="ServerSMTPParametersId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NameServerSMTP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Port" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="UsernameSMTP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="PasswordSMTP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="NameServerSMTP" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Port" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="UsernameSMTP" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="PasswordSMTP" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsServerSMTPParameters_ServerSMTPParametersId" FromRole="ServerSMTPParameters" ToRole="Integrations" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="SystemLog">
           <Key>
@@ -756,11 +734,11 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Domain" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Domain" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsUsers_UserId" FromRole="Users" ToRole="Integrations" />
           <NavigationProperty Name="Permissions" Relationship="IntegrationToolModel.FK_PermissionsUsers_UserId" FromRole="Users" ToRole="Permissions" />
@@ -771,7 +749,7 @@
             <PropertyRef Name="UserTypeId" />
           </Key>
           <Property Name="UserTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Users" Relationship="IntegrationToolModel.FK_UsersUsersType_UserTypeId" FromRole="UsersType" ToRole="Users" />
         </EntityType>
         <EntityType Name="WebService">
@@ -780,8 +758,8 @@
           </Key>
           <Property Name="WebServiceId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Endpoint" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsWebServices_WebServiceId" FromRole="WebServices" ToRole="Integrations" />
         </EntityType>
         <Association Name="FK_CalendarsIntegrations_IntegrationId">
@@ -1137,17 +1115,6 @@
                 <ScalarProperty Name="Port" ColumnName="Port" />
                 <ScalarProperty Name="UsernameSMTP" ColumnName="UsernameSMTP" />
                 <ScalarProperty Name="PasswordSMTP" ColumnName="PasswordSMTP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="IntegrationToolModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
