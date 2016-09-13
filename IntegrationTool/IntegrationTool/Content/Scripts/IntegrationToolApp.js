@@ -75,6 +75,9 @@ var configFunction = function ($routeProvider) {
         .when('/Integration/manual', {
             templateUrl: '/Integration/manual',
             controller: 'IntegrationManualController'
+        })
+        .when('/Integration/automatic', {
+            templateUrl: '/Integration/automatic'
         });
 }
 configFunction.$inject = ['$routeProvider'];

@@ -122,11 +122,11 @@
                                 </div>
                             </div>
                             <div ng-repeat="param in params" class="form-group">
-                                <label for="param">{{param}}</label>
-                                <input ng-model="" type="text" class="form-control" id="" name="" placeholder="Enter param" ng-required="true">
-                                <div ng-if="">
-                                    <div ng-messages="" role="alert">
-                                        <div class="help-block error-text" ng-message="required">* Param is required.</div>
+                                <label for="param">{{param.nameParam}}</label>
+                                <input ng-model="request[param.nameParam]" type="text" class="form-control" id="{{param.nameParam}}" name="{{param.nameParam}}" placeholder="Enter param" ng-required="true">
+                                <div ng-if="form[param.nameParam].$touched || form.$submitted">
+                                    <div ng-messages="form[param.nameParam].$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* {{param.nameParam}} is required.</div>
                                     </div>
                                 </div>
                             </div>

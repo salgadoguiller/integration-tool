@@ -6,9 +6,9 @@
     $scope.queries = [];
     $scope.webServices = [];
     $scope.operationsWebServices = [];
-    $scope.params = [];
     $scope.databases = [];
     $scope.flatFiles = [];
+    $scope.params = [];
     $scope.query;
     $scope.sendRequest = sendRequest;
     $scope.getQueries = getQueries;
@@ -134,7 +134,13 @@
     }
 
     function getParams() {
-        $scope.params = $scope.query.Query1.match(/\[\[.*\]\]/g);
+        params = $scope.query.Query1.match(/\[\[.*\]\]/g);
+        requestParams = [];
+        for (index = 0; index < params.length; index++) {
+            property = 'param' + index;
+            requestParams[index] = { nameParam: params[index], valueParam: '' }
+        }
+        $scope.params = requestParams;
     }
 
     function getDatabases() {
@@ -197,7 +203,9 @@
 
         var data = $.param(req);
 
-        $http.put('Integration/execute', data, config).success(function (resp) {
+        console.log(data);
+
+        $http.put('Integration/saveIntegration', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

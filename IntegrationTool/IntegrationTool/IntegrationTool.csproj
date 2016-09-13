@@ -156,7 +156,6 @@
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\WriteFileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,6 +180,7 @@
     <Compile Include="Models\Integration.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegrationConfiguration.cs" />
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -270,13 +270,16 @@
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
-    <Content Include="Content\Scripts\Plugins\3dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
-    <Content Include="Content\Scripts\Plugins\2jquery.dataTables.min.js" />
+    <Content Include="Content\Scripts\Plugins\3jquery.dataTables.min.js" />
+    <Content Include="Content\Scripts\Plugins\6fullcalendar.min.js" />
+    <Content Include="Content\Scripts\Plugins\2jquery-ui.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
-    <Content Include="Content\Scripts\Plugins\sweetalert.min.js" />
+    <Content Include="Content\Scripts\Plugins\5moment.min.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
-    <Content Include="Content\Stylesheets\Styles\Style.css" />
+    <Content Include="Content\Stylesheets\Styles\fullcalendar.min.css" />
+    <Content Include="Content\Stylesheets\Styles\style.css" />
     <Content Include="Content\Template\css\template.css" />
     <Content Include="Content\Template\css\template.min.css" />
     <Content Include="Content\Template\css\skins\skin-black-light.css" />
@@ -314,12 +317,7 @@
     <Content Include="Content\Template\js\pages\dashboard2.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Scripts\Plugins\fastclick\fastclick.js" />
-    <Content Include="Content\Scripts\Plugins\fastclick\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\1jquery-2.2.3.min.js" />
-    <Content Include="Content\Scripts\Plugins\jQuery\jquery-2.2.3.min.js" />
-    <Content Include="Content\Scripts\Plugins\slimScroll\jquery.slimscroll.js" />
-    <Content Include="Content\Scripts\Plugins\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -425,6 +423,9 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Integration\automatic.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

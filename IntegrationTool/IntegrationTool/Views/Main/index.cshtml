@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Integration Tool</title>
-        <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
         <link rel="icon" type="image/png" href="../Content/Images/favicon.png" />
@@ -15,10 +14,10 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Sweet Alert -->
-        <link rel="stylesheet" href="//rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
+        <link rel="stylesheet" href="https://rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
 
-        @Styles.Render("~/Content/CSSTemplate")
         @Styles.Render("~/Content/Styles")
+        @Styles.Render("~/Content/CSSTemplate")
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -140,7 +139,7 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a><i class="fa fa-circle-o"></i>Automatic</a></li>
+                    <li><a href="/#/Integration/automatic"><i class="fa fa-circle-o"></i>Automatic</a></li>
                     <li><a href="/#/Integration/manual"><i class="fa fa-circle-o"></i>Manual</a></li>
                   </ul>
                 </li>
@@ -212,7 +211,6 @@
         <!-- ./wrapper -->
 
         @Scripts.Render("~/Content/Plugins")
-
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
