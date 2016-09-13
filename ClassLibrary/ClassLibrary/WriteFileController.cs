@@ -9,9 +9,9 @@ namespace ClassLibrary
 {
     public class WriteFileController
     {
-        public void writeFileinFlatFile(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
+        public string writeFileinFlatFile(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
         {
-            string path = locationToSave + @"\" + nameIntegration + "-" + returnDatetimeNow() + ".txt";
+            string path = locationToSave + "/" + nameIntegration + "-" + returnDatetimeNow() + ".txt";
             FileStream fs = new FileStream(path, FileMode.Append);
             using (StreamWriter file = new StreamWriter(fs, Encoding.UTF8))
             {
@@ -19,9 +19,11 @@ namespace ClassLibrary
                 //file.WriteLine();
                 file.Write(resultQuery);
             }
+
+            return path;
         }
 
-        public void writeIntegrationinExcel(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
+        public string writeIntegrationinExcel(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
         {
             StringBuilder csvContent = new StringBuilder();
             //string header = headers.Replace("|", ",");
@@ -31,6 +33,8 @@ namespace ClassLibrary
             csvContent.AppendLine(query);
             string path = locationToSave + @"\" + nameIntegration + returnDatetimeNow() + ".csv";
             File.AppendAllText(path, csvContent.ToString());
+
+            return path;
         }
 
         private string returnDatetimeNow()

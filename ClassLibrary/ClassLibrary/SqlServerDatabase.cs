@@ -46,16 +46,10 @@ namespace ClassLibrary
         }
 
         public string executeQuery(string query)
-        {
-            
-            //openConnection();
-
+        {                  
             SqlCommand queryCommand = new SqlCommand(query, con);
             SqlDataReader reader = queryCommand.ExecuteReader();
             
-            closeConnection();
-        
-
             if (reader.Read())
                 return reader.GetString(0);
             else

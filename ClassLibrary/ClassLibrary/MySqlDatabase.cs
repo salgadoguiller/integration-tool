@@ -63,7 +63,7 @@ namespace ClassLibrary
 
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
-            openConnection();
+            //openConnection();
             command.ExecuteNonQuery();
 
             MySqlDataReader returnQuery = command.ExecuteReader();
@@ -71,10 +71,10 @@ namespace ClassLibrary
             while (returnQuery.Read())
             {
                 int id = returnQuery.GetInt32(0);
-                responseQuery += id + "-";
+                responseQuery += id + "\n";
             }
 
-            closeConnection();
+            //closeConnection();
             return responseQuery;
         }  
     }
