@@ -220,5 +220,29 @@ namespace IntegrationTool.Controllers
 
             response(resp);
         }
+
+        [HttpGet]
+        public void getIntegrationsShedule()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Integration> integrations = integrationConfigurationModel.getIntegrationShedule();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\""+e.Message+"\"}";
+                //resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Shedule. Please try again.\"}";
+            }
+
+            response(resp);
+        }
     }
 }
