@@ -176,6 +176,8 @@
             property = 'param' + index;
             requestParams[index] = { nameParam: params[index], valueParam: '' }
         }
+
+       
         $scope.params = requestParams;
     }
 

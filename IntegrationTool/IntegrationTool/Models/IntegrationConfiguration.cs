@@ -64,5 +64,11 @@ namespace IntegrationTool.Models
             List<Recurrence> recurrences = integrationConfigurationDB.Recurrences.ToList();
             return recurrences;
         }
+
+        public List<Integration> getIntegrationShedule()
+        {
+            List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId== 2).ToList();
+            return integrations;
+        }
     }
 }
