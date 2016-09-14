@@ -101,10 +101,23 @@ namespace IntegrationTool.Models
             return recurrences;
         }
 
-        public List<Integration> getIntegrationShedule()
+        public List<IntegrationSchedule> getIntegrationShedule()
         {
-            List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId== 2).ToList();
-            return integrations;
+            List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 2).ToList();
+
+            List<IntegrationSchedule> integrationsSchedule = new List<IntegrationSchedule>();
+
+            foreach(Integration i in integrations)
+            {
+                IntegrationSchedule integrationSchedule = new IntegrationSchedule();
+                integrationSchedule.IntegrationId = i.IntegrationId;
+                integrationSchedule.Name = i.IntegrationsType.Name;
+                integrationSchedule.NextExecutionDate = Convert.ToDateTime(i.Calendars.ElementAt(0).NextExecutionDate);
+
+                integrationsSchedule.Add(integrationSchedule);
+            }
+
+            return integrationsSchedule;
         }
     }
 }

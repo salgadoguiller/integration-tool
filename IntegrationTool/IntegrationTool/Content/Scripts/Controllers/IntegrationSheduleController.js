@@ -18,9 +18,9 @@
         var data = $.param({});
 
         $http.get('Integration/getIntegrationsShedule', data, config).success(function (resp) {
-            alert("ghdfgh");
             if (resp.type !== 'danger') {
-                buildArray(resp);               
+                console.log(resp);
+                // buildArray(resp);               
             }
             else {
                 console.log("sfsdfas");

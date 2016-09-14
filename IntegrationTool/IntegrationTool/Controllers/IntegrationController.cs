@@ -228,7 +228,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                List<Integration> integrations = integrationConfigurationModel.getIntegrationShedule();
+                List<IntegrationSchedule> integrations = integrationConfigurationModel.getIntegrationShedule();
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
                     new JsonSerializerSettings()
@@ -238,8 +238,8 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception e)
             {
-                resp = "{\"type\":\"danger\", \"message\":\""+e.Message+"\"}";
-                //resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Shedule. Please try again.\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\""+e.Message+"\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Shedule. Please try again.\"}";
             }
 
             response(resp);
