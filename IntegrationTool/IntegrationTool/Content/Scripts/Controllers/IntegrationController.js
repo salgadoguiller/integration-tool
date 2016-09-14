@@ -37,9 +37,9 @@
             }
         }
 
-        var data = $.param(req);
+        console.log(req);
 
-        return;
+        var data = $.param(req);
 
         $http.put('Integration/saveIntegration', data, config).success(function (resp) {
             $scope.message = resp.message;
@@ -48,6 +48,7 @@
             $scope.queries = [];
             $scope.recurrences = [];
             $scope.params = [];
+            $scope.query = null;
             form.$setPristine();
             form.$setUntouched();
         }).error(function (resp) {

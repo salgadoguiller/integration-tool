@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 using Newtonsoft.Json;
 using IntegrationTool.Models;
 using ClassLibrary;
@@ -53,7 +54,6 @@ namespace IntegrationTool.Controllers
             string resp = "";
             try
             {
-                throw new Exception(Request.Form["ExecutionEndDate"]);
                 List<QueryParameter> queryParameters = new List<QueryParameter>();
                 Regex regex = new Regex(@"\[\[.*\]\]");
 
@@ -72,21 +72,48 @@ namespace IntegrationTool.Controllers
 
                 connectModel();
 
-                integrationConfigurationModel.saveIntegration(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                if (Request.Form["IntegrationCategoryId"] == "1")
+                {
+                    integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
                                                                 Convert.ToInt32(Request.Form["FlatFileParameterId"]),
                                                                 Convert.ToInt32(Request.Form["IntegrationTypeId"]),
                                                                 Convert.ToInt32(Request.Form["QueryId"]),
+                                                                Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
                                                                 queryParameters);
+
+                    // Execute Integration
+                }
+                else
+                {
+                    string format = "ddd MMM dd yyyy HH:mm:ss 'GMT'K '(Central America Standard Time)'";
+
+                    DateTime executionStartDate = DateTime.ParseExact(Request.Form["ExecutionStartDate"], format, CultureInfo.CurrentCulture);
+                    DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
+
+                    integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                                Convert.ToInt32(Request.Form["WebServiceId"]),
+                                                                Convert.ToInt32(Request.Form["DatabaseParametersId"]),
+                                                                /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
+                                                                Convert.ToInt32(Request.Form["FlatFileParameterId"]),
+                                                                Convert.ToInt32(Request.Form["IntegrationTypeId"]),
+                                                                Convert.ToInt32(Request.Form["QueryId"]),
+                                                                Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
+                                                                queryParameters,
+                                                                executionStartDate,
+                                                                executionEndDate,
+                                                                Request.Form["Emails"],
+                                                                Convert.ToInt32(Request.Form["RecurrenceId"]));
+                }
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration Successful Stored.\"}";
             }
             catch (Exception ex)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
             }
 
 

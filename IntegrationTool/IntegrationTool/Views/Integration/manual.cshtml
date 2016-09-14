@@ -144,7 +144,7 @@
                                 </div>
                             </div>
 
-                            <div ng-show="recurrences.length != 0" class="form-group">
+                            <div ng-if="recurrences.length != 0" class="form-group">
                                 <label>Execution Start Date</label>
                                 <input ng-model="request.ExecutionStartDate" type="datetime-local" class="form-control" id="ExecutionStartDate" name="ExecutionStartDate" ng-required="true">
                                 <div ng-if="form.ExecutionStartDate.$touched || form.$submitted">
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
 
-                            <div ng-show="recurrences.length != 0" class="form-group">
+                            <div ng-if="recurrences.length != 0" class="form-group">
                                 <label>Execution End Date</label>
                                 <input ng-model="request.ExecutionEndDate" type="datetime-local" class="form-control" id="ExecutionEndDate" name="ExecutionEndDate" ng-required="true">
                                 <div ng-if="form.ExecutionEndDate.$touched || form.$submitted">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
 
-                            <div ng-show="recurrences.length != 0" class="form-group">
+                            <div ng-if="recurrences.length != 0" class="form-group">
                                 <label>Recurrence</label>
                                 <select class="form-control select" name="RecurrenceId" style="width: 100%;" ng-model="request.RecurrenceId" ng-required="true">
                                     <option selected disabled value="">Select</option>
@@ -173,6 +173,17 @@
                                 <div ng-if="form.RecurrenceId.$touched || form.$submitted">
                                     <div ng-messages="form.RecurrenceId.$error" role="alert">
                                         <div class="help-block error-text" ng-message="required">* Recurrence is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-if="recurrences.length != 0"class="form-group">
+                                <label>Emails</label>
+                                <input ng-model="request.Emails" type="text" class="form-control" id="Emails" name="Emails" placeholder="Enter Emails" ng-required="true">
+                                <div class="help-block">* Enter emails separated by <strong>|</strong></div>
+                                <div ng-if="form.Emails.$touched || form.$submitted">
+                                    <div ng-messages="form.Emails.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Emails are required.</div>
                                     </div>
                                 </div>
                             </div>
