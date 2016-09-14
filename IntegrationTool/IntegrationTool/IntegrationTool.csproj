@@ -180,6 +180,9 @@
     <Compile Include="Models\Integration.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegrationCategory.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IntegrationConfiguration.cs" />
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
@@ -254,7 +257,7 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
-    <Content Include="Content\Scripts\Controllers\IntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\IntegrationController.js" />
     <Content Include="Content\Scripts\Controllers\FormActiveDirectoryController.js" />
     <Content Include="Content\Scripts\Controllers\FormServerSMTPController.js" />
     <Content Include="Content\Scripts\Controllers\FormDataBaseController.js" />

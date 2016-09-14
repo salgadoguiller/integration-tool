@@ -31,6 +31,7 @@ namespace IntegrationTool.Models
         public DbSet<Engine> Engines { get; set; }
         public DbSet<FlatFile> FlatFiles { get; set; }
         public DbSet<FlatFilesParameter> FlatFilesParameters { get; set; }
+        public DbSet<IntegrationCategory> IntegrationCategories { get; set; }
         public DbSet<IntegrationLog> IntegrationLogs { get; set; }
         public DbSet<Integration> Integrations { get; set; }
         public DbSet<IntegrationsType> IntegrationsTypes { get; set; }

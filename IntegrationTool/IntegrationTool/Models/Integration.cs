@@ -27,20 +27,20 @@ namespace IntegrationTool.Models
         public int UserId { get; set; }
         public int WebServiceId { get; set; }
         public int DatabaseParametersId { get; set; }
-        public int ServerSMTPParametersId { get; set; }
         public int FlatFileId { get; set; }
         public int FlatFileParameterId { get; set; }
         public int IntegrationTypeId { get; set; }
         public int QueryId { get; set; }
+        public int IntegrationCategoryId { get; set; }
     
         public virtual ICollection<Calendar> Calendars { get; set; }
         public virtual DatabaseParameter DatabaseParameter { get; set; }
         public virtual FlatFile FlatFile { get; set; }
         public virtual FlatFilesParameter FlatFilesParameter { get; set; }
+        public virtual IntegrationCategory IntegrationCategory { get; set; }
         public virtual ICollection<IntegrationLog> IntegrationLogs { get; set; }
         public virtual IntegrationsType IntegrationsType { get; set; }
         public virtual Query Query { get; set; }
-        public virtual ServerSMTPParameter ServerSMTPParameter { get; set; }
         public virtual User User { get; set; }
         public virtual WebService WebService { get; set; }
         public virtual ICollection<QueryParameter> QueryParameters { get; set; }

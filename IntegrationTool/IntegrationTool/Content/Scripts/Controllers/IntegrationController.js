@@ -1,4 +1,4 @@
-﻿var IntegrationManualController = function ($scope, $http) {
+﻿var IntegrationController = function ($scope, $http) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -8,17 +8,53 @@
     $scope.operationsWebServices = [];
     $scope.databases = [];
     $scope.flatFiles = [];
+    $scope.integrationCategories = [];
+    $scope.recurrences = [];
     $scope.params = [];
     $scope.query;
     $scope.sendRequest = sendRequest;
     $scope.getQueries = getQueries;
-    $scope.getQuery = getQuery; 
+    $scope.getQuery = getQuery;
+    $scope.getRecurrences = getRecurrences;
 
     getIntegrationsType();
     getWebServices();
     getOperationsWebServices();
     getDatabases();
     getFlatFiles();
+    getIntegrationCategories();
+
+    function sendRequest(req, form) {
+        if (!form.$valid) {
+            $scope.message = "Error: Invalid form, please try again.";
+            $scope.typeMessage = "danger";
+            return false;
+        }
+
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param(req);
+
+        return;
+
+        $http.put('Integration/saveIntegration', data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            $scope.request = {};
+            $scope.queries = [];
+            $scope.recurrences = [];
+            $scope.params = [];
+            form.$setPristine();
+            form.$setUntouched();
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+    }
 
     function getIntegrationsType() {
         var config = {
@@ -51,7 +87,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getQueriesByIntegrationType?id=' + integrationTypeId, data, config).success(function (resp) {
+        $http.get('Integration/getQueriesByIntegrationType?id=' + integrationTypeId, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.queries = resp;
                 $scope.query = null;
@@ -97,7 +133,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getOperationsWebServices', data, config).success(function (resp) {
+        $http.get('Integration/getOperationsWebServices', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.operationsWebServices = resp;
             } else {
@@ -187,12 +223,32 @@
         });
     }
 
-    function sendRequest(req, form) {
-        console.log(req);
-        if (!form.$valid) {
-            $scope.message = "Error: Invalid form, please try again.";
+    function getIntegrationCategories() {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Integration/getIntegrationCategories', data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                $scope.integrationCategories = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
-            return false;
+        });
+    }
+
+    function getRecurrences(integrationCategory) {
+        if (integrationCategory == 1) {
+            $scope.recurrences = [];
+            return;
         }
 
         var config = {
@@ -201,20 +257,20 @@
             }
         }
 
-        var data = $.param(req);
+        var data = $.param({});
 
-        console.log(data);
-
-        $http.put('Integration/saveIntegration', data, config).success(function (resp) {
-            $scope.message = resp.message;
-            $scope.typeMessage = resp.type;
-            $scope.request = {};
-            form.$setPristine();
-            form.$setUntouched();
+        $http.get('Integration/getRecurrences', data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                $scope.recurrences = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
         });
     }
 }
-IntegrationManualController.$inject = ['$scope', '$http'];
+
+IntegrationController.$inject = ['$scope', '$http'];

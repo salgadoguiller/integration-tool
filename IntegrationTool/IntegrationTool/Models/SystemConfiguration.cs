@@ -109,18 +109,6 @@ namespace IntegrationTool.Models
             return webService;
         }
 
-        public List<Query> getQueriesByIntegrationType(int id)
-        {
-            List<Query> queries = systemConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
-            return queries;
-        }
-
-        public List<OperationsWebService> getOperationsWebServices()
-        {
-            List<OperationsWebService> operations = systemConfigurationDB.OperationsWebServices.ToList();
-            return operations;
-        }
-
         // ================================================================================================================
         // Almacenar parametros del sistema.
         // ================================================================================================================

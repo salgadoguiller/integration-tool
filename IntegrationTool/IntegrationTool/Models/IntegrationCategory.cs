@@ -12,17 +12,16 @@ namespace IntegrationTool.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Calendar
+    public partial class IntegrationCategory
     {
-        public int CalendarId { get; set; }
-        public System.DateTime ExecutionStartDate { get; set; }
-        public Nullable<System.DateTime> NextExecutionDate { get; set; }
-        public string Emails { get; set; }
-        public int IntegrationId { get; set; }
-        public int RecurrenceId { get; set; }
-        public System.DateTime ExecutionEndDate { get; set; }
+        public IntegrationCategory()
+        {
+            this.Integrations = new HashSet<Integration>();
+        }
     
-        public virtual Integration Integration { get; set; }
-        public virtual Recurrence Recurrence { get; set; }
+        public int IntegrationCategoryId { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<Integration> Integrations { get; set; }
     }
 }

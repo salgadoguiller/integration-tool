@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap']);
 
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
@@ -14,7 +14,7 @@ IntegrationToolApp.controller('ListQueriesController', ListQueriesController);
 IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPController);
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
 
-IntegrationToolApp.controller('IntegrationManualController', IntegrationManualController);
+IntegrationToolApp.controller('IntegrationController', IntegrationController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -74,7 +74,7 @@ var configFunction = function ($routeProvider) {
         })
         .when('/Integration/manual', {
             templateUrl: '/Integration/manual',
-            controller: 'IntegrationManualController'
+            controller: 'IntegrationController'
         })
         .when('/Integration/automatic', {
             templateUrl: '/Integration/automatic'

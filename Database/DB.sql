@@ -165,6 +165,16 @@ CREATE TABLE FlatFiles (
 
 
 -- -----------------------------------------------------
+-- Table IntegrationCategories
+-- -----------------------------------------------------
+CREATE TABLE IntegrationCategories (
+  IntegrationCategoryId INT NOT NULL IDENTITY(1,1),
+  Name VARCHAR(50) NOT NULL,
+  CONSTRAINT PK_IntegrationCategory
+    PRIMARY KEY (IntegrationCategoryId));
+
+
+-- -----------------------------------------------------
 -- Table Integrations
 -- -----------------------------------------------------
 CREATE TABLE Integrations (
@@ -173,10 +183,10 @@ CREATE TABLE Integrations (
   UserId INT NOT NULL,
   WebServiceId INT NOT NULL,
   DatabaseParametersId INT NOT NULL,
-  ServerSMTPParametersId INT NOT NULL,
   FlatFileId INT NOT NULL,
   FlatFileParameterId INT NOT NULL,
   IntegrationTypeId INT NOT NULL,
+  IntegrationCategoryId INT NOT NULL,
   QueryId INT NOT NULL,
   CONSTRAINT PK_Integration
     PRIMARY KEY (IntegrationId),
@@ -195,11 +205,6 @@ CREATE TABLE Integrations (
     REFERENCES DatabaseParameters (DatabaseParametersId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT FK_IntegrationsServerSMTPParameters_ServerSMTPParametersId
-    FOREIGN KEY (ServerSMTPParametersId)
-    REFERENCES ServerSMTPParameters (ServerSMTPParametersId)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT FK_IntegrationsFlatFiles_FlatFileId
     FOREIGN KEY (FlatFileId)
     REFERENCES FlatFiles (FlatFileId)
@@ -213,6 +218,11 @@ CREATE TABLE Integrations (
   CONSTRAINT FK_IntegrationsIntegrationsType_IntegrationTypeId
     FOREIGN KEY (IntegrationTypeId)
     REFERENCES IntegrationsType (IntegrationTypeId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_IntegrationsIntegrationCategories_IntegrationCategoryId
+    FOREIGN KEY (IntegrationCategoryId)
+    REFERENCES IntegrationCategories (IntegrationCategoryId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT FK_IntegrationsQueries_QueryId
@@ -305,6 +315,7 @@ CREATE TABLE Calendars (
   CalendarId INT NOT NULL IDENTITY(1,1),
   ExecutionStartDate DATETIME NOT NULL,
   NextExecutionDate DATETIME NULL,
+  ExecutionEndDate DATETIME NOT NULL,
   Emails VARCHAR(MAX),
   IntegrationId INT NOT NULL,
   RecurrenceId INT NOT NULL,

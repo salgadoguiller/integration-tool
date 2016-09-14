@@ -29,18 +29,31 @@ namespace IntegrationTool.Controllers
             Response.End();
         }
 
+        // ================================================================================================================
+        // Retorna las vitas del sistema.
+        // ================================================================================================================
         [HttpGet]
         public ActionResult manual()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult automatic()
+        {
+            return View();
+        }
+
+        // ================================================================================================================
+        // Almacena en base de datos integraciones automaticas y manuales.
+        // ================================================================================================================
         [HttpPut]
         public void saveIntegration()
         {
             string resp = "";
             try
             {
+                throw new Exception(Request.Form["ExecutionEndDate"]);
                 List<QueryParameter> queryParameters = new List<QueryParameter>();
                 Regex regex = new Regex(@"\[\[.*\]\]");
 
@@ -62,7 +75,6 @@ namespace IntegrationTool.Controllers
                 integrationConfigurationModel.saveIntegration(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
-                                                                /*Convert.ToInt32(Request.Form["ServerSMTPParametersId"])*/ 1,
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
                                                                 Convert.ToInt32(Request.Form["FlatFileParameterId"]),
                                                                 Convert.ToInt32(Request.Form["IntegrationTypeId"]),
@@ -73,19 +85,113 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-                // resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
             }
 
 
             response(resp);
         }
 
+        // ================================================================================================================
+        // Obtiene y retorna datos necesarios para realizar una integración.
+        // ================================================================================================================
         [HttpGet]
-        public ActionResult automatic()
+        public void getQueriesByIntegrationType(int id)
         {
-            return View();
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Query> queries = integrationConfigurationModel.getQueriesByIntegrationType(id);
+
+                foreach (Query query in queries)
+                {
+                    query.Query1 = encryptor.decryptData(query.Query1);
+                    query.Description = encryptor.decryptData(query.Description);
+                }
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the queries. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getOperationsWebServices()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<OperationsWebService> operations = integrationConfigurationModel.getOperationsWebServices();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(operations,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the operations web services. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getIntegrationCategories()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<IntegrationCategory> integrationCategories = integrationConfigurationModel.getIntegrationCategories();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationCategories,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration categories. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getRecurrences()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Recurrence> recurrences = integrationConfigurationModel.getRecurrences();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(recurrences,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the recurrences. Please try again.\"}";
+            }
+
+            response(resp);
         }
     }
 }

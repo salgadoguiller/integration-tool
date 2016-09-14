@@ -792,58 +792,6 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpGet]
-        public void getQueriesByIntegrationType(int id)
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                List<Query> queries = systemConfigurationModel.getQueriesByIntegrationType(id);
-
-                foreach (Query query in queries)
-                {
-                    query.Query1 = encryptor.decryptData(query.Query1);
-                    query.Description = encryptor.decryptData(query.Description);
-                }
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the queries. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
-        [HttpGet]
-        public void getOperationsWebServices()
-        {
-            string resp = "";
-            try
-            {
-                connectModel();
-                List<OperationsWebService> operations = systemConfigurationModel.getOperationsWebServices();
-
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(operations,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the operations web services. Please try again.\"}";
-            }
-
-            response(resp);
-        }
-
         // ================================================================================================================
         // Eliminar parametros del sistema
         // ================================================================================================================

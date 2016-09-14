@@ -16,9 +16,9 @@ namespace IntegrationTool.Models
 
 
         // ================================================================================================================
-        // Almacenar integracion en el sistema.
+        // Almacenar integración en el sistema.
         // ================================================================================================================
-        public void saveIntegration(int userId,  int webServiceId, int databaseParametersId, int serverSMTPParametersId, int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId, List<QueryParameter> queryParameters) 
+        public void saveIntegration(int userId,  int webServiceId, int databaseParametersId, int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId, List<QueryParameter> queryParameters) 
         {
             Integration integration = new Integration();
 
@@ -26,7 +26,6 @@ namespace IntegrationTool.Models
             integration.UserId = userId;
             integration.WebServiceId = webServiceId;
             integration.DatabaseParametersId =  databaseParametersId;
-            integration.ServerSMTPParametersId = serverSMTPParametersId;
             integration.FlatFileId = flatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
             integration.IntegrationTypeId = integrationTypeId;
@@ -36,6 +35,34 @@ namespace IntegrationTool.Models
 
             integrationConfigurationDB.Integrations.Add(integration);
             integrationConfigurationDB.SaveChanges();
+        }
+
+
+        // ================================================================================================================
+        // Obtener información para realizar una integración
+        // ================================================================================================================
+        public List<IntegrationCategory> getIntegrationCategories()
+        {
+            List<IntegrationCategory> integrationCategories = integrationConfigurationDB.IntegrationCategories.ToList();
+            return integrationCategories;
+        }
+
+        public List<Query> getQueriesByIntegrationType(int id)
+        {
+            List<Query> queries = integrationConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
+            return queries;
+        }
+
+        public List<OperationsWebService> getOperationsWebServices()
+        {
+            List<OperationsWebService> operations = integrationConfigurationDB.OperationsWebServices.ToList();
+            return operations;
+        }
+
+        public List<Recurrence> getRecurrences()
+        {
+            List<Recurrence> recurrences = integrationConfigurationDB.Recurrences.ToList();
+            return recurrences;
         }
     }
 }

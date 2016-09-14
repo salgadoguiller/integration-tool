@@ -43,6 +43,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Integration Category</label>
+                                <select class="form-control select" name="IntegrationCategoryId" style="width: 100%;" ng-model="request.IntegrationCategoryId" ng-change="getRecurrences(request.IntegrationCategoryId)" ng-required="true">
+                                    <option selected disabled value="">Select</option>
+                                    <option ng-repeat="integrationCategory in integrationCategories" value="{{integrationCategory.IntegrationCategoryId}}">{{integrationCategory.Name}}</option>
+                                </select>
+                                <div ng-if="form.IntegrationCategoryId.$touched || form.$submitted">
+                                    <div ng-messages="form.IntegrationCategoryId.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Integration category is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Web Service</label>
                                 <select class="form-control select" name="WebServiceId" style="width: 100%;" ng-model="request.WebServiceId" ng-required="true">
                                     <option selected disabled value="">Select</option>
@@ -89,7 +102,7 @@
                                 </select>
                                 <div ng-if="form.FlatFileParameterId.$touched || form.$submitted">
                                     <div ng-messages="form.FlatFileParameterId.$error" role="alert">
-                                        <div class="help-block error-text" ng-message="required">* Flat File is required.</div>
+                                        <div class="help-block error-text" ng-message="required">* Flat file is required.</div>
                                     </div>
                                 </div>
                             </div>
@@ -127,6 +140,39 @@
                                 <div ng-if="form[param.nameParam].$touched || form.$submitted">
                                     <div ng-messages="form[param.nameParam].$error" role="alert">
                                         <div class="help-block error-text" ng-message="required">* {{param.nameParam}} is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-show="recurrences.length != 0" class="form-group">
+                                <label>Execution Start Date</label>
+                                <input ng-model="request.ExecutionStartDate" type="datetime-local" class="form-control" id="ExecutionStartDate" name="ExecutionStartDate" ng-required="true">
+                                <div ng-if="form.ExecutionStartDate.$touched || form.$submitted">
+                                    <div ng-messages="form.ExecutionStartDate.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Execution start date is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-show="recurrences.length != 0" class="form-group">
+                                <label>Execution End Date</label>
+                                <input ng-model="request.ExecutionEndDate" type="datetime-local" class="form-control" id="ExecutionEndDate" name="ExecutionEndDate" ng-required="true">
+                                <div ng-if="form.ExecutionEndDate.$touched || form.$submitted">
+                                    <div ng-messages="form.ExecutionEndDate.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Execution end date is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-show="recurrences.length != 0" class="form-group">
+                                <label>Recurrence</label>
+                                <select class="form-control select" name="RecurrenceId" style="width: 100%;" ng-model="request.RecurrenceId" ng-required="true">
+                                    <option selected disabled value="">Select</option>
+                                    <option ng-repeat="recurrence in recurrences" value="{{recurrence.RecurrenceId}}">{{recurrence.NameRecurrence}}</option>
+                                </select>
+                                <div ng-if="form.RecurrenceId.$touched || form.$submitted">
+                                    <div ng-messages="form.RecurrenceId.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Recurrence is required.</div>
                                     </div>
                                 </div>
                             </div>

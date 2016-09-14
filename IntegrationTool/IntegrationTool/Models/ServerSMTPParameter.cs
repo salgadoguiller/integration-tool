@@ -14,17 +14,10 @@ namespace IntegrationTool.Models
     
     public partial class ServerSMTPParameter
     {
-        public ServerSMTPParameter()
-        {
-            this.Integrations = new HashSet<Integration>();
-        }
-    
         public int ServerSMTPParametersId { get; set; }
         public string NameServerSMTP { get; set; }
         public string Port { get; set; }
         public string UsernameSMTP { get; set; }
         public string PasswordSMTP { get; set; }
-    
-        public virtual ICollection<Integration> Integrations { get; set; }
     }
 }
