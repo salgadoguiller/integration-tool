@@ -1,4 +1,4 @@
-﻿var IntegrationSheduleController = function ($scope, $http, $location) {
+﻿var IntegrationsSheduleController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationShedule = [];
@@ -20,11 +20,9 @@
         $http.get('Integration/getIntegrationsShedule', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 console.log(resp);
-                // buildArray(resp);               
+                buildCalendar(resp);               
             }
             else {
-                console.log("sfsdfas");
-                console.log(resp);
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
             }
@@ -34,7 +32,7 @@
         });
     }
 
-    function buildArray(resp)
+    function buildCalendar(resp)
     {              
         for (index = 0; index < resp.length; index++)
         {
@@ -52,10 +50,10 @@
                 borderColor: "#f56954" //red                 
             }
         }
-        initScriptLoadCallendar($scope.listIntegrationShedule);
+        loadCallendar($scope.listIntegrationShedule);
     }
 
-    function initScriptLoadCallendar(integrationShedule) {
+    function loadCallendar(integrationShedule) {
         /* initialize the external events
          -----------------------------------------------------------------*/
         function ini_events(ele) {
@@ -91,4 +89,4 @@
         });
     }
 }
-IntegrationSheduleController.$inject = ['$scope', '$http', '$location'];
+IntegrationsSheduleController.$inject = ['$scope', '$http', '$location'];

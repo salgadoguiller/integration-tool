@@ -19,7 +19,7 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         public void saveIntegrationManual(int userId, string curlParameters,  int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, List<QueryParameter> queryParameters)
+                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters)
         {
             Integration integration = new Integration();
 
@@ -27,6 +27,7 @@ namespace IntegrationTool.Models
             integration.UserId = userId;
             integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
+            integration.OperationWebServiceId = operationWebServiceId;
             integration.DatabaseParametersId = databaseParametersId;
             integration.FlatFileId = flatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
@@ -42,7 +43,7 @@ namespace IntegrationTool.Models
 
         public void saveIntegrationSchedule(int userId , string curlParameters, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, List<QueryParameter> queryParameters,
+                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
                                             DateTime executionStartDate, DateTime executionEndDate, string emails,
                                             int recurenceId)
         {
@@ -52,6 +53,7 @@ namespace IntegrationTool.Models
             integration.UserId = userId;
             integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
+            integration.OperationWebServiceId = operationWebServiceId;
             integration.DatabaseParametersId = databaseParametersId;
             integration.FlatFileId = flatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
@@ -80,49 +82,32 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         public List<IntegrationCategory> getIntegrationCategories()
         {
-            List<IntegrationCategory> integrationCategories = new List<IntegrationCategory>();
-            integrationCategories = integrationConfigurationDB.IntegrationCategories.ToList();
+            List<IntegrationCategory> integrationCategories = integrationConfigurationDB.IntegrationCategories.ToList();
             return integrationCategories;
         }
 
         public List<Query> getQueriesByIntegrationType(int id)
         {
-            List<Query> queries = new List<Query>();
-            queries = integrationConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
+            List<Query> queries = integrationConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
             return queries;
         }
 
         public List<OperationsWebService> getOperationsWebServices()
         {
-            List<OperationsWebService> operations = new List<OperationsWebService>();
-            operations = integrationConfigurationDB.OperationsWebServices.ToList();
+            List<OperationsWebService> operations = integrationConfigurationDB.OperationsWebServices.ToList();
             return operations;
         }
 
         public List<Recurrence> getRecurrences()
         {
-            List<Recurrence> recurrences = new List<Recurrence>();
-            recurrences = integrationConfigurationDB.Recurrences.ToList();
+            List<Recurrence> recurrences = integrationConfigurationDB.Recurrences.ToList();
             return recurrences;
         }
 
-        public List<IntegrationSchedule> getIntegrationShedule()
+        public List<Integration> getIntegrations()
         {
-            List<IntegrationSchedule> integrationsSchedule = new List<IntegrationSchedule>();
             List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 2).ToList();
-
-            integrationsSchedule = new List<IntegrationSchedule>();
-
-            foreach (Integration i in integrations)
-            {
-                IntegrationSchedule integrationSchedule = new IntegrationSchedule();
-                integrationSchedule.IntegrationId = i.IntegrationId;
-                integrationSchedule.Name = i.IntegrationsType.Name;
-                integrationSchedule.NextExecutionDate = Convert.ToDateTime(i.Calendars.ElementAt(0).NextExecutionDate);
-
-                integrationsSchedule.Add(integrationSchedule);
-            }
-            return integrationsSchedule;
+            return integrations;
         }
     }
 }

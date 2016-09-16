@@ -64,6 +64,10 @@
             <End Role="IntegrationsType" EntitySet="IntegrationsType" />
             <End Role="Integrations" EntitySet="Integrations" />
           </AssociationSet>
+          <AssociationSet Name="FK_IntegrationsOperationsWebServices_OperationWebServiceId" Association="IntegrationToolModel.Store.FK_IntegrationsOperationsWebServices_OperationWebServiceId">
+            <End Role="OperationsWebServices" EntitySet="OperationsWebServices" />
+            <End Role="Integrations" EntitySet="Integrations" />
+          </AssociationSet>
           <AssociationSet Name="FK_IntegrationsQueries_QueryId" Association="IntegrationToolModel.Store.FK_IntegrationsQueries_QueryId">
             <End Role="Queries" EntitySet="Queries" />
             <End Role="Integrations" EntitySet="Integrations" />
@@ -186,6 +190,7 @@
           <Property Name="QueryId" Type="int" Nullable="false" />
           <Property Name="IntegrationCategoryId" Type="int" Nullable="false" />
           <Property Name="CurlParameters" Type="varchar" Nullable="false" MaxLength="120" />
+          <Property Name="OperationWebServiceId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="IntegrationsType">
           <Key>
@@ -408,6 +413,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IntegrationsOperationsWebServices_OperationWebServiceId">
+          <End Role="OperationsWebServices" Type="IntegrationToolModel.Store.OperationsWebServices" Multiplicity="1" />
+          <End Role="Integrations" Type="IntegrationToolModel.Store.Integrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationsWebServices">
+              <PropertyRef Name="OperationWebServiceId" />
+            </Principal>
+            <Dependent Role="Integrations">
+              <PropertyRef Name="OperationWebServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IntegrationsQueries_QueryId">
           <End Role="Queries" Type="IntegrationToolModel.Store.Queries" Multiplicity="1" />
           <End Role="Integrations" Type="IntegrationToolModel.Store.Integrations" Multiplicity="*" />
@@ -580,6 +597,10 @@
             <End Role="IntegrationsType" EntitySet="IntegrationsTypes" />
             <End Role="Integrations" EntitySet="Integrations" />
           </AssociationSet>
+          <AssociationSet Name="FK_IntegrationsOperationsWebServices_OperationWebServiceId" Association="IntegrationToolModel.FK_IntegrationsOperationsWebServices_OperationWebServiceId">
+            <End Role="OperationsWebServices" EntitySet="OperationsWebServices" />
+            <End Role="Integrations" EntitySet="Integrations" />
+          </AssociationSet>
           <AssociationSet Name="FK_IntegrationsQueries_QueryId" Association="IntegrationToolModel.FK_IntegrationsQueries_QueryId">
             <End Role="Queries" EntitySet="Queries" />
             <End Role="Integrations" EntitySet="Integrations" />
@@ -711,6 +732,7 @@
           <Property Name="QueryId" Type="Int32" Nullable="false" />
           <Property Name="IntegrationCategoryId" Type="Int32" Nullable="false" />
           <Property Name="CurlParameters" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
+          <Property Name="OperationWebServiceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Calendars" Relationship="IntegrationToolModel.FK_CalendarsIntegrations_IntegrationId" FromRole="Integrations" ToRole="Calendars" />
           <NavigationProperty Name="DatabaseParameter" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="Integrations" ToRole="DatabaseParameters" />
           <NavigationProperty Name="FlatFile" Relationship="IntegrationToolModel.FK_IntegrationsFlatFiles_FlatFileId" FromRole="Integrations" ToRole="FlatFiles" />
@@ -718,6 +740,7 @@
           <NavigationProperty Name="IntegrationCategory" Relationship="IntegrationToolModel.FK_IntegrationsIntegrationCategories_IntegrationCategoryId" FromRole="Integrations" ToRole="IntegrationCategories" />
           <NavigationProperty Name="IntegrationLogs" Relationship="IntegrationToolModel.FK_IntegrationLogsIntegrations_IntegrationId" FromRole="Integrations" ToRole="IntegrationLogs" />
           <NavigationProperty Name="IntegrationsType" Relationship="IntegrationToolModel.FK_IntegrationsIntegrationsType_IntegrationTypeId" FromRole="Integrations" ToRole="IntegrationsType" />
+          <NavigationProperty Name="OperationsWebService" Relationship="IntegrationToolModel.FK_IntegrationsOperationsWebServices_OperationWebServiceId" FromRole="Integrations" ToRole="OperationsWebServices" />
           <NavigationProperty Name="Query" Relationship="IntegrationToolModel.FK_IntegrationsQueries_QueryId" FromRole="Integrations" ToRole="Queries" />
           <NavigationProperty Name="User" Relationship="IntegrationToolModel.FK_IntegrationsUsers_UserId" FromRole="Integrations" ToRole="Users" />
           <NavigationProperty Name="WebService" Relationship="IntegrationToolModel.FK_IntegrationsWebServices_WebServiceId" FromRole="Integrations" ToRole="WebServices" />
@@ -741,6 +764,7 @@
           <Property Name="OperationWebServiceId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsOperationsWebServices_OperationWebServiceId" FromRole="OperationsWebServices" ToRole="Integrations" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -960,6 +984,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IntegrationsOperationsWebServices_OperationWebServiceId">
+          <End Role="OperationsWebServices" Type="IntegrationToolModel.OperationsWebService" Multiplicity="1" />
+          <End Role="Integrations" Type="IntegrationToolModel.Integration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationsWebServices">
+              <PropertyRef Name="OperationWebServiceId" />
+            </Principal>
+            <Dependent Role="Integrations">
+              <PropertyRef Name="OperationWebServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IntegrationsQueries_QueryId">
           <End Role="Queries" Type="IntegrationToolModel.Query" Multiplicity="1" />
           <End Role="Integrations" Type="IntegrationToolModel.Integration" Multiplicity="*" />
@@ -1166,6 +1202,7 @@
                 <ScalarProperty Name="QueryId" ColumnName="QueryId" />
                 <ScalarProperty Name="IntegrationCategoryId" ColumnName="IntegrationCategoryId" />
                 <ScalarProperty Name="CurlParameters" ColumnName="CurlParameters" />
+                <ScalarProperty Name="OperationWebServiceId" ColumnName="OperationWebServiceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

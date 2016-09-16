@@ -572,8 +572,8 @@ namespace IntegrationTool.Controllers
         {
             string resp = "";
             
-            //try
-            //{
+            try
+            {
                 connectModel();
                 List<DatabaseParameter> databases = systemConfigurationModel.getDatabases();
 
@@ -592,12 +592,11 @@ namespace IntegrationTool.Controllers
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
-            /*}
+            }
             catch (Exception ex)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the databases. Please try again.\"}";
-            }*/
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the databases. Please try again.\"}";
+            }
 
             response(resp);
         }

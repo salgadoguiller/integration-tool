@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -33,18 +34,34 @@ namespace IntegrationTool.Models
         public int QueryId { get; set; }
         public int IntegrationCategoryId { get; set; }
         public string CurlParameters { get; set; }
+        public int OperationWebServiceId { get; set; }
+
     
         public virtual ICollection<Calendar> Calendars { get; set; }
+        [JsonIgnore]
         public virtual DatabaseParameter DatabaseParameter { get; set; }
+        [JsonIgnore]
         public virtual FlatFile FlatFile { get; set; }
+        [JsonIgnore]
         public virtual FlatFilesParameter FlatFilesParameter { get; set; }
+        [JsonIgnore]
         public virtual IntegrationCategory IntegrationCategory { get; set; }
+        [JsonIgnore]
         public virtual ICollection<IntegrationLog> IntegrationLogs { get; set; }
+
         public virtual IntegrationsType IntegrationsType { get; set; }
+
+        [JsonIgnore]
+        public virtual OperationsWebService OperationsWebService { get; set; }
+        [JsonIgnore]
         public virtual Query Query { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
+        [JsonIgnore]
         public virtual WebService WebService { get; set; }
+        [JsonIgnore]
         public virtual ICollection<QueryParameter> QueryParameters { get; set; }
+        [JsonIgnore]
         public virtual ICollection<SystemLog> SystemLogs { get; set; }
     }
 }

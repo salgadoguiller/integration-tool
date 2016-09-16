@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -18,7 +19,8 @@ namespace IntegrationTool.Models
         public string Name { get; set; }
         public string Value { get; set; }
         public int IntegrationId { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Integration Integration { get; set; }
     }
 }

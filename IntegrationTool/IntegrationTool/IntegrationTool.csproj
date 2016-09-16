@@ -188,7 +188,6 @@
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IntegrationSchedule.cs" />
     <Compile Include="Models\IntegrationsType.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -259,7 +258,7 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
-    <Content Include="Content\Scripts\Controllers\IntegrationSheduleController.js" />
+    <Content Include="Content\Scripts\Controllers\IntegrationsSheduleController.js" />
     <Content Include="Content\Scripts\Controllers\IntegrationController.js" />
     <Content Include="Content\Scripts\Controllers\FormActiveDirectoryController.js" />
     <Content Include="Content\Scripts\Controllers\FormServerSMTPController.js" />
@@ -407,10 +406,10 @@
     <Content Include="Views\Configuration\listWebServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Integration\manual.cshtml" />
+    <Content Include="Views\Integration\configuration.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Integration\automatic.cshtml" />
+    <Content Include="Views\Integration\calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">

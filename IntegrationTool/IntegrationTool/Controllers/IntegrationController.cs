@@ -34,13 +34,13 @@ namespace IntegrationTool.Controllers
         // Retorna las vitas del sistema.
         // ================================================================================================================
         [HttpGet]
-        public ActionResult manual()
+        public ActionResult configuration()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult automatic()
+        public ActionResult calendar()
         {
             return View();
         }
@@ -83,6 +83,7 @@ namespace IntegrationTool.Controllers
                                                                 Convert.ToInt32(Request.Form["IntegrationTypeId"]),
                                                                 Convert.ToInt32(Request.Form["QueryId"]),
                                                                 Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
+                                                                Convert.ToInt32(Request.Form["OperationWebServiceId"]),
                                                                 queryParameters);
 
                     // Execute Integration
@@ -103,6 +104,7 @@ namespace IntegrationTool.Controllers
                                                                 Convert.ToInt32(Request.Form["IntegrationTypeId"]),
                                                                 Convert.ToInt32(Request.Form["QueryId"]),
                                                                 Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
+                                                                Convert.ToInt32(Request.Form["OperationWebServiceId"]),
                                                                 queryParameters,
                                                                 executionStartDate,
                                                                 executionEndDate,
@@ -230,7 +232,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                List<IntegrationSchedule> integrations = integrationConfigurationModel.getIntegrationShedule();
+                List<Integration> integrations = integrationConfigurationModel.getIntegrations();
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
                     new JsonSerializerSettings()
@@ -240,7 +242,6 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception e)
             {
-                // resp = "{\"type\":\"danger\", \"message\":\""+e.Message+"\"}";
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Shedule. Please try again.\"}";
             }
 

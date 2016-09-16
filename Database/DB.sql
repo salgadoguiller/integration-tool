@@ -183,6 +183,7 @@ CREATE TABLE Integrations (
   IntegrationDate DATETIME NOT NULL,
   UserId INT NOT NULL,
   WebServiceId INT NOT NULL,
+  OperationWebServiceId INT NOT NULL,
   DatabaseParametersId INT NOT NULL,
   FlatFileId INT NOT NULL,
   FlatFileParameterId INT NOT NULL,
@@ -199,6 +200,11 @@ CREATE TABLE Integrations (
   CONSTRAINT FK_IntegrationsWebServices_WebServiceId
     FOREIGN KEY (WebServiceId)
     REFERENCES WebServices (WebServiceId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_IntegrationsOperationsWebServices_OperationWebServiceId
+    FOREIGN KEY (OperationWebServiceId)
+    REFERENCES OperationsWebServices (OperationWebServiceId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT FK_IntegrationsDatabaseParameters_DatabaseParametersId

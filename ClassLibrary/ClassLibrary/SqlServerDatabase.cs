@@ -49,13 +49,13 @@ namespace ClassLibrary
         {                  
             SqlCommand queryCommand = new SqlCommand(query, con);
             SqlDataReader reader = queryCommand.ExecuteReader();
-            
-            if (reader.Read())
-                return reader.GetString(0);
-            else
-                throw new Exception();
 
-           
+            string result = "";
+
+            while (reader.Read())
+                result += reader.GetString(0) + "\n";
+
+            return result;
         }
     }
 }

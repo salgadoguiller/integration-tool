@@ -9,13 +9,22 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class OperationsWebService
     {
+        public OperationsWebService()
+        {
+            this.Integrations = new HashSet<Integration>();
+        }
+    
         public int OperationWebServiceId { get; set; }
         public string Name { get; set; }
         public string Identifier { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Integration> Integrations { get; set; }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -21,7 +22,8 @@ namespace IntegrationTool.Models
     
         public int EngineId { get; set; }
         public string Name { get; set; }
-    
+
+        [JsonIgnore]
         public virtual ICollection<DatabaseParameter> DatabaseParameters { get; set; }
     }
 }

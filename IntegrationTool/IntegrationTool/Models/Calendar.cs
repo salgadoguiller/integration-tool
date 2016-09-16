@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -21,8 +22,10 @@ namespace IntegrationTool.Models
         public int IntegrationId { get; set; }
         public int RecurrenceId { get; set; }
         public System.DateTime ExecutionEndDate { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Integration Integration { get; set; }
+        [JsonIgnore]
         public virtual Recurrence Recurrence { get; set; }
     }
 }

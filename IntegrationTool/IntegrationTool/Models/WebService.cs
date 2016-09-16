@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -23,7 +24,8 @@ namespace IntegrationTool.Models
         public string Endpoint { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-    
+
+        [JsonIgnore]
         public virtual ICollection<Integration> Integrations { get; set; }
     }
 }

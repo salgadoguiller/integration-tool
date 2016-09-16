@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -17,8 +18,10 @@ namespace IntegrationTool.Models
         public int PermissionId { get; set; }
         public int UserId { get; set; }
         public int ResourceId { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Resource Resource { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

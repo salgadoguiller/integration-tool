@@ -15,7 +15,7 @@ IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPControll
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
 
 IntegrationToolApp.controller('IntegrationController', IntegrationController);
-IntegrationToolApp.controller('IntegrationSheduleController', IntegrationSheduleController);
+IntegrationToolApp.controller('IntegrationsSheduleController', IntegrationsSheduleController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -74,12 +74,12 @@ var configFunction = function ($routeProvider) {
             controller: 'FormWebServiceController'
         })
         .when('/Integration/manual', {
-            templateUrl: '/Integration/manual',
+            templateUrl: '/Integration/configuration',
             controller: 'IntegrationController'
         })
         .when('/Integration/automatic', {
-            templateUrl: '/Integration/automatic',
-            controller: 'IntegrationSheduleController'
+            templateUrl: '/Integration/calendar',
+            controller: 'IntegrationsSheduleController'
         });
 }
 configFunction.$inject = ['$routeProvider'];
