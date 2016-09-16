@@ -69,9 +69,9 @@ namespace ClassLibrary
             MySqlDataReader returnQuery = command.ExecuteReader();
 
             while (returnQuery.Read())
-            {
-                int id = returnQuery.GetInt32(0);
-                responseQuery += id + "\n";
+            {              
+                string response = returnQuery.GetString(0);
+                responseQuery += response + "%";
             }
 
             //closeConnection();
