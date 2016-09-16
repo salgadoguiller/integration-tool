@@ -75,6 +75,7 @@ namespace IntegrationTool.Controllers
                 if (Request.Form["IntegrationCategoryId"] == "1")
                 {
                     integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                                Request.Form["CurlParameters"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -94,6 +95,7 @@ namespace IntegrationTool.Controllers
                     DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
 
                     integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                                Request.Form["CurlParameters"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -112,8 +114,8 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception ex)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
             }
 
 

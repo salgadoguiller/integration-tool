@@ -95,7 +95,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Flat File</label>
+                                <label>Path Flat File</label>
                                 <select class="form-control select" name="FlatFileParameterId" style="width: 100%;" ng-model="request.FlatFileParameterId" ng-required="true">
                                     <option selected disabled value="">Select</option>
                                     <option ng-repeat="flatFile in flatFiles" value="{{flatFile.FlatFileParameterId}}">{{flatFile.Location}}</option>
@@ -103,6 +103,17 @@
                                 <div ng-if="form.FlatFileParameterId.$touched || form.$submitted">
                                     <div ng-messages="form.FlatFileParameterId.$error" role="alert">
                                         <div class="help-block error-text" ng-message="required">* Flat file is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Curl Parameters</label>
+                                <input ng-model="request.CurlParameters" type="text" class="form-control" id="CurlParameters" name="CurlParameters" placeholder="Enter param" ng-required="true">
+                                <div class="help-block">* Example: -k -O</div>
+                                <div ng-if="form.CurlParameters.$touched || form.$submitted">
+                                    <div ng-messages="form.CurlParameters.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Curl Parameters are required.</div>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +191,7 @@
                             <div ng-if="recurrences.length != 0"class="form-group">
                                 <label>Emails</label>
                                 <input ng-model="request.Emails" type="text" class="form-control" id="Emails" name="Emails" placeholder="Enter Emails" ng-required="true">
-                                <div class="help-block">* Enter emails separated by <strong>|</strong></div>
+                                <div class="help-block">* Example: user@domain | user2@domain </div>
                                 <div ng-if="form.Emails.$touched || form.$submitted">
                                     <div ng-messages="form.Emails.$error" role="alert">
                                         <div class="help-block error-text" ng-message="required">* Emails are required.</div>

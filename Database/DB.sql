@@ -179,6 +179,7 @@ CREATE TABLE IntegrationCategories (
 -- -----------------------------------------------------
 CREATE TABLE Integrations (
   IntegrationId INT NOT NULL IDENTITY(1,1),
+  CurlParameters VARCHAR(120) NOT NULL,
   IntegrationDate DATETIME NOT NULL,
   UserId INT NOT NULL,
   WebServiceId INT NOT NULL,

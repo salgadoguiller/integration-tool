@@ -185,6 +185,7 @@
           <Property Name="IntegrationTypeId" Type="int" Nullable="false" />
           <Property Name="QueryId" Type="int" Nullable="false" />
           <Property Name="IntegrationCategoryId" Type="int" Nullable="false" />
+          <Property Name="CurlParameters" Type="varchar" Nullable="false" MaxLength="120" />
         </EntityType>
         <EntityType Name="IntegrationsType">
           <Key>
@@ -709,6 +710,7 @@
           <Property Name="IntegrationTypeId" Type="Int32" Nullable="false" />
           <Property Name="QueryId" Type="Int32" Nullable="false" />
           <Property Name="IntegrationCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CurlParameters" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Calendars" Relationship="IntegrationToolModel.FK_CalendarsIntegrations_IntegrationId" FromRole="Integrations" ToRole="Calendars" />
           <NavigationProperty Name="DatabaseParameter" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="Integrations" ToRole="DatabaseParameters" />
           <NavigationProperty Name="FlatFile" Relationship="IntegrationToolModel.FK_IntegrationsFlatFiles_FlatFileId" FromRole="Integrations" ToRole="FlatFiles" />
@@ -1163,6 +1165,7 @@
                 <ScalarProperty Name="IntegrationTypeId" ColumnName="IntegrationTypeId" />
                 <ScalarProperty Name="QueryId" ColumnName="QueryId" />
                 <ScalarProperty Name="IntegrationCategoryId" ColumnName="IntegrationCategoryId" />
+                <ScalarProperty Name="CurlParameters" ColumnName="CurlParameters" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

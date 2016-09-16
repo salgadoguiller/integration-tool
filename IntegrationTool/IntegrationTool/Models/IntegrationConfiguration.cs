@@ -14,20 +14,20 @@ namespace IntegrationTool.Models
             integrationConfigurationDB = new IntegrationToolEntities();
         }
 
-
         // ================================================================================================================
         // Almacenar integración en el sistema.
         // ================================================================================================================
-        public void saveIntegrationManual(int userId,  int webServiceId, int databaseParametersId, int flatFileId, 
-                                            int flatFileParameterId, int integrationTypeId, int queryId, 
-                                            int integrationCategoryId, List<QueryParameter> queryParameters) 
+        public void saveIntegrationManual(int userId, string curlParameters,  int webServiceId, int databaseParametersId,
+                                            int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
+                                            int integrationCategoryId, List<QueryParameter> queryParameters)
         {
             Integration integration = new Integration();
 
             integration.IntegrationDate = DateTime.Now;
             integration.UserId = userId;
+            integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
-            integration.DatabaseParametersId =  databaseParametersId;
+            integration.DatabaseParametersId = databaseParametersId;
             integration.FlatFileId = flatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
             integration.IntegrationTypeId = integrationTypeId;
@@ -40,16 +40,17 @@ namespace IntegrationTool.Models
             integrationConfigurationDB.SaveChanges();
         }
 
-        public void saveIntegrationSchedule(int userId, int webServiceId, int databaseParametersId, int flatFileId, 
-                                            int flatFileParameterId, int integrationTypeId, int queryId, 
+        public void saveIntegrationSchedule(int userId , string curlParameters, int webServiceId, int databaseParametersId,
+                                            int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, List<QueryParameter> queryParameters,
-                                            DateTime executionStartDate, DateTime executionEndDate, string emails, 
+                                            DateTime executionStartDate, DateTime executionEndDate, string emails,
                                             int recurenceId)
         {
             Integration integration = new Integration();
 
             integration.IntegrationDate = DateTime.Now;
             integration.UserId = userId;
+            integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
             integration.DatabaseParametersId = databaseParametersId;
             integration.FlatFileId = flatFileId;
@@ -79,35 +80,40 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         public List<IntegrationCategory> getIntegrationCategories()
         {
-            List<IntegrationCategory> integrationCategories = integrationConfigurationDB.IntegrationCategories.ToList();
+            List<IntegrationCategory> integrationCategories = new List<IntegrationCategory>();
+            integrationCategories = integrationConfigurationDB.IntegrationCategories.ToList();
             return integrationCategories;
         }
 
         public List<Query> getQueriesByIntegrationType(int id)
         {
-            List<Query> queries = integrationConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
+            List<Query> queries = new List<Query>();
+            queries = integrationConfigurationDB.Queries.Where(param => param.IntegrationTypeId == id).ToList();
             return queries;
         }
 
         public List<OperationsWebService> getOperationsWebServices()
         {
-            List<OperationsWebService> operations = integrationConfigurationDB.OperationsWebServices.ToList();
+            List<OperationsWebService> operations = new List<OperationsWebService>();
+            operations = integrationConfigurationDB.OperationsWebServices.ToList();
             return operations;
         }
 
         public List<Recurrence> getRecurrences()
         {
-            List<Recurrence> recurrences = integrationConfigurationDB.Recurrences.ToList();
+            List<Recurrence> recurrences = new List<Recurrence>();
+            recurrences = integrationConfigurationDB.Recurrences.ToList();
             return recurrences;
         }
 
         public List<IntegrationSchedule> getIntegrationShedule()
         {
+            List<IntegrationSchedule> integrationsSchedule = new List<IntegrationSchedule>();
             List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 2).ToList();
 
-            List<IntegrationSchedule> integrationsSchedule = new List<IntegrationSchedule>();
+            integrationsSchedule = new List<IntegrationSchedule>();
 
-            foreach(Integration i in integrations)
+            foreach (Integration i in integrations)
             {
                 IntegrationSchedule integrationSchedule = new IntegrationSchedule();
                 integrationSchedule.IntegrationId = i.IntegrationId;
@@ -116,7 +122,6 @@ namespace IntegrationTool.Models
 
                 integrationsSchedule.Add(integrationSchedule);
             }
-
             return integrationsSchedule;
         }
     }

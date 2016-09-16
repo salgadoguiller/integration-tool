@@ -410,6 +410,9 @@
     <Content Include="Views\Integration\manual.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Integration\automatic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
@@ -429,9 +432,6 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Integration\automatic.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

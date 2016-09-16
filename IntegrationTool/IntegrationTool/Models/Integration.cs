@@ -32,6 +32,7 @@ namespace IntegrationTool.Models
         public int IntegrationTypeId { get; set; }
         public int QueryId { get; set; }
         public int IntegrationCategoryId { get; set; }
+        public string CurlParameters { get; set; }
     
         public virtual ICollection<Calendar> Calendars { get; set; }
         public virtual DatabaseParameter DatabaseParameter { get; set; }

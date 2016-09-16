@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ba6c64042d6b4ab5afc090ece8654244" Name="Diagram1">
+      <Diagram DiagramId="c05d1776d0634539bb50833f26ef97ba" Name="Diagram1">
         <EntityTypeShape EntityType="IntegrationToolModel.ActiveDirectoryParameter" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Calendar" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.DatabaseParameter" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="IntegrationToolModel.FlatFilesParameter" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.IntegrationCategory" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.IntegrationLog" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Integration" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Integration" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.IntegrationsType" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.OperationsWebService" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Permission" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
