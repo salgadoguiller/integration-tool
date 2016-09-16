@@ -10,7 +10,7 @@ namespace ClassLibrary
     {
         public InterfaceDatabase createInstanceDataBase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, string engine)
         {
-            if (engine == "SqlServer")
+            if (engine == "SQLServer")
                 return new SqlServerDatabase(ip, port, nameDataBase, serverInstance, username, password);
             else
                 return new MySqlDatabase(ip, nameDataBase, serverInstance, username, password,port);

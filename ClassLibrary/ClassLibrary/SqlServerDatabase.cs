@@ -22,17 +22,19 @@ namespace ClassLibrary
         public SqlServerDatabase(string ip, string port, string nameDataBase, string serverInstance, string username, string password)
         {
             this.ip = ip;
-            this.port = port;
+            this.port = (port == string.Empty) ? null : "," + port;
             this.nameDataBase = nameDataBase;
-            this.serverInstance = serverInstance;
+            this.serverInstance = (serverInstance == string.Empty) ? null : "\\" +serverInstance;
             this.username = username;
             this.password = password;          
         }
 
         public void openConnection()
         {
-            string conectionString = "Data Source=" + this.ip + ";" +
-                                    "Initial Catalog=" + this.nameDataBase + ";Integrated Security=true;";
+            string conectionString = "Data Source=" + this.ip + this.serverInstance + this.port + ";" + 
+                                    "Initial Catalog=" + this.nameDataBase + ";" + 
+                                    "User ID="  + this.username + ";" + 
+                                    "Password=" + this.password;
             this.con = new SqlConnection(conectionString);
             this.con.Open();
         }

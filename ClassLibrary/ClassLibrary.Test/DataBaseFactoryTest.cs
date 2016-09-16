@@ -11,12 +11,11 @@ namespace IntegrationTool.Tests
     [TestFixture]
     class DataBaseFactoryTest
     {
-        [TestCase("172.20.33.13", "", "IntegrationTool", "", "", "", "SQLServer", "SELECT 'abc'")]
-        [TestCase("172.20.33.13", "", "IntegrationTool", "", "", "", "SQLServer", "SELECT 'abc'")]
+        [TestCase("172.20.33.13", "", "IntegrationTool", "", "SISUser", "test2016!", "SQLServer", "SELECT 'abc'")]
         public void sqlServerDataBase_ConnectWithFactoryMethod_ReturnQueryResult(string ip, string port, string nameDataBase, string serverInstance, string username, string password, string engine, string query)
         {
             DataBaseFactory factory = new DataBaseFactory();
-            InterfaceDatabase dataBase = factory.createDataBase(ip, port, nameDataBase, serverInstance, username, password, engine);
+            InterfaceDatabase dataBase = factory.createInstanceDataBase(ip, port, nameDataBase, serverInstance, username, password, engine);
             dataBase.openConnection();
             string result = dataBase.executeQuery(query);
             dataBase.closeConnection();

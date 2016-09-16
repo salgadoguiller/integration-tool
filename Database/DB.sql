@@ -25,7 +25,7 @@ CREATE TABLE Engines (
 CREATE TABLE DatabaseParameters (
   DatabaseParametersId INT NOT NULL IDENTITY(1,1),
   Ip VARCHAR(30) NOT NULL,
-  Port VARCHAR(20) NOT NULL,
+  Port VARCHAR(20),
   Instance VARCHAR(80),
   Name VARCHAR(80) NOT NULL,
   Username VARCHAR(80) NOT NULL,
@@ -140,6 +140,9 @@ CREATE TABLE ServerSMTPParameters (
   Port VARCHAR(80) NOT NULL,
   UsernameSMTP VARCHAR(80) NOT NULL,
   PasswordSMTP VARCHAR(80) NOT NULL,
+  EmailFrom VARCHAR(200) NOT NULL,
+  Subject VARCHAR(MAX) NOT NULL,
+  Body VARCHAR(MAX) NOT NULL,
   CONSTRAINT PK_EmailParameter
     PRIMARY KEY (ServerSMTPParametersId));
 
@@ -179,7 +182,7 @@ CREATE TABLE IntegrationCategories (
 -- -----------------------------------------------------
 CREATE TABLE Integrations (
   IntegrationId INT NOT NULL IDENTITY(1,1),
-  CurlParameters VARCHAR(120) NOT NULL,
+  CurlParameters VARCHAR(120),
   IntegrationDate DATETIME NOT NULL,
   UserId INT NOT NULL,
   WebServiceId INT NOT NULL,

@@ -15,14 +15,14 @@ namespace IntegrationTool.Tests
         public void WriteInFile2(string headers, string resultQuery, string location,string nameIntegration)
         {
             WriteFileController file = new WriteFileController();
-            file.writeFileinFlatFile(headers, resultQuery, location,nameIntegration);
+            file.writeFileinFlatFile(resultQuery, location,nameIntegration);
         }
 
         [Test]
         public void writeFileinExcel()
         {
             WriteFileController file = new WriteFileController();
-            file.writeIntegrationinExcel("iÝğçşüexternal_course_key|course_id|course_name|term_key|duration|master_course_key|new_data_source_key", "CHE101002|CHE101002|General Chemistry 2 002|201206|t|CHE101M|201206_COURSES", @"C:\Users\cturcios\Desktop", "COURSES");
+            // file.writeIntegrationinExcel("iÝğçşüexternal_course_key|course_id|course_name|term_key|duration|master_course_key|new_data_source_key", "CHE101002|CHE101002|General Chemistry 2 002|201206|t|CHE101M|201206_COURSES", @"C:\Users\cturcios\Desktop", "COURSES");
         }     
     }
 }
