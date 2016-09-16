@@ -116,8 +116,7 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception ex)
             {
-                // resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration Active Directory Unsuccessful. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Integration Unsuccessful Stored. Please try again.\"}";
             }
 
 
