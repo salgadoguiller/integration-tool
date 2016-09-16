@@ -10,13 +10,13 @@ namespace ClassLibrary
 {
     public class SendEmail
     {
-         public void sendMail(string smtpUser,string smtpPassword,string smtpServer,int smtpPort,string from,string destination,string subject,string body)
+         public void sendMail(string smtpUser,string smtpPassword,string smtpServer,string smtpPort,string from,string destination,string subject,string body)
          {                         
             MailMessage mail = new MailMessage(from,destination,subject,body);
         
             SmtpClient smtp = new SmtpClient();
             smtp.Host = smtpServer;
-            smtp.Port = smtpPort;
+            smtp.Port = Convert.ToInt32(smtpPort);
             smtp.Credentials = new NetworkCredential(smtpUser, smtpPassword);
 
             smtp.EnableSsl = true;

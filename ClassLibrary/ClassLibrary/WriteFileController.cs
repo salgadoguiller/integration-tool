@@ -11,23 +11,31 @@ namespace ClassLibrary
     {
         public string writeFileinFlatFile(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
         {
-            string path = locationToSave + "/" + nameIntegration + "-" + returnDatetimeNow() + ".txt";
+            string nameFile = nameIntegration+"-"+returnDatetimeNow()+".txt";
+
+            string path = locationToSave + "/" + nameFile;
             FileStream fs = new FileStream(path, FileMode.Append);
             using (StreamWriter file = new StreamWriter(fs, Encoding.UTF8))
             {
                 //file.Write(headers);
                 //file.WriteLine();
-                file.Write(resultQuery);
+
+                string[] resultParse = resultQuery.Split('%');
+
+                for (int i = 0; i < resultParse.Length; i++)
+                {
+                    file.WriteLine(resultParse[i]);
+                }                    
             }
 
-            return path;
+            return path+"|"+nameFile;
         }
 
         public string writeIntegrationinExcel(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
         {
             StringBuilder csvContent = new StringBuilder();
             //string header = headers.Replace("|", ",");
-            string query = resultQuery.Replace("|", ",");
+            string query = resultQuery.Replace("%", ",");
 
             //csvContent.AppendLine(header);
             csvContent.AppendLine(query);

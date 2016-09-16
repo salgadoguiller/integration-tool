@@ -55,7 +55,7 @@ namespace ClassLibrary
             string result = "";
 
             while (reader.Read())
-                result += reader.GetString(0) + "\n";
+                result += reader.GetString(0) + "%";
 
             return result;
         }
