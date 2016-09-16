@@ -324,7 +324,7 @@ CREATE TABLE Recurrences (
 CREATE TABLE Calendars (
   CalendarId INT NOT NULL IDENTITY(1,1),
   ExecutionStartDate DATETIME NOT NULL,
-  NextExecutionDate DATETIME NULL,
+  NextExecutionDate DATETIME NOT NULL,
   ExecutionEndDate DATETIME NOT NULL,
   Emails VARCHAR(MAX),
   IntegrationId INT NOT NULL,

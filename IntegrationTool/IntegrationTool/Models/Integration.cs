@@ -35,7 +35,6 @@ namespace IntegrationTool.Models
         public int IntegrationCategoryId { get; set; }
         public string CurlParameters { get; set; }
         public int OperationWebServiceId { get; set; }
-
     
         public virtual ICollection<Calendar> Calendars { get; set; }
         [JsonIgnore]
@@ -48,7 +47,7 @@ namespace IntegrationTool.Models
         public virtual IntegrationCategory IntegrationCategory { get; set; }
         [JsonIgnore]
         public virtual ICollection<IntegrationLog> IntegrationLogs { get; set; }
-
+        
         public virtual IntegrationsType IntegrationsType { get; set; }
 
         [JsonIgnore]

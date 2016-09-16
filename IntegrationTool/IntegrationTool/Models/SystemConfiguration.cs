@@ -122,13 +122,16 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void saveServerSMPT(string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
+        public void saveServerSMPT(string nameServerSMTP, string port, string usernameSMTP, string passwordSMTP, string from, string subject, string body)
         {
             ServerSMTPParameter serverSmtp = new ServerSMTPParameter();
-            serverSmtp.NameServerSMTP = NameServerSMTP;
-            serverSmtp.Port = Port;
-            serverSmtp.UsernameSMTP = UsernameSMTP;
-            serverSmtp.PasswordSMTP = PasswordSMTP;
+            serverSmtp.NameServerSMTP = nameServerSMTP;
+            serverSmtp.Port = port;
+            serverSmtp.UsernameSMTP = usernameSMTP;
+            serverSmtp.PasswordSMTP = passwordSMTP;
+            serverSmtp.EmailFrom = from;
+            serverSmtp.Subject = subject;
+            serverSmtp.Body = body;
 
             systemConfigurationDB.ServerSMTPParameters.Add(serverSmtp);
             systemConfigurationDB.SaveChanges();
@@ -155,7 +158,7 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void saveDatabase(string ip, string instance, string name, string username, string password, string engineId, string port)
+        public void saveDatabase(string ip, string name, string username, string password, string engineId, string port = null, string instance = null)
         {
             DatabaseParameter db = new DatabaseParameter();
             db.Ip = ip;
@@ -198,7 +201,7 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void updateDatabase(int id, string ip, string instance, string name, string username, string password, int engineId, string port)
+        public void updateDatabase(int id, string ip, string name, string username, string password, int engineId, string port = null, string instance = null)
         {
             DatabaseParameter db = systemConfigurationDB.DatabaseParameters.Where(param => param.DatabaseParametersId == id).ToList()[0];
             db.Ip = ip;
@@ -229,13 +232,16 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void updateServerSMPT(int id, string NameServerSMTP, string Port, string UsernameSMTP, string PasswordSMTP)
+        public void updateServerSMPT(int id, string nameServerSMTP, string port, string usernameSMTP, string passwordSMTP, string from, string subject, string body)
         {
             ServerSMTPParameter serverSmtp = systemConfigurationDB.ServerSMTPParameters.Where(param => param.ServerSMTPParametersId == id).ToList()[0];
-            serverSmtp.NameServerSMTP = NameServerSMTP;
-            serverSmtp.Port = Port;
-            serverSmtp.UsernameSMTP = UsernameSMTP;
-            serverSmtp.PasswordSMTP = PasswordSMTP;
+            serverSmtp.NameServerSMTP = nameServerSMTP;
+            serverSmtp.Port = port;
+            serverSmtp.UsernameSMTP = usernameSMTP;
+            serverSmtp.PasswordSMTP = passwordSMTP;
+            serverSmtp.EmailFrom = from;
+            serverSmtp.Subject = subject;
+            serverSmtp.Body = body;
 
             systemConfigurationDB.SaveChanges();
         }

@@ -75,7 +75,6 @@ namespace IntegrationTool.Controllers
                 if (Request.Form["IntegrationCategoryId"] == "1")
                 {
                     integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
-                                                                Request.Form["CurlParameters"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -84,7 +83,8 @@ namespace IntegrationTool.Controllers
                                                                 Convert.ToInt32(Request.Form["QueryId"]),
                                                                 Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
                                                                 Convert.ToInt32(Request.Form["OperationWebServiceId"]),
-                                                                queryParameters);
+                                                                queryParameters,
+                                                                Request.Form["CurlParameters"]);
 
                     // Execute Integration
                 }
@@ -96,7 +96,6 @@ namespace IntegrationTool.Controllers
                     DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
 
                     integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
-                                                                Request.Form["CurlParameters"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -108,8 +107,9 @@ namespace IntegrationTool.Controllers
                                                                 queryParameters,
                                                                 executionStartDate,
                                                                 executionEndDate,
+                                                                Convert.ToInt32(Request.Form["RecurrenceId"]),
                                                                 Request.Form["Emails"],
-                                                                Convert.ToInt32(Request.Form["RecurrenceId"]));
+                                                                Request.Form["CurlParameters"]);
                 }
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration Successful Stored.\"}";

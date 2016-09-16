@@ -19,5 +19,8 @@ namespace IntegrationTool.Models
         public string Port { get; set; }
         public string UsernameSMTP { get; set; }
         public string PasswordSMTP { get; set; }
+        public string EmailFrom { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
     }
 }

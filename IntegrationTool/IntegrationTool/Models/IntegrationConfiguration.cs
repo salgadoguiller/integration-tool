@@ -17,9 +17,10 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         // Almacenar integración en el sistema.
         // ================================================================================================================
-        public void saveIntegrationManual(int userId, string curlParameters,  int webServiceId, int databaseParametersId,
+        public void saveIntegrationManual(int userId,  int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters)
+                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
+                                            string curlParameters = null)
         {
             Integration integration = new Integration();
 
@@ -41,11 +42,11 @@ namespace IntegrationTool.Models
             integrationConfigurationDB.SaveChanges();
         }
 
-        public void saveIntegrationSchedule(int userId , string curlParameters, int webServiceId, int databaseParametersId,
+        public void saveIntegrationSchedule(int userId, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
-                                            DateTime executionStartDate, DateTime executionEndDate, string emails,
-                                            int recurenceId)
+                                            DateTime executionStartDate, DateTime executionEndDate, int recurenceId, string emails = null,
+                                            string curlParameters = null)
         {
             Integration integration = new Integration();
 

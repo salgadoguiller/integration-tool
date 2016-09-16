@@ -160,7 +160,9 @@ namespace IntegrationTool.Controllers
             {
                 connectModel();
                 systemConfigurationModel.saveServerSMPT(encryptor.encryptData(Request.Form["NameServerSMTP"]), encryptor.encryptData(Request.Form["Port"]),
-                                                        encryptor.encryptData(Request.Form["UsernameSMTP"]), encryptor.encryptData(Request.Form["PasswordSMTP"]));
+                                                        encryptor.encryptData(Request.Form["UsernameSMTP"]), encryptor.encryptData(Request.Form["PasswordSMTP"]),
+                                                        encryptor.encryptData(Request.Form["EmailFrom"]), encryptor.encryptData(Request.Form["Subject"]),
+                                                        encryptor.encryptData(Request.Form["Body"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
             }
@@ -179,17 +181,20 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveDatabase(encryptor.encryptData(Request.Form["Ip"]), encryptor.encryptData(Request.Form["Instance"]),
-                                                    encryptor.encryptData(Request.Form["Name"]), encryptor.encryptData(Request.Form["Username"]),
-                                                    encryptor.encryptData(Request.Form["Password"]), Request.Form["EngineId"],
-                                                    encryptor.encryptData(Request.Form["Port"]));
+                systemConfigurationModel.saveDatabase(encryptor.encryptData(Request.Form["Ip"]),
+                                                    encryptor.encryptData(Request.Form["Name"]), 
+                                                    encryptor.encryptData(Request.Form["Username"]),
+                                                    encryptor.encryptData(Request.Form["Password"]),
+                                                    Request.Form["EngineId"],
+                                                    encryptor.encryptData(Request.Form["Port"]), 
+                                                    encryptor.encryptData(Request.Form["Instance"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
             }
             catch (Exception ex)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -299,7 +304,10 @@ namespace IntegrationTool.Controllers
                                                             encryptor.encryptData(Request.Form["NameServerSMTP"]),
                                                             encryptor.encryptData(Request.Form["Port"]),
                                                             encryptor.encryptData(Request.Form["UsernameSMTP"]),
-                                                            encryptor.encryptData(Request.Form["PasswordSMTP"]));
+                                                            encryptor.encryptData(Request.Form["PasswordSMTP"]),
+                                                            encryptor.encryptData(Request.Form["EmailFrom"]), 
+                                                            encryptor.encryptData(Request.Form["Subject"]),
+                                                            encryptor.encryptData(Request.Form["Body"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Server SMTP Successful.\"}";
             }
@@ -320,12 +328,12 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 systemConfigurationModel.updateDatabase(Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                         encryptor.encryptData(Request.Form["Ip"]),
-                                                        encryptor.encryptData(Request.Form["Instance"]),
                                                         encryptor.encryptData(Request.Form["Name"]),
                                                         encryptor.encryptData(Request.Form["Username"]),
                                                         encryptor.encryptData(Request.Form["Password"]),
                                                         Convert.ToInt32(Request.Form["EngineId"]),
-                                                        encryptor.encryptData(Request.Form["Port"]));
+                                                        encryptor.encryptData(Request.Form["Port"]),
+                                                        encryptor.encryptData(Request.Form["Instance"]));
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
             }
@@ -551,6 +559,9 @@ namespace IntegrationTool.Controllers
                     server.Port = encryptor.decryptData(server.Port);
                     server.UsernameSMTP = encryptor.decryptData(server.UsernameSMTP);
                     server.PasswordSMTP = encryptor.decryptData(server.PasswordSMTP);
+                    server.EmailFrom = encryptor.decryptData(server.EmailFrom);
+                    server.Subject = encryptor.decryptData(server.Subject);
+                    server.Body = encryptor.decryptData(server.Body);
                 }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
@@ -751,6 +762,9 @@ namespace IntegrationTool.Controllers
                 serverSMTP.Port = encryptor.decryptData(serverSMTP.Port);
                 serverSMTP.UsernameSMTP = encryptor.decryptData(serverSMTP.UsernameSMTP);
                 serverSMTP.PasswordSMTP = encryptor.decryptData(serverSMTP.PasswordSMTP);
+                serverSMTP.EmailFrom = encryptor.decryptData(serverSMTP.EmailFrom);
+                serverSMTP.Subject = encryptor.decryptData(serverSMTP.Subject);
+                serverSMTP.Body = encryptor.decryptData(serverSMTP.Body);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
                     new JsonSerializerSettings()
