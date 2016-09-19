@@ -47,7 +47,8 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ClassLibrary">
+    <Reference Include="ClassLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClassLibrary\ClassLibrary\bin\Debug\ClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML">
@@ -258,7 +259,8 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
-    <Content Include="Content\Scripts\Controllers\IntegrationsSheduleController.js" />
+    <Content Include="Content\Scripts\Controllers\ManualIntegrationController.js" />
+    <Content Include="Content\Scripts\Controllers\SheduleIntegrationsController.js" />
     <Content Include="Content\Scripts\Controllers\IntegrationController.js" />
     <Content Include="Content\Scripts\Controllers\FormActiveDirectoryController.js" />
     <Content Include="Content\Scripts\Controllers\FormServerSMTPController.js" />
@@ -431,6 +433,9 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Integration\manual.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,4 @@
-﻿var IntegrationsSheduleController = function ($scope, $http, $location) {
+﻿var SheduleIntegrationsController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationShedule = [];
@@ -17,9 +17,8 @@
 
         var data = $.param({});
 
-        $http.get('Integration/getIntegrationsShedule', data, config).success(function (resp) {
+        $http.get('Integration/getSheduleIntegrations', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                console.log(resp);
                 buildCalendar(resp);               
             }
             else {
@@ -81,12 +80,10 @@
             events: integrationShedule,
             eventClick: function (event) {
                 if (event.url) {
-                    alert("Hola");
-                    window.open(event.url);
                     return false;
                 }
             }
         });
     }
 }
-IntegrationsSheduleController.$inject = ['$scope', '$http', '$location'];
+SheduleIntegrationsController.$inject = ['$scope', '$http', '$location'];

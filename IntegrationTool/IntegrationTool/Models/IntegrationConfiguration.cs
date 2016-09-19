@@ -105,9 +105,15 @@ namespace IntegrationTool.Models
             return recurrences;
         }
 
-        public List<Integration> getIntegrations()
+        public List<Integration> getScheduleIntegrations()
         {
             List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 2).ToList();
+            return integrations;
+        }
+
+        public List<Integration> getManualIntegrations()
+        {
+            List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 1).ToList();
             return integrations;
         }
     }

@@ -40,6 +40,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult manual()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult calendar()
         {
             return View();
@@ -64,7 +70,7 @@ namespace IntegrationTool.Controllers
                     {
                         QueryParameter qp = new QueryParameter();
                         qp.Name = Request.Form.AllKeys[index];
-                        qp.Value = Request.Form[qp.Name];
+                        qp.Value = "'" + Request.Form[qp.Name] + "'";
 
                         queryParameters.Add(qp);
                     }
@@ -225,13 +231,13 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
-        public void getIntegrationsShedule()
+        public void getSheduleIntegrations()
         {
             string resp = "";
             try
             {
                 connectModel();
-                List<Integration> integrations = integrationConfigurationModel.getIntegrations();
+                List<Integration> integrations = integrationConfigurationModel.getScheduleIntegrations();
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
                     new JsonSerializerSettings()
@@ -241,7 +247,45 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception e)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Shedule. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the schedule integration. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+
+        [HttpGet]
+        public void getManualIntegrations()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Integration> integrations = integrationConfigurationModel.getManualIntegrations();
+
+                /*
+                foreach (Integration i in integrations)
+                {
+                    i.WebService.Endpoint = encryptor.decryptData(i.WebService.Endpoint);
+                    i.DatabaseParameter.Name = encryptor.decryptData(i.DatabaseParameter.Name);
+                    i.DatabaseParameter.Ip = encryptor.decryptData(i.DatabaseParameter.Ip);
+                    i.DatabaseParameter.Port = encryptor.decryptData(i.DatabaseParameter.Port);
+                    i.DatabaseParameter.Instance = encryptor.decryptData(i.DatabaseParameter.Instance);
+                    i.FlatFilesParameter.Location = encryptor.decryptData(i.FlatFilesParameter.Location);
+                    i.Query.Query1 = encryptor.decryptData(i.Query.Query1);
+                }
+                */
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"" + e.Message + "\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the manual integration. Please try again.\"}";
             }
 
             response(resp);

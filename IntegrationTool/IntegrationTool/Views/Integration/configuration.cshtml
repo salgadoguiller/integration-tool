@@ -6,11 +6,11 @@
     <section class="content-header">
         <div class="col-md-12">
         <h1>
-            Integration Manual
+            Configuration
         </h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-cog"></i> Integrations</li>
-            <li class="breadcrumb-item active"> Manual</li>
+            <li class="breadcrumb-item active"> Configuration</li>
         </ol>
         </div>
     </section>
@@ -85,7 +85,7 @@
                                 <label>Database</label>
                                 <select class="form-control select" name="DatabaseParametersId" style="width: 100%;" ng-model="request.DatabaseParametersId" ng-required="true">
                                     <option selected disabled value="">Select</option>
-                                    <option ng-repeat="database in databases" value="{{database.DatabaseParametersId}}">{{database.Ip}}:{{database.Port}}/{{database.Instance}}</option>
+                                    <option ng-repeat="database in databases" value="{{database.DatabaseParametersId}}">NAME<{{database.Name}}> IP<{{database.Ip}}> PORT<{{database.Port}}> INSTANCE<{{database.Instance}}></option>
                                 </select>
                                 <div ng-if="form.DatabaseParametersId.$touched || form.$submitted">
                                     <div ng-messages="form.DatabaseParametersId.$error" role="alert">
