@@ -32,22 +32,30 @@
     }
 
     function buildCalendar(resp)
-    {              
+    {
+        var colors = ['#f56954', '#f39c12', '#0073b7', '#00c0ef', '#00a65a', '#3c8dbc'];
+        var count = 0;
+
         for (index = 0; index < resp.length; index++)
         {
+            if (count == colors.length)
+                count = 0;
+
             var dateDatabase = resp[index].Calendars[0].NextExecutionDate;
             var fecha = dateDatabase.split("T");
             var fechaSplit = fecha[0].split("-");
             var horaSplit = fecha[1].split(":");
-
+    
             $scope.listIntegrationShedule[index] =
             {
                 id: resp[index].IntegrationId,
                 title: resp[index].IntegrationsType.Name,
-                start: new Date(fechaSplit[0],fechaSplit[1]-1,fechaSplit[2],horaSplit[0],horaSplit[1],horaSplit[2]),
-                backgroundColor: "#f56954", //red
-                borderColor: "#f56954" //red                 
+                start: new Date(fechaSplit[0], fechaSplit[1] - 1, fechaSplit[2], horaSplit[0], horaSplit[1], horaSplit[2]),
+                url: '/#/Integration/configuration',
+                backgroundColor: colors[count],
+                borderColor: colors[count]          
             }
+            count++;
         }
         loadCallendar($scope.listIntegrationShedule);
     }
@@ -80,7 +88,7 @@
             events: integrationShedule,
             eventClick: function (event) {
                 if (event.url) {
-                    return false;
+                    window(event.url);                   
                 }
             }
         });

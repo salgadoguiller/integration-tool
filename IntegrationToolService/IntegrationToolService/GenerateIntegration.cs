@@ -188,8 +188,8 @@ namespace IntegrationToolService
 
             DataTable table = DataTable(query);
 
-            InterfaceDatabase iNterfaceDatabase = dataBase.createInstanceDataBase(decrypt.decryptData(Convert.ToString(table.Rows[0]["Ip"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["Name"])),
-            decrypt.decryptData(Convert.ToString(table.Rows[0]["Instance"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), /*""*/decrypt.decryptData(Convert.ToString(table.Rows[0]["Password"])), Convert.ToString(table.Rows[0]["NameEngine"]));
+            InterfaceDatabase iNterfaceDatabase = dataBase.createInstanceDataBase(decrypt.decryptData(Convert.ToString(table.Rows[0]["Ip"])),"" /*decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"]))*/, decrypt.decryptData(Convert.ToString(table.Rows[0]["Name"])),
+            ""/*decrypt.decryptData(Convert.ToString(table.Rows[0]["Instance"]))*/, decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), ""/*decrypt.decryptData(Convert.ToString(table.Rows[0]["Password"]))*/, Convert.ToString(table.Rows[0]["NameEngine"]));
 
             return executeQueryInDatabase(iNterfaceDatabase, integrationId);
         }
@@ -295,6 +295,8 @@ namespace IntegrationToolService
 
             string query = "SELECT NameServerSMTP, Port, UsernameSMTP, PasswordSMTP, EmailFrom, Subject, Body FROM dbo.ServerSMTPParameters";
             DataTable table = DataTable(query);
+
+            Console.WriteLine(emails);
 
             email.sendMail(decrypt.decryptData(Convert.ToString(table.Rows[0]["UsernameSMTP"])),decrypt.decryptData(Convert.ToString(table.Rows[0]["PasswordSMTP"])),decrypt.decryptData(Convert.ToString(table.Rows[0]["NameServerSMTP"])),
                            decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["EmailFrom"])), emails, decrypt.decryptData(Convert.ToString(table.Rows[0]["Subject"])),
