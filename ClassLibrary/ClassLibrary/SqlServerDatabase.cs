@@ -31,10 +31,15 @@ namespace ClassLibrary
 
         public void openConnection()
         {
+            /*
             string conectionString = "Data Source=" + this.ip + this.serverInstance + this.port + ";" + 
                                     "Initial Catalog=" + this.nameDataBase + ";" + 
                                     "User ID="  + this.username + ";" + 
                                     "Password=" + this.password;
+            */
+            string conectionString = "Data Source=" + this.ip + ";" +
+                        "Initial Catalog=" + this.nameDataBase + ";" +
+                        "Integrated Security=true;";
             this.con = new SqlConnection(conectionString);
             this.con.Open();
         }

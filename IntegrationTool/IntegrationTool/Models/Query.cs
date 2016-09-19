@@ -27,7 +27,6 @@ namespace IntegrationTool.Models
 
         [JsonIgnore]
         public virtual ICollection<Integration> Integrations { get; set; }
-        [JsonIgnore]
         public virtual IntegrationsType IntegrationsType { get; set; }
     }
 }

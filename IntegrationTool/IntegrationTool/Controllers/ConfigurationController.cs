@@ -181,20 +181,22 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
+                string port = (Request.Form["Port"] != null) ? encryptor.encryptData(Request.Form["Port"]) : null;
+                string instance = (Request.Form["Instance"] != null) ? encryptor.encryptData(Request.Form["Instance"]) : null;
                 systemConfigurationModel.saveDatabase(encryptor.encryptData(Request.Form["Ip"]),
                                                     encryptor.encryptData(Request.Form["Name"]), 
                                                     encryptor.encryptData(Request.Form["Username"]),
                                                     encryptor.encryptData(Request.Form["Password"]),
                                                     Request.Form["EngineId"],
-                                                    encryptor.encryptData(Request.Form["Port"]), 
-                                                    encryptor.encryptData(Request.Form["Instance"]));
+                                                    port,
+                                                    instance);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration DataBase Successful.\"}";
             }
             catch (Exception ex)
             {
-                // resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
-                resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"" + ex.Message + "\"}";
+                // resp = "{\"type\":\"danger\", \"message\":\"Configuration DataBase Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -591,8 +593,8 @@ namespace IntegrationTool.Controllers
                 foreach (DatabaseParameter database in databases)
                 {
                     database.Ip = encryptor.decryptData(database.Ip);
-                    database.Port = encryptor.decryptData(database.Port);
-                    database.Instance = encryptor.decryptData(database.Instance);
+                    database.Port = (database.Port != null) ? encryptor.decryptData(database.Port) : null;
+                    database.Instance = (database.Instance != null) ? encryptor.decryptData(database.Instance) : null;
                     database.Name = encryptor.decryptData(database.Name);
                     database.Username = encryptor.decryptData(database.Username);
                     database.Password = encryptor.decryptData(database.Password);
@@ -678,8 +680,8 @@ namespace IntegrationTool.Controllers
                 DatabaseParameter database = systemConfigurationModel.getDatabase(id);
 
                 database.Ip = encryptor.decryptData(database.Ip);
-                database.Port = encryptor.decryptData(database.Port);
-                database.Instance = encryptor.decryptData(database.Instance);
+                database.Port = (database.Port != null) ? encryptor.decryptData(database.Port) : null;
+                database.Instance = (database.Instance != null) ? encryptor.decryptData(database.Instance) : null;
                 database.Name = encryptor.decryptData(database.Name);
                 database.Username = encryptor.decryptData(database.Username);
                 database.Password = encryptor.decryptData(database.Password);
