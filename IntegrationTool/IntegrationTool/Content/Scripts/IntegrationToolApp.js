@@ -74,7 +74,7 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Configuration/formWebService',
             controller: 'FormWebServiceController'
         })
-        .when('/Integration/configuration', {
+        .when('/Integration/configuration/:id', {
             templateUrl: '/Integration/configuration',
             controller: 'IntegrationController'
         })

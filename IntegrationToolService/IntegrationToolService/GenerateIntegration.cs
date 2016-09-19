@@ -162,7 +162,7 @@ namespace IntegrationToolService
         private void executeIntegration(int integrationId)
         {          
             string resultQueryAndNameIntegration = obtainDatabaseParameters(integrationId);       
-            string[] result = resultQueryAndNameIntegration.Split('|');
+            string[] result = resultQueryAndNameIntegration.Split('$');
             
             string location= obtainLocationFileToSave(integrationId);
             string fullPathMoreNameFile = writeFileController.writeFileinFlatFile(result[0], location, result[1]);
@@ -215,7 +215,7 @@ namespace IntegrationToolService
 
             string nameIntegration = ReturnNameIntegration(integrationId);
           
-            return resultQuery + "|" + nameIntegration;
+            return resultQuery + "$" + nameIntegration;
         }
 
         //8.1

@@ -258,23 +258,23 @@ namespace IntegrationTool.Controllers
         public void getManualIntegrations()
         {
             string resp = "";
+            
             try
             {
                 connectModel();
                 List<Integration> integrations = integrationConfigurationModel.getManualIntegrations();
 
-                /*
+                
                 foreach (Integration i in integrations)
                 {
                     i.WebService.Endpoint = encryptor.decryptData(i.WebService.Endpoint);
                     i.DatabaseParameter.Name = encryptor.decryptData(i.DatabaseParameter.Name);
+                    i.DatabaseParameter.Port = (i.DatabaseParameter.Port != null) ? encryptor.decryptData(i.DatabaseParameter.Port) : null;
+                    i.DatabaseParameter.Instance = (i.DatabaseParameter.Instance != null) ? encryptor.decryptData(i.DatabaseParameter.Instance) : null;
                     i.DatabaseParameter.Ip = encryptor.decryptData(i.DatabaseParameter.Ip);
-                    i.DatabaseParameter.Port = encryptor.decryptData(i.DatabaseParameter.Port);
-                    i.DatabaseParameter.Instance = encryptor.decryptData(i.DatabaseParameter.Instance);
                     i.FlatFilesParameter.Location = encryptor.decryptData(i.FlatFilesParameter.Location);
                     i.Query.Query1 = encryptor.decryptData(i.Query.Query1);
                 }
-                */
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
                     new JsonSerializerSettings()

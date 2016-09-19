@@ -1,4 +1,4 @@
-﻿var IntegrationController = function ($scope, $http) {
+﻿var IntegrationController = function ($scope, $http, $routeParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -23,6 +23,8 @@
     getDatabases();
     getFlatFiles();
     getIntegrationCategories();
+
+    var id = $routeParams.id;
 
     function sendRequest(req, form) {
         if (!form.$valid) {
@@ -276,4 +278,4 @@
     }
 }
 
-IntegrationController.$inject = ['$scope', '$http'];
+IntegrationController.$inject = ['$scope', '$http', '$routeParams'];

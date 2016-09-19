@@ -1,7 +1,8 @@
-﻿var ManualIntegrationController = function ($scope, $http) {
+﻿var ManualIntegrationController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.manualIntegrations = [];
+    $scope.editManualIntegration = editManualIntegration;
 
     getManualIntegrations();
 
@@ -27,6 +28,10 @@
             $scope.typeMessage = "danger";
         });
     }
+
+    function editManualIntegration(id) {
+        $location.url('/Integration/configuration/' + id);
+    }
 }
 
-ManualIntegrationController.$inject = ['$scope', '$http'];
+ManualIntegrationController.$inject = ['$scope', '$http', '$location'];
