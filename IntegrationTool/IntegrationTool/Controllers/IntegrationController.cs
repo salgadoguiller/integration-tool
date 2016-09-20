@@ -58,8 +58,8 @@ namespace IntegrationTool.Controllers
         public void saveIntegration()
         {
             string resp = "";
-            //try
-            //{
+            try
+            {
                 List<QueryParameter> queryParameters = new List<QueryParameter>();
                 Regex regex = new Regex(@"\[\[.*\]\]");
 
@@ -93,8 +93,8 @@ namespace IntegrationTool.Controllers
                                                                 queryParameters,
                                                                 Request.Form["CurlParameters"]);
 
-                    ClassLibrary.Integration integration = new ClassLibrary.Integration();
-                    integration.executeIntegration(integrationId);
+                    // ClassLibrary.Integration integration = new ClassLibrary.Integration();
+                    // integration.executeIntegration(integrationId);
                 }
                 else
                 {
@@ -121,12 +121,12 @@ namespace IntegrationTool.Controllers
                                                                 Request.Form["CurlParameters"]);
                 }
 
-                resp = "{\"type\":\"success\", \"message\":\"Integration Successful Stored.\"}";
-            /*}
+                resp = "{\"type\":\"success\", \"message\":\"Integration successful stored.\"}";
+            }
             catch (Exception)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Integration Unsuccessful Stored. Please try again.\"}";
-            }*/
+                resp = "{\"type\":\"danger\", \"message\":\"Integration unsuccessful stored. Please try again.\"}";
+            }
 
 
             response(resp);
@@ -372,6 +372,24 @@ namespace IntegrationTool.Controllers
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void executeIntegration(int id)
+        {
+            string resp = "";
+            try
+            {
+                // ClassLibrary.Integration integration = new ClassLibrary.Integration();
+                // integration.executeIntegration(integrationId);
+                resp = "{\"type\":\"success\", \"message\":\"Integration successful executed.\"}";
             }
             catch (Exception)
             {

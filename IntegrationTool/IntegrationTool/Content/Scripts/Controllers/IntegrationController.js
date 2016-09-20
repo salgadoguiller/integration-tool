@@ -27,10 +27,47 @@
     getIntegrationCategories();
 
     if ($routeParams.id != -1) {
-        getIntegrationManual($routeParams.id);
+        getIntegration($routeParams.id);
     }
 
-    function getIntegrationManual(id) {
+    function integration(resp) {
+        resp.IntegrationTypeId = resp.IntegrationTypeId + '';
+        resp.IntegrationCategoryId = resp.IntegrationCategoryId + '';
+        resp.WebServiceId = resp.WebServiceId + '';
+        resp.OperationWebServiceId = resp.OperationWebServiceId + '';
+        resp.DatabaseParametersId = resp.DatabaseParametersId + '';
+        resp.FlatFileParameterId = resp.FlatFileParameterId + '';
+        resp.QueryId = resp.QueryId + '';
+
+        getDatabase(resp.DatabaseParametersId);
+        getQueries(resp.IntegrationTypeId);
+        var Interval = setInterval(function () {
+            if ($scope.queries.length != 0) {
+                clearInterval(Interval);
+                getQuery(resp.QueryId);
+            }
+        }, 50);
+
+        if (resp.IntegrationCategoryId == 2) {
+            getRecurrences(resp.IntegrationCategoryId);
+            resp.RecurrenceId = resp.Calendars[0].RecurrenceId + '';
+            resp.Emails = resp.Calendars[0].Emails + '';
+            var startDate = new Date(resp.Calendars[0].ExecutionStartDate);
+            var endDate = new Date(resp.Calendars[0].ExecutionEndDate);
+            startDate.setHours(startDate.getHours() + 6);
+            endDate.setHours(endDate.getHours() + 6);
+            resp.ExecutionStartDate = startDate;
+            resp.ExecutionEndDate = endDate;
+        }
+
+        $scope.request = resp;
+
+        for (index = 0; index < resp.QueryParameters.length; index++) {
+            $scope.request[resp.QueryParameters[index].Name] = resp.QueryParameters[index].Value.replace(/\'/g, '');
+        }
+    }
+
+    function getIntegration(id) {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -41,19 +78,7 @@
 
         $http.get('Integration/getIntegration?id=' + id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                resp.IntegrationTypeId = resp.IntegrationTypeId + '';
-                resp.IntegrationCategoryId = resp.IntegrationCategoryId + '';
-                resp.WebServiceId = resp.WebServiceId + '';
-                resp.OperationWebServiceId = resp.OperationWebServiceId + '';
-                resp.DatabaseParametersId = resp.DatabaseParametersId + '';
-                resp.FlatFileParameterId = resp.FlatFileParameterId + '';
-                resp.QueryId = resp.QueryId + '';
-
-                getQueries(resp.IntegrationTypeId);
-                getQuery(resp.QueryId);
-                getDatabase(resp.DatabaseParametersId);
-
-                $scope.request = resp;
+                integration(resp);
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
