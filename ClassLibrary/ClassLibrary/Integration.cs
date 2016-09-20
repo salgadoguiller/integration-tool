@@ -36,13 +36,27 @@ namespace ClassLibrary
         //0.1
         private void OpenConnection()
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }    
         }
 
         //0.2
         private void CloseConnection()
         {
-            connection.Close();
+            try
+            {
+                connection.Close();
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }  
         }      
 
         //2
@@ -52,7 +66,16 @@ namespace ClassLibrary
 
             DataTable table = new DataTable();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            sqlDataAdapter.Fill(table);
+
+            try
+            {
+                sqlDataAdapter.Fill(table);
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+     
             return table;
         }
 
@@ -64,7 +87,7 @@ namespace ClassLibrary
 
         //Desde este metodo partiria para una integracion manual, sin hacer los metodos previos
         //6
-        private void executeIntegration(int integrationId)
+        public void executeIntegration(int integrationId)
         {
             string resultQueryAndNameIntegration = obtainDatabaseParameters(integrationId);
             string[] result = resultQueryAndNameIntegration.Split('$');
@@ -194,7 +217,7 @@ namespace ClassLibrary
             Console.WriteLine(curlCommand);
             curl.IntegrationWithCurl(curlCommand);
 
-            sendEmail();
+            //sendEmail();
         }
 
         //12
