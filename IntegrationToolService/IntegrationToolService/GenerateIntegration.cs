@@ -20,8 +20,7 @@ namespace IntegrationToolService
         private  WriteFileController writeFileController= new WriteFileController();
         private string emails = "";
         private string location = "";
-     
-       
+            
         public GenerateIntegration(string server = "172.20.33.13", string databaseName = "IntegrationTool", string userId="SISUser",string password="test2016!")
         {
             this.dataConnection = "Data Source=" + server + ";Initial Catalog=" + databaseName + ";User ID="+userId+";Password="+password;  
@@ -38,13 +37,27 @@ namespace IntegrationToolService
         //0.1
         private void OpenConnection()
         {
-            connection.Open();       
+            try
+            {
+                connection.Open();      
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }           
         }
 
         //0.2
         private void CloseConnection()
         {
-            connection.Close();           
+            try
+            {
+                connection.Close();    
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }                 
         }      
 
         //1
@@ -68,10 +81,18 @@ namespace IntegrationToolService
         private DataTable DataTable(string query)
         {
             SqlCommand sqlCommand = new SqlCommand(query, connection);
-
             DataTable table = new DataTable();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            sqlDataAdapter.Fill(table);
+
+            try
+            {
+                sqlDataAdapter.Fill(table);
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+           
             return table;
         }
 
@@ -112,7 +133,6 @@ namespace IntegrationToolService
 
                 updateTimeToExecuteIntegration(calendarId, setNewTimeToExecuteIntegration(recurrenceId, nextExecutionDate));
                // executeIntegration(integrationId);
-
                 integration.initIntegrationAutomatic(integrationId, emails);
             }
         }
