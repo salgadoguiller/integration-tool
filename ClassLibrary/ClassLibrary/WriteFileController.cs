@@ -9,32 +9,36 @@ namespace ClassLibrary
 {
     public class WriteFileController
     {
-        public string writeFileinFlatFile(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
+        public string writeFileinFlatFile(string resultQuery, string locationToSave, string nameIntegration)
         {
             string nameFile = nameIntegration+"-"+returnDatetimeNow()+".txt";
 
             string path = locationToSave + "/" + nameFile;
-            FileStream fs = new FileStream(path, FileMode.Append);
-            using (StreamWriter file = new StreamWriter(fs, Encoding.UTF8))
+
+            try
             {
-                //file.Write(headers);
-                //file.WriteLine();
-
-                string[] resultParse = resultQuery.Split('%');
-
-                for (int i = 0; i < resultParse.Length; i++)
+                FileStream fs = new FileStream(path, FileMode.Append);
+                using (StreamWriter file = new StreamWriter(fs, Encoding.UTF8))
                 {
-                    file.WriteLine(resultParse[i]);
-                }                    
-            }
+                    string[] resultParse = resultQuery.Split('%');
 
+                    for (int i = 0; i < resultParse.Length; i++)
+                    {
+                        file.WriteLine(resultParse[i]);
+                    }
+                }
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine(e.Message );
+            }
+        
             return path+"|"+nameFile;
         }
 
-        public string writeIntegrationinExcel(/*string headers,*/ string resultQuery, string locationToSave, string nameIntegration)
+        public string writeIntegrationinExcel(string resultQuery, string locationToSave, string nameIntegration)
         {
-            StringBuilder csvContent = new StringBuilder();
-            //string header = headers.Replace("|", ",");
+            StringBuilder csvContent = new StringBuilder();           
             string query = resultQuery.Replace("%", ",");
 
             //csvContent.AppendLine(header);

@@ -137,10 +137,11 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void saveQuery(string queryString, string description, string integrationType)
+        public void saveQuery(string queryString, string queryName, string description, string integrationType)
         {
             Query query = new Query();
             query.Query1 = queryString;
+            query.QueryName = queryName;
             query.Description = description;
             query.IntegrationTypeId = Convert.ToInt32(integrationType);
 
@@ -222,10 +223,11 @@ namespace IntegrationTool.Models
             systemConfigurationDB.SaveChanges();
         }
 
-        public void updateQuery(int id, string queryString, string description, int integrationTypeId)
+        public void updateQuery(int id, string queryString, string queryName, string description, int integrationTypeId)
         {
             Query query = systemConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
             query.Query1 = queryString;
+            query.QueryName = queryName;
             query.Description = description;
             query.IntegrationTypeId = integrationTypeId;
 

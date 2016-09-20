@@ -29,6 +29,17 @@
                     <!-- form start -->
                     <form name="form" role="form" ng-submit="sendRequest(request, form)" novalidate>
                         <div class="box-body">
+
+                            <div class="form-group">
+                                <label>Integration Name</label>
+                                <input ng-model="request.IntegrationName" type="text" class="form-control" id="IntegrationName" name="IntegrationName" placeholder="Enter Integration Name" ng-required="true">
+                                <div ng-if="form.IntegrationName.$touched || form.$submitted">
+                                    <div ng-messages="form.IntegrationName.$error" role="alert">
+                                        <div class="help-block error-text" ng-message="required">* Integration Name is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label>Integration Type</label>
                                 <select class="form-control select" name="IntegrationTypeId" style="width: 100%;" ng-model="request.IntegrationTypeId" ng-change="getQueries(request.IntegrationTypeId)" ng-required="true">
@@ -83,13 +94,26 @@
 
                             <div class="form-group">
                                 <label>Database</label>
-                                <select class="form-control select" name="DatabaseParametersId" style="width: 100%;" ng-model="request.DatabaseParametersId" ng-required="true">
+                                <select class="form-control select" name="DatabaseParametersId" style="width: 100%;" ng-model="request.DatabaseParametersId" ng-change="getDatabase(request.DatabaseParametersId)" ng-required="true">
                                     <option selected disabled value="">Select</option>
-                                    <option ng-repeat="database in databases" value="{{database.DatabaseParametersId}}">NAME<{{database.Name}}> IP<{{database.Ip}}> PORT<{{database.Port}}> INSTANCE<{{database.Instance}}></option>
+                                    <option ng-repeat="database in databases" value="{{database.DatabaseParametersId}}">{{database.Name}}</option>
                                 </select>
                                 <div ng-if="form.DatabaseParametersId.$touched || form.$submitted">
                                     <div ng-messages="form.DatabaseParametersId.$error" role="alert">
                                         <div class="help-block error-text" ng-message="required">* Database is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-hide="request.DatabaseParametersId == null" class="form-group">
+                                <div class="col-md-12">
+                                    <label>Description Database</label>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="4" required disabled>
+                                        NAME: {{database.Name}}
+                                        IP: {{database.Ip}}
+                                        PORT: {{database.Port}}
+                                        INSTANCE: {{database.Instance}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +141,7 @@
                                 <label>Query</label>
                                 <select class="form-control select" name="QueryId" style="width: 100%;" ng-model="request.QueryId" ng-change="getQuery(request.QueryId);" ng-required="true">
                                     <option selected disabled value="">Select</option>
-                                    <option ng-repeat="query in queries" value="{{query.QueryId}}">{{query.Query1}}</option>
+                                    <option ng-repeat="query in queries" value="{{query.QueryId}}">{{query.QueryName}}</option>
                                 </select>
                                 <div ng-if="form.QueryId.$touched || form.$submitted">
                                     <div ng-messages="form.QueryId.$error" role="alert">
@@ -130,13 +154,13 @@
                                 <div class="col-md-6">
                                     <label for="Description">Description </label>
                                     <div class="form-group">
-                                        <textarea name="Description" ng-model="query.Description" id="Description" class="form-control" rows="3" required disabled></textarea>
+                                        <textarea name="Description" ng-model="query.Description" id="Description" class="form-control" rows="5" required disabled></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Query">Query </label>
                                     <div class="form-group">
-                                        <textarea name="Query" ng-model="query.Query1" id="Query" class="form-control" rows="3" required disabled></textarea>
+                                        <textarea name="Query" ng-model="query.Query1" id="Query" class="form-control" rows="5" required disabled></textarea>
                                     </div>
                                 </div>
                             </div>

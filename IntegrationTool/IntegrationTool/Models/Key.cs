@@ -9,25 +9,13 @@
 
 namespace IntegrationTool.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
-    public partial class Query
+    public partial class Key
     {
-        public Query()
-        {
-            this.Integrations = new HashSet<Integration>();
-        }
-    
-        public int QueryId { get; set; }
-        public string Query1 { get; set; }
+        public int KeyId { get; set; }
+        public string KeyValue { get; set; }
         public string Description { get; set; }
-        public int IntegrationTypeId { get; set; }
-        public string QueryName { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Integration> Integrations { get; set; }
-        public virtual IntegrationsType IntegrationsType { get; set; }
     }
 }

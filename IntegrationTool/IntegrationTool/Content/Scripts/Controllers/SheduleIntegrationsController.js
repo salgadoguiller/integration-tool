@@ -49,7 +49,7 @@
             $scope.listIntegrationShedule[index] =
             {
                 id: resp[index].IntegrationId,
-                title: resp[index].IntegrationsType.Name,
+                title: resp[index].IntegrationName,
                 start: new Date(fechaSplit[0], fechaSplit[1] - 1, fechaSplit[2], horaSplit[0], horaSplit[1], horaSplit[2]),
                 url: '/#/Integration/configuration/' + resp[index].IntegrationId,
                 backgroundColor: colors[count],

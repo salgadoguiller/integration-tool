@@ -120,6 +120,7 @@ CREATE TABLE IntegrationsType (
 CREATE TABLE Queries (
   QueryId INT NOT NULL IDENTITY(1,1),
   Query VARCHAR(MAX) NOT NULL,
+  QueryName VARCHAR(200) NOT NULL,
   Description VARCHAR(MAX) NOT NULL,
   IntegrationTypeId INT NOT NULL,
   CONSTRAINT PK_Query
@@ -182,6 +183,7 @@ CREATE TABLE IntegrationCategories (
 -- -----------------------------------------------------
 CREATE TABLE Integrations (
   IntegrationId INT NOT NULL IDENTITY(1,1),
+  IntegrationName VARCHAR(200) NOT NULL,
   CurlParameters VARCHAR(120),
   IntegrationDate DATETIME NOT NULL,
   UserId INT NOT NULL,
@@ -268,6 +270,17 @@ CREATE TABLE ActiveDirectoryParameters (
   ADDomain VARCHAR(80) NOT NULL,
   CONSTRAINT PK_ActiveDirectoryParameter
     PRIMARY KEY (ActiveDirectoryId));
+
+
+-- -----------------------------------------------------
+-- Table Keys
+-- -----------------------------------------------------
+CREATE TABLE Keys (
+  KeyId INT NOT NULL IDENTITY(1,1),
+  KeyValue VARCHAR(200) NOT NULL,
+  Description VARCHAR(500) NOT NULL,
+  CONSTRAINT PK_Key
+    PRIMARY KEY (KeyId));
 
 
 -- -----------------------------------------------------

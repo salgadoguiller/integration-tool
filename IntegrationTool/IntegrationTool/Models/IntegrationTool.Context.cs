@@ -35,6 +35,7 @@ namespace IntegrationTool.Models
         public DbSet<IntegrationLog> IntegrationLogs { get; set; }
         public DbSet<Integration> Integrations { get; set; }
         public DbSet<IntegrationsType> IntegrationsTypes { get; set; }
+        public DbSet<Key> Keys { get; set; }
         public DbSet<OperationsWebService> OperationsWebServices { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Query> Queries { get; set; }

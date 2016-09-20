@@ -17,7 +17,7 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         // Almacenar integración en el sistema.
         // ================================================================================================================
-        public void saveIntegrationManual(int userId,  int webServiceId, int databaseParametersId,
+        public void saveIntegrationManual(int userId, string integrationName, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
                                             string curlParameters = null)
@@ -26,6 +26,7 @@ namespace IntegrationTool.Models
 
             integration.IntegrationDate = DateTime.Now;
             integration.UserId = userId;
+            integration.IntegrationName = integrationName;
             integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
             integration.OperationWebServiceId = operationWebServiceId;
@@ -42,7 +43,7 @@ namespace IntegrationTool.Models
             integrationConfigurationDB.SaveChanges();
         }
 
-        public void saveIntegrationSchedule(int userId, int webServiceId, int databaseParametersId,
+        public void saveIntegrationSchedule(int userId, string integrationName, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
                                             DateTime executionStartDate, DateTime executionEndDate, int recurenceId, string emails = null,
@@ -52,6 +53,7 @@ namespace IntegrationTool.Models
 
             integration.IntegrationDate = DateTime.Now;
             integration.UserId = userId;
+            integration.IntegrationName = integrationName;
             integration.CurlParameters = curlParameters;
             integration.WebServiceId = webServiceId;
             integration.OperationWebServiceId = operationWebServiceId;
@@ -115,6 +117,12 @@ namespace IntegrationTool.Models
         {
             List<Integration> integrations = integrationConfigurationDB.Integrations.Where(param => param.IntegrationCategoryId == 1).ToList();
             return integrations;
+        }
+
+        public Integration getIntegration(int id)
+        {
+            Integration integration = integrationConfigurationDB.Integrations.Where(param => param.IntegrationId == id).ToList()[0];
+            return integration;
         }
     }
 }

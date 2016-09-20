@@ -248,7 +248,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                systemConfigurationModel.saveQuery(encryptor.encryptData(Request.Form["Query1"]), encryptor.encryptData(Request.Form["Description"]), Request.Form["IntegrationTypeId"]);
+                systemConfigurationModel.saveQuery(encryptor.encryptData(Request.Form["Query1"]), encryptor.encryptData(Request.Form["QueryName"]), encryptor.encryptData(Request.Form["Description"]), Request.Form["IntegrationTypeId"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Configuration Query Successful.\"}";
             }
@@ -398,6 +398,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 systemConfigurationModel.updateQuery(Convert.ToInt32(Request.Form["QueryId"]),
                                                     encryptor.encryptData(Request.Form["Query1"]),
+                                                    encryptor.encryptData(Request.Form["QueryName"]),
                                                     encryptor.encryptData(Request.Form["Description"]),
                                                     Convert.ToInt32(Request.Form["IntegrationTypeId"]));
 
@@ -472,6 +473,7 @@ namespace IntegrationTool.Controllers
                 foreach (Query query in queries)
                 {
                     query.Query1 = encryptor.decryptData(query.Query1);
+                    query.QueryName = encryptor.decryptData(query.QueryName);
                     query.Description = encryptor.decryptData(query.Description);
                 }
 
@@ -606,7 +608,7 @@ namespace IntegrationTool.Controllers
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the databases. Please try again.\"}";
             }
@@ -735,6 +737,7 @@ namespace IntegrationTool.Controllers
                 Query query = systemConfigurationModel.getQuery(id);
 
                 query.Query1 = encryptor.decryptData(query.Query1);
+                query.QueryName = encryptor.decryptData(query.QueryName);
                 query.Description = encryptor.decryptData(query.Description);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(query,

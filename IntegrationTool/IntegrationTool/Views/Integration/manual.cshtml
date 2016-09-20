@@ -29,8 +29,9 @@
               <table id="datatable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Integration Type</th>
-                  <th>Integration Category</th>
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>Category</th>
                   <th>Web Service</th>
                   <th>Operation Web Service</th>
                   <th>Database</th>
@@ -43,6 +44,7 @@
                 <tbody>
                 <tr ng-repeat="integration in manualIntegrations">
                     <td>{{integration.IntegrationsType.Name}}</td>
+                    <td>{{integration.IntegrationName}}</td>
                     <td>{{integration.IntegrationCategory.Name}}</td>
                     <td>{{integration.WebService.Endpoint}}</td>
                     <td>{{integration.OperationsWebService.Name}}</td>
@@ -51,7 +53,7 @@
                         IP<{{integration.DatabaseParameter.Ip}}> 
                         PORT<{{integration.DatabaseParameter.Port}}> 
                         INSTANCE<{{integration.DatabaseParameter.Instance}}></td>
-                    <td>{{integration.FlatFilesParameter.Location}}\{{integration.FlatFile.Name}}</td>
+                    <td>{{integration.FlatFilesParameter.Location}}/{{integration.FlatFile.Name}}</td>
                     <td>{{integration.CurlParameters}}</td>
                     <td>{{integration.Query.Query1}}</td>
                     <td>
@@ -64,8 +66,9 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Integration Type</th>
-                  <th>Integration Category</th>
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>Category</th>
                   <th>Web Service</th>
                   <th>Operation Web Service</th>
                   <th>Database</th>

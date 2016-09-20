@@ -30,15 +30,17 @@
                 <table id="datable" class="table table-bordered table-striped table-hover">                    
                     <thead>
                     <tr >
-                      <th>Query Type</th>
+                      <th>Type</th>
+                      <th>Name</th>
                       <th>Query</th>
-                      <th>Query Description</th>
+                      <th>Description</th>
                       <th>Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="query in listQueries">
                        <td>{{query.IntegrationsType.Name}}</td>
+                       <td>{{query.QueryName}}</td>
                        <td>{{query.Query1}}</td>
                        <td>{{query.Description}}</td>
                        <td>
@@ -51,10 +53,11 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Query Type</th>
-                        <th>Query</th>
-                        <th>Query Description</th>
-                        <th>Options</th>
+                      <th>Type</th>
+                      <th>Name</th>
+                      <th>Query</th>
+                      <th>Description</th>
+                      <th>Options</th>
                     </tr>
                     </tfoot>
                 </table>

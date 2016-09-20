@@ -11,13 +11,16 @@ using ClassLibrary;
 namespace IntegrationToolService
 {
     public class GenerateIntegration
-    {
+    {                
         private string dataConnection;
         private SqlConnection connection;
+        private Integration integration = new Integration();
         private Encrypt decrypt = new Encrypt();
         private Curl curl = new Curl();
         private  WriteFileController writeFileController= new WriteFileController();
         private string emails = "";
+        private string location = "";
+     
        
         public GenerateIntegration(string server = "172.20.33.13", string databaseName = "IntegrationTool", string userId="SISUser",string password="test2016!")
         {
@@ -108,7 +111,9 @@ namespace IntegrationToolService
                 emails = Convert.ToString(table.Rows[i]["Emails"]);
 
                 updateTimeToExecuteIntegration(calendarId, setNewTimeToExecuteIntegration(recurrenceId, nextExecutionDate));
-                executeIntegration(integrationId);
+               // executeIntegration(integrationId);
+
+                integration.initIntegrationAutomatic(integrationId, emails);
             }
         }
 
@@ -159,12 +164,12 @@ namespace IntegrationToolService
 
         //Desde este metodo partiria para una integracion manual, sin hacer los metodos previos
         //6
-        private void executeIntegration(int integrationId)
+        /*private void executeIntegration(int integrationId)
         {          
             string resultQueryAndNameIntegration = obtainDatabaseParameters(integrationId);       
             string[] result = resultQueryAndNameIntegration.Split('$');
             
-            string location= obtainLocationFileToSave(integrationId);
+            location= obtainLocationFileToSave(integrationId);
             string fullPathMoreNameFile = writeFileController.writeFileinFlatFile(result[0], location, result[1]);
             string webServicesParameters = obtainWebService(integrationId);
 
@@ -188,8 +193,12 @@ namespace IntegrationToolService
 
             DataTable table = DataTable(query);
 
-            InterfaceDatabase iNterfaceDatabase = dataBase.createInstanceDataBase(decrypt.decryptData(Convert.ToString(table.Rows[0]["Ip"])),"" /*decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"]))*/, decrypt.decryptData(Convert.ToString(table.Rows[0]["Name"])),
-            ""/*decrypt.decryptData(Convert.ToString(table.Rows[0]["Instance"]))*/, decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), ""/*decrypt.decryptData(Convert.ToString(table.Rows[0]["Password"]))*/, Convert.ToString(table.Rows[0]["NameEngine"]));
+            string instance = (Convert.ToString(table.Rows[0]["Instance"]) != null) ? decrypt.decryptData(Convert.ToString(table.Rows[0]["Instance"])) : "";
+            string port = (Convert.ToString(table.Rows[0]["Port"]) != null) ? decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])) : "";
+            string password = (Convert.ToString(table.Rows[0]["Password"]) != null) ? decrypt.decryptData(Convert.ToString(table.Rows[0]["Password"])) : "";
+             
+            InterfaceDatabase iNterfaceDatabase = dataBase.createInstanceDataBase(decrypt.decryptData(Convert.ToString(table.Rows[0]["Ip"])), port, decrypt.decryptData(Convert.ToString(table.Rows[0]["Name"])),
+            instance, decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), password, Convert.ToString(table.Rows[0]["NameEngine"]));
 
             return executeQueryInDatabase(iNterfaceDatabase, integrationId);
         }
@@ -280,27 +289,28 @@ namespace IntegrationToolService
         {
             string[] webServices = webServicesParameters.Split('|');
 
-            string curlCommand = "curl -w '%{http_code}' -H 'Content-Type:text/plain' --data-binary '"+fullPath+ "' -u "+webServices[4]+":"+webServices[3]+" --url "+webServices[0]+webServices[1]+"/"+webServices[2];
+            string curlCommand = "curl -w '%{http_code}' -H Content-Type:text/plain --data-binary @" + fullPath + " -u " + webServices[4] + ":" + webServices[3] + " --url " + webServices[0] + webServices[1] + "/" + webServices[2]+"> "+location+"/LogIntegration.txt";
            
             Console.WriteLine(curlCommand);
             curl.IntegrationWithCurl(curlCommand);
 
-            sendEmail();
+            //sendEmail();
         }
 
         //12
         private void sendEmail()
-        {
-            SendEmail email = new SendEmail();
+        {            
+            if (emails != null || !emails.Equals(""))
+            {
+                SendEmail email = new SendEmail();
 
-            string query = "SELECT NameServerSMTP, Port, UsernameSMTP, PasswordSMTP, EmailFrom, Subject, Body FROM dbo.ServerSMTPParameters";
-            DataTable table = DataTable(query);
+                string query = "SELECT NameServerSMTP, Port, UsernameSMTP, PasswordSMTP, EmailFrom, Subject, Body FROM dbo.ServerSMTPParameters";
+                DataTable table = DataTable(query);
 
-            Console.WriteLine(emails);
-
-            email.sendMail(decrypt.decryptData(Convert.ToString(table.Rows[0]["UsernameSMTP"])),decrypt.decryptData(Convert.ToString(table.Rows[0]["PasswordSMTP"])),decrypt.decryptData(Convert.ToString(table.Rows[0]["NameServerSMTP"])),
-                           decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["EmailFrom"])), emails, decrypt.decryptData(Convert.ToString(table.Rows[0]["Subject"])),
-                           decrypt.decryptData(Convert.ToString(table.Rows[0]["Body"])));          
+                email.sendMail(decrypt.decryptData(Convert.ToString(table.Rows[0]["UsernameSMTP"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["PasswordSMTP"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["NameServerSMTP"])),
+                               decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["EmailFrom"])), emails, decrypt.decryptData(Convert.ToString(table.Rows[0]["Subject"])),
+                               decrypt.decryptData(Convert.ToString(table.Rows[0]["Body"])));
+            }                    
         }
 
         //13
@@ -308,11 +318,10 @@ namespace IntegrationToolService
         {          
             string query = "insert into FlatFiles (Name) values('" + NameFile + "')";
 
-            Console.WriteLine(query);
             OpenConnection();
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
             CloseConnection();          
-        }
+        }*/
     }
 }

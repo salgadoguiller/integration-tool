@@ -31,17 +31,26 @@ namespace ClassLibrary
 
         public void openConnection()
         {
-            /*
+           
             string conectionString = "Data Source=" + this.ip + this.serverInstance + this.port + ";" + 
                                     "Initial Catalog=" + this.nameDataBase + ";" + 
                                     "User ID="  + this.username + ";" + 
                                     "Password=" + this.password;
-            */
-            string conectionString = "Data Source=" + this.ip + ";" +
+           
+            /*string conectionString = "Data Source=" + this.ip + ";" +
                         "Initial Catalog=" + this.nameDataBase + ";" +
-                        "Integrated Security=true;";
+                        "Integrated Security=true;";*/
+
             this.con = new SqlConnection(conectionString);
-            this.con.Open();
+
+            try
+            {
+                this.con.Open();
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }       
         }
 
         public void closeConnection()
@@ -55,12 +64,21 @@ namespace ClassLibrary
         public string executeQuery(string query)
         {                  
             SqlCommand queryCommand = new SqlCommand(query, con);
-            SqlDataReader reader = queryCommand.ExecuteReader();
-
             string result = "";
 
-            while (reader.Read())
-                result += reader.GetString(0) + "%";
+            try
+            {
+                SqlDataReader reader = queryCommand.ExecuteReader();
+            
+                while (reader.Read())
+                    result += reader.GetString(0) + "%";
+            }
+            catch (System.InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+          
 
             return result;
         }

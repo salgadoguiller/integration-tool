@@ -49,12 +49,26 @@ namespace ClassLibrary
 
         public void openConnection()
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }           
         }
 
         public void closeConnection()
         {
-            connection.Close();
+            try
+            {
+                connection.Close();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }              
         }
 
         public string executeQuery(string query)
@@ -64,16 +78,22 @@ namespace ClassLibrary
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
             //openConnection();
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+                MySqlDataReader returnQuery = command.ExecuteReader();
 
-            MySqlDataReader returnQuery = command.ExecuteReader();
-
-            while (returnQuery.Read())
-            {              
-                string response = returnQuery.GetString(0);
-                responseQuery += response + "%";
+                while (returnQuery.Read())
+                {
+                    string response = returnQuery.GetString(0);
+                    responseQuery += response + "%";
+                }
             }
-
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+                  
             //closeConnection();
             return responseQuery;
         }  

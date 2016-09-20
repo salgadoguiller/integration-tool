@@ -81,6 +81,7 @@ namespace IntegrationTool.Controllers
                 if (Request.Form["IntegrationCategoryId"] == "1")
                 {
                     integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                                Request.Form["IntegrationName"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -102,6 +103,7 @@ namespace IntegrationTool.Controllers
                     DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
 
                     integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                                Request.Form["IntegrationName"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
                                                                 /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
@@ -120,7 +122,7 @@ namespace IntegrationTool.Controllers
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration Successful Stored.\"}";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Integration Unsuccessful Stored. Please try again.\"}";
             }
@@ -144,6 +146,7 @@ namespace IntegrationTool.Controllers
                 foreach (Query query in queries)
                 {
                     query.Query1 = encryptor.decryptData(query.Query1);
+                    query.QueryName = encryptor.decryptData(query.QueryName);
                     query.Description = encryptor.decryptData(query.Description);
                 }
 
@@ -245,7 +248,7 @@ namespace IntegrationTool.Controllers
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the schedule integration. Please try again.\"}";
             }
@@ -265,15 +268,79 @@ namespace IntegrationTool.Controllers
                 List<Integration> integrations = integrationConfigurationModel.getManualIntegrations();
 
                 
-                foreach (Integration i in integrations)
+                for (int index = 0; index < integrations.Count; index++ )
                 {
-                    i.WebService.Endpoint = encryptor.decryptData(i.WebService.Endpoint);
-                    i.DatabaseParameter.Name = encryptor.decryptData(i.DatabaseParameter.Name);
-                    i.DatabaseParameter.Port = (i.DatabaseParameter.Port != null) ? encryptor.decryptData(i.DatabaseParameter.Port) : null;
-                    i.DatabaseParameter.Instance = (i.DatabaseParameter.Instance != null) ? encryptor.decryptData(i.DatabaseParameter.Instance) : null;
-                    i.DatabaseParameter.Ip = encryptor.decryptData(i.DatabaseParameter.Ip);
-                    i.FlatFilesParameter.Location = encryptor.decryptData(i.FlatFilesParameter.Location);
-                    i.Query.Query1 = encryptor.decryptData(i.Query.Query1);
+                    try
+                    {
+                        integrations[index].WebService.Endpoint = encryptor.decryptData(integrations[index].WebService.Endpoint);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                    try
+                    {
+                        integrations[index].DatabaseParameter.Name = encryptor.decryptData(integrations[index].DatabaseParameter.Name);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+            
+                    try
+                    {
+                        integrations[index].DatabaseParameter.Port = (integrations[index].DatabaseParameter.Port != null) ? encryptor.decryptData(integrations[index].DatabaseParameter.Port) : null;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    try
+                    {
+                        integrations[index].DatabaseParameter.Instance = (integrations[index].DatabaseParameter.Instance != null) ? encryptor.decryptData(integrations[index].DatabaseParameter.Instance) : null;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    try
+                    {
+                        integrations[index].DatabaseParameter.Instance = (integrations[index].DatabaseParameter.Instance != null) ? encryptor.decryptData(integrations[index].DatabaseParameter.Instance) : null;
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                    try
+                    {
+                        integrations[index].DatabaseParameter.Ip = encryptor.decryptData(integrations[index].DatabaseParameter.Ip);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    try
+                    {
+                        integrations[index].FlatFilesParameter.Location = encryptor.decryptData(integrations[index].FlatFilesParameter.Location);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    try
+                    {
+                        integrations[index].Query.Query1 = encryptor.decryptData(integrations[index].Query.Query1);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
@@ -284,8 +351,30 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception e)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"" + e.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the manual integration. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the manual integration. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getIntegration(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                Integration integration = integrationConfigurationModel.getIntegration(id);
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integration,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
             }
 
             response(resp);

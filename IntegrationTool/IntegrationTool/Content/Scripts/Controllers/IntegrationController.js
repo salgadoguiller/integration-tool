@@ -12,10 +12,12 @@
     $scope.recurrences = [];
     $scope.params = [];
     $scope.query;
+    $scope.database;
     $scope.sendRequest = sendRequest;
     $scope.getQueries = getQueries;
     $scope.getQuery = getQuery;
     $scope.getRecurrences = getRecurrences;
+    $scope.getDatabase = getDatabase;
 
     getIntegrationsType();
     getWebServices();
@@ -24,7 +26,55 @@
     getFlatFiles();
     getIntegrationCategories();
 
-    var id = $routeParams.id;
+    if ($routeParams.id != -1) {
+        getIntegration($routeParams.id);
+    }
+
+    function getDatabase(id) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Configuration/getDataBase?id=' + id, data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                $scope.database = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+    }
+
+    function getIntegration(id) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Integration/getIntegration?id=' + id, data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                console.log(resp);
+                resp.IntegrationTypeId = '\'' + resp.IntegrationTypeId + '\''
+                $scope.request = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+    }
 
     function sendRequest(req, form) {
         if (!form.$valid) {

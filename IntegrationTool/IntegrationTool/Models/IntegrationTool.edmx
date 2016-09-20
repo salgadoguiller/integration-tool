@@ -16,6 +16,7 @@
           <EntitySet Name="IntegrationLogs" EntityType="IntegrationToolModel.Store.IntegrationLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Integrations" EntityType="IntegrationToolModel.Store.Integrations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="IntegrationsType" EntityType="IntegrationToolModel.Store.IntegrationsType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Keys" EntityType="IntegrationToolModel.Store.Keys" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OperationsWebServices" EntityType="IntegrationToolModel.Store.OperationsWebServices" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Permissions" EntityType="IntegrationToolModel.Store.Permissions" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Queries" EntityType="IntegrationToolModel.Store.Queries" store:Type="Tables" Schema="dbo" />
@@ -191,6 +192,7 @@
           <Property Name="IntegrationCategoryId" Type="int" Nullable="false" />
           <Property Name="CurlParameters" Type="varchar" MaxLength="120" />
           <Property Name="OperationWebServiceId" Type="int" Nullable="false" />
+          <Property Name="IntegrationName" Type="varchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="IntegrationsType">
           <Key>
@@ -199,6 +201,14 @@
           <Property Name="IntegrationTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Identifier" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Keys">
+          <Key>
+            <PropertyRef Name="KeyId" />
+          </Key>
+          <Property Name="KeyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
         </EntityType>
         <EntityType Name="OperationsWebServices">
           <Key>
@@ -224,6 +234,7 @@
           <Property Name="Query" Type="varchar(max)" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="IntegrationTypeId" Type="int" Nullable="false" />
+          <Property Name="QueryName" Type="varchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="QueryParameters">
           <Key>
@@ -552,6 +563,7 @@
           <EntitySet Name="IntegrationLogs" EntityType="IntegrationToolModel.IntegrationLog" />
           <EntitySet Name="Integrations" EntityType="IntegrationToolModel.Integration" />
           <EntitySet Name="IntegrationsTypes" EntityType="IntegrationToolModel.IntegrationsType" />
+          <EntitySet Name="Keys" EntityType="IntegrationToolModel.Key" />
           <EntitySet Name="OperationsWebServices" EntityType="IntegrationToolModel.OperationsWebService" />
           <EntitySet Name="Permissions" EntityType="IntegrationToolModel.Permission" />
           <EntitySet Name="Queries" EntityType="IntegrationToolModel.Query" />
@@ -736,6 +748,7 @@
           <Property Name="IntegrationCategoryId" Type="Int32" Nullable="false" />
           <Property Name="CurlParameters" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
           <Property Name="OperationWebServiceId" Type="Int32" Nullable="false" />
+          <Property Name="IntegrationName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Calendars" Relationship="IntegrationToolModel.FK_CalendarsIntegrations_IntegrationId" FromRole="Integrations" ToRole="Calendars" />
           <NavigationProperty Name="DatabaseParameter" Relationship="IntegrationToolModel.FK_IntegrationsDatabaseParameters_DatabaseParametersId" FromRole="Integrations" ToRole="DatabaseParameters" />
           <NavigationProperty Name="FlatFile" Relationship="IntegrationToolModel.FK_IntegrationsFlatFiles_FlatFileId" FromRole="Integrations" ToRole="FlatFiles" />
@@ -759,6 +772,14 @@
           <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsIntegrationsType_IntegrationTypeId" FromRole="IntegrationsType" ToRole="Integrations" />
           <NavigationProperty Name="Queries" Relationship="IntegrationToolModel.FK_QueriesIntegrationsType_IntegrationTypeId" FromRole="IntegrationsType" ToRole="Queries" />
+        </EntityType>
+        <EntityType Name="Key">
+          <Key>
+            <PropertyRef Name="KeyId" />
+          </Key>
+          <Property Name="KeyId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="OperationsWebService">
           <Key>
@@ -787,6 +808,7 @@
           <Property Name="Query1" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="IntegrationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="QueryName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsQueries_QueryId" FromRole="Queries" ToRole="Integrations" />
           <NavigationProperty Name="IntegrationsType" Relationship="IntegrationToolModel.FK_QueriesIntegrationsType_IntegrationTypeId" FromRole="Queries" ToRole="IntegrationsType" />
         </EntityType>
@@ -1209,6 +1231,7 @@
                 <ScalarProperty Name="IntegrationCategoryId" ColumnName="IntegrationCategoryId" />
                 <ScalarProperty Name="CurlParameters" ColumnName="CurlParameters" />
                 <ScalarProperty Name="OperationWebServiceId" ColumnName="OperationWebServiceId" />
+                <ScalarProperty Name="IntegrationName" ColumnName="IntegrationName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1218,6 +1241,15 @@
                 <ScalarProperty Name="IntegrationTypeId" ColumnName="IntegrationTypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keys">
+            <EntityTypeMapping TypeName="IntegrationToolModel.Key">
+              <MappingFragment StoreEntitySet="Keys">
+                <ScalarProperty Name="KeyId" ColumnName="KeyId" />
+                <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1246,6 +1278,7 @@
                 <ScalarProperty Name="Query1" ColumnName="Query" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IntegrationTypeId" ColumnName="IntegrationTypeId" />
+                <ScalarProperty Name="QueryName" ColumnName="QueryName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

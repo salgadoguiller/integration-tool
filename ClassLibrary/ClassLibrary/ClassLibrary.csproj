@@ -47,6 +47,7 @@
     <Compile Include="Curl.cs" />
     <Compile Include="DataBaseFactory.cs" />
     <Compile Include="Encrypt.cs" />
+    <Compile Include="Integration.cs" />
     <Compile Include="InterfaceDatabase.cs" />
     <Compile Include="MySqlDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
