@@ -13,6 +13,7 @@ IntegrationToolApp.controller('ListFlatFilesController', ListFlatFilesController
 IntegrationToolApp.controller('ListQueriesController', ListQueriesController);
 IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPController);
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
+IntegrationToolApp.controller('ListKeysController', ListKeysController);
 
 IntegrationToolApp.controller('IntegrationController', IntegrationController);
 IntegrationToolApp.controller('ManualIntegrationController', ManualIntegrationController);
@@ -49,6 +50,10 @@ var configFunction = function ($routeProvider) {
         .when('/Configuration/listWebServices', {
             templateUrl: '/Configuration/listWebServices',
             controller: 'ListWebServicesController'
+        })
+        .when('/Configuration/listKeys', {
+            templateUrl: '/Configuration/listKeys',
+            controller: 'ListKeysController'
         })
         .when('/Configuration/formActiveDirectory/:id', {
             templateUrl: '/Configuration/formActiveDirectory',

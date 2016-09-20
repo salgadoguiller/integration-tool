@@ -80,7 +80,7 @@ namespace IntegrationTool.Controllers
 
                 if (Request.Form["IntegrationCategoryId"] == "1")
                 {
-                    integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                    int integrationId = integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
                                                                 Request.Form["IntegrationName"],
                                                                 Convert.ToInt32(Request.Form["WebServiceId"]),
                                                                 Convert.ToInt32(Request.Form["DatabaseParametersId"]),
@@ -93,7 +93,8 @@ namespace IntegrationTool.Controllers
                                                                 queryParameters,
                                                                 Request.Form["CurlParameters"]);
 
-                    // Execute Integration
+                    ClassLibrary.Integration integration = new ClassLibrary.Integration();
+                    integration.executeIntegration(integrationId);
                 }
                 else
                 {
@@ -240,7 +241,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                List<Integration> integrations = integrationConfigurationModel.getScheduleIntegrations();
+                List<IntegrationTool.Models.Integration> integrations = integrationConfigurationModel.getScheduleIntegrations();
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
                     new JsonSerializerSettings()
@@ -265,7 +266,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                List<Integration> integrations = integrationConfigurationModel.getManualIntegrations();
+                List<IntegrationTool.Models.Integration> integrations = integrationConfigurationModel.getManualIntegrations();
 
                 
                 for (int index = 0; index < integrations.Count; index++ )
@@ -364,7 +365,7 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                Integration integration = integrationConfigurationModel.getIntegration(id);
+                IntegrationTool.Models.Integration integration = integrationConfigurationModel.getIntegration(id);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integration,
                     new JsonSerializerSettings()

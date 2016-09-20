@@ -27,6 +27,8 @@
 
         $http.get('Configuration/getDataBase?id=' + $routeParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
+                resp.EngineId =  resp.EngineId + ''
+                console.log(resp);
                 $scope.request = resp;
             } else {
                 $scope.message = resp.message;

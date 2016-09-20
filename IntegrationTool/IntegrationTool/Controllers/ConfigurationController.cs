@@ -118,6 +118,12 @@ namespace IntegrationTool.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult listKeys()
+        {
+            return View();
+        }
+
         // ================================================================================================================
         // Almacena en base de datos parametros del sistema.
         // ================================================================================================================
@@ -641,6 +647,29 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the web services. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getListKeys()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Key> keys = systemConfigurationModel.getKeys();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(keys,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the keys. Please try again.\"}";
             }
 
             response(resp);

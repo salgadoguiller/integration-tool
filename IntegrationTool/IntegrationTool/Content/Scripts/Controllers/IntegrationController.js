@@ -27,7 +27,41 @@
     getIntegrationCategories();
 
     if ($routeParams.id != -1) {
-        getIntegration($routeParams.id);
+        getIntegrationManual($routeParams.id);
+    }
+
+    function getIntegrationManual(id) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Integration/getIntegration?id=' + id, data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                resp.IntegrationTypeId = resp.IntegrationTypeId + '';
+                resp.IntegrationCategoryId = resp.IntegrationCategoryId + '';
+                resp.WebServiceId = resp.WebServiceId + '';
+                resp.OperationWebServiceId = resp.OperationWebServiceId + '';
+                resp.DatabaseParametersId = resp.DatabaseParametersId + '';
+                resp.FlatFileParameterId = resp.FlatFileParameterId + '';
+                resp.QueryId = resp.QueryId + '';
+
+                getQueries(resp.IntegrationTypeId);
+                getQuery(resp.QueryId);
+                getDatabase(resp.DatabaseParametersId);
+
+                $scope.request = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
     }
 
     function getDatabase(id) {
@@ -42,30 +76,6 @@
         $http.get('Configuration/getDataBase?id=' + id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.database = resp;
-            } else {
-                $scope.message = resp.message;
-                $scope.typeMessage = resp.type;
-            }
-        }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
-        });
-    }
-
-    function getIntegration(id) {
-        var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        }
-
-        var data = $.param({});
-
-        $http.get('Integration/getIntegration?id=' + id, data, config).success(function (resp) {
-            if (resp.type !== 'danger') {
-                console.log(resp);
-                resp.IntegrationTypeId = '\'' + resp.IntegrationTypeId + '\''
-                $scope.request = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;

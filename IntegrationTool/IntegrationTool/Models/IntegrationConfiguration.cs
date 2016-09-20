@@ -17,7 +17,7 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         // Almacenar integración en el sistema.
         // ================================================================================================================
-        public void saveIntegrationManual(int userId, string integrationName, int webServiceId, int databaseParametersId,
+        public int saveIntegrationManual(int userId, string integrationName, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
                                             string curlParameters = null)
@@ -41,6 +41,8 @@ namespace IntegrationTool.Models
 
             integrationConfigurationDB.Integrations.Add(integration);
             integrationConfigurationDB.SaveChanges();
+
+            return integration.IntegrationId;
         }
 
         public void saveIntegrationSchedule(int userId, string integrationName, int webServiceId, int databaseParametersId,

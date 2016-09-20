@@ -73,6 +73,13 @@ namespace IntegrationTool.Models
             return integrationsType;
         }
 
+        public List<Key> getKeys()
+        {
+            List<Key> keys = (from k in systemConfigurationDB.Keys
+                                select k).ToList();
+            return keys;
+        }
+
         public ActiveDirectoryParameter getActiveDirectory(int id)
         {
             ActiveDirectoryParameter activeDirectory = systemConfigurationDB.ActiveDirectoryParameters.Where(param => param.ActiveDirectoryId == id).ToList()[0];

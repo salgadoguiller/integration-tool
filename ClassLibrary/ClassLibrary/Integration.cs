@@ -64,7 +64,7 @@ namespace ClassLibrary
 
         //Desde este metodo partiria para una integracion manual, sin hacer los metodos previos
         //6
-        private void executeIntegration(int integrationId)
+        public void executeIntegration(int integrationId)
         {
             string resultQueryAndNameIntegration = obtainDatabaseParameters(integrationId);
             string[] result = resultQueryAndNameIntegration.Split('$');

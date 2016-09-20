@@ -25,6 +25,7 @@
 
         $http.get('Configuration/getQuery?id=' + $routeParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
+                resp.IntegrationTypeId = resp.IntegrationTypeId + ''
                 $scope.request = resp;
             } else {
                 $scope.message = resp.message;

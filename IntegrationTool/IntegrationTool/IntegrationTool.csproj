@@ -262,6 +262,7 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
+    <Content Include="Content\Scripts\Controllers\ListKeysController.js" />
     <Content Include="Content\Scripts\Controllers\ManualIntegrationController.js" />
     <Content Include="Content\Scripts\Controllers\SheduleIntegrationsController.js" />
     <Content Include="Content\Scripts\Controllers\IntegrationController.js" />
@@ -439,6 +440,9 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listKeys.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
