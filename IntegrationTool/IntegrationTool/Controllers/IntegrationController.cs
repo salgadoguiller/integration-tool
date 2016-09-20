@@ -58,8 +58,8 @@ namespace IntegrationTool.Controllers
         public void saveIntegration()
         {
             string resp = "";
-            try
-            {
+            //try
+            //{
                 List<QueryParameter> queryParameters = new List<QueryParameter>();
                 Regex regex = new Regex(@"\[\[.*\]\]");
 
@@ -122,11 +122,11 @@ namespace IntegrationTool.Controllers
                 }
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration Successful Stored.\"}";
-            }
+            /*}
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Integration Unsuccessful Stored. Please try again.\"}";
-            }
+            }*/
 
 
             response(resp);
