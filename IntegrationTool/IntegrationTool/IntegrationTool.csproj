@@ -262,10 +262,11 @@
     <Content Include="Content\Images\boxed-bg.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
+    <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
     <Content Include="Content\Scripts\Controllers\ListKeysController.js" />
     <Content Include="Content\Scripts\Controllers\ManualIntegrationController.js" />
     <Content Include="Content\Scripts\Controllers\SheduleIntegrationsController.js" />
-    <Content Include="Content\Scripts\Controllers\IntegrationController.js" />
+    <Content Include="Content\Scripts\Controllers\ConfigIntegrationScheduledController.js" />
     <Content Include="Content\Scripts\Controllers\FormActiveDirectoryController.js" />
     <Content Include="Content\Scripts\Controllers\FormServerSMTPController.js" />
     <Content Include="Content\Scripts\Controllers\FormDataBaseController.js" />
@@ -412,7 +413,7 @@
     <Content Include="Views\Configuration\listWebServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Integration\configuration.cshtml" />
+    <Content Include="Views\Integration\configurationScheduled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Integration\calendar.cshtml" />
@@ -443,6 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Configuration\listKeys.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Integration\configurationManual.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

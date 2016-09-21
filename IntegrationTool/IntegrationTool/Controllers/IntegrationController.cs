@@ -16,25 +16,17 @@ namespace IntegrationTool.Controllers
         private IntegrationConfiguration integrationConfigurationModel;
         private Encrypt encryptor;
 
-        private void connectModel()
-        {
-            integrationConfigurationModel = new IntegrationConfiguration();
-            encryptor = new Encrypt();
-        }
-
-        private void response(string json)
-        {
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-        }
-
         // ================================================================================================================
         // Retorna las vitas del sistema.
         // ================================================================================================================
         [HttpGet]
-        public ActionResult configuration()
+        public ActionResult configurationScheduled()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult configurationManual()
         {
             return View();
         }
@@ -55,71 +47,73 @@ namespace IntegrationTool.Controllers
         // Almacena en base de datos integraciones automaticas y manuales.
         // ================================================================================================================
         [HttpPut]
-        public void saveIntegration()
+        public void saveIntegrationManual()
         {
             string resp = "";
             try
             {
-                List<QueryParameter> queryParameters = new List<QueryParameter>();
-                Regex regex = new Regex(@"\[\[.*\]\]");
-
-                for (int index = 0; index < Request.Form.Count; index++)
-                {
-                    Match match = regex.Match(Request.Form.AllKeys[index]);
-                    if(match.Success)
-                    {
-                        QueryParameter qp = new QueryParameter();
-                        qp.Name = Request.Form.AllKeys[index];
-                        qp.Value = "'" + Request.Form[qp.Name] + "'";
-
-                        queryParameters.Add(qp);
-                    }
-                }
+                List<QueryParameter> queryParameters = getQueryParameters(Request);
 
                 connectModel();
 
-                if (Request.Form["IntegrationCategoryId"] == "1")
-                {
-                    int integrationId = integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
-                                                                Request.Form["IntegrationName"],
-                                                                Convert.ToInt32(Request.Form["WebServiceId"]),
-                                                                Convert.ToInt32(Request.Form["DatabaseParametersId"]),
-                                                                /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
-                                                                Convert.ToInt32(Request.Form["FlatFileParameterId"]),
-                                                                Convert.ToInt32(Request.Form["IntegrationTypeId"]),
-                                                                Convert.ToInt32(Request.Form["QueryId"]),
-                                                                Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
-                                                                Convert.ToInt32(Request.Form["OperationWebServiceId"]),
-                                                                queryParameters,
-                                                                Request.Form["CurlParameters"]);
+                int integrationId = integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                            Request.Form["IntegrationName"],
+                                                            Convert.ToInt32(Request.Form["WebServiceId"]),
+                                                            Convert.ToInt32(Request.Form["DatabaseParametersId"]),
+                                                            /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
+                                                            Convert.ToInt32(Request.Form["FlatFileParameterId"]),
+                                                            Convert.ToInt32(Request.Form["IntegrationTypeId"]),
+                                                            Convert.ToInt32(Request.Form["QueryId"]),
+                                                            /*IntegrationCategoryId*/ 1,
+                                                            Convert.ToInt32(Request.Form["OperationWebServiceId"]),
+                                                            queryParameters,
+                                                            Request.Form["CurlParameters"]);
 
-                    // ClassLibrary.Integration integration = new ClassLibrary.Integration();
-                    // integration.executeIntegration(integrationId);
-                }
-                else
-                {
-                    string format = "ddd MMM dd yyyy HH:mm:ss 'GMT'K '(Central America Standard Time)'";
+                // executeIntegrationManual(integrationId);
 
-                    DateTime executionStartDate = DateTime.ParseExact(Request.Form["ExecutionStartDate"], format, CultureInfo.CurrentCulture);
-                    DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
+                resp = "{\"type\":\"success\", \"message\":\"Integration successful stored.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Integration unsuccessful stored. Please try again.\"}";
+            }
 
-                    integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
-                                                                Request.Form["IntegrationName"],
-                                                                Convert.ToInt32(Request.Form["WebServiceId"]),
-                                                                Convert.ToInt32(Request.Form["DatabaseParametersId"]),
-                                                                /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
-                                                                Convert.ToInt32(Request.Form["FlatFileParameterId"]),
-                                                                Convert.ToInt32(Request.Form["IntegrationTypeId"]),
-                                                                Convert.ToInt32(Request.Form["QueryId"]),
-                                                                Convert.ToInt32(Request.Form["IntegrationCategoryId"]),
-                                                                Convert.ToInt32(Request.Form["OperationWebServiceId"]),
-                                                                queryParameters,
-                                                                executionStartDate,
-                                                                executionEndDate,
-                                                                Convert.ToInt32(Request.Form["RecurrenceId"]),
-                                                                Request.Form["Emails"],
-                                                                Request.Form["CurlParameters"]);
-                }
+
+            response(resp);
+        }
+
+        [HttpPut]
+        public void saveIntegrationScheduled()
+        {
+            string resp = "";
+            try
+            {
+
+                List<QueryParameter> queryParameters = getQueryParameters(Request);
+
+                connectModel();
+
+                string format = "ddd MMM dd yyyy HH:mm:ss 'GMT'K '(Central America Standard Time)'";
+
+                DateTime executionStartDate = DateTime.ParseExact(Request.Form["ExecutionStartDate"], format, CultureInfo.CurrentCulture);
+                DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
+
+                integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                            Request.Form["IntegrationName"],
+                                                            Convert.ToInt32(Request.Form["WebServiceId"]),
+                                                            Convert.ToInt32(Request.Form["DatabaseParametersId"]),
+                    /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
+                                                            Convert.ToInt32(Request.Form["FlatFileParameterId"]),
+                                                            Convert.ToInt32(Request.Form["IntegrationTypeId"]),
+                                                            Convert.ToInt32(Request.Form["QueryId"]),
+                                                            /*IntegrationCategoryId*/ 2,
+                                                            Convert.ToInt32(Request.Form["OperationWebServiceId"]),
+                                                            queryParameters,
+                                                            executionStartDate,
+                                                            executionEndDate,
+                                                            Convert.ToInt32(Request.Form["RecurrenceId"]),
+                                                            Request.Form["Emails"],
+                                                            Request.Form["CurlParameters"]);
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration successful stored.\"}";
             }
@@ -151,11 +145,7 @@ namespace IntegrationTool.Controllers
                     query.Description = encryptor.decryptData(query.Description);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(queries);
             }
             catch (Exception)
             {
@@ -174,11 +164,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<OperationsWebService> operations = integrationConfigurationModel.getOperationsWebServices();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(operations,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(operations);
             }
             catch (Exception)
             {
@@ -197,11 +183,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<IntegrationCategory> integrationCategories = integrationConfigurationModel.getIntegrationCategories();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationCategories,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(integrationCategories);
             }
             catch (Exception)
             {
@@ -220,11 +202,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<Recurrence> recurrences = integrationConfigurationModel.getRecurrences();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(recurrences,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(recurrences);
             }
             catch (Exception)
             {
@@ -243,11 +221,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<IntegrationTool.Models.Integration> integrations = integrationConfigurationModel.getScheduleIntegrations();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(integrations);
             }
             catch (Exception)
             {
@@ -344,11 +318,7 @@ namespace IntegrationTool.Controllers
                     }
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrations,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(integrations);
             }
             catch (Exception e)
             {
@@ -367,11 +337,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 IntegrationTool.Models.Integration integration = integrationConfigurationModel.getIntegration(id);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integration,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(integration);
             }
             catch (Exception)
             {
@@ -387,8 +353,7 @@ namespace IntegrationTool.Controllers
             string resp = "";
             try
             {
-                // ClassLibrary.Integration integration = new ClassLibrary.Integration();
-                // integration.executeIntegration(integrationId);
+                // executeIntegrationManual(id);
                 resp = "{\"type\":\"success\", \"message\":\"Integration successful executed.\"}";
             }
             catch (Exception)
@@ -397,6 +362,59 @@ namespace IntegrationTool.Controllers
             }
 
             response(resp);
+        }
+
+        // ================================================================================================================
+        // Metodos privados que proveen funcionalidad a las acciones del controlador.
+        // ================================================================================================================
+        private void connectModel()
+        {
+            integrationConfigurationModel = new IntegrationConfiguration();
+            encryptor = new Encrypt();
+        }
+
+        private void response(string json)
+        {
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+        }
+
+        private void executeIntegrationManual(int integrationId)
+        {
+            ClassLibrary.Integration integration = new ClassLibrary.Integration();
+            integration.executeIntegration(integrationId);
+        }
+
+        private List<QueryParameter> getQueryParameters(HttpRequestBase req)
+        {
+            List<QueryParameter> queryParameters = new List<QueryParameter>();
+            Regex regex = new Regex(@"\[\[.*\]\]");
+
+            for (int index = 0; index < req.Form.Count; index++)
+            {
+                Match match = regex.Match(Request.Form.AllKeys[index]);
+                if (match.Success)
+                {
+                    QueryParameter qp = new QueryParameter();
+                    qp.Name = Request.Form.AllKeys[index];
+                    qp.Value = "'" + Request.Form[qp.Name] + "'";
+
+                    queryParameters.Add(qp);
+                }
+            }
+
+            return queryParameters;
+        }
+
+        private string serializeObject(Object obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
     }
 }

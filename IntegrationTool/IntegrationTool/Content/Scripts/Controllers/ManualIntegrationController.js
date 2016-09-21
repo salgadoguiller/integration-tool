@@ -48,7 +48,7 @@
     }
 
     function editManualIntegration(id) {
-        $location.url('/Integration/configuration/' + id);
+        $location.url('/Integration/configurationManual/' + id);
     }
 }
 

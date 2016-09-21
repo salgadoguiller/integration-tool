@@ -15,7 +15,8 @@ IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPControll
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
 IntegrationToolApp.controller('ListKeysController', ListKeysController);
 
-IntegrationToolApp.controller('IntegrationController', IntegrationController);
+IntegrationToolApp.controller('ConfigIntegrationManualController', ConfigIntegrationManualController);
+IntegrationToolApp.controller('ConfigIntegrationScheduledController', ConfigIntegrationScheduledController);
 IntegrationToolApp.controller('ManualIntegrationController', ManualIntegrationController);
 IntegrationToolApp.controller('SheduleIntegrationsController', SheduleIntegrationsController);
 
@@ -79,15 +80,19 @@ var configFunction = function ($routeProvider) {
             templateUrl: '/Configuration/formWebService',
             controller: 'FormWebServiceController'
         })
-        .when('/Integration/configuration/:id', {
-            templateUrl: '/Integration/configuration',
-            controller: 'IntegrationController'
+        .when('/Integration/configurationManual/:id', {
+            templateUrl: '/Integration/configurationManual',
+            controller: 'ConfigIntegrationManualController'
+        })
+        .when('/Integration/configurationScheduled/:id', {
+            templateUrl: '/Integration/configurationScheduled',
+            controller: 'ConfigIntegrationScheduledController'
         })
         .when('/Integration/manual', {
             templateUrl: '/Integration/manual',
             controller: 'ManualIntegrationController'
         })
-        .when('/Integration/automatic', {
+        .when('/Integration/calendar', {
             templateUrl: '/Integration/calendar',
             controller: 'SheduleIntegrationsController'
         });
