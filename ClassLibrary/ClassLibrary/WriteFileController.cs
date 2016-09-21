@@ -9,10 +9,9 @@ namespace ClassLibrary
 {
     public class WriteFileController
     {
-        public string writeFileinFlatFile(string resultQuery, string locationToSave, string nameIntegration)
+        public string writeFileinFlatFile(string resultQuery, string locationToSave, string nameIntegration,Integration integration)
         {
             string nameFile = nameIntegration+"-"+returnDatetimeNow()+".txt";
-
             string path = locationToSave + "/" + nameFile;
 
             try
@@ -30,7 +29,10 @@ namespace ClassLibrary
             }
             catch (DirectoryNotFoundException e)
             {
-                Console.WriteLine(e.Message );
+                string message = e.Message;
+                message = message.Replace("'","");
+                string query = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class WriteFile: " + message + "','" + DateTime.Now + "'," + integration.integrationId + ")";             
+                integration.insertSystemLog(query);              
             }
         
             return path+"|"+nameFile;
@@ -38,15 +40,20 @@ namespace ClassLibrary
 
         public string writeIntegrationinExcel(string resultQuery, string locationToSave, string nameIntegration)
         {
-            StringBuilder csvContent = new StringBuilder();           
-            string query = resultQuery.Replace("%", ",");
+            StringBuilder csvContent = new StringBuilder();
+            string nameFile = nameIntegration + returnDatetimeNow() + ".csv";
 
-            //csvContent.AppendLine(header);
-            csvContent.AppendLine(query);
-            string path = locationToSave + @"\" + nameIntegration + returnDatetimeNow() + ".csv";
+            string[] resultParse = resultQuery.Split('%');
+
+            for (int i = 0; i < resultParse.Length; i++)
+            {               
+                csvContent.AppendLine(resultParse[i]);
+            }
+                   
+            string path = locationToSave + "/" + nameFile;
             File.AppendAllText(path, csvContent.ToString());
 
-            return path;
+            return path+"|"+nameFile;
         }
 
         private string returnDatetimeNow()

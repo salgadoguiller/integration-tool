@@ -18,6 +18,7 @@ namespace ClassLibrary
         private WriteFileController writeFileController = new WriteFileController();
         private string emails = "";
         private string location = "";
+        public int integrationId = 0;
 
 
         public Integration(string server = "172.20.33.13", string databaseName = "IntegrationTool", string userId = "SISUser", string password = "test2016!")
@@ -82,7 +83,8 @@ namespace ClassLibrary
         public void initIntegrationAutomatic(int integrationId, string emails)
         {
             this.emails = emails;
-            executeIntegration(integrationId);
+            this.integrationId = integrationId;
+            executeIntegration(this.integrationId);
         }
 
         //Desde este metodo partiria para una integracion manual, sin hacer los metodos previos
@@ -93,7 +95,8 @@ namespace ClassLibrary
             string[] result = resultQueryAndNameIntegration.Split('$');
 
             location = obtainLocationFileToSave(integrationId);
-            string fullPathMoreNameFile = writeFileController.writeFileinFlatFile(result[0], location, result[1]);
+            string fullPathMoreNameFile = writeFileController.writeFileinFlatFile(result[0], location, result[1],this);
+            //string fullPathMoreNameFile = writeFileController.writeIntegrationinExcel(result[0], location, result[1]);
             string webServicesParameters = obtainWebService(integrationId);
 
             string[] splitNameAndFullPath = fullPathMoreNameFile.Split('|');
@@ -121,7 +124,7 @@ namespace ClassLibrary
             string password = (Convert.ToString(table.Rows[0]["Password"]) != null) ? decrypt.decryptData(Convert.ToString(table.Rows[0]["Password"])) : "";
 
             InterfaceDatabase iNterfaceDatabase = dataBase.createInstanceDataBase(decrypt.decryptData(Convert.ToString(table.Rows[0]["Ip"])), port, decrypt.decryptData(Convert.ToString(table.Rows[0]["Name"])),
-            instance, decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), password, Convert.ToString(table.Rows[0]["NameEngine"]));
+            instance, decrypt.decryptData(Convert.ToString(table.Rows[0]["Username"])), password, Convert.ToString(table.Rows[0]["NameEngine"]),this);
 
             return executeQueryInDatabase(iNterfaceDatabase, integrationId);
         }
@@ -215,9 +218,9 @@ namespace ClassLibrary
             string curlCommand = "curl -w '%{http_code}' -H Content-Type:text/plain --data-binary @" + fullPath + " -u " + webServices[4] + ":" + webServices[3] + " --url " + webServices[0] + webServices[1] + "/" + webServices[2] + "> " + location + "/LogIntegration.txt";
 
             Console.WriteLine(curlCommand);
-            curl.IntegrationWithCurl(curlCommand);
+            curl.IntegrationWithCurl(curlCommand,this);
 
-            //sendEmail();
+            sendEmail();
         }
 
         //12
@@ -232,7 +235,7 @@ namespace ClassLibrary
 
                 email.sendMail(decrypt.decryptData(Convert.ToString(table.Rows[0]["UsernameSMTP"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["PasswordSMTP"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["NameServerSMTP"])),
                                decrypt.decryptData(Convert.ToString(table.Rows[0]["Port"])), decrypt.decryptData(Convert.ToString(table.Rows[0]["EmailFrom"])), emails, decrypt.decryptData(Convert.ToString(table.Rows[0]["Subject"])),
-                               decrypt.decryptData(Convert.ToString(table.Rows[0]["Body"])));
+                               decrypt.decryptData(Convert.ToString(table.Rows[0]["Body"])),this);
             }
         }
 
@@ -241,6 +244,14 @@ namespace ClassLibrary
         {
             string query = "insert into FlatFiles (Name) values('" + NameFile + "')";
 
+            OpenConnection();
+            SqlCommand sqlCommand = new SqlCommand(query, connection);
+            sqlCommand.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public void insertSystemLog(string query)
+        {
             OpenConnection();
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
