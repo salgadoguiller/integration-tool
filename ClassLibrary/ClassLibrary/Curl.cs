@@ -10,7 +10,7 @@ namespace ClassLibrary
 {
     public class Curl
     {
-        public void IntegrationWithCurl(string parameter)
+        public void IntegrationWithCurl(string parameter,Integration integration)
         {
             try
             {
@@ -29,7 +29,8 @@ namespace ClassLibrary
             }
             catch (System.ComponentModel.Win32Exception e)
             {
-                Console.WriteLine(e.Message );
+                string query = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class Curl: " + e.Message + "','" + DateTime.Now + "'," + integration.integrationId + ")";
+                integration.insertSystemLog(query);
             }          
         }
     }

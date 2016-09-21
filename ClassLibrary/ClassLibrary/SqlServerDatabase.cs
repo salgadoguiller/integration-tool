@@ -16,17 +16,19 @@ namespace ClassLibrary
         private string serverInstance;
         private string username;
         private string password;
+        private Integration integration;
 
         private SqlConnection con = null;
 
-        public SqlServerDatabase(string ip, string port, string nameDataBase, string serverInstance, string username, string password)
+        public SqlServerDatabase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, Integration integration)
         {
             this.ip = ip;
             this.port = (port == string.Empty) ? null : "," + port;
             this.nameDataBase = nameDataBase;
             this.serverInstance = (serverInstance == string.Empty) ? null : "\\" +serverInstance;
             this.username = username;
-            this.password = password;          
+            this.password = password;
+            this.integration= integration;
         }
 
         public void openConnection()
@@ -49,7 +51,10 @@ namespace ClassLibrary
             }
             catch (System.Data.SqlClient.SqlException e)
             {
-                Console.WriteLine(e.Message);
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
+                integration.insertSystemLog(queryToLog2);    
             }       
         }
 
@@ -75,11 +80,12 @@ namespace ClassLibrary
             }
             catch (System.InvalidOperationException e)
             {
-                Console.WriteLine(e.Message);
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string queryToLog = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
+                integration.insertSystemLog(queryToLog);    
             }
-
-          
-
+        
             return result;
         }
     }

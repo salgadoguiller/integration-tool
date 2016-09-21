@@ -16,9 +16,10 @@ namespace ClassLibrary
         private string password;
         private string port;
         private MySqlConnection connection;
+        private Integration integration;
 
 
-        public MySqlDatabase(string ip, string nameDatabase, string serverInstance, string username, string password, string port)
+        public MySqlDatabase(string ip, string nameDatabase, string serverInstance, string username, string password, string port,Integration integration)
         {
             this.Ip = ip;
             this.nameDatabase = nameDatabase;
@@ -26,6 +27,7 @@ namespace ClassLibrary
             this.username = username;
             this.password = password;
             this.port = port;
+            this.integration = integration;
 
             connectionStringDatabase();
         }
@@ -55,7 +57,10 @@ namespace ClassLibrary
             }
             catch (MySqlException e)
             {
-                Console.WriteLine(e.Message);
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string query = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class Mysql: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
+                integration.insertSystemLog(query);    
             }           
         }
 
@@ -67,7 +72,10 @@ namespace ClassLibrary
             }
             catch (MySql.Data.MySqlClient.MySqlException e)
             {
-                Console.WriteLine(e.Message);
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class MySql: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
+                integration.insertSystemLog(queryToLog2);    
             }              
         }
 
@@ -91,7 +99,10 @@ namespace ClassLibrary
             }
             catch (InvalidOperationException e)
             {
-                Console.WriteLine(e.Message);
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string queryToLog = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class MySql: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
+                integration.insertSystemLog(queryToLog); 
             }
                   
             //closeConnection();
