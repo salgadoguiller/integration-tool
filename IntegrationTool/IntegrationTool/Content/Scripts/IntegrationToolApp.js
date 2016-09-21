@@ -20,6 +20,8 @@ IntegrationToolApp.controller('ConfigIntegrationScheduledController', ConfigInte
 IntegrationToolApp.controller('ManualIntegrationController', ManualIntegrationController);
 IntegrationToolApp.controller('SheduleIntegrationsController', SheduleIntegrationsController);
 
+IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
+
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
@@ -95,7 +97,12 @@ var configFunction = function ($routeProvider) {
         .when('/Integration/calendar', {
             templateUrl: '/Integration/calendar',
             controller: 'SheduleIntegrationsController'
+        })
+        .when('/Logs/listSystemLogs', {
+            templateUrl: '/Logs/listSystemLogs',
+            controller: 'ListSystemLogsController'
         });
+
 }
 configFunction.$inject = ['$routeProvider'];
 

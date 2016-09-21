@@ -9,6 +9,7 @@
 
 namespace IntegrationTool.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -48,6 +49,8 @@ namespace IntegrationTool.Models
         public virtual User User { get; set; }
         public virtual WebService WebService { get; set; }
         public virtual ICollection<QueryParameter> QueryParameters { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<SystemLog> SystemLogs { get; set; }
     }
 }
