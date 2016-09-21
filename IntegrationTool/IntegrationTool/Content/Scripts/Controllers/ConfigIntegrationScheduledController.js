@@ -123,10 +123,12 @@
         var data = $.param(req);
 
         if ($routeParams.id == -1)
-            saveIntegrationScheduled();
+            saveIntegrationScheduled(data, config, form);
         else
-            updateIntegrationScheduled();
+            updateIntegrationScheduled(data, config, form);
+    }
 
+    function saveIntegrationScheduled(data, config, form) {
         $http.put('Integration/saveIntegrationScheduled', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
@@ -142,12 +144,16 @@
         });
     }
 
-    function saveIntegrationScheduled() {
-
-    }
-
-    function updateIntegrationScheduled() {
-
+    function updateIntegrationScheduled(data, config, form) {
+        $http.post('Integration/updateIntegrationScheduled', data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            form.$setPristine();
+            form.$setUntouched();
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
     }
 
     function getIntegrationsType() {

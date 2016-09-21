@@ -1,4 +1,4 @@
-﻿var SheduleIntegrationsController = function ($scope, $http, $location) {
+﻿var SheduleIntegrationsController = function ($scope, $http, $location, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationShedule = [];
@@ -88,10 +88,10 @@
             events: integrationShedule,
             eventClick: function (event) {
                 if (event.url) {
-                    window(event.url);                   
+                    $window(event.url);                   
                 }
             }
         });
     }
 }
-SheduleIntegrationsController.$inject = ['$scope', '$http', '$location'];
+SheduleIntegrationsController.$inject = ['$scope', '$http', '$location', '$window'];

@@ -114,10 +114,12 @@
         $http.put('Integration/saveIntegrationManual', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
-            $scope.request = {};
-            $scope.queries = [];
-            $scope.params = [];
-            $scope.query = null;
+            if ($routeParams.id == -1) {
+                $scope.request = {};
+                $scope.queries = [];
+                $scope.params = [];
+                $scope.query = null;
+            }
             form.$setPristine();
             form.$setUntouched();
         }).error(function (resp) {

@@ -13,11 +13,11 @@ namespace IntegrationTool.Controllers
 {
     public class IntegrationController : Controller
     {
-        private IntegrationConfiguration integrationConfigurationModel;
+        private IntegrationModel integrationConfigurationModel;
         private Encrypt encryptor;
 
         // ================================================================================================================
-        // Retorna las vitas del sistema.
+        // Retornar las vitas del sistema.
         // ================================================================================================================
         [HttpGet]
         public ActionResult configurationScheduled()
@@ -44,7 +44,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Almacena en base de datos integraciones automaticas y manuales.
+        // Almacenar en la base de datos integraciones automaticas y manuales.
         // ================================================================================================================
         [HttpPut]
         public void saveIntegrationManual()
@@ -88,7 +88,6 @@ namespace IntegrationTool.Controllers
             string resp = "";
             try
             {
-
                 List<QueryParameter> queryParameters = getQueryParameters(Request);
 
                 connectModel();
@@ -102,7 +101,7 @@ namespace IntegrationTool.Controllers
                                                             Request.Form["IntegrationName"],
                                                             Convert.ToInt32(Request.Form["WebServiceId"]),
                                                             Convert.ToInt32(Request.Form["DatabaseParametersId"]),
-                    /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
+                                                            /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
                                                             Convert.ToInt32(Request.Form["FlatFileParameterId"]),
                                                             Convert.ToInt32(Request.Form["IntegrationTypeId"]),
                                                             Convert.ToInt32(Request.Form["QueryId"]),
@@ -120,6 +119,53 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Integration unsuccessful stored. Please try again.\"}";
+            }
+
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Actualizar en la base de datos integraciones automaticas.
+        // ================================================================================================================
+        [HttpPost]
+        public void updateIntegrationScheduled()
+        {
+            string resp = "";
+            try
+            {
+                List<QueryParameter> queryParameters = getQueryParameters(Request);
+
+                connectModel();
+
+                string format = "ddd MMM dd yyyy HH:mm:ss 'GMT'K '(Central America Standard Time)'";
+
+                DateTime executionStartDate = DateTime.ParseExact(Request.Form["ExecutionStartDate"], format, CultureInfo.CurrentCulture);
+                DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
+
+                integrationConfigurationModel.updateIntegrationSchedule(Convert.ToInt32(Request.Form["IntegrationId"]),
+                                                            /*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                            Request.Form["IntegrationName"],
+                                                            Convert.ToInt32(Request.Form["WebServiceId"]),
+                                                            Convert.ToInt32(Request.Form["DatabaseParametersId"]),
+                                                            /*Convert.ToInt32(Request.Form["FlatFileId"])*/ 1,
+                                                            Convert.ToInt32(Request.Form["FlatFileParameterId"]),
+                                                            Convert.ToInt32(Request.Form["IntegrationTypeId"]),
+                                                            Convert.ToInt32(Request.Form["QueryId"]),
+                                                            /*IntegrationCategoryId*/ 2,
+                                                            Convert.ToInt32(Request.Form["OperationWebServiceId"]),
+                                                            queryParameters,
+                                                            executionStartDate,
+                                                            executionEndDate,
+                                                            Convert.ToInt32(Request.Form["RecurrenceId"]),
+                                                            Request.Form["Emails"],
+                                                            Request.Form["CurlParameters"]);
+
+                resp = "{\"type\":\"success\", \"message\":\"Integration successful updated.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Integration unsuccessful updated. Please try again.\"}";
             }
 
 
@@ -369,7 +415,7 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
         private void connectModel()
         {
-            integrationConfigurationModel = new IntegrationConfiguration();
+            integrationConfigurationModel = new IntegrationModel();
             encryptor = new Encrypt();
         }
 

@@ -11,25 +11,11 @@ namespace IntegrationTool.Controllers
 {
     public class ConfigurationController : Controller
     {
-        private SystemConfiguration systemConfigurationModel;
+        private ConfigurationModel systemConfigurationModel;
         private Encrypt encryptor;
 
-        private void connectModel()
-        {
-            systemConfigurationModel = new SystemConfiguration();
-            encryptor = new Encrypt();
-        }
-
-        private void response(string json)
-        {
-            Response.Clear();
-            Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(json);
-            Response.End();
-        }
-
         // ================================================================================================================
-        // Retornan formularios para insertar o actualizar parametros del sistema.
+        // Retornar formularios para insertar o actualizar parametros del sistema.
         // ================================================================================================================
         [HttpGet]
         public ActionResult formActiveDirectory()
@@ -74,7 +60,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Lista parametros del sistema.
+        // Vistas para listar parametros del sistema.
         // ================================================================================================================
         [HttpGet]
         public ActionResult listActiveDirectories()
@@ -125,7 +111,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Almacena en base de datos parametros del sistema.
+        // Almacenar en la base de datos parametros del sistema.
         // ================================================================================================================
         [HttpPut]
         public void saveActiveDirectory()
@@ -146,16 +132,6 @@ namespace IntegrationTool.Controllers
             
 
             response(resp);
-
-            // Select and return activeDirectories
-            /*
-            List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
-           
-            Response.ContentType = "application/json; charset=utf-8";
-            var response = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories);
-            Response.Write(response);
-            Response.End();
-            */
         }
 
         [HttpPut]
@@ -267,7 +243,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Actualiza en base de datos parametros del sistema.
+        // Actualizar en base de datos parametros del sistema.
         // ================================================================================================================
         [HttpPost]
         public void updateActiveDirectory()
@@ -289,16 +265,6 @@ namespace IntegrationTool.Controllers
 
 
             response(resp);
-
-            // Select and return activeDirectories
-            /*
-            List<ActiveDirectoryParameter> activeDirectories = systemConfigurationModel.getActiveDirectories();
-           
-            Response.ContentType = "application/json; charset=utf-8";
-            var response = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories);
-            Response.Write(response);
-            Response.End();
-            */
         }
 
         [HttpPost]
@@ -419,7 +385,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Obtiene y retorna parametros del sistema.
+        // Obtener y retornar parametros del sistema.
         // ================================================================================================================
         [HttpGet]
         public void getDataBaseEngines()
@@ -430,11 +396,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<Engine> engines = systemConfigurationModel.getDataBaseEngines();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(engines,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(engines);
             }
             catch (Exception)
             {
@@ -453,11 +415,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<IntegrationsType> integrationsType = systemConfigurationModel.getIntegrationsType();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationsType,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(integrationsType);
             }
             catch (Exception)
             {
@@ -483,11 +441,7 @@ namespace IntegrationTool.Controllers
                     query.Description = encryptor.decryptData(query.Description);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(queries,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(queries);
             }
             catch (Exception)
             {
@@ -512,11 +466,7 @@ namespace IntegrationTool.Controllers
                     activeDirectory.ADPath = encryptor.decryptData(activeDirectory.ADPath);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectories,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(activeDirectories);
             }
             catch (Exception)
             {
@@ -540,11 +490,7 @@ namespace IntegrationTool.Controllers
                     flatFile.Location = encryptor.decryptData(flatFile.Location);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFiles,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(flatFiles);
             }
             catch (Exception)
             {
@@ -574,11 +520,7 @@ namespace IntegrationTool.Controllers
                     server.Body = encryptor.decryptData(server.Body);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(serverSMTP);
             }
             catch (Exception)
             {
@@ -608,11 +550,7 @@ namespace IntegrationTool.Controllers
                     database.Password = encryptor.decryptData(database.Password);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(databases,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(databases);
             }
             catch (Exception)
             {
@@ -638,11 +576,7 @@ namespace IntegrationTool.Controllers
                     webService.Password = encryptor.decryptData(webService.Password);
                 }
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(webServices,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(webServices);
             }
             catch (Exception)
             {
@@ -661,11 +595,7 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 List<Key> keys = systemConfigurationModel.getKeys();
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(keys,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(keys);
             }
             catch (Exception)
             {
@@ -687,11 +617,7 @@ namespace IntegrationTool.Controllers
                 activeDirectory.ADDomain = encryptor.decryptData(activeDirectory.ADDomain);
                 activeDirectory.ADPath = encryptor.decryptData(activeDirectory.ADPath);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(activeDirectory,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(activeDirectory);
             }
             catch (Exception)
             {
@@ -717,11 +643,7 @@ namespace IntegrationTool.Controllers
                 database.Username = encryptor.decryptData(database.Username);
                 database.Password = encryptor.decryptData(database.Password);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(database,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(database);
             }
             catch (Exception)
             {
@@ -742,11 +664,7 @@ namespace IntegrationTool.Controllers
 
                 flatFile.Location = encryptor.decryptData(flatFile.Location);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(flatFile,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(flatFile);
             }
             catch (Exception)
             {
@@ -769,11 +687,7 @@ namespace IntegrationTool.Controllers
                 query.QueryName = encryptor.decryptData(query.QueryName);
                 query.Description = encryptor.decryptData(query.Description);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(query,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(query);
             }
             catch (Exception)
             {
@@ -800,11 +714,7 @@ namespace IntegrationTool.Controllers
                 serverSMTP.Subject = encryptor.decryptData(serverSMTP.Subject);
                 serverSMTP.Body = encryptor.decryptData(serverSMTP.Body);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(serverSMTP,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(serverSMTP);
             }
             catch (Exception)
             {
@@ -827,11 +737,7 @@ namespace IntegrationTool.Controllers
                 webService.Username = encryptor.decryptData(webService.Username);
                 webService.Password = encryptor.decryptData(webService.Password);
 
-                resp = Newtonsoft.Json.JsonConvert.SerializeObject(webService,
-                    new JsonSerializerSettings()
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
+                resp = serializeObject(webService);
             }
             catch (Exception)
             {
@@ -963,6 +869,32 @@ namespace IntegrationTool.Controllers
             }
 
             response(resp);
+        }
+
+        // ================================================================================================================
+        // Metodos privados que proveen funcionalidad a las acciones del controlador.
+        // ================================================================================================================
+        private void connectModel()
+        {
+            systemConfigurationModel = new ConfigurationModel();
+            encryptor = new Encrypt();
+        }
+
+        private void response(string json)
+        {
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+        }
+
+        private string serializeObject(Object obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
     }
 }

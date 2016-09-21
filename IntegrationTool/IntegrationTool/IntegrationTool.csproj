@@ -185,7 +185,7 @@
     <Compile Include="Models\IntegrationCategory.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IntegrationConfiguration.cs" />
+    <Compile Include="Models\IntegrationModel.cs" />
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -234,7 +234,7 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SystemConfiguration.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
