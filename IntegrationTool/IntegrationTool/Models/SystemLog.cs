@@ -20,7 +20,7 @@ namespace IntegrationTool.Models
         public System.DateTime ErrorDate { get; set; }
         public int IntegrationId { get; set; }
 
-        [JsonIgnore]
+ 
         public virtual Integration Integration { get; set; }
     }
 }
