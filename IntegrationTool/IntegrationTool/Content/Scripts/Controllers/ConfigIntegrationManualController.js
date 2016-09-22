@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationManualController = function ($scope, $http, $routeParams) {
+﻿var ConfigIntegrationManualController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -22,8 +22,8 @@
     getDatabases();
     getFlatFiles();
 
-    if ($routeParams.id != -1) {
-        getIntegration($routeParams.id);
+    if ($stateParams.id != -1) {
+        getIntegration($stateParams.id);
     }
 
     function getIntegration(id) {
@@ -114,7 +114,7 @@
         $http.put('Integration/saveIntegrationManual', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
-            if ($routeParams.id == -1) {
+            if ($stateParams.id == -1) {
                 $scope.request = {};
                 $scope.queries = [];
                 $scope.params = [];
@@ -297,4 +297,4 @@
     }
 }
 
-ConfigIntegrationManualController.$inject = ['$scope', '$http', '$routeParams'];
+ConfigIntegrationManualController.$inject = ['$scope', '$http', '$stateParams'];

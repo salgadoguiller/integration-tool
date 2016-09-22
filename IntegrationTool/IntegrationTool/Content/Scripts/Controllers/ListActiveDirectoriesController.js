@@ -49,7 +49,7 @@
     }
 
     function editActiveDirectory(id) {
-        $location.url('/Configuration/formActiveDirectory/' + id );
+        $location.url('/main/configuration/formActiveDirectory/' + id);
     }
 }
 ListActiveDirectoriesController.$inject = ['$scope', '$http', '$location'];

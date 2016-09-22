@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationScheduledController = function ($scope, $http, $routeParams) {
+﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -24,8 +24,8 @@
     getFlatFiles();
     getRecurrences();
 
-    if ($routeParams.id != -1) {
-        getIntegration($routeParams.id);
+    if ($stateParams.id != -1) {
+        getIntegration($stateParams.id);
     }
 
     function getIntegration(id) {
@@ -122,7 +122,7 @@
 
         var data = $.param(req);
 
-        if ($routeParams.id == -1)
+        if ($stateParams.id == -1)
             saveIntegrationScheduled(data, config, form);
         else
             updateIntegrationScheduled(data, config, form);
@@ -277,7 +277,7 @@
             requestParams[index] = { nameParam: params[index], valueParam: '' }
         }
 
-       
+
         $scope.params = requestParams;
     }
 
@@ -370,4 +370,4 @@
     }
 }
 
-ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$routeParams'];
+ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams'];

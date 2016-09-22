@@ -1,14 +1,14 @@
-﻿var FormActiveDirectoryController = function ($scope, $http, $routeParams) {
+﻿var FormActiveDirectoryController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
-    $scope.type = $routeParams.id;
+    $scope.type = $stateParams.id;
 
     loadInfo();
 
     function loadInfo() {
-        if ($routeParams.id == -1) {
+        if ($stateParams.id == -1) {
             return;
         }
 
@@ -20,7 +20,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getActiveDirectory?id=' + $routeParams.id, data, config).success(function (resp) {
+        $http.get('Configuration/getActiveDirectory?id=' + $stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.request = resp;
             } else {
@@ -48,7 +48,7 @@
 
         var data = $.param(req);
 
-        if ($routeParams.id == -1)
+        if ($stateParams.id == -1)
             put(data, config, form);
         else
             post(data, config, form);
@@ -81,4 +81,4 @@
         });
     }
 }
-FormActiveDirectoryController.$inject = ['$scope', '$http', '$routeParams'];
+FormActiveDirectoryController.$inject = ['$scope', '$http', '$stateParams'];

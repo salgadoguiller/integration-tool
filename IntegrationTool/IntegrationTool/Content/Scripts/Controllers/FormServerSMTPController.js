@@ -1,15 +1,15 @@
-﻿var FormServerSMTPController = function ($scope, $http, $routeParams) {
+﻿var FormServerSMTPController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.regex = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
-    $scope.type = $routeParams.id;
+    $scope.type = $stateParams.id;
 
     loadInfo();
 
     function loadInfo() {
-        if ($routeParams.id == -1) {
+        if ($stateParams.id == -1) {
             return;
         }
 
@@ -21,7 +21,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getServerSMTP?id=' + $routeParams.id, data, config).success(function (resp) {
+        $http.get('Configuration/getServerSMTP?id=' + $stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.request = resp;
             } else {
@@ -49,7 +49,7 @@
 
         var data = $.param(req);
 
-        if ($routeParams.id == -1)
+        if ($stateParams.id == -1)
             put(data, config, form);
         else
             post(data, config, form);
@@ -83,5 +83,4 @@
     }
 }
 
-FormServerSMTPController.$inject = ['$scope', '$http', '$routeParams'];
-
+FormServerSMTPController.$inject = ['$scope', '$http', '$stateParams'];

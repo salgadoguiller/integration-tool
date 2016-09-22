@@ -14,5 +14,10 @@ namespace IntegrationTool.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult layout()
+        {
+            return View();
+        }
     }
 }

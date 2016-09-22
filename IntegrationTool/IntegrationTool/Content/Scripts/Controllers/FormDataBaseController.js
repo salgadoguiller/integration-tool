@@ -1,4 +1,4 @@
-﻿var FormDataBaseController = function ($scope, $http, $routeParams) {
+﻿var FormDataBaseController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -6,14 +6,14 @@
     $scope.regexPort = /^([0-9]*)$/;
     $scope.sendRequest = sendRequest;
     $scope.dataBaseEngines = [];
-    $scope.type = $routeParams.id;
+    $scope.type = $stateParams.id;
 
     getDataBaseEngines();
 
     loadInfo();
 
     function loadInfo() {
-        if ($routeParams.id == -1) {
+        if ($stateParams.id == -1) {
             return;
         }
 
@@ -25,7 +25,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getDataBase?id=' + $routeParams.id, data, config).success(function (resp) {
+        $http.get('Configuration/getDataBase?id=' + $stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 resp.EngineId =  resp.EngineId + ''
                 console.log(resp);
@@ -77,7 +77,7 @@
 
         var data = $.param(req);
 
-        if ($routeParams.id == -1)
+        if ($stateParams.id == -1)
             put(data, config, form);
         else
             post(data, config, form);
@@ -111,4 +111,4 @@
     }
 }
 
-FormDataBaseController.$inject = ['$scope', '$http', '$routeParams'];
+FormDataBaseController.$inject = ['$scope', '$http', '$stateParams'];

@@ -49,7 +49,7 @@
     }
 
     function editServerSMTP(id) {
-        $location.url('/Configuration/formServerSMTP/' + id);
+        $location.url('/main/configuration/formServerSMTP/' + id);
     }
 }
 

@@ -49,7 +49,7 @@
     }
 
     function editWebService(id) {
-        $location.url('/Configuration/formWebService/' + id);
+        $location.url('/main/configuration/formWebService/' + id);
     }
 }
 ListWebServicesController.$inject = ['$scope', '$http', '$location'];

@@ -1,17 +1,17 @@
-﻿var FormQueryController = function ($scope, $http, $routeParams) {
+﻿var FormQueryController = function ($scope, $http, $stateParams) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
     $scope.integrationsType = [];
-    $scope.type = $routeParams.id;
+    $scope.type = $stateParams.id;
 
     getIntegrationsType();
-    
+
     loadInfo();
 
     function loadInfo() {
-        if ($routeParams.id == -1) {
+        if ($stateParams.id == -1) {
             return;
         }
 
@@ -23,7 +23,7 @@
 
         var data = $.param({});
 
-        $http.get('Configuration/getQuery?id=' + $routeParams.id, data, config).success(function (resp) {
+        $http.get('Configuration/getQuery?id=' + $stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 resp.IntegrationTypeId = resp.IntegrationTypeId + ''
                 $scope.request = resp;
@@ -75,7 +75,7 @@
 
         var data = $.param(req);
 
-        if ($routeParams.id == -1)
+        if ($stateParams.id == -1)
             put(data, config, form);
         else
             post(data, config, form);
@@ -109,6 +109,4 @@
     }
 }
 
-FormQueryController.$inject = ['$scope', '$http', '$routeParams'];
-
-
+FormQueryController.$inject = ['$scope', '$http', '$stateParams'];

@@ -49,7 +49,7 @@
     }
 
     function editDatabase(id) {
-        $location.url('/Configuration/formDatabase/' + id);
+        $location.url('/main/configuration/formDatabase/' + id);
     }
 }
 ListDatabasesController.$inject = ['$scope', '$http', '$location'];

@@ -28,196 +28,14 @@
         <![endif]-->
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
-
-          <header class="main-header">
-            <!-- Logo -->
-            <a  class="logo">
-              <!-- mini logo for sidebar mini 50x50 pixels -->
-              <span class="logo-mini"><b>I</b>Tool</span>
-              <!-- logo for regular state and mobile devices -->
-              <span class="logo-lg"><b>Integration</b>Tool</span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-              <!-- Sidebar toggle button-->
-              <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </a>
-
-              <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                  <!-- User Account: style can be found in dropdown.less -->
-                  <li class="dropdown user user-menu">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                      <img src="../../Content/Images/Icon-user.png" class="user-image" alt="User Image">
-                      <span class="hidden-xs">User-Laureate</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <!-- User image -->
-                      <li class="user-header">
-                        <img src="../../Content/Images/Icon-user.png" class="img-circle" alt="User Image">
-
-                        <p>
-                          User-Laureate
-                          <small>Administrator</small>
-                        </p>
-                      </li>
-
-                      <!-- Menu Footer-->
-                      <li class="user-footer">
-                        <div class="pull-left">
-                          <a class="btn btn-default btn-flat">Profile</a>
-                        </div>
-                        <div class="pull-right">
-                          <a class="btn btn-default btn-flat">Sign out</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <!-- Control Sidebar Toggle Button -->
-                  <li>
-                    <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          </header>
-
-          <!-- =============================================== -->
-
-          <!-- Left side column. contains the sidebar -->
-          <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-              <!-- Sidebar user panel -->
-              <div class="user-panel">
-                <div class="pull-left image">
-                  <img src="../../Content/Images/Icon-user.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                  <p>User-Laureate</p>
-                  <a><i class="fa fa-circle text-success"></i>Administrator</a>
-                </div>
-              </div>
-
-              <!-- sidebar menu: : style can be found in sidebar.less -->
-              <ul class="sidebar-menu">
-                <li class="header">Options</li>
-                <li class="treeview">
-                  <a href="/#/main">
-                    <i class="fa fa-dashboard"></i> <span>Main</span>
-                  </a>
-                </li>
-                <li class="treeview">
-                  <a>
-                    <i class="fa fa-cog"></i>
-                    <span>Configuration</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="/#/Configuration/listActiveDirectories"><i class="fa fa-circle-o"></i>Active Directory</a></li>
-                    <li><a href="/#/Configuration/listDatabases"><i class="fa fa-circle-o"></i>Databases</a></li>
-                    <li><a href="/#/Configuration/listFlatFiles"><i class="fa fa-circle-o"></i>Flat Files</a></li>
-                    <li><a href="/#/Configuration/listQueries"><i class="fa fa-circle-o"></i>Queries</a></li>
-                    <li><a href="/#/Configuration/listServerSMTP"><i class="fa fa-circle-o"></i>Server SMTP</a></li>
-                    <li><a href="/#/Configuration/listWebServices"><i class="fa fa-circle-o"></i>Web Services</a></li>
-                    <li><a href="/#/Configuration/listKeys"><i class="fa fa-circle-o"></i>Keys</a></li>
-                  </ul>
-                </li>
-                <li class="treeview">
-                  <a>
-                    <i class="fa fa-files-o"></i>
-                    <span>Integrations</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="/#/Integration/configurationManual/-1"><i class="fa fa-circle-o"></i>Configuration Manual</a></li>
-                    <li><a href="/#/Integration/configurationScheduled/-1"><i class="fa fa-circle-o"></i>Configuration Calendar</a></li>
-                    <li><a href="/#/Integration/manual"><i class="fa fa-circle-o"></i>Manual</a></li>
-                    <li><a href="/#/Integration/calendar"><i class="fa fa-circle-o"></i>Calendar</a></li>
-                  </ul>
-                </li>
-
-                <li class="treeview">
-                  <a>
-                    <i class="fa fa-users"></i>
-                    <span>Users</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a><i class="fa fa-circle-o"></i>Locals</a></li>
-                    <li><a><i class="fa fa-circle-o"></i>Active Directory</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a>
-                    <i class="fa fa-file"></i> <span>Reports</span>
-                  </a>
-                </li>
-
-                <li class="treeview">
-                  <a>
-                    <i class="fa fa-laptop"></i>
-                    <span>Logs</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                   
-                  <ul class="treeview-menu">
-                    <li><a href="/#/Logs/listIntegrationLogs"><i class="fa fa-circle-o"></i>Integrations</a></li>
-                    <li><a href="/#/Logs/listSystemLogs"><i class="fa fa-circle-o"></i>System</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-              </ul>
-            </section>
-            <!-- /.sidebar -->
-          </aside>
-
-          <!-- =============================================== -->
-
-          <!-- Content Wrapper. Contains page content -->
-          <div class="content-wrapper">
-            <div ng-view></div>
-          </div>
-          <!-- /.content-wrapper -->
-
-          <footer class="main-footer">
-            <strong>Copyright &copy;<a href="http://lno.laureate.net/"> Laureate Network Office</a>.</strong> All rights
-            reserved.
-          </footer>
-
-          <!-- Control Sidebar -->
-          <aside class="control-sidebar control-sidebar-dark">
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <!-- Home tab content -->
-              <div class="tab-pane" id="control-sidebar-home-tab">
-              </div>
-            </div>
-          </aside>
-          <!-- /.control-sidebar -->
-          <!-- Add the sidebar's background. This div must be placed
-               immediately after the control sidebar -->
-        </div>
-        <!-- ./wrapper -->
+        
+        <div ui-view></div>
 
         @Scripts.Render("~/Content/Plugins")
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
         <script src="//rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>
         <script src="//rawgit.com/tushariscoolster/ng-sweet-alert/master/ng-sweet-alert.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-calendar/1.0.0/calendar.min.js"></script>
@@ -225,15 +43,10 @@
 
         @Scripts.Render("~/Content/JSBootstrap")
 
-        @Scripts.Render("~/Content/JSTemplate")
-
         @Scripts.Render("~/Content/IntegrationToolAppControllers")
 
         @Scripts.Render("~/Content/IntegrationToolAppDirectives")
 
         @Scripts.Render("~/Content/IntegrationToolApp")
-
-
-
     </body>
 </html>

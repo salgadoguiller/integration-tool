@@ -49,7 +49,7 @@
     }
 
     function editFlatFile(id) {
-        $location.url('/Configuration/formFlatFile/' + id);
+        $location.url('/main/configuration/formFlatFile/' + id);
     }
 }
 

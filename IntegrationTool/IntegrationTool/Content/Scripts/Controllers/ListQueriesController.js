@@ -49,7 +49,7 @@
     }
 
     function editQuery(id) {
-        $location.url('/Configuration/formQuery/' + id);
+        $location.url('/main/configuration/formQuery/' + id);
     }
 }
 ListQueriesController.$inject = ['$scope', '$http', '$location'];
