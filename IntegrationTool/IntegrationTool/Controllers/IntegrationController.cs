@@ -69,7 +69,7 @@ namespace IntegrationTool.Controllers
                                                             queryParameters,
                                                             Request.Form["CurlParameters"]);
 
-                // executeIntegrationManual(integrationId);
+                executeIntegrationManual(integrationId);
 
                 resp = "{\"type\":\"success\", \"message\":\"Integration successful stored.\"}";
             }
@@ -270,8 +270,8 @@ namespace IntegrationTool.Controllers
                 resp = serializeObject(integrations);
             }
             catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the schedule integration. Please try again.\"}";
+            {              
+               resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the schedule integration. Please try again.\"}";
             }
 
             response(resp);
@@ -397,15 +397,15 @@ namespace IntegrationTool.Controllers
         public void executeIntegration(int id)
         {
             string resp = "";
-            try
-            {
-                // executeIntegrationManual(id);
+            //try
+            //{
+                executeIntegrationManual(id);
                 resp = "{\"type\":\"success\", \"message\":\"Integration successful executed.\"}";
-            }
-            catch (Exception)
-            {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
-            }
+            //}
+            //catch (Exception)
+            //{
+              //  resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
+            //}
 
             response(resp);
         }

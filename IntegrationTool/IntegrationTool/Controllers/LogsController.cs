@@ -13,12 +13,11 @@ namespace IntegrationTool.Controllers
     {
 
         private LogsConfiguration logsConfigurationModel;
-        private Encrypt encryptor;
-
+       
         private void connectModel()
         {
             logsConfigurationModel = new LogsConfiguration();
-            encryptor = new Encrypt();
+           
         }
 
         private void response(string json)
@@ -34,6 +33,36 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
 
         [HttpGet]
+        public ActionResult listIntegrationLogs()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public void getListIntegrationLogs()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+
+                List<IntegrationLog> integrationLogs = logsConfigurationModel.getIntegrationLogs();
+
+                resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationLogs,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat files. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
         public ActionResult listSystemLogs()
         {
             return View();
@@ -47,7 +76,9 @@ namespace IntegrationTool.Controllers
             try
             {
                 connectModel();
-                
+
+            
+        
                 List<SystemLog> systemLogs = logsConfigurationModel.getSystemLogs();
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(systemLogs,

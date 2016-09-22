@@ -24,5 +24,12 @@ namespace IntegrationTool.Models
                         select sl).ToList();
             return systemLogs;
         }
+
+        public List<IntegrationLog> getIntegrationLogs()
+        {
+            List<IntegrationLog> IntegrationLogs = (from il in LogsConfigurationDB.IntegrationLogs
+                                          select il).ToList();
+            return IntegrationLogs;
+        }
     }
 }

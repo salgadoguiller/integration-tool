@@ -186,10 +186,10 @@
     <Compile Include="Models\IntegrationCategory.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IntegrationModel.cs" />
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegrationModel.cs" />
     <Compile Include="Models\IntegrationsType.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -212,6 +212,7 @@
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogsConfiguration.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\OperationsWebService.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -236,7 +237,6 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\SystemLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -265,6 +265,7 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\ListIntegrationLogsController.js" />
     <Content Include="Content\Scripts\Controllers\ListSystemLogsController.js" />
     <Content Include="Content\Scripts\Controllers\ListKeysController.js" />
     <Content Include="Content\Scripts\Controllers\ManualIntegrationController.js" />
@@ -425,6 +426,15 @@
     <Content Include="Views\Integration\manual.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Configuration\listKeys.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Integration\configurationManual.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Logs\listSystemLogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
@@ -446,13 +456,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Configuration\listKeys.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Integration\configurationManual.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Logs\listSystemLogs.cshtml" />
+    <Content Include="Views\Logs\listIntegrationLogs.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

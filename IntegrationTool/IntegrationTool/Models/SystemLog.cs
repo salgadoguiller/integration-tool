@@ -19,8 +19,7 @@ namespace IntegrationTool.Models
         public string Description { get; set; }
         public System.DateTime ErrorDate { get; set; }
         public int IntegrationId { get; set; }
-
- 
+    
         public virtual Integration Integration { get; set; }
     }
 }

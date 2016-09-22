@@ -1,11 +1,11 @@
-﻿var ListSystemLogsController = function ($scope, $http, $location) {
+﻿var ListIntegrationLogsController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
-    $scope.listSystemLogs = [];
+    $scope.listIntegrationLogs = [];
    
-    getListSystemLogs();
+    getListIntegrationLogs();
 
-    function getListSystemLogs() {
+    function getListIntegrationLogs() {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -14,9 +14,10 @@
 
         var data = $.param({});
 
-        $http.get('Logs/getListSystemLogs', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {              
-                $scope.listSystemLogs = resp;
+        $http.get('Logs/getListIntegrationLogs', data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                console.log(resp);
+                $scope.listIntegrationLogs = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
@@ -28,4 +29,4 @@
     } 
 }
 
-ListSystemLogsController.$inject = ['$scope', '$http', '$location'];
+ListIntegrationLogsController.$inject = ['$scope', '$http', '$location'];

@@ -16,11 +16,12 @@ namespace IntegrationTool.Models
     public partial class IntegrationLog
     {
         public int LogId { get; set; }
-        public string Description { get; set; }
-        public System.DateTime ErrorDate { get; set; }
+        public string ReferenceCode { get; set; }
+        public System.DateTime Date { get; set; }
         public int IntegrationId { get; set; }
+        public string Status { get; set; }
 
-        [JsonIgnore]
+    
         public virtual Integration Integration { get; set; }
     }
 }

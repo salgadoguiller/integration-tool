@@ -20,6 +20,7 @@ IntegrationToolApp.controller('ConfigIntegrationScheduledController', ConfigInte
 IntegrationToolApp.controller('ManualIntegrationController', ManualIntegrationController);
 IntegrationToolApp.controller('SheduleIntegrationsController', SheduleIntegrationsController);
 
+IntegrationToolApp.controller('ListIntegrationLogsController', ListIntegrationLogsController);
 IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
@@ -101,6 +102,10 @@ var configFunction = function ($routeProvider) {
         .when('/Logs/listSystemLogs', {
             templateUrl: '/Logs/listSystemLogs',
             controller: 'ListSystemLogsController'
+        })
+        .when('/Logs/listIntegrationLogs', {
+        templateUrl: '/Logs/listIntegrationLogs',
+        controller: 'ListIntegrationLogsController'
         });
 
 }
