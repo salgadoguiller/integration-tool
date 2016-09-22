@@ -23,6 +23,8 @@ IntegrationToolApp.controller('SheduleIntegrationsController', SheduleIntegratio
 IntegrationToolApp.controller('ListIntegrationLogsController', ListIntegrationLogsController);
 IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
 
+IntegrationToolApp.controller('LoginController', LoginController);
+
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
@@ -31,8 +33,9 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
     // Login
     $stateProvider
     .state('login', {
-        url: '/login',
-        templateUrl: '/Account/login'
+        url: '/account/login',
+        templateUrl: '/Account/login',
+        controller: 'LoginController'
     })
     // Rutas para usuarios logeados.
     .state('main', {

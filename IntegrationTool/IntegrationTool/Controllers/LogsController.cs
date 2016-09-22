@@ -11,7 +11,6 @@ namespace IntegrationTool.Controllers
 {
     public class LogsController : Controller
     {
-
         private LogsConfiguration logsConfigurationModel;
        
         private void connectModel()

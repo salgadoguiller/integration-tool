@@ -267,6 +267,7 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\LoginController.js" />
     <Content Include="Content\Scripts\Controllers\ListIntegrationLogsController.js" />
     <Content Include="Content\Scripts\Controllers\ListSystemLogsController.js" />
     <Content Include="Content\Scripts\Controllers\ListKeysController.js" />
