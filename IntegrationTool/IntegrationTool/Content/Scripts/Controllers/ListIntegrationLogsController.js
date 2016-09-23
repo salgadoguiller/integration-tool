@@ -15,8 +15,7 @@
         var data = $.param({});
 
         $http.get('Logs/getListIntegrationLogs', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {
-                console.log(resp);
+            if (resp.type !== 'danger') {              
                 $scope.listIntegrationLogs = resp;
             } else {
                 $scope.message = resp.message;
