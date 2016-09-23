@@ -24,9 +24,69 @@ IntegrationToolApp.controller('ListIntegrationLogsController', ListIntegrationLo
 IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
 
 IntegrationToolApp.controller('LoginController', LoginController);
+IntegrationToolApp.controller('LayoutController', LayoutController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
+
+function runFunction($rootScope, $state, Authentication, $location) {
+    $rootScope.$on('$stateChangeStart', stateChangeStart);
+    $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+    function stateChangeStart(event, toState, toParams, fromState, fromParams) {
+        if (toState.name == 'login' && Authentication.user) {
+            event.preventDefault();
+            $state.go('main.integrations.calendar').then(function () {
+                storePreviousState(toState, toParams);
+            });
+            return;
+        }
+
+        if (toState.name == 'login' && !Authentication.user) {
+            return;
+        }
+
+        if (toState.name == 'forbidden') {
+            return;
+        }
+
+        if (Authentication.user) {
+            for (index = 0; index < Authentication.user.Permissions.length; index++) {
+                var regex = new RegExp(Authentication.user.Permissions[index].Resource.Name.toLowerCase());
+                var havePermissions = toState.name.search(regex);
+                if (havePermissions != -1) {
+                    return;
+                }
+            }
+            event.preventDefault();
+            $state.transitionTo('forbidden');
+        }
+        else {
+            event.preventDefault();
+            $state.transitionTo('login').then(function () {
+                storePreviousState(toState, toParams);
+            });
+        }
+    }
+
+    function stateChangeSuccess(event, toState, toParams, fromState, fromParams) {
+        storePreviousState(fromState, fromParams);
+    }
+
+    function storePreviousState(state, params) {
+        if (!state.data || !state.data.ignoreState) {
+            $state.previous = {
+                state: state,
+                params: params,
+                href: $state.href(state, params)
+            };
+        }
+    }
+}
+
+runFunction.$inject = ['$rootScope', '$state', 'Authentication', '$location'];
+
+IntegrationToolApp.run(runFunction);
 
 var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/main/integrations/calendar');
@@ -34,14 +94,21 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
     $stateProvider
     .state('login', {
         url: '/account/login',
-        templateUrl: '/Account/login',
+        templateUrl: '/Account/viewLogin',
         controller: 'LoginController'
+    })
+    // Forbidden
+    $stateProvider
+    .state('forbidden', {
+        url: '/error/forbiden',
+        templateUrl: '/Errors/forbidden'
     })
     // Rutas para usuarios logeados.
     .state('main', {
         abstract: true,
         url: '/main',
-        templateUrl: 'Main/layout' 
+        templateUrl: 'Main/layout',
+        controller: 'LayoutController'
     })
     // Pestaña de configuración
     .state('main.configuration', {

@@ -5,68 +5,98 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using IntegrationTool.Models;
+using System.Security.Principal;
+using System.Threading;
+using Newtonsoft.Json;
 
-namespace MvcApplication1.Controllers
+namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
-        public ActionResult Login()
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult viewLogin()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public void login()
         {
-            if (ModelState.IsValid)
+            AccountModel accountModel = new AccountModel();
+
+            string resp = "";
+            if (Membership.ValidateUser(Request.Form["Username"], Request.Form["Password"]))
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                try
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    /*
-                    string userData = "ApplicationSpecific data for this user.";
-
-                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                      model.UserName,
-                      DateTime.Now,
-                      DateTime.Now.AddMinutes(30),
-                      model.RememberMe,
-                      userData,
-                      FormsAuthentication.FormsCookiePath);
-
-                    // Encrypt the ticket.
-                    string encTicket = FormsAuthentication.Encrypt(ticket);
-
-                    // Create the cookie.
-                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
-
-                     * */
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    User user = accountModel.getUser(Request.Form["Username"]);
+                    FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    resp = serializeObject(user);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    resp = "{\"type\":\"danger\", \"message\":\"User don´t have permissions.\"}";
+                }
+            }
+            else
+            {
+                if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
+                {
+                    User user = accountModel.getUser(Request.Form["Username"]);
+                    FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    resp = serializeObject(user);
                 }
                 else
                 {
-
+                    resp = "{\"type\":\"danger\", \"message\":\"User or password incorrect. Please try again.\"}";
                 }
             }
 
-            // if we got this far, something failed, redisplay form
-            return View(model);
+            response(resp);
         }
 
-        [Authorize]
-        public ActionResult LogOff()
+        [HttpPost]
+        public void Logout()
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            string resp = "{\"type\":\"danger\", \"message\":\"Logout succesfully.\"}";
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public static bool isAuthenticated()
+        {
+            IPrincipal user = Thread.CurrentPrincipal;
+
+            if (user.Identity.IsAuthenticated)
+                return true;
+            else
+                return false;
+        }
+
+        // ================================================================================================================
+        // Metodos privados que proveen funcionalidad a las acciones del controlador.
+        // ================================================================================================================
+        private void response(string json)
+        {
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+        }
+
+        private string serializeObject(Object obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿var LoginController = function ($scope, $http) {
+﻿var LoginController = function ($scope, $http, $state, Authentication) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
+    var authentication = Authentication;
 
     function sendRequest(req, form) {
         if (!form.$valid) {
@@ -20,10 +21,14 @@
         var data = $.param(req);
 
         $http.post('Account/login', data, config).success(function (resp) {
-            $scope.message = resp.message;
-            $scope.typeMessage = resp.type;
-            form.$setPristine();
-            form.$setUntouched();
+            if (resp.type !== 'danger') {
+                authentication.user = resp;
+                $state.go($state.previous.state.name || 'main.integrations.calendar', $state.previous.params);
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+                $scope.request.Password = '';
+            }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
@@ -31,4 +36,4 @@
     }
 }
 
-LoginController.$inject = ['$scope', '$http'];
+LoginController.$inject = ['$scope', '$http', '$state', 'Authentication'];

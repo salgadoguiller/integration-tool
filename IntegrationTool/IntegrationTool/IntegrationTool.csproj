@@ -157,6 +157,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogiModel.cs" />
     <Compile Include="Models\DatabaseParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -267,6 +269,7 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\LayoutController.js" />
     <Content Include="Content\Scripts\Controllers\LoginController.js" />
     <Content Include="Content\Scripts\Controllers\ListIntegrationLogsController.js" />
     <Content Include="Content\Scripts\Controllers\ListSystemLogsController.js" />
@@ -296,6 +299,7 @@
     <Content Include="Content\Scripts\Plugins\2jquery-ui.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
     <Content Include="Content\Scripts\Plugins\5moment.min.js" />
+    <Content Include="Content\Scripts\Services\AuthenticationService.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
     <Content Include="Content\Stylesheets\Styles\fullcalendar.min.css" />
     <Content Include="Content\Stylesheets\Styles\style.css" />
@@ -462,10 +466,13 @@
     <Content Include="Views\Logs\listIntegrationLogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\viewLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Main\layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\forbidden.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

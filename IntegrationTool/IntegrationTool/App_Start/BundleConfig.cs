@@ -13,6 +13,9 @@ namespace IntegrationTool
             bundles.Add(new ScriptBundle("~/Content/IntegrationToolAppDirectives")
                 .IncludeDirectory("~/Content/Scripts/Directives/", "*.js"));
 
+            bundles.Add(new ScriptBundle("~/Content/IntegrationToolAppServices")
+                .IncludeDirectory("~/Content/Scripts/Services/", "*.js"));
+
             bundles.Add(new ScriptBundle("~/Content/IntegrationToolApp")
                 .Include("~/Content/Scripts/IntegrationToolApp.js"));
 
