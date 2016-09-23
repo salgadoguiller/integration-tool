@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router', 'nya.bootstrap.select']);
 
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
@@ -24,6 +24,8 @@ IntegrationToolApp.controller('ListIntegrationLogsController', ListIntegrationLo
 IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
 
 IntegrationToolApp.controller('LoginController', LoginController);
+
+IntegrationToolApp.controller('ReportController', ReportController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -155,6 +157,17 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/listIntegrationLogs',
         templateUrl: '/Logs/listIntegrationLogs',
         controller: 'ListIntegrationLogsController'
+    })
+    // Pestaña de Reports
+    .state('main.reports', {
+        abstract: true,
+        url: '/reports',
+        template: '<div ui-view></div>'
+    })
+    .state('main.reports.generate', {
+        url: '/generate',
+        templateUrl: '/Report/getReport',
+        controller: 'ReportController'
     });
 
 }

@@ -19,7 +19,7 @@ namespace IntegrationTool.Models
         // ================================================================================================================      
 
         public List<SystemLog> getSystemLogs()
-        {           
+        {
             List<SystemLog> systemLogs = (from sl in LogsConfigurationDB.SystemLogs
                         select sl).ToList();
             return systemLogs;
