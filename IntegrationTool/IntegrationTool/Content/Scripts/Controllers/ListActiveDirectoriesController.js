@@ -1,4 +1,4 @@
-﻿var ListActiveDirectoriesController = function ($scope, $http, $location) {
+﻿var ListActiveDirectoriesController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listActiveDirectories = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getListActiveDirectories();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -52,4 +50,4 @@
         $location.url('/main/configuration/formActiveDirectory/' + id);
     }
 }
-ListActiveDirectoriesController.$inject = ['$scope', '$http', '$location'];
+ListActiveDirectoriesController.$inject = ['$scope', '$http', '$location', '$state'];

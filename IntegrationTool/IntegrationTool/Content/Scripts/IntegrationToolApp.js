@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router', 'ngCookies']);
 
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
@@ -34,19 +34,23 @@ function runFunction($rootScope, $state, Authentication, $location) {
     $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
 
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
+        if (toState.name == 'login' && !Authentication.user) {
+            return;
+        }
+
+        if (toState.name == 'main.errors.forbidden' && Authentication.user) {
+            return;
+        }
+
+        if (toState.name == 'main.errors.internalServerError' && Authentication.user) {
+            return;
+        }
+
         if (toState.name == 'login' && Authentication.user) {
             event.preventDefault();
             $state.go('main.integrations.calendar').then(function () {
                 storePreviousState(toState, toParams);
             });
-            return;
-        }
-
-        if (toState.name == 'login' && !Authentication.user) {
-            return;
-        }
-
-        if (toState.name == 'forbidden') {
             return;
         }
 
@@ -57,15 +61,16 @@ function runFunction($rootScope, $state, Authentication, $location) {
                 if (havePermissions != -1) {
                     return;
                 }
-            }
+            }    
             event.preventDefault();
-            $state.transitionTo('forbidden');
+            $state.transitionTo('main.errors.forbidden');
         }
         else {
             event.preventDefault();
             $state.transitionTo('login').then(function () {
                 storePreviousState(toState, toParams);
             });
+            return;
         }
     }
 
@@ -96,12 +101,6 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/account/login',
         templateUrl: '/Account/viewLogin',
         controller: 'LoginController'
-    })
-    // Forbidden
-    $stateProvider
-    .state('forbidden', {
-        url: '/error/forbiden',
-        templateUrl: '/Errors/forbidden'
     })
     // Rutas para usuarios logeados.
     .state('main', {
@@ -222,6 +221,20 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/listIntegrationLogs',
         templateUrl: '/Logs/listIntegrationLogs',
         controller: 'ListIntegrationLogsController'
+    })
+    // Rutas de errores.
+    .state('main.errors', {
+        abstract: true,
+        url: '/errors',
+        template: '<div ui-view></div>'
+    })
+    .state('main.errors.forbidden', {
+        url: '/forbiden',
+        templateUrl: '/Errors/forbidden403'
+    })
+    .state('main.errors.internalServerError', {
+        url: '/internalServerError',
+        templateUrl: '/Errors/internalServerError500'
     });
 
 }

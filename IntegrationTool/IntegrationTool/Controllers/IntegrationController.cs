@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class IntegrationController : Controller
     {
         private IntegrationModel integrationConfigurationModel;

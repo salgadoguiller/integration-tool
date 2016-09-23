@@ -1,4 +1,4 @@
-﻿var ListDatabasesController = function ($scope, $http, $location) {
+﻿var ListDatabasesController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listDatabases = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getListDatabases();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -52,4 +50,4 @@
         $location.url('/main/configuration/formDatabase/' + id);
     }
 }
-ListDatabasesController.$inject = ['$scope', '$http', '$location'];
+ListDatabasesController.$inject = ['$scope', '$http', '$location', '$state'];

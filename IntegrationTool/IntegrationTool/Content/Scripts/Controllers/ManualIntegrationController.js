@@ -1,4 +1,4 @@
-﻿var ManualIntegrationController = function ($scope, $http, $location) {
+﻿var ManualIntegrationController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.manualIntegrations = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -42,8 +41,7 @@
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -52,4 +50,4 @@
     }
 }
 
-ManualIntegrationController.$inject = ['$scope', '$http', '$location'];
+ManualIntegrationController.$inject = ['$scope', '$http', '$location', '$state'];

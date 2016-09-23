@@ -1,8 +1,8 @@
-﻿var ListSystemLogsController = function ($scope, $http, $location) {
+﻿var ListSystemLogsController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listSystemLogs = [];
-   
+
     getListSystemLogs();
 
     function getListSystemLogs() {
@@ -15,17 +15,16 @@
         var data = $.param({});
 
         $http.get('Logs/getListSystemLogs', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {              
+            if (resp.type !== 'danger') {
                 $scope.listSystemLogs = resp;
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
-    } 
+    }
 }
 
-ListSystemLogsController.$inject = ['$scope', '$http', '$location'];
+ListSystemLogsController.$inject = ['$scope', '$http', '$location', '$state'];

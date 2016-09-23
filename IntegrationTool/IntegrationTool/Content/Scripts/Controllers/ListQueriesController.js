@@ -1,4 +1,4 @@
-﻿var ListQueriesController = function ($scope, $http, $location) {
+﻿var ListQueriesController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listQueries = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getlistQueries();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -52,4 +50,4 @@
         $location.url('/main/configuration/formQuery/' + id);
     }
 }
-ListQueriesController.$inject = ['$scope', '$http', '$location'];
+ListQueriesController.$inject = ['$scope', '$http', '$location', '$state'];

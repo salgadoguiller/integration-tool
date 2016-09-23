@@ -472,7 +472,10 @@
     <Content Include="Views\Main\layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Errors\forbidden.cshtml" />
+    <Content Include="Views\Errors\forbidden403.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\internalServerError500.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

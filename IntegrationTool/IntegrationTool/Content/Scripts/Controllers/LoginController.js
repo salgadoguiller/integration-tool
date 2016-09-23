@@ -1,4 +1,4 @@
-﻿var LoginController = function ($scope, $http, $state, Authentication) {
+﻿var LoginController = function ($scope, $http, $state, Authentication, $cookies, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -22,7 +22,10 @@
 
         $http.post('Account/login', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                authentication.user = resp;
+                var expireDate = new Date();
+                expireDate.setMinutes(expireDate.getMinutes() + 30);
+                $cookies.putObject('user', resp, { 'expires': expireDate });
+                Authentication.user = resp;
                 $state.go($state.previous.state.name || 'main.integrations.calendar', $state.previous.params);
             } else {
                 $scope.message = resp.message;
@@ -30,10 +33,9 @@
                 $scope.request.Password = '';
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 }
 
-LoginController.$inject = ['$scope', '$http', '$state', 'Authentication'];
+LoginController.$inject = ['$scope', '$http', '$state', 'Authentication', '$cookies', '$state'];

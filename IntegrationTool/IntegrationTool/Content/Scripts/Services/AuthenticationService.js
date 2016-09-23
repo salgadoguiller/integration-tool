@@ -1,10 +1,10 @@
 ﻿angular.module('IntegrationToolApp').factory('Authentication', Authentication);
 
-Authentication.$inject = ['$window'];
+Authentication.$inject = ['$cookies'];
 
-function Authentication($window) {
+function Authentication($cookies) {
     var auth = {
-        user: $window.user
+        user: $cookies.getObject('user')
     };
 
     return auth;

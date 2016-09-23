@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class MainController : Controller
     {
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult index()
         {

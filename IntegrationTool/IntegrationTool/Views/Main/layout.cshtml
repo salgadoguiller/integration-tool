@@ -25,7 +25,7 @@
             <li class="dropdown user user-menu">
             <a class="dropdown-toggle" data-toggle="dropdown">
                 <img src="../../Content/Images/Icon-user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs">User-Laureate</span>
+                <span class="hidden-xs">{{name}}</span>
             </a>
             <ul class="dropdown-menu">
                 <!-- User image -->
@@ -33,8 +33,8 @@
                 <img src="../../Content/Images/Icon-user.png" class="img-circle" alt="User Image">
 
                 <p>
-                    User-Laureate
-                    <small>Administrator</small>
+                    {{name}}
+                    <small>User Integration Tool</small>
                 </p>
                 </li>
 
@@ -70,8 +70,8 @@
             <img src="../../Content/Images/Icon-user.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-            <p>User-Laureate</p>
-            <a><i class="fa fa-circle text-success"></i>Administrator</a>
+            <p>{{name}}</p>
+            <a><i class="fa fa-circle text-success"></i>User Integration Tool</a>
         </div>
         </div>
 
@@ -83,7 +83,7 @@
             <i class="fa fa-dashboard"></i> <span>Main</span>
             </a>
         </li>
-        <li class="treeview">
+        <li class="treeview" ng-if="permissions.indexOf('configuration') >= 0">
             <a>
             <i class="fa fa-cog"></i>
             <span>Configuration</span>
@@ -101,7 +101,7 @@
             <li><a href="/#/main/configuration/listKeys"><i class="fa fa-circle-o"></i>Keys</a></li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview" ng-if="permissions.indexOf('integrations') >= 0">
             <a>
             <i class="fa fa-files-o"></i>
             <span>Integrations</span>
@@ -117,7 +117,7 @@
             </ul>
         </li>
 
-        <li class="treeview">
+        <li class="treeview" ng-if="permissions.indexOf('users') >= 0">
             <a>
             <i class="fa fa-users"></i>
             <span>Users</span>
@@ -130,13 +130,13 @@
             <li><a><i class="fa fa-circle-o"></i>Active Directory</a></li>
             </ul>
         </li>
-        <li>
+        <li ng-if="permissions.indexOf('reports') >= 0">
             <a>
             <i class="fa fa-file"></i> <span>Reports</span>
             </a>
         </li>
 
-        <li class="treeview">
+        <li class="treeview" ng-if="permissions.indexOf('logs') >= 0">
             <a>
             <i class="fa fa-laptop"></i>
             <span>Logs</span>
