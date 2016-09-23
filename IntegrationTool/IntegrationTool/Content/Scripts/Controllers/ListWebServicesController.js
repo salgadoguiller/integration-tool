@@ -1,4 +1,4 @@
-﻿var ListWebServicesController = function ($scope, $http, $location) {
+﻿var ListWebServicesController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listWebServices = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getListWebServices();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -52,4 +50,4 @@
         $location.url('/main/configuration/formWebService/' + id);
     }
 }
-ListWebServicesController.$inject = ['$scope', '$http', '$location'];
+ListWebServicesController.$inject = ['$scope', '$http', '$location', '$state'];

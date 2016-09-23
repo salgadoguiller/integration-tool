@@ -33,7 +33,8 @@ namespace IntegrationTool.Controllers
                 try
                 {
                     User user = accountModel.getUser(Request.Form["Username"]);
-                    FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    // FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    addAuthCookie(Request.Form["Username"]);
                     resp = serializeObject(user);
                 }
                 catch (ArgumentOutOfRangeException)
@@ -46,7 +47,8 @@ namespace IntegrationTool.Controllers
                 if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
                 {
                     User user = accountModel.getUser(Request.Form["Username"]);
-                    FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    // FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
+                    addAuthCookie(Request.Form["Username"]);
                     resp = serializeObject(user);
                 }
                 else
@@ -68,17 +70,6 @@ namespace IntegrationTool.Controllers
             response(resp);
         }
 
-        [HttpGet]
-        public static bool isAuthenticated()
-        {
-            IPrincipal user = Thread.CurrentPrincipal;
-
-            if (user.Identity.IsAuthenticated)
-                return true;
-            else
-                return false;
-        }
-
         // ================================================================================================================
         // Metodos privados que proveen funcionalidad a las acciones del controlador.
         // ================================================================================================================
@@ -97,6 +88,23 @@ namespace IntegrationTool.Controllers
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
+        }
+
+        private void addAuthCookie(string username)
+        {
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                      username,
+                      DateTime.Now,
+                      DateTime.Now.AddMinutes(30),
+                      true,
+                      "",
+                      FormsAuthentication.FormsCookiePath);
+
+            // Encrypt the ticket.
+            string encTicket = FormsAuthentication.Encrypt(ticket);
+
+            // Create the cookie.
+            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
         }
     }
 }

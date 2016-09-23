@@ -1,4 +1,4 @@
-﻿var ListServerSMTPController = function ($scope, $http, $location) {
+﻿var ListServerSMTPController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listServersSMTP = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getListServersSMTP();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -53,4 +51,4 @@
     }
 }
 
-ListServerSMTPController.$inject = ['$scope', '$http', '$location'];
+ListServerSMTPController.$inject = ['$scope', '$http', '$location', '$state'];

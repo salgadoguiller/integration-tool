@@ -1,4 +1,4 @@
-﻿var FormFlatFileController = function ($scope, $http, $stateParams) {
+﻿var FormFlatFileController = function ($scope, $http, $stateParams, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -28,8 +28,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -62,8 +61,7 @@
             form.$setPristine();
             form.$setUntouched();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -76,10 +74,9 @@
             form.$setPristine();
             form.$setUntouched();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 }
 
-FormFlatFileController.$inject = ['$scope', '$http', '$stateParams'];
+FormFlatFileController.$inject = ['$scope', '$http', '$stateParams', '$state'];

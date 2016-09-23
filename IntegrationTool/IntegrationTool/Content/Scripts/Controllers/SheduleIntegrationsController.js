@@ -1,14 +1,14 @@
-﻿var SheduleIntegrationsController = function ($scope, $http, $location, $window) {
+﻿var SheduleIntegrationsController = function ($scope, $http, $location, $window, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationShedule = [];
     $scope.integrationId = '';
 
     getIntegrationsShedule();
-   
+
     function getIntegrationsShedule()
     {
-        
+
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -19,15 +19,14 @@
 
         $http.get('Integration/getSheduleIntegrations', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                buildCalendar(resp);               
+                buildCalendar(resp);
             }
             else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -45,7 +44,7 @@
             var fecha = dateDatabase.split("T");
             var fechaSplit = fecha[0].split("-");
             var horaSplit = fecha[1].split(":");
-    
+
             $scope.listIntegrationShedule[index] =
             {
                 id: resp[index].IntegrationId,
@@ -53,7 +52,7 @@
                 start: new Date(fechaSplit[0], fechaSplit[1] - 1, fechaSplit[2], horaSplit[0], horaSplit[1], horaSplit[2]),
                 url: '/#/main/integrations/configurationScheduled/' + resp[index].IntegrationId,
                 backgroundColor: colors[count],
-                borderColor: colors[count]          
+                borderColor: colors[count]
             }
             count++;
         }
@@ -88,10 +87,10 @@
             events: integrationShedule,
             eventClick: function (event) {
                 if (event.url) {
-                    $window(event.url);                   
+                    $window(event.url);
                 }
             }
         });
     }
 }
-SheduleIntegrationsController.$inject = ['$scope', '$http', '$location', '$window'];
+SheduleIntegrationsController.$inject = ['$scope', '$http', '$location', '$window', '$state'];

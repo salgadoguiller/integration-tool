@@ -1,4 +1,4 @@
-﻿var ListFlatFilesController = function ($scope, $http, $location) {
+﻿var ListFlatFilesController = function ($scope, $http, $location, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listFlatFiles = [];
@@ -24,8 +24,7 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -43,8 +42,7 @@
             $scope.typeMessage = resp.type;
             getListFlatFiles();
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 
@@ -53,4 +51,4 @@
     }
 }
 
-ListFlatFilesController.$inject = ['$scope', '$http', '$location'];
+ListFlatFilesController.$inject = ['$scope', '$http', '$location', '$state'];

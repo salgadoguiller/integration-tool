@@ -9,6 +9,7 @@ using ClassLibrary;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class ConfigurationController : Controller
     {
         private ConfigurationModel systemConfigurationModel;

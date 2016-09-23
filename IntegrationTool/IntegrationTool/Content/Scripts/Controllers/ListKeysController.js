@@ -1,4 +1,4 @@
-﻿var ListKeysController = function ($scope, $http) {
+﻿var ListKeysController = function ($scope, $http, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listKeys = [];
@@ -22,9 +22,8 @@
                 $scope.typeMessage = resp.type;
             }
         }).error(function (resp) {
-            $scope.message = "Error: " + resp;
-            $scope.typeMessage = "danger";
+            $state.transitionTo('main.errors.internalServerError');
         });
     }
 }
-ListKeysController.$inject = ['$scope', '$http'];
+ListKeysController.$inject = ['$scope', '$http', '$state'];

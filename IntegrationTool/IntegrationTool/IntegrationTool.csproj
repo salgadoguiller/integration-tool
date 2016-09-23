@@ -51,6 +51,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClassLibrary\ClassLibrary\bin\Debug\ClassLibrary.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="ClosedXML, Version=0.80.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.80.1\lib\net40-client\ClosedXML.dll</HintPath>
       <Private>True</Private>
@@ -58,15 +59,26 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
+=======
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DocumentFormat.OpenXml.dll</HintPath>
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\itextsharp.dll</HintPath>
     </Reference>
+=======
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -166,7 +178,10 @@
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\ReportController.cs" />
+=======
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,8 +253,11 @@
     <Compile Include="Models\Recurrence.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\ReportsConfiguration.cs" />
     <Compile Include="Models\ReportsGenerate.cs" />
+=======
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Compile Include="Models\Resource.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -277,7 +295,10 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+<<<<<<< HEAD
     <Content Include="Content\Scripts\Controllers\ReportController.js" />
+=======
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Content Include="Content\Scripts\Controllers\LayoutController.js" />
     <Content Include="Content\Scripts\Controllers\LoginController.js" />
     <Content Include="Content\Scripts\Controllers\ListIntegrationLogsController.js" />
@@ -301,16 +322,21 @@
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
+<<<<<<< HEAD
     <Content Include="Content\Scripts\moduleAngular\nya-bs-select.min.js" />
     <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
     <Content Include="Content\Scripts\Plugins\8bootstrap-select.min.js" />
+=======
+    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\3jquery.dataTables.min.js" />
     <Content Include="Content\Scripts\Plugins\6fullcalendar.min.js" />
     <Content Include="Content\Scripts\Plugins\2jquery-ui.min.js" />
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
     <Content Include="Content\Scripts\Plugins\5moment.min.js" />
+<<<<<<< HEAD
     <Content Include="Content\Stylesheets\Styles\bootstrap-select.min.css" />
     <Content Include="Content\Scripts\Services\AuthenticationService.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
@@ -319,6 +345,12 @@
     <Content Include="Content\Stylesheets\Styles\nya-bs-select.min.css" />
     <Content Include="Content\Stylesheets\Styles\style.css" />
     <Content Include="Content\Stylesheets\Styles\style2.css" />
+=======
+    <Content Include="Content\Scripts\Services\AuthenticationService.js" />
+    <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
+    <Content Include="Content\Stylesheets\Styles\fullcalendar.min.css" />
+    <Content Include="Content\Stylesheets\Styles\style.css" />
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
     <Content Include="Content\Template\css\template.css" />
     <Content Include="Content\Template\css\template.min.css" />
     <Content Include="Content\Template\css\skins\skin-black-light.css" />
@@ -488,8 +520,15 @@
     <Content Include="Views\Main\layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Views\Report\getReport.cshtml" />
     <Content Include="Views\Errors\forbidden.cshtml" />
+=======
+    <Content Include="Views\Errors\forbidden403.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\internalServerError500.cshtml" />
+>>>>>>> 3372de3dfd83369e871f1b81f217f04c8930d59c
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
