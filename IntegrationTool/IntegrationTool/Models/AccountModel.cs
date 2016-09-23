@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Globalization;
-using System.Web.Security;
+using System.Linq;
+using System.Web;
 
 namespace IntegrationTool.Models
 {
-    public class LoginModel
+    public class AccountModel
     {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        private IntegrationToolEntities AccountDB;
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public AccountModel()
+        {
+            AccountDB = new IntegrationToolEntities();
+        }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        public User getUser(string username)
+        {
+            User user = AccountDB.Users.Where(param => param.Username == username).ToList()[0];
+            return user;
+        }
+
+        public bool validateLocalUser(string username, string password)
+        {
+            List<User> users = AccountDB.Users.Where(param => param.Username == username && param.Password == password).ToList();
+
+            if (users.Count == 1)
+                return true;
+            else
+                return false;
+        }
     }
 }

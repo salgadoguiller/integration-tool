@@ -15,11 +15,14 @@ namespace IntegrationTool.Models
     
     public partial class Permission
     {
+        [JsonIgnore]
         public int PermissionId { get; set; }
+        [JsonIgnore]
         public int UserId { get; set; }
+        [JsonIgnore]
         public int ResourceId { get; set; }
 
-        [JsonIgnore]
+        
         public virtual Resource Resource { get; set; }
         [JsonIgnore]
         public virtual User User { get; set; }
