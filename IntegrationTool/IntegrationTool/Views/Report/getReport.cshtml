@@ -1,5 +1,6 @@
 ﻿<div>
   <br />
+    <feedback type=typeMessage message=message></feedback>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="col-md-10 col-md-offset-1">
@@ -20,37 +21,51 @@
               <h3 class="box-title">Reports</h3>
             </div>
             <div class="box-body">
+            
+            <form role="form" ng-submit="sendRequest(request)"  novalidate>             
                               
              <div class="form-group">
                          
              <center>
-               <div class="btn-group">
-                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type Integration <span class="caret"></span></button>
-                 <ul class="dropdown-menu">
-                   <li ng-repeat="integrationType in listIntegrationType"><a>{{integrationType.Name}}</a></li>                                     
-                 </ul>
-               </div>
+               <div class="row">
+                
+                <div class="col-md-3">
+                 <div class="form-group">                       
+                  <select class="form-control" id="IntegrationType" name="IntegrationType" style="width: 100%;" ng-model="request.IntegrationType">
+                   <option value="" selected disabled>Select Type Integration</option>
+                    <option ng-repeat="integrationType in listIntegrationType" value="{{integrationType.IntegrationTypeId}}">{{integrationType.Name}}</option>                          
+                  </select>
+                 </div>
+                </div>
 
-               <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li ng-repeat="integrationCategory in listIntegrationCategory"><a>{{integrationCategory.Name}}</a></li>                  
-                </ul>
-               </div>
-                                         
-               <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Operation <span class="caret"></span></button>
-                <ul class="dropdown-menu">                   
-                   <li ng-repeat="operationWebServices in  listOperationWebServices"><a>{{operationWebServices.Name}}</a></li>                    
-                </ul>
-               </div>
-              
-               <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name Database <span class="caret"></span></button>
-                <ul class="dropdown-menu">                   
-                 <li ng-repeat="databaseParameter in listDatabaseParameter"><a>{{databaseParameter.Name}}</a></li>
-                </ul>
-               </div>
+                <div class="col-md-3">
+                 <div class="form-group">                        
+                  <select class="form-control" id="IntegrationCategory" name="IntegrationCategory" style="width: 100%;" ng-model="request.IntegrationCategory">
+                   <option value="" selected disabled>Select Category Integration</option>
+                   <option ng-repeat="integrationCategory in listIntegrationCategory" value="{{integrationCategory.IntegrationCategoryId}}">{{integrationCategory.Name}}</option>     
+                  </select>
+                 </div>
+                </div>
+
+                <div class="col-md-3">
+                 <div class="form-group">                  
+                  <select class="form-control" id="OperationWebServices" name="OperationWebServices" style="width: 100%;" ng-model="request.OperationWebServices">
+                   <option value="" selected disabled>Select Operation Web Services</option>
+                   <option ng-repeat="operationWebServices in  listOperationWebServices" value="{{operationWebServices.OperationWebServiceId}}">{{operationWebServices.Name}}</option>     
+                  </select>
+                 </div>
+                </div>
+
+                <div class="col-md-3">
+                 <div class="form-group">                      
+                  <select class="form-control" id="DatabaseParameter" name="DatabaseParameter" style="width: 100%;" ng-model="request.DatabaseParameter">
+                   <option value="" selected disabled>Select Name Databases</option>
+                   <option ng-repeat="databaseParameter in listDatabaseParameter" value="{{databaseParameter.EngineId}}">{{databaseParameter.Name}}</option>     
+                  </select>
+                 </div>
+                </div>
+
+               </div>               
              </center>
                                                                       
              </div>
@@ -62,22 +77,27 @@
                 </div>
               </center>          
             </div>
-
-              
+           
             <center>
               <div class="card-drop">
                 <a class='toggle'><span class='label-active'>Select One Option...</span></a>
                 <ul>
-                  <li class='active'><a data-label="IntegrationLogs" value="IntegrationLogs" >Integration Logs</a></li>
-                  <li><a data-label="SystemLogs" value="SystemLogs" >System Logs</a></li>
+                  <li class='active'><a data-label="Integration Logs" value="IntegrationLogs" >Integration Logs</a></li>
+                  <li><a data-label="SystemLogs" value="System Logs" >System Logs</a></li>
                 </ul>
               </div>
             </center>
-         
-            </div>
-        
 
-              <br><br><br><br><br>
+                     <br><br>
+              <div class="box-footer" >                
+               <center>
+                 <button type="submit" class="btn btn-primary" >Generate</button>
+               </center>
+              </div>  
+            </form>
+            </div>
+
+                
               <!-- /.form group -->
             </div>
             <!-- /.box-body -->

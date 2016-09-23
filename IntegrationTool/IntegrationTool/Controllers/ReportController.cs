@@ -1,10 +1,19 @@
-﻿using IntegrationTool.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using IntegrationTool.Models;
+//Para el manejo de Archivos
+using System.IO;
+//Clases necesarias de iTextSharp
+using iTextSharp;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+//Para la creacion de un excel
+using DocumentFormat.OpenXml;
+using ClosedXML.Excel;
 using ClassLibrary;
 
 namespace IntegrationTool.Controllers
@@ -138,6 +147,79 @@ namespace IntegrationTool.Controllers
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
+        }
+
+
+        [HttpPost]
+        public void getDocumentReport()
+        {
+            string resp = "";
+            string verificacion ="";
+            ReportsGenerate reportGenerate = new ReportsGenerate();
+                     
+            try
+            {
+
+             verificacion= reportGenerate.ParamToGenerateReport(Convert.ToInt32(Request.Form["IntegrationType"]),Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]),
+                                                   Convert.ToInt32(Request.Form["DatabaseParameter"]),Request.Form["start"], Request.Form["end"], Request.Form["value2"]);
+
+             generateDocument();
+
+                resp = "{\"type\":\"success\", \"message\":\"Report Generate "+verificacion+" Successful.\"}";
+            }
+            catch (Exception ex)
+            {              
+                resp = "{\"type\":\"danger\", \"message\":\"Report Generate "+ex.Message+" Unsuccessful. Please try again.\"}";
+            }
+            //response(resp);
+        }
+
+        private void generateDocument()
+        {
+            ////                   
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Integration");
+
+            worksheet.Cell("A1").Value = "Reference Code";
+            worksheet.Cell("B1").Value = "Date";
+            worksheet.Cell("C1").Value = "integration Id";
+            worksheet.Cell("D1").Value = "Status";
+
+            connectModel();
+
+            List<IntegrationLog> integrationLog2 = ReportsConfigurationModel.getIntegrationLog();
+                               
+            int contador = 4;
+            foreach (IntegrationLog integration2 in integrationLog2)
+            {
+
+                worksheet.Cell("A" + contador).Value = integration2.ReferenceCode;
+                worksheet.Cell("B" + contador).Value = integration2.Date.ToString("d");
+                worksheet.Cell("C" + contador).Value = integration2.IntegrationId;
+                worksheet.Cell("D" + contador).Value = integration2.Status;
+               contador++;
+            }              
+            
+            worksheet.Columns().AdjustToContents();
+
+            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string path = "C:/Users/cturcios/Desktop/ReporteIntegration.xlsx";
+            
+            workbook.SaveAs(path);
+
+            downloadExcel(path);            
+            ////
+        }
+
+        private void downloadExcel(string path)
+        {
+            Response.Clear();
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.Flush();
+            Response.TransmitFile(path);
+            Response.End();
         }
     }
 }

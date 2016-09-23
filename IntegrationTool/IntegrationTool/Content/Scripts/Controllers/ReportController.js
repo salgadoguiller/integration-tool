@@ -1,6 +1,11 @@
 ﻿var ReportController = function ($scope, $http, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
+    $scope.value = "";
+    $scope.startDate ="";
+    $scope.endDate="";
+    $scope.request = {};
+    $scope.sendRequest = sendRequest;
     $scope.listIntegrationCategory = [];
     $scope.listIntegrationType = [];
     $scope.listOperationWebServices = [];
@@ -13,10 +18,6 @@
     getListDatabaseParameter();
 
     function getListIntegrationCategory() {
-        $('.selectpicker').selectpicker({
-
-        });
-
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -27,7 +28,7 @@
 
         $http.get('Report/getListCategoryIntegration', data, config).success(function (resp)
         {
-            if (resp.type !== 'danger'){
+            if (resp.type !== 'danger') {             
                 $scope.listIntegrationCategory = resp;
             } else {
                 $scope.message = resp.message;
@@ -36,13 +37,11 @@
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
-        });
-
-
-        
+        });      
     }
 
-    function getListIntegrationType() {
+    function getListIntegrationType()
+    {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -52,7 +51,7 @@
         var data = $.param({});
 
         $http.get('Report/getListIntegrationType', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {             
+            if (resp.type !== 'danger') {               
                 $scope.listIntegrationType = resp;
             } else {
                 $scope.message = resp.message;
@@ -64,7 +63,8 @@
         });
     }
 
-    function getListOperationWebServices() {
+    function getListOperationWebServices()
+    {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -74,7 +74,7 @@
         var data = $.param({});
 
         $http.get('Report/getListOperationWebServices', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {              
+            if (resp.type !== 'danger') {                
                 $scope.listOperationWebServices = resp;
             } else {
                 $scope.message = resp.message;
@@ -86,7 +86,8 @@
         });
     }
 
-    function getListDatabaseParameter() {
+    function getListDatabaseParameter()
+    {
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -96,7 +97,7 @@
         var data = $.param({});
 
         $http.get('Report/getListDatabaseParameter', data, config).success(function (resp) {
-            if (resp.type !== 'danger') {              
+            if (resp.type !== 'danger') {             
                 $scope.listDatabaseParameter = resp;
             } else {
                 $scope.message = resp.message;
@@ -108,6 +109,35 @@
         });
     }
 
+    function sendRequest(req) {
+      
+        $scope.request.start = $scope.startDate;
+        $scope.request.end = $scope.endDate;
+        $scope.request.value2 = $scope.value;
+        
+        console.log(req);
+             
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param(req);
+
+        console.log(data);
+        $http.post('Report/getDocumentReport', data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            $scope.request = {};
+            console.log(resp);
+        }).error(function (resp) {
+            $scope.message = "Error: " + resp;
+            $scope.typeMessage = "danger";
+        });
+        
+    }
+  
     function enableCard()
     {
         
@@ -189,19 +219,18 @@
                 e.preventDefault;
             });
 
-            function ExtractValue(Value)
-            {
-                var anchor = Value[0];
-                var Value = $(anchor).attr("value");
-            }
+            
 
         })(jQuery);
         /////
     }
 
+    function ExtractValue(Value) {
+        var anchor = Value[0];       
+        $scope.value = $(anchor).attr("value");
+    }
+
     $(function () {
-
-
         //Date range as a button
         $('#daterange-btn').daterangepicker(
             {
@@ -218,14 +247,13 @@
             },
             function (start, end) {
                 $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $scope.startDate = start.format('MM D, YYYY');
+                $scope.endDate = end.format('MM D, YYYY');
                 //prueba(start.format('MM D, YYYY'), end.format('MM D, YYYY'));
             }
         );
 
-    });
-
-    
-        
+    });      
 }
 
 ReportController.$inject = ['$scope', '$http', '$location'];

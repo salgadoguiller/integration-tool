@@ -31,6 +31,7 @@ IntegrationToolApp.controller('ReportController', ReportController);
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
 
+/*
 function runFunction($rootScope, $state, Authentication, $location) {
     $rootScope.$on('$stateChangeStart', stateChangeStart);
     $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
@@ -89,6 +90,7 @@ function runFunction($rootScope, $state, Authentication, $location) {
 runFunction.$inject = ['$rootScope', '$state', 'Authentication', '$location'];
 
 IntegrationToolApp.run(runFunction);
+*/
 
 var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/main/integrations/calendar');

@@ -45,5 +45,12 @@ namespace IntegrationTool.Models
                                                                select dp).ToList();
             return databaseParameter;
         }
+
+        public List<IntegrationLog> getIntegrationLog()
+        {
+            List<IntegrationLog> integrationLog = (from il in ReportsConfigurationDB.IntegrationLogs
+                                                         select il).ToList();
+            return integrationLog;
+        }
     }
 }
