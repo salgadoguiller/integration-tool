@@ -165,7 +165,7 @@ namespace IntegrationTool.Controllers
 
              generateDocument();
 
-                resp = "{\"type\":\"success\", \"message\":\"Report Generate "+verificacion+" Successful.\"}";
+                resp = "{\"type\":\"success\", \"message\":\"Report Generate Successful.\"}";
             }
             catch (Exception ex)
             {              
@@ -207,7 +207,7 @@ namespace IntegrationTool.Controllers
             
             workbook.SaveAs(path);
 
-            downloadExcel(path);            
+            //downloadExcel(path);            
             ////
         }
 
