@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Resource
     {
         public Resource()
         {
             this.Permissions = new HashSet<Permission>();
         }
-    
+
         public int ResourceId { get; set; }
         public string Name { get; set; }
 

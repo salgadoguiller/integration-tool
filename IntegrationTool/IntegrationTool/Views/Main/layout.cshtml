@@ -116,19 +116,10 @@
             <li><a href="/#/main/integrations/calendar"><i class="fa fa-circle-o"></i>Calendar</a></li>
             </ul>
         </li>
-
-        <li class="treeview" ng-if="permissions.indexOf('users') >= 0">
-            <a>
-            <i class="fa fa-users"></i>
-            <span>Users</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
+        <li ng-if="permissions.indexOf('users') >= 0">
+            <a href="/#/main/users/list">
+            <i class="fa fa-file"></i> <span>Users</span>
             </a>
-            <ul class="treeview-menu">
-            <li><a><i class="fa fa-circle-o"></i>Locals</a></li>
-            <li><a><i class="fa fa-circle-o"></i>Active Directory</a></li>
-            </ul>
         </li>
         <li ng-if="permissions.indexOf('reports') >= 0">
             <a href="/#/main/reports/generate">

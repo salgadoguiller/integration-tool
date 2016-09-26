@@ -20,6 +20,16 @@ CREATE TABLE Engines (
 
 
 -- -----------------------------------------------------
+-- Table Status
+-- -----------------------------------------------------
+CREATE TABLE Status (
+  StatusId INT NOT NULL IDENTITY(1,1),
+  Name VARCHAR(80) NOT NULL,
+  CONSTRAINT PK_Status
+    PRIMARY KEY (StatusId));
+
+
+-- -----------------------------------------------------
 -- Table DatabaseParameters
 -- -----------------------------------------------------
 CREATE TABLE DatabaseParameters (
@@ -69,13 +79,22 @@ CREATE TABLE Users (
   Username VARCHAR(80) NOT NULL,
   Password VARCHAR(80) NOT NULL,
   Email VARCHAR(80) NOT NULL,
-  Domain VARCHAR(80) NULL,
   UserTypeId INT NOT NULL,
+  StatusId INT NOT NULL,
   CONSTRAINT PK_User
     PRIMARY KEY (UserId),
+  CONSTRAINT UQ_Username
+    UNIQUE(Username),
+  CONSTRAINT DF_Password
+    DEFAULT 'ActiveDirectory' FOR Password,
   CONSTRAINT FK_UsersUsersType_UserTypeId
     FOREIGN KEY (UserTypeId)
     REFERENCES UsersType (UserTypeId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_UsersStatus_StatusId
+    FOREIGN KEY (StatusId)
+    REFERENCES Status (StatusId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -195,6 +214,7 @@ CREATE TABLE Integrations (
   IntegrationTypeId INT NOT NULL,
   IntegrationCategoryId INT NOT NULL,
   QueryId INT NOT NULL,
+  StatusId INT NOT NULL,
   CONSTRAINT PK_Integration
     PRIMARY KEY (IntegrationId),
   CONSTRAINT FK_IntegrationsUsers_UserId
@@ -240,6 +260,11 @@ CREATE TABLE Integrations (
   CONSTRAINT FK_IntegrationsQueries_QueryId
     FOREIGN KEY (QueryId)
     REFERENCES Queries (QueryId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_IntegrationsStatus_StatusId
+    FOREIGN KEY (StatusId)
+    REFERENCES Status (StatusId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

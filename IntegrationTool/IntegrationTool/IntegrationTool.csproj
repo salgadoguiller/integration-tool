@@ -174,6 +174,7 @@
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -184,7 +185,6 @@
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LogiModel.cs" />
     <Compile Include="Models\DatabaseParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -206,7 +206,6 @@
     <Compile Include="Models\IntegrationLog.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IntegrationModel.cs" />
     <Compile Include="Models\IntegrationsType.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -228,8 +227,6 @@
     <Compile Include="Models\Key.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LogsConfiguration.cs" />
-    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\OperationsWebService.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -253,6 +250,9 @@
     <Compile Include="Models\ServerSMTPParameter.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Status.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -262,6 +262,13 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsersModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\IntegrationModel.cs" />
+    <Compile Include="Models\LogsConfiguration.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\ReportsConfiguration.cs" />
+    <Compile Include="Models\ReportsGenerate.cs" />
     <Compile Include="Models\UsersType.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -284,6 +291,7 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\ListUsersController.js" />
     <Content Include="Content\Scripts\Controllers\ReportController.js" />
     <Content Include="Content\Scripts\Controllers\LayoutController.js" />
     <Content Include="Content\Scripts\Controllers\LoginController.js" />
@@ -308,6 +316,8 @@
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
+    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
     <Content Include="Content\Scripts\moduleAngular\nya-bs-select.min.js" />
     <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
@@ -470,6 +480,26 @@
     <Content Include="Views\Logs\listSystemLogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Logs\listIntegrationLogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\viewLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Main\layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\getReport.cshtml" />
+    <Content Include="Views\Errors\forbidden.cshtml" />
+    <Content Include="Views\Errors\forbidden403.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\internalServerError500.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\listUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\IntegrationTool.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
@@ -526,7 +556,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>65316</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:51124/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

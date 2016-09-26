@@ -1,4 +1,4 @@
-﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router', 'ngCookies', 'nya.bootstrap.select']);
+﻿var IntegrationToolApp = angular.module('IntegrationToolApp', ['ngRoute', 'ngMessages', 'ng-sweet-alert', 'ui.calendar', 'ui.bootstrap', 'ui.router', 'ngCookies']);
 
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
@@ -28,9 +28,10 @@ IntegrationToolApp.controller('LayoutController', LayoutController);
 
 IntegrationToolApp.controller('ReportController', ReportController);
 
+IntegrationToolApp.controller('ListUsersController', ListUsersController);
+
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
-
 
 function runFunction($rootScope, $state, Authentication, $location) {
     $rootScope.$on('$stateChangeStart', stateChangeStart);
@@ -95,7 +96,6 @@ function runFunction($rootScope, $state, Authentication, $location) {
 runFunction.$inject = ['$rootScope', '$state', 'Authentication', '$location'];
 
 IntegrationToolApp.run(runFunction);
-
 
 var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/main/integrations/calendar');
@@ -250,6 +250,17 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/generate',
         templateUrl: '/Report/getReport',
         controller: 'ReportController'
+    })
+    // Pestaña de Users
+    .state('main.users', {
+        abstract: true,
+        url: '/users',
+        template: '<div ui-view></div>'
+    })
+    .state('main.users.list', {
+        url: '/list',
+        templateUrl: '/Users/listUsers',
+        controller: 'ListUsersController'
     });
 
 }

@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Engine
     {
         public Engine()
         {
             this.DatabaseParameters = new HashSet<DatabaseParameter>();
         }
-    
+
         public int EngineId { get; set; }
         public string Name { get; set; }
 
@@ -27,3 +27,4 @@ namespace IntegrationTool.Models
         public virtual ICollection<DatabaseParameter> DatabaseParameters { get; set; }
     }
 }
+

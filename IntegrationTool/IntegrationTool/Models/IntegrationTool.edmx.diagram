@@ -4,30 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3daadcddc0a4b4a979b71fa5136b9b4" Name="Diagram1">
-        <EntityTypeShape EntityType="IntegrationToolModel.ActiveDirectoryParameter" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="65520f05e9454354bb2b4f59df91ace3" Name="Diagram1">
+        <EntityTypeShape EntityType="IntegrationToolModel.ActiveDirectoryParameter" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Calendar" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.DatabaseParameter" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Engine" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.FlatFile" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.FlatFilesParameter" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.IntegrationCategory" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.DatabaseParameter" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Engine" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.FlatFile" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.FlatFilesParameter" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.IntegrationCategory" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.IntegrationLog" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Integration" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Integration" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.IntegrationsType" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Key" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.OperationsWebService" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Permission" Width="1.5" PointX="5.25" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Key" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.OperationsWebService" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Permission" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Query" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.QueryParameter" Width="1.5" PointX="7.5" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.Recurrence" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.Resource" Width="1.5" PointX="3" PointY="28.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.ServerSMTPParameter" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Resource" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.ServerSMTPParameter" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.Status" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntegrationToolModel.SystemLog" Width="1.5" PointX="7.5" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.User" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.UsersType" Width="1.5" PointX="0.75" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntegrationToolModel.WebService" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.User" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.UsersType" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegrationToolModel.WebService" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
         <AssociationConnector Association="IntegrationToolModel.FK_CalendarsIntegrations_IntegrationId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_CalendarsRecurrences_RecurrenceId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_DatabaseParametersEngines_EngineId" ManuallyRouted="false" />
@@ -39,6 +40,7 @@
         <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsIntegrationsType_IntegrationTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsOperationsWebServices_OperationWebServiceId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsQueries_QueryId" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsStatus_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_IntegrationsWebServices_WebServiceId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_QueryParametersIntegrations_IntegrationId" ManuallyRouted="false" />
@@ -46,6 +48,7 @@
         <AssociationConnector Association="IntegrationToolModel.FK_QueriesIntegrationsType_IntegrationTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_PermissionsResources_ResourceId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_PermissionsUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegrationToolModel.FK_UsersStatus_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="IntegrationToolModel.FK_UsersUsersType_UserTypeId" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

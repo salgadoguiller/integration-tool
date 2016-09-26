@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Query
     {
         public Query()
         {
             this.Integrations = new HashSet<Integration>();
         }
-    
+
         public int QueryId { get; set; }
         public string Query1 { get; set; }
         public string Description { get; set; }

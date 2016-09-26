@@ -12,17 +12,20 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
-    public partial class UsersType
+    
+    public partial class Status
     {
-        public UsersType()
+        public Status()
         {
+            this.Integrations = new HashSet<Integration>();
             this.Users = new HashSet<User>();
         }
-
-        public int UserTypeId { get; set; }
-        public string Type { get; set; }
-
+    
+        public int StatusId { get; set; }
+        public string Name { get; set; }
+    
+        [JsonIgnore]
+        public virtual ICollection<Integration> Integrations { get; set; }
         [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }
