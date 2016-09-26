@@ -33,9 +33,7 @@ namespace IntegrationTool.Controllers
                 try
                 {
                     User user = accountModel.getUser(Request.Form["Username"]);
-                    // FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
-                    addAuthCookie(Request.Form["Username"]);
-                    resp = serializeObject(user);
+                    resp = verifyStatus(user);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -47,9 +45,7 @@ namespace IntegrationTool.Controllers
                 if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
                 {
                     User user = accountModel.getUser(Request.Form["Username"]);
-                    // FormsAuthentication.SetAuthCookie(Request.Form["Username"], true);
-                    addAuthCookie(Request.Form["Username"]);
-                    resp = serializeObject(user);
+                    resp = verifyStatus(user);
                 }
                 else
                 {
@@ -88,6 +84,22 @@ namespace IntegrationTool.Controllers
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
+        }
+
+        private string verifyStatus(User user)
+        {
+            string resp = "";
+            if (user.Status.Name == "Enable")
+            {
+                addAuthCookie(Request.Form["Username"]);
+                resp = serializeObject(user);
+            }
+            else
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"User is disable.\"}";
+            }
+
+            return resp;
         }
 
         private void addAuthCookie(string username)

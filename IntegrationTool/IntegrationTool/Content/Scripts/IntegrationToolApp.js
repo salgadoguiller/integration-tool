@@ -29,6 +29,7 @@ IntegrationToolApp.controller('LayoutController', LayoutController);
 IntegrationToolApp.controller('ReportController', ReportController);
 
 IntegrationToolApp.controller('ListUsersController', ListUsersController);
+IntegrationToolApp.controller('FormUserController', FormUserController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -261,6 +262,11 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/list',
         templateUrl: '/Users/listUsers',
         controller: 'ListUsersController'
+    })
+    .state('main.users.formUser', {
+        url: '/formUser/:id',
+        templateUrl: '/Users/formUser',
+        controller: 'FormUserController'
     });
 
 }
