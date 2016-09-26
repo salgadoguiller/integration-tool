@@ -242,6 +242,8 @@
     <Compile Include="Models\Recurrence.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportsConfiguration.cs" />
+    <Compile Include="Models\ReportsGenerate.cs" />
     <Compile Include="Models\Resource.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -316,6 +318,11 @@
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
     <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
+    <Content Include="Content\Scripts\moduleAngular\nya-bs-select.min.js" />
+    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
+    <Content Include="Content\Scripts\Plugins\8bootstrap-select.min.js" />
+    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\3jquery.dataTables.min.js" />
     <Content Include="Content\Scripts\Plugins\6fullcalendar.min.js" />
@@ -512,6 +519,23 @@
       <DependentUpon>IntegrationTool.edmx</DependentUpon>
       <LastGenOutput>IntegrationTool.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Logs\listIntegrationLogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\viewLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Main\layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\getReport.cshtml" />
+    <Content Include="Views\Errors\forbidden.cshtml" />
+    <Content Include="Views\Errors\forbidden403.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\internalServerError500.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
