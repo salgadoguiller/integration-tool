@@ -21,7 +21,6 @@ namespace IntegrationTool.Models
         public int IntegrationId { get; set; }
         public string Status { get; set; }
 
-
         public virtual Integration Integration { get; set; }
     }
 }

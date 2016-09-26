@@ -15,6 +15,7 @@ using iTextSharp.text;
 using DocumentFormat.OpenXml;
 using ClosedXML.Excel;
 using ClassLibrary;
+using System.Data;
 
 namespace IntegrationTool.Controllers
 {
@@ -160,50 +161,52 @@ namespace IntegrationTool.Controllers
             try
             {
 
-             verificacion= reportGenerate.ParamToGenerateReport(Convert.ToInt32(Request.Form["IntegrationType"]),Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]),
+             var table = reportGenerate.ParamToGenerateReport(Convert.ToInt32(Request.Form["IntegrationType"]),Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]),
                                                    Convert.ToInt32(Request.Form["DatabaseParameter"]),Request.Form["start"], Request.Form["end"], Request.Form["value2"]);
 
-             generateDocument();
+             generateDocument(table);
 
-                resp = "{\"type\":\"success\", \"message\":\"Report Generate Successful.\"}";
+               resp = "{\"type\":\"success\", \"message\":\"Report Generate"+verificacion+"  Successful.\"}";
             }
             catch (Exception ex)
             {              
                 resp = "{\"type\":\"danger\", \"message\":\"Report Generate "+ex.Message+" Unsuccessful. Please try again.\"}";
+              
             }
-            //response(resp);
+            response(resp);
+            
         }
 
-        private void generateDocument()
+        private void generateDocument(DataTable table)
         {
             ////                   
+            Encrypt decrypt = new Encrypt();
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Integration");
 
             worksheet.Cell("A1").Value = "Reference Code";
-            worksheet.Cell("B1").Value = "Date";
-            worksheet.Cell("C1").Value = "integration Id";
-            worksheet.Cell("D1").Value = "Status";
-
-            connectModel();
-
-            List<IntegrationLog> integrationLog2 = ReportsConfigurationModel.getIntegrationLog();
-                               
+            worksheet.Cell("B1").Value = "Status";
+            worksheet.Cell("C1").Value = "Category Integration";
+            worksheet.Cell("D1").Value = "Type Integration";
+            worksheet.Cell("E1").Value = "Operation Web Services";
+            worksheet.Cell("F1").Value = "Database Name";
+            worksheet.Cell("G1").Value = "Date Integration";
+         
             int contador = 4;
-            foreach (IntegrationLog integration2 in integrationLog2)
+            for (int i = 0; i < table.Rows.Count; i++)
             {
-
-                worksheet.Cell("A" + contador).Value = integration2.ReferenceCode;
-                worksheet.Cell("B" + contador).Value = integration2.Date.ToString("d");
-                worksheet.Cell("C" + contador).Value = integration2.IntegrationId;
-                worksheet.Cell("D" + contador).Value = integration2.Status;
-               contador++;
-            }              
+                worksheet.Cell("A" + contador).Value = Convert.ToString(table.Rows[i]["ReferenceCode"]);
+                worksheet.Cell("B" + contador).Value = Convert.ToString(table.Rows[i]["Status"]);
+                worksheet.Cell("C" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
+                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
+                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
+                worksheet.Cell("F" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                worksheet.Cell("G" + contador).Value = Convert.ToString(table.Rows[i]["Date"]);
+                contador++; 
+            }
             
-            worksheet.Columns().AdjustToContents();
-
-            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            string path = "C:/Users/cturcios/Desktop/ReporteIntegration.xlsx";
+            worksheet.Columns().AdjustToContents();        
+            string path = "C:/Users/cturcios/Desktop/ReporteIntegration" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
             
             workbook.SaveAs(path);
 
