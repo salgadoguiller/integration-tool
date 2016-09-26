@@ -20,8 +20,7 @@ namespace IntegrationTool.Models
         public System.DateTime Date { get; set; }
         public int IntegrationId { get; set; }
         public string Status { get; set; }
-
-    
+   
         public virtual Integration Integration { get; set; }
     }
 }

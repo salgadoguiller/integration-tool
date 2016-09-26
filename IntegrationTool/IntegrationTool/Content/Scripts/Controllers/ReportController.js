@@ -114,9 +114,7 @@
         $scope.request.start = $scope.startDate;
         $scope.request.end = $scope.endDate;
         $scope.request.value2 = $scope.value;
-        
-        console.log(req);
-             
+                    
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -124,8 +122,6 @@
         }
 
         var data = $.param(req);
-
-        console.log(data);
         $http.post('Report/getDocumentReport', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
