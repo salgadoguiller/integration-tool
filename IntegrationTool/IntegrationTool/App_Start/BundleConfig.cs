@@ -22,9 +22,6 @@ namespace IntegrationTool
             bundles.Add(new ScriptBundle("~/Content/Plugins")
                 .IncludeDirectory("~/Content/Scripts/Plugins/", "*.js"));
 
-            bundles.Add(new ScriptBundle("~/Content/moduleAngular")
-                .IncludeDirectory("~/Content/Scripts/moduleAngular", "*.js"));
-
             bundles.Add(new StyleBundle("~/Content/Styles")
                 .IncludeDirectory("~/Content/Stylesheets/Styles/", "*.css"));
 

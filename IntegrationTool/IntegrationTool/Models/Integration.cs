@@ -36,6 +36,7 @@ namespace IntegrationTool.Models
         public string CurlParameters { get; set; }
         public int OperationWebServiceId { get; set; }
         public string IntegrationName { get; set; }
+        public int StatusId { get; set; }
     
         public virtual ICollection<Calendar> Calendars { get; set; }
         public virtual DatabaseParameter DatabaseParameter { get; set; }
@@ -46,6 +47,7 @@ namespace IntegrationTool.Models
         public virtual IntegrationsType IntegrationsType { get; set; }
         public virtual OperationsWebService OperationsWebService { get; set; }
         public virtual Query Query { get; set; }
+        public virtual Status Status { get; set; }
         public virtual User User { get; set; }
         public virtual WebService WebService { get; set; }
         public virtual ICollection<QueryParameter> QueryParameters { get; set; }

@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class DatabaseParameter
     {
         public DatabaseParameter()
         {
             this.Integrations = new HashSet<Integration>();
         }
-    
+
         public int DatabaseParametersId { get; set; }
         public string Ip { get; set; }
         public string Port { get; set; }
@@ -28,9 +28,9 @@ namespace IntegrationTool.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public int EngineId { get; set; }
-    
+
         public virtual Engine Engine { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Integration> Integrations { get; set; }      
+        public virtual ICollection<Integration> Integrations { get; set; }
     }
 }

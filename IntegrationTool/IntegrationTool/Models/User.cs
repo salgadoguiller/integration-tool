@@ -20,23 +20,20 @@ namespace IntegrationTool.Models
             this.Integrations = new HashSet<Integration>();
             this.Permissions = new HashSet<Permission>();
         }
-
-        [JsonIgnore]
+    
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
         public string Email { get; set; }
-        [JsonIgnore]
-        public string Domain { get; set; }
-        [JsonIgnore]
         public int UserTypeId { get; set; }
+        public int StatusId { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Integration> Integrations { get; set; }
         public virtual ICollection<Permission> Permissions { get; set; }
-        [JsonIgnore]
+        public virtual Status Status { get; set; }
         public virtual UsersType UsersType { get; set; }
     }
 }

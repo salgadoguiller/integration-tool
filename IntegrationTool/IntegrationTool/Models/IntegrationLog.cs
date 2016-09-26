@@ -12,7 +12,7 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class IntegrationLog
     {
         public int LogId { get; set; }
@@ -21,7 +21,7 @@ namespace IntegrationTool.Models
         public int IntegrationId { get; set; }
         public string Status { get; set; }
 
-    
+
         public virtual Integration Integration { get; set; }
     }
 }

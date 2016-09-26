@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Recurrence
     {
         public Recurrence()
         {
             this.Calendars = new HashSet<Calendar>();
         }
-    
+
         public int RecurrenceId { get; set; }
         public string NameRecurrence { get; set; }
 

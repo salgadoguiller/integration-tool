@@ -12,7 +12,7 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class IntegrationsType
     {
         public IntegrationsType()
@@ -20,7 +20,7 @@ namespace IntegrationTool.Models
             this.Integrations = new HashSet<Integration>();
             this.Queries = new HashSet<Query>();
         }
-    
+
         public int IntegrationTypeId { get; set; }
         public string Name { get; set; }
         public string Identifier { get; set; }
