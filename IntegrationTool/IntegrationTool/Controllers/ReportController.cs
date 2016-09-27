@@ -19,6 +19,7 @@ using System.Data;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private ReportsConfiguration ReportsConfigurationModel;

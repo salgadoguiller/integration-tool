@@ -77,7 +77,7 @@ CREATE TABLE Users (
   UserId INT NOT NULL IDENTITY(1,1),
   Name VARCHAR(80) NOT NULL,
   Username VARCHAR(80) NOT NULL,
-  Password VARCHAR(80) NOT NULL,
+  Password VARCHAR(80) NOT NULL DEFAULT 'ActiveDirectory',
   Email VARCHAR(80) NOT NULL,
   UserTypeId INT NOT NULL,
   StatusId INT NOT NULL,
@@ -85,8 +85,6 @@ CREATE TABLE Users (
     PRIMARY KEY (UserId),
   CONSTRAINT UQ_Username
     UNIQUE(Username),
-  CONSTRAINT DF_Password
-    DEFAULT 'ActiveDirectory' FOR Password,
   CONSTRAINT FK_UsersUsersType_UserTypeId
     FOREIGN KEY (UserTypeId)
     REFERENCES UsersType (UserTypeId)

@@ -65,8 +65,11 @@
         });
     }
 
-    function editUser(id) {
-        $location.url('/main/users/formUser/' + id);
+    function editUser(id, usersType) {
+        if(usersType == 'Local')
+            $location.url('/main/users/formLocalUser/' + id);
+        else
+            $location.url('/main/users/formADUser/' + id);
     }
 }
 ListUsersController.$inject = ['$scope', '$http', '$location', '$state'];

@@ -40,8 +40,8 @@
 
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                <div class="pull-left">
-                    <a class="btn btn-default btn-flat">Profile</a>
+                <div class="pull-left" ng-if="userType == 'Local'">
+                    <a href="/#/main/users/changePassword" class="btn btn-default btn-flat">Change Password</a>
                 </div>
                 <div class="pull-right">
                     <a ng-click="sendRequest();" class="btn btn-default btn-flat">Sign out</a>

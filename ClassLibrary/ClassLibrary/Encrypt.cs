@@ -7,9 +7,18 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-public class Encrypt
+    public class Encrypt
     {
-        string key = "Laureate123*LNO321";
+        // string key = "Laureate123*LNO321";
+        string key ;
+
+        public Encrypt()
+        {
+            SqlServerDatabase db = new SqlServerDatabase("172.20.33.13", "", "IntegrationTool", "", "SISUser", "test2016!", null);
+            db.openConnection();
+            key = db.executeQuery("Select KeyValue From Keys");
+            db.closeConnection();
+        }
 
         public string encryptData(string data){
             byte[] arrayKey;

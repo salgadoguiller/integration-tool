@@ -20,7 +20,7 @@ namespace ClassLibrary
 
         private SqlConnection con = null;
 
-        public SqlServerDatabase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, Integration integration)
+        public SqlServerDatabase(string ip, string port, string nameDataBase, string serverInstance, string username, string password, Integration integration = null)
         {
             this.ip = ip;
             this.port = (port == string.Empty) ? null : "," + port;

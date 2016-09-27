@@ -1,8 +1,10 @@
-﻿var FormUserController = function ($scope, $http, $stateParams, $state) {
+﻿var FormADUserController = function ($scope, $http, $stateParams, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
     $scope.sendRequest = sendRequest;
+    $scope.searchUser = searchUser;
+    $scope.search = '';
     $scope.someSelected = someSelected;
     $scope.type = $stateParams.id;
     $scope.userTypes = [];
@@ -13,6 +15,27 @@
 
     if ($stateParams.id != -1) {
         loadInfo();
+    }
+
+    function searchUser(search) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Users/searchUser?username=' + search, data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                $scope.request = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $state.transitionTo('main.errors.internalServerError');
+        });
     }
 
     function loadInfo() {
@@ -98,11 +121,21 @@
         }
 
         var permissions = '';
-        for (var x in req.Permissions) {
-            permissions += x + '|';
+        for (var index = 0; index < $scope.resources.length; index++) {
+            if (req.Permissions[$scope.resources[index].ResourceId] == true)
+                permissions += $scope.resources[index].ResourceId + '|';
         }
 
+        permissions = permissions.replace(/\|$/, '');
+
         req.Permissions = permissions;
+
+        for (var index = 0; index < $scope.userTypes.length; index++) {
+            if ($scope.userTypes[index].Type != 'Local')
+                req.UserTypeId = $scope.userTypes[index].UserTypeId;
+        }
+
+        req.Password = "ActiveDirectory";
 
         var data = $.param(req);
 
@@ -145,4 +178,4 @@
     }
 }
 
-FormUserController.$inject = ['$scope', '$http', '$stateParams', '$state'];
+FormADUserController.$inject = ['$scope', '$http', '$stateParams', '$state'];

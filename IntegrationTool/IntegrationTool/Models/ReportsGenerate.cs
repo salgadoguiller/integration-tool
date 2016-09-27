@@ -59,7 +59,7 @@ namespace IntegrationTool.Models
         {
             string integrationCategoryDecision = "";
             string integrationTypeDecision = "";
-            string operationWebServicesDecision= "":
+            string operationWebServicesDecision = "";
             string DatabaseParameterDecision ="";
 
             switch (IntegrationType)

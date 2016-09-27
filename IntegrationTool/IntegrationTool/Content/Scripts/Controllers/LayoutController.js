@@ -2,6 +2,7 @@
     $scope.sendRequest = sendRequest;
     $scope.permissions = [];
     $scope.name = Authentication.user.Name;
+    $scope.userType = Authentication.user.UsersType.Type;
 
     for (index = 0; index < Authentication.user.Permissions.length; index++) {
         $scope.permissions.push(Authentication.user.Permissions[index].Resource.Name.toLowerCase());

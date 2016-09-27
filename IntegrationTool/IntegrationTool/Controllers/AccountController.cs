@@ -27,6 +27,19 @@ namespace IntegrationTool.Controllers
         {
             AccountModel accountModel = new AccountModel();
 
+            /*
+            string resp = "";
+            if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
+            {
+                User user = accountModel.getUser(Request.Form["Username"]);
+                resp = verifyStatus(user);
+            }
+            else
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"User or password incorrect. Please try again.\"}";
+            }
+            */
+
             string resp = "";
             if (Membership.ValidateUser(Request.Form["Username"], Request.Form["Password"]))
             {

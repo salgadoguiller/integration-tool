@@ -9,6 +9,7 @@ using IntegrationTool.Models;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private UsersModel userModel;
@@ -24,7 +25,19 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
-        public ActionResult formUser()
+        public ActionResult formLocalUser()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formADUser()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult changePassword()
         {
             return View();
         }
@@ -71,6 +84,25 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public void searchUser(string search)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                User user = userModel.searchUser(search);
+
+                resp = serializeObject(user);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be find the user. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
         public void getUserTypes()
         {
             string resp = "";
@@ -109,7 +141,7 @@ namespace IntegrationTool.Controllers
         }
 
         // ================================================================================================================
-        // Almacenar en base de datos usuarios.
+        // Almacenar datos relacionados con la gestón de usuarios en el sistema.
         // ================================================================================================================
         [HttpPut]
         public void saveUser()
@@ -117,19 +149,64 @@ namespace IntegrationTool.Controllers
             string resp = "";
             try
             {
-                throw new Exception(Request.Form["Permissions"]);
+                string[] permissionsIds = Request.Form["Permissions"].Split('|');
 
-                // connectModel();
-                // userModel.saveUser(Request.Form["UserTypeId"], Request.Form["Name"], Request.Form["Username"], Request.Form["Email"], Request.Form["Password"], Request.Form["Permissions"]);
+                connectModel();
+                userModel.saveUser(Request.Form["UserTypeId"], Request.Form["Name"], Request.Form["Username"], Request.Form["Email"], Request.Form["Password"], permissionsIds);
 
                 resp = "{\"type\":\"success\", \"message\":\"User created succesfully..\"}";
             }
             catch (Exception e)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"" + e.Message + "\"}";
-                // resp = "{\"type\":\"danger\", \"message\":\"Can not be created the user. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be created the user. Please try again.\"}";
             }
 
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Actualizar datos relacionados con la gestón de usuarios en el sistema.
+        // ================================================================================================================
+        [HttpPost]
+        public void updateUser()
+        {
+            string resp = "";
+            try
+            {   
+                string[] permissionsIds = Request.Form["Permissions"].Split('|');
+
+                connectModel();
+                userModel.updateUser(Request.Form["UserId"], Request.Form["UserTypeId"], Request.Form["Name"], 
+                                        Request.Form["Username"], Request.Form["Email"], Request.Form["Password"], 
+                                        permissionsIds);
+
+                resp = "{\"type\":\"success\", \"message\":\"User updated succesfully.\"}";
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be updated the user. Please try again.\"}";
+            }
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updatePassword()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                bool isUpdated = userModel.changePassword(Request.Form["UserId"], Request.Form["Password"], Request.Form["NewPassword"]);
+
+                if(isUpdated)
+                    resp = "{\"type\":\"success\", \"message\":\"Password changed succesfully.\"}";
+                else
+                    resp = "{\"type\":\"danger\", \"message\":\"Password incorrect.\"}";
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be changed the password. Please try again.\"}";
+            }
             response(resp);
         }
 
