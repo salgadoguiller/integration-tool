@@ -128,8 +128,7 @@
             }
         }
 
-        var data = $.param(req);
-        console.log(req);
+        var data = $.param(req);     
        
         $http.post('Report/getDocumentReport', data, config).success(function (resp) {
             $scope.message = resp.message;
@@ -144,8 +143,7 @@
     }
   
     function enableCard()
-    {
-        
+    {       
         //////////////
 
         (function ($)

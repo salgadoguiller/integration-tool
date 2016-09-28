@@ -322,7 +322,7 @@ namespace IntegrationTool.Controllers
             //documento.Close();
           
             
-            downloadAdjuntos(path);
+            //downloadAdjuntos(path);
 
             //Si la bandera es true quiere decir que el reporte fue generado de forma exitosa y se puede mostrar un mensaje de exito al usuario
             
@@ -376,7 +376,7 @@ namespace IntegrationTool.Controllers
             
             workbook.SaveAs(path);
 
-            downloadExcel(path);            
+            //downloadExcel(path);            
             ////
         }
 

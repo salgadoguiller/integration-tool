@@ -54,7 +54,7 @@ namespace ClassLibrary
                 string message = e.Message;
                 message = message.Replace("'", "");
                 string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
-                integration.insertSystemLog(queryToLog2);    
+                integration.insertLog(queryToLog2);    
             }       
         }
 
@@ -83,7 +83,7 @@ namespace ClassLibrary
                 string message = e.Message;
                 message = message.Replace("'", "");
                 string queryToLog = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
-                integration.insertSystemLog(queryToLog);    
+                integration.insertLog(queryToLog);    
             }
         
             return result;
