@@ -28,10 +28,10 @@
 
         $http.get('Users/searchUser?search=' + search, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
+                resp.Password = 'ActiveDirectory';
                 $scope.request = resp;
             } else {
-                $scope.message = resp.message;
-                $scope.typeMessage = resp.type;
+                $scope.request = {};
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
