@@ -324,6 +324,7 @@
     <Content Include="Content\Stylesheets\Styles\daterangepicker.css" />
     <Content Include="Content\Stylesheets\Styles\fullcalendar.min.css" />
     <Content Include="Content\Stylesheets\Styles\nya-bs-select.min.css" />
+    <Content Include="Content\Stylesheets\Styles\Preloader.css" />
     <Content Include="Content\Stylesheets\Styles\style.css" />
     <Content Include="Content\Stylesheets\Styles\style2.css" />
     <Content Include="Content\Scripts\Services\AuthenticationService.js" />

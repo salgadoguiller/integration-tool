@@ -54,9 +54,9 @@ namespace IntegrationTool.Controllers
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat files. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Integration Logs"+e.Message+". Please try again.\"}";
             }
 
             response(resp);
@@ -89,7 +89,7 @@ namespace IntegrationTool.Controllers
             }
             catch (Exception)
             {
-                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat files. Please try again.\"}";
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the System Logs. Please try again.\"}";
             }
 
             response(resp);

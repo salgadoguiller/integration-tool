@@ -5,6 +5,7 @@
     $scope.deleteDatabase = deleteDatabase;
     $scope.editDatabase = editDatabase;
 
+
     getListDatabases();
 
     function getListDatabases() {
@@ -19,6 +20,7 @@
         $http.get('Configuration/getListDatabases', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listDatabases = resp;
+               
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;

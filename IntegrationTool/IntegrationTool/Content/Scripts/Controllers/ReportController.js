@@ -116,6 +116,13 @@
 
     function sendRequest(req) {
       
+
+        $('#submit').button('loading');
+        setTimeout(function ()
+        {
+            $('#submit').button('reset');
+        }, 1000);
+
         $scope.request.start = $scope.startDate;
         $scope.request.end = $scope.endDate;
         $scope.request.value2 = $scope.value;
