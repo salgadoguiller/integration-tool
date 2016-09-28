@@ -166,7 +166,7 @@ namespace IntegrationTool.Controllers
              
              DeterminateDateIsNullOrNot(reportGenerate, table);                                    
              
-             resp = "{\"type\":\"success\", \"message\":\"Report Generate " + Request.Form["value2"] + " Successful.\"}";
+             resp = "{\"type\":\"success\", \"message\":\"Report Generate " + Request.Form["Report"] + " Successful.\"}";
             }
             catch (Exception ex)
             {              
@@ -197,7 +197,11 @@ namespace IntegrationTool.Controllers
 
                 table = reportGenerate.ParamToGenerateReportForIntegrationLogs(Convert.ToString(Request.Form["start"]), Convert.ToString(Request.Form["end"]), Convert.ToInt32(Request.Form["IntegrationType"]),
                                                                Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
-                generateDocumentForIntegrationLogs(table);
+
+                if (Request.Form["Report"].Equals("Excel"))
+                    generateDocumentForIntegrationLogsExcel(table);
+                else
+                    generateDocumentForIntegrationLogsPDF(table);
             }
 
             else
@@ -205,7 +209,10 @@ namespace IntegrationTool.Controllers
                 table = reportGenerate.ParamToGenerateReportForSystemLogs(Convert.ToString(Request.Form["start"]), Convert.ToString(Request.Form["end"]), Convert.ToInt32(Request.Form["IntegrationType"]),
                                                                Convert.ToInt32(Request.Form["IntegrationCategory"]), Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
 
-                generateDocumentForSystemLogs(table);
+                if (Request.Form["Report"].Equals("Excel"))
+                    generateDocumentForSystemLogsExcel(table);
+                else
+                    generateDocumentForSystemLogsPDF(table);              
             }
             
         }
@@ -217,7 +224,10 @@ namespace IntegrationTool.Controllers
                 table = reportGenerate.ParamToGenerateReportForIntegrationLogs(TimeStartandEnd, TimeStartandEnd, Convert.ToInt32(Request.Form["IntegrationType"]), Convert.ToInt32(Request.Form["IntegrationCategory"]),
                                                                Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
 
-                generateDocumentForIntegrationLogs(table);
+                if (Request.Form["Report"].Equals("Excel"))
+                    generateDocumentForIntegrationLogsExcel(table);
+                else
+                    generateDocumentForIntegrationLogsPDF(table);               
             }
 
             else
@@ -225,12 +235,113 @@ namespace IntegrationTool.Controllers
                 table = reportGenerate.ParamToGenerateReportForSystemLogs(TimeStartandEnd, TimeStartandEnd, Convert.ToInt32(Request.Form["IntegrationType"]), Convert.ToInt32(Request.Form["IntegrationCategory"]),
                                                                Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
 
-                generateDocumentForSystemLogs(table);
+                if (Request.Form["Report"].Equals("Excel"))
+                    generateDocumentForSystemLogsExcel(table);
+                else
+                    generateDocumentForSystemLogsPDF(table);               
             }
             
         }
 
-        private void generateDocumentForIntegrationLogs(DataTable table)
+        private void generateDocumentForIntegrationLogsPDF(DataTable table)
+        {
+            ///////   
+      
+            //Creamos un tipo de archivo que solo se cargará en la memoria principal
+            Document documento = new Document();
+            
+            //Obtenemos la fecha actual incluyendo horas, minutos y segundos, esto se agregara al path del contrato, esto se hace asi para poder tener varios reportes de contratos guardados con el mismo nombre
+            //y que lo que diferencie a cada reporte de contrato sea la fecha y hora en que se han generado
+            string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
+            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateNow + ".pdf";
+              
+            //Creamos la instancia para generar el archivo PDF
+            //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
+            PdfWriter.GetInstance(documento, new FileStream(path, FileMode.OpenOrCreate));
+
+            //Rotamos el documento para que quede horizontal y pueda caber mas informacion para ser visualizada por el usuario
+            documento.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
+            //Abrimos el documento
+            documento.Open();
+                  
+            //Le decimos que nuestro documento actualmente tendra 9 celdas (posible cambio en futuro)
+            iTextSharp.text.pdf.PdfPTable aTable = new iTextSharp.text.pdf.PdfPTable(9);           
+            //Se hace una instancia de la clase que es la encargada de hacer la consulta a la base de datos para retornar los contratos
+           
+            
+            //Se crea una nueva celda y se le agrega un titulo
+            PdfPCell cell = new PdfPCell(new Phrase("Logs For Integrations Stored On The System"));
+            
+            //Estas son solamente opciones de personalizacion y diseño de la celda          
+            cell.HorizontalAlignment = 1;
+            cell.UseVariableBorders = true;
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(245, 92, 24);
+            cell.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
+            cell.Colspan = 9;
+           
+            //Se agrega la celda que se creo al documento
+            aTable.AddCell(cell);
+
+            //Se agregan los titulos de las celdas al documento
+
+            PdfPCell headers = new PdfPCell(new Phrase("Reference Code"));
+            headers.BorderWidthRight = 1;
+            headers.HorizontalAlignment = 1;
+            headers.BackgroundColor = new iTextSharp.text.BaseColor(247, 150, 70);
+            headers.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
+            headers.Colspan = 1;
+            aTable.AddCell(headers);
+
+            headers = GenerateHeaders(aTable, headers, "Name Integration");
+            headers = GenerateHeaders(aTable, headers, "Status");
+            headers = GenerateHeaders(aTable, headers, "Category Integration");
+            headers = GenerateHeaders(aTable, headers, "Type Integration");
+            headers = GenerateHeaders(aTable, headers, "Operation Web Services");
+            headers = GenerateHeaders(aTable, headers, "Database Name");
+            headers = GenerateHeaders(aTable, headers, "Date Integration");
+          
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                aTable.AddCell(Convert.ToString(table.Rows[i]["ReferenceCode"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["IntegrationName"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Status"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Name"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["TypeIntegration"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["OperationWebServices"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Date"]));             
+            }
+         
+
+            //Se agrega toda la informacion traida desde la base de datos al documento
+            documento.Add(aTable);
+            //Se cierra el documento para que pueda ser visualizado por el usuario
+            //documento.Close();
+          
+            
+            //downloadAdjuntos(path);
+
+            //Si la bandera es true quiere decir que el reporte fue generado de forma exitosa y se puede mostrar un mensaje de exito al usuario
+            
+             /////////
+        }
+
+        private static PdfPCell GenerateHeaders(iTextSharp.text.pdf.PdfPTable aTable, PdfPCell headers,string NameHeader)
+        {
+            headers = new PdfPCell(new Phrase(NameHeader));
+            headers.BorderWidthRight = 1;
+            headers.HorizontalAlignment = 1;
+            headers.BackgroundColor = new iTextSharp.text.BaseColor(247, 150, 70);
+            headers.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
+            headers.Colspan = 1;
+            aTable.AddCell(headers);
+            return headers;
+        }    
+
+        private void generateDocumentForIntegrationLogsExcel(DataTable table)
         {
             ////                   
             Encrypt decrypt = new Encrypt();
@@ -269,7 +380,92 @@ namespace IntegrationTool.Controllers
             ////
         }
 
-        private void generateDocumentForSystemLogs(DataTable table)
+        private void generateDocumentForSystemLogsPDF(DataTable table)
+        {
+            ///////   
+
+            //Creamos un tipo de archivo que solo se cargará en la memoria principal
+            Document documento = new Document();
+
+            //Obtenemos la fecha actual incluyendo horas, minutos y segundos, esto se agregara al path del contrato, esto se hace asi para poder tener varios reportes de contratos guardados con el mismo nombre
+            //y que lo que diferencie a cada reporte de contrato sea la fecha y hora en que se han generado
+            string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
+            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateNow + ".pdf";
+
+            //Creamos la instancia para generar el archivo PDF
+            //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
+            PdfWriter.GetInstance(documento, new FileStream(path, FileMode.OpenOrCreate));
+
+            //Rotamos el documento para que quede horizontal y pueda caber mas informacion para ser visualizada por el usuario
+            documento.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
+            //Abrimos el documento
+            documento.Open();
+
+            //Le decimos que nuestro documento actualmente tendra 9 celdas (posible cambio en futuro)
+            iTextSharp.text.pdf.PdfPTable aTable = new iTextSharp.text.pdf.PdfPTable(9);
+            //Se hace una instancia de la clase que es la encargada de hacer la consulta a la base de datos para retornar los contratos
+
+
+            //Se crea una nueva celda y se le agrega un titulo
+            PdfPCell cell = new PdfPCell(new Phrase("Logs For System Stored On The System"));
+
+            //Estas son solamente opciones de personalizacion y diseño de la celda          
+            cell.HorizontalAlignment = 1;
+            cell.UseVariableBorders = true;
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(245, 92, 24);
+            cell.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
+            cell.Colspan = 9;
+
+            //Se agrega la celda que se creo al documento
+            aTable.AddCell(cell);
+
+            //Se agregan los titulos de las celdas al documento
+
+            PdfPCell headers = new PdfPCell(new Phrase("Description"));
+            headers.BorderWidthRight = 1;
+            headers.HorizontalAlignment = 1;
+            headers.BackgroundColor = new iTextSharp.text.BaseColor(247, 150, 70);
+            headers.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
+            headers.Colspan = 1;
+            aTable.AddCell(headers);
+
+            headers = GenerateHeaders(aTable, headers, "Name Integration");
+            headers = GenerateHeaders(aTable, headers, "Error Date");
+            headers = GenerateHeaders(aTable, headers, "Category Integration");
+            headers = GenerateHeaders(aTable, headers, "Type Integration");
+            headers = GenerateHeaders(aTable, headers, "Operation Web Services");
+            headers = GenerateHeaders(aTable, headers, "Database Name");
+            headers = GenerateHeaders(aTable, headers, "Date Integration");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Description"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["IntegrationName"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["ErrorDate"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Name"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["TypeIntegration"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["OperationWebServices"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["IntegrationDate"]));
+            }
+
+
+            //Se agrega toda la informacion traida desde la base de datos al documento
+            documento.Add(aTable);
+            //Se cierra el documento para que pueda ser visualizado por el usuario
+            documento.Close();
+
+
+            // downloadAdjuntos(path);
+          
+            /////////
+
+        }
+
+        private void generateDocumentForSystemLogsExcel(DataTable table)
         {
             ////                   
             Encrypt decrypt = new Encrypt();

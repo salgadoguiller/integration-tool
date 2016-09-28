@@ -9,16 +9,16 @@ namespace ClassLibrary
 {
     public class Encrypt
     {
-        // string key = "Laureate123*LNO321";
-        string key ;
+        string key = "Laureate123*LNO321";
+       // string key ;
 
-        public Encrypt()
+        /*public Encrypt()
         {
-            SqlServerDatabase db = new SqlServerDatabase("172.20.33.13", "", "IntegrationTool", "", "SISUser", "test2016!", null);
+            SqlServerDatabase db = new SqlServerDatabase("127.0.0.1", "", "IntegrationTool", "CTURCIOS-IT\\SQLEXPRESS", "", "", null);
             db.openConnection();
             key = db.executeQuery("Select KeyValue From Keys");
             db.closeConnection();
-        }
+        }*/
 
         public string encryptData(string data){
             byte[] arrayKey;

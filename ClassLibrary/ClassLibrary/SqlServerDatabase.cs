@@ -34,14 +34,14 @@ namespace ClassLibrary
         public void openConnection()
         {
            
-            string conectionString = "Data Source=" + this.ip + this.serverInstance + this.port + ";" + 
+            /*string conectionString = "Data Source=" + this.ip + this.serverInstance + this.port + ";" + 
                                     "Initial Catalog=" + this.nameDataBase + ";" + 
                                     "User ID="  + this.username + ";" + 
-                                    "Password=" + this.password;
-           
-            /*string conectionString = "Data Source=" + this.ip + ";" +
+                                    "Password=" + this.password;*/
+
+            string conectionString = "Data Source=" + this.serverInstance + ";" +
                         "Initial Catalog=" + this.nameDataBase + ";" +
-                        "Integrated Security=true;";*/
+                        "Integrated Security=true;";
 
             this.con = new SqlConnection(conectionString);
 
@@ -54,7 +54,7 @@ namespace ClassLibrary
                 string message = e.Message;
                 message = message.Replace("'", "");
                 string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
-                integration.insertSystemLog(queryToLog2);    
+                integration.insertLog(queryToLog2);    
             }       
         }
 
@@ -83,7 +83,7 @@ namespace ClassLibrary
                 string message = e.Message;
                 message = message.Replace("'", "");
                 string queryToLog = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + this.integration.integrationId + ")";
-                integration.insertSystemLog(queryToLog);    
+                integration.insertLog(queryToLog);    
             }
         
             return result;

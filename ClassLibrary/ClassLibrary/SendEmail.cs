@@ -36,14 +36,14 @@ namespace ClassLibrary
                  string message = e.Message;
                  message = message.Replace("'", "");
                  string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class Send Mails: " + message + "','" + DateTime.Now + "'," + integration.integrationId + ")";
-                 integration.insertSystemLog(queryToLog2);  
+                 integration.insertLog(queryToLog2);  
              }
              catch (System.IO.IOException e)
              {               
                  string message = e.Message;
                  message = message.Replace("'", "");
                  string queryToLog2 = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class Send Mails: " + message + "','" + DateTime.Now + "'," + integration.integrationId + ")";
-                 integration.insertSystemLog(queryToLog2);  
+                 integration.insertLog(queryToLog2);  
              } 
                      
          }

@@ -105,7 +105,7 @@ namespace ClassLibrary
             parseWebServicesResult(webServicesParameters, splitNameAndFullPath[0]);
             insertNameFile(splitNameAndFullPath[1]);
             Thread.Sleep(1000);
-            insertSystemLog(readFile.Read(pathLog, integrationId));
+            insertLog(readFile.Read(pathLog, integrationId));         
         }
 
         //7
@@ -255,7 +255,7 @@ namespace ClassLibrary
             CloseConnection();
         }
 
-        public void insertSystemLog(string query)
+        public void insertLog(string query)
         {
             OpenConnection();
             SqlCommand sqlCommand = new SqlCommand(query, connection);
@@ -273,6 +273,6 @@ namespace ClassLibrary
             }*/
                     
             CloseConnection();
-        }
+        }       
     }
 }
