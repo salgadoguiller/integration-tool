@@ -26,7 +26,7 @@
 
         var data = $.param({});
 
-        $http.get('Users/searchUser?username=' + search, data, config).success(function (resp) {
+        $http.get('Users/searchUser?search=' + search, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.request = resp;
             } else {

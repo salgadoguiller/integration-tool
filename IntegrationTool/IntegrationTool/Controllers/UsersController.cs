@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IntegrationTool.Models;
+using System.Web.Configuration;
+using System.DirectoryServices;
 
 namespace IntegrationTool.Controllers
 {
@@ -92,7 +94,11 @@ namespace IntegrationTool.Controllers
                 connectModel();
                 User user = userModel.searchUser(search);
 
-                resp = serializeObject(user);
+                if(user != null)
+                    resp = serializeObject(user);
+                else
+                    resp = serializeObject(user);
+                    // resp = "{\"type\":\"danger\", \"message\":\"Can not be find the user. Please try again.\"}";
             }
             catch (Exception)
             {

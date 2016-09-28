@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 
 namespace IntegrationTool.Models
 {
@@ -174,13 +176,34 @@ namespace IntegrationTool.Models
             return resources;
         }
 
-        public User searchUser(string search)
+        public User searchUser(string stringSearch)
         {
+            string domain = WebConfigurationManager.AppSettings["ADDomain"];
+            string path = WebConfigurationManager.AppSettings["ADPath"];
+
+            DirectoryEntry entry = new DirectoryEntry(path);
+
+            Object obj = entry.NativeObject;
+            DirectorySearcher search = new DirectorySearcher(entry);
+
+            search.Filter = "(&(objectClass=user)(sAMAccountName=" + stringSearch + "))";
+            search.PropertiesToLoad.Add("sAMAccountName");
+            search.PropertiesToLoad.Add("cn");
+            search.PropertiesToLoad.Add("displayName");
+            search.PropertiesToLoad.Add("mail");
+
+            SearchResult result = search.FindOne();
+
+            if (result == null)
+            {
+                return null;
+            }
+
             User user = new User();
-            user.Name = "Cristian Turcios";
-            user.Username = "cturcios";
-            user.Email = "cristian.turcios@laureate.net";
-            user.Password = "asd.123@";
+            user.Name = result.Properties["displayName"][0].ToString();
+            user.Username = result.Properties["sAMAccountName"][0].ToString();
+            user.Email = result.Properties["mail"][0].ToString();
+
             return user;
         }
     }
