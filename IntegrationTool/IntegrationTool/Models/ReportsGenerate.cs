@@ -59,7 +59,7 @@ namespace IntegrationTool.Models
         {
             string RangeDateIntegrationDecision = "";
             string integrationTypeDecision = "";
-<<<<<<< HEAD
+
             string integrationCategoryDecision = "";
             string operationWebServicesDecision = "";
             string DatabaseParameterDecision = "";
@@ -81,9 +81,8 @@ namespace IntegrationTool.Models
                             " dbo.SystemLogs ON dbo.Integrations.IntegrationId = dbo.SystemLogs.IntegrationId"+
                             " where " + integrationCategoryDecision + " and " + integrationTypeDecision + " and " + operationWebServicesDecision + " and " + DatabaseParameterDecision+
                             " and " + RangeDateIntegrationDecision;
-=======
-            string operationWebServicesDecision = "";
-            string DatabaseParameterDecision ="";
+
+         
 
             switch (IntegrationType)
             {
@@ -94,7 +93,7 @@ namespace IntegrationTool.Models
                     integrationTypeDecision = "IntegrationsType.IntegrationTypeId ="+IntegrationType;
                     break;             
             }
->>>>>>> 84533474a2a1eed70ce0eec4e05db86d7be497a1
+
 
             OpenConnection();
             var table = DataTable(query);
