@@ -53,50 +53,67 @@ namespace IntegrationTool.Models
             {
                 Console.WriteLine(e.Message);
             }                 
-        }      
+        }
 
-        public DataTable ParamToGenerateReport(int IntegrationType=0, int IntegrationCategory=0, int OperationWebServices=0, int DatabaseParameter=0, string DateStart="", string DateEnd="",string value="")
+        public DataTable ParamToGenerateReportForSystemLogs(string DateStart, string DateEnd, int IntegrationType = 0, int IntegrationCategory = 0, int OperationWebServices = 0, int DatabaseParameter = 0)
         {
-            string integrationCategoryDecision = "";
+            string RangeDateIntegrationDecision = "";
             string integrationTypeDecision = "";
-            string operationWebServicesDecision= "":
-            string DatabaseParameterDecision ="";
+            string integrationCategoryDecision = "";
+            string operationWebServicesDecision = "";
+            string DatabaseParameterDecision = "";
 
-            switch (IntegrationType)
-            {
-                case 0:
-                    integrationTypeDecision = "1=1";
-                    break;
-                default:
-                    integrationTypeDecision = "IntegrationsType.IntegrationTypeId ="+IntegrationType;
-                    break;             
-            }
+            integrationTypeDecision = AssignIntegrationTypeDecision(IntegrationType, integrationTypeDecision);
+            integrationCategoryDecision = AssignIntegrationCategoryDecision(IntegrationCategory, integrationCategoryDecision);
+            operationWebServicesDecision = AssignOperationWebServicesDecision(OperationWebServices, operationWebServicesDecision);
+            DatabaseParameterDecision = AssignDatabaseParameterDecision(DatabaseParameter, DatabaseParameterDecision);
+            RangeDateIntegrationDecision = AssignRangeDateIntegrationDecision(DateStart, DateEnd, RangeDateIntegrationDecision);
 
-            switch (IntegrationCategory)
-            {
-                case 0:
-                    integrationCategoryDecision = "1=1";
-                    break;
-                default:
-                    integrationCategoryDecision = "IntegrationCategories.IntegrationCategoryId ="+IntegrationCategory;
-                    break;             
-            }
+            string query =  "SELECT  dbo.IntegrationCategories.Name, dbo.IntegrationsType.Name AS TypeIntegration, dbo.OperationsWebServices.Name AS OperationWebServices,"+
+                            " dbo.DatabaseParameters.Name AS DatabaseName, dbo.Integrations.IntegrationDate, "+
+                            " dbo.SystemLogs.Description, dbo.SystemLogs.ErrorDate,dbo.Integrations.IntegrationName"+
+                            " FROM dbo.DatabaseParameters INNER JOIN"+
+                            " dbo.Integrations ON dbo.DatabaseParameters.DatabaseParametersId = dbo.Integrations.DatabaseParametersId INNER JOIN"+
+                            " dbo.IntegrationCategories ON dbo.Integrations.IntegrationCategoryId = dbo.IntegrationCategories.IntegrationCategoryId INNER JOIN"+
+                            " dbo.IntegrationsType ON dbo.Integrations.IntegrationTypeId = dbo.IntegrationsType.IntegrationTypeId INNER JOIN"+
+                            " dbo.OperationsWebServices ON dbo.Integrations.OperationWebServiceId = dbo.OperationsWebServices.OperationWebServiceId INNER JOIN"+
+                            " dbo.SystemLogs ON dbo.Integrations.IntegrationId = dbo.SystemLogs.IntegrationId"+
+                            " where " + integrationCategoryDecision + " and " + integrationTypeDecision + " and " + operationWebServicesDecision + " and " + DatabaseParameterDecision+
+                            " and " + RangeDateIntegrationDecision;
 
-            
+            OpenConnection();
+            var table = DataTable(query);
+            CloseConnection();
 
-            string verificacion = "TypeIntegration: "+Convert.ToString(IntegrationType)+" IntegrationCategory: "+IntegrationCategory+" operationWebServices: "+OperationWebServices+" DateStart: "+DateStart+
-                " DateEnd: "+DateEnd+" Value: "+value;
+            return table;
 
+        }
+
+        public DataTable ParamToGenerateReportForIntegrationLogs(string DateStart, string DateEnd, int IntegrationType = 0, int IntegrationCategory = 0, int OperationWebServices = 0, int DatabaseParameter = 0)
+        {           
+            string RangeDateIntegrationDecision = "";
+            string integrationTypeDecision = "";
+            string integrationCategoryDecision = "";
+            string operationWebServicesDecision = "";
+            string DatabaseParameterDecision = "";
+
+            integrationTypeDecision = AssignIntegrationTypeDecision(IntegrationType, integrationTypeDecision);
+            integrationCategoryDecision = AssignIntegrationCategoryDecision(IntegrationCategory, integrationCategoryDecision);
+            operationWebServicesDecision = AssignOperationWebServicesDecision(OperationWebServices, operationWebServicesDecision);
+            DatabaseParameterDecision = AssignDatabaseParameterDecision(DatabaseParameter, DatabaseParameterDecision);
+            RangeDateIntegrationDecision = AssignRangeDateIntegrationDecision(DateStart, DateEnd, RangeDateIntegrationDecision);
+                           
             string query = "SELECT  dbo.IntegrationCategories.Name, dbo.IntegrationsType.Name AS TypeIntegration, dbo.OperationsWebServices.Name AS OperationWebServices,"+
                            " dbo.DatabaseParameters.Name AS DatabaseName, dbo.IntegrationLogs.ReferenceCode,"+
-                           " dbo.IntegrationLogs.Date, dbo.IntegrationLogs.Status"+
+                           " dbo.IntegrationLogs.Date, dbo.IntegrationLogs.Status,dbo.Integrations.IntegrationName"+
                            " FROM dbo.Integrations INNER JOIN"+
                            " dbo.IntegrationCategories ON dbo.Integrations.IntegrationCategoryId = dbo.IntegrationCategories.IntegrationCategoryId INNER JOIN"+
                            " dbo.IntegrationsType ON dbo.Integrations.IntegrationTypeId = dbo.IntegrationsType.IntegrationTypeId INNER JOIN"+
                            " dbo.OperationsWebServices ON dbo.Integrations.OperationWebServiceId = dbo.OperationsWebServices.OperationWebServiceId INNER JOIN"+
                            " dbo.DatabaseParameters ON dbo.Integrations.DatabaseParametersId = dbo.DatabaseParameters.DatabaseParametersId INNER JOIN"+
                            " dbo.IntegrationLogs ON dbo.Integrations.IntegrationId = dbo.IntegrationLogs.IntegrationId"+
-                           " where "+integrationCategoryDecision;
+                           " where "+integrationCategoryDecision +" and "+ integrationTypeDecision + " and "+ operationWebServicesDecision +" and "+DatabaseParameterDecision 
+                           + " and "+ RangeDateIntegrationDecision;
                     
             OpenConnection();         
             var table = DataTable(query);
@@ -106,7 +123,77 @@ namespace IntegrationTool.Models
          
         }
 
-        //2
+        private static string AssignRangeDateIntegrationDecision(string DateStart, string DateEnd, string RangeDateIntegrationDecision)
+        {
+            switch (DateStart)
+            {
+                case "01-01-1901":
+                    RangeDateIntegrationDecision = "1=1";
+                    break;
+                default:
+                    RangeDateIntegrationDecision = "dbo.IntegrationLogs.Date BETWEEN'" + Convert.ToDateTime(DateStart) + "' and '" + Convert.ToDateTime(DateEnd) + "'";
+                    break;
+            }
+            return RangeDateIntegrationDecision;
+        }
+
+        private static string AssignDatabaseParameterDecision(int DatabaseParameter, string DatabaseParameterDecision)
+        {
+            switch (DatabaseParameter)
+            {
+                case 0:
+                    DatabaseParameterDecision = "1=1";
+                    break;
+                default:
+                    DatabaseParameterDecision = "DatabaseParameters.DatabaseParametersId=" + DatabaseParameter;
+                    break;
+            }
+            return DatabaseParameterDecision;
+        }
+
+        private static string AssignOperationWebServicesDecision(int OperationWebServices, string operationWebServicesDecision)
+        {
+            switch (OperationWebServices)
+            {
+                case 0:
+                    operationWebServicesDecision = "1=1";
+                    break;
+                default:
+                    operationWebServicesDecision = "dbo.OperationsWebServices.OperationWebServiceId =" + OperationWebServices;
+                    break;
+            }
+            return operationWebServicesDecision;
+        }
+
+        private static string AssignIntegrationCategoryDecision(int IntegrationCategory, string integrationCategoryDecision)
+        {
+            switch (IntegrationCategory)
+            {
+                case 0:
+                    integrationCategoryDecision = "1=1";
+                    break;
+                default:
+                    integrationCategoryDecision = "IntegrationCategories.IntegrationCategoryId =" + IntegrationCategory;
+                    break;
+            }
+            return integrationCategoryDecision;
+        }
+
+        private static string AssignIntegrationTypeDecision(int IntegrationType, string integrationTypeDecision)
+        {
+            switch (IntegrationType)
+            {
+                case 0:
+                    integrationTypeDecision = "1=1";
+                    break;
+                default:
+                    integrationTypeDecision = "IntegrationsType.IntegrationTypeId =" + IntegrationType;
+                    break;
+            }
+            return integrationTypeDecision;
+        }
+
+        
         private DataTable DataTable(string query)
         {
             SqlCommand sqlCommand = new SqlCommand(query, connection);
@@ -124,16 +211,6 @@ namespace IntegrationTool.Models
 
             return table;            
         }
-
-        public DataTable PathToSaveReport()
-        {
-            string query = "Select Location";
-
-            OpenConnection();
-            var table = DataTable(query);
-            CloseConnection();
-
-            return table;
-        }
+      
     }
 }

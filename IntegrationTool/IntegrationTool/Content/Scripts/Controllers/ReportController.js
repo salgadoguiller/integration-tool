@@ -2,6 +2,7 @@
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.value = "";
+    $scope.checkbox = "";
     $scope.startDate ="";
     $scope.endDate="";
     $scope.request = {};
@@ -122,11 +123,12 @@
         }
 
         var data = $.param(req);
+        console.log(req);
         $http.post('Report/getDocumentReport', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};
-            console.log(resp);
+           
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";

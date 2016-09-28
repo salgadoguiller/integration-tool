@@ -242,8 +242,6 @@
     <Compile Include="Models\Recurrence.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ReportsConfiguration.cs" />
-    <Compile Include="Models\ReportsGenerate.cs" />
     <Compile Include="Models\Resource.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>

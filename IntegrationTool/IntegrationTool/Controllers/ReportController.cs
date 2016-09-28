@@ -156,17 +156,16 @@ namespace IntegrationTool.Controllers
         {
             string resp = "";
             string verificacion ="";
+            
             ReportsGenerate reportGenerate = new ReportsGenerate();
+            DataTable table = new DataTable();
                      
             try
             {
-
-             var table = reportGenerate.ParamToGenerateReport(Convert.ToInt32(Request.Form["IntegrationType"]),Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]),
-                                                   Convert.ToInt32(Request.Form["DatabaseParameter"]),Request.Form["start"], Request.Form["end"], Request.Form["value2"]);
-
-             generateDocument(table);
-
-               resp = "{\"type\":\"success\", \"message\":\"Report Generate"+verificacion+"  Successful.\"}";
+             
+             DeterminateDateIsNullOrNot(reportGenerate, table);                                    
+             
+             resp = "{\"type\":\"success\", \"message\":\"Report Generate " + Request.Form["value2"] + " Successful.\"}";
             }
             catch (Exception ex)
             {              
@@ -177,37 +176,131 @@ namespace IntegrationTool.Controllers
             
         }
 
-        private void generateDocument(DataTable table)
+        private void DeterminateDateIsNullOrNot(ReportsGenerate reportGenerate, DataTable table)
+        {
+            string TimeStartandEnd = "01-01-1901";
+
+            if (string.IsNullOrEmpty(Convert.ToString(Request.Form["start"])))
+               ExtractDataToReportWithTimeStartAndEnd(reportGenerate, table, TimeStartandEnd);              
+            
+            else
+               ExtractDataToReport(reportGenerate, table);
+            
+           
+        }
+
+        private void ExtractDataToReport(ReportsGenerate reportGenerate, DataTable table)
+        {
+            if (Request.Form["value2"].Equals("Integration Logs") || string.IsNullOrEmpty(Request.Form["value2"]))
+            {
+
+                table = reportGenerate.ParamToGenerateReportForIntegrationLogs(Convert.ToString(Request.Form["start"]), Convert.ToString(Request.Form["end"]), Convert.ToInt32(Request.Form["IntegrationType"]),
+                                                               Convert.ToInt32(Request.Form["IntegrationCategory"]),Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
+                generateDocumentForIntegrationLogs(table);
+            }
+
+            else
+            {
+                table = reportGenerate.ParamToGenerateReportForSystemLogs(Convert.ToString(Request.Form["start"]), Convert.ToString(Request.Form["end"]), Convert.ToInt32(Request.Form["IntegrationType"]),
+                                                               Convert.ToInt32(Request.Form["IntegrationCategory"]), Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
+
+                generateDocumentForSystemLogs(table);
+            }
+            
+        }
+
+        private void ExtractDataToReportWithTimeStartAndEnd(ReportsGenerate reportGenerate, DataTable table, string TimeStartandEnd)
+        {
+            if (Request.Form["value2"].Equals("Integration Logs") || string.IsNullOrEmpty(Request.Form["value2"]))
+            {
+                table = reportGenerate.ParamToGenerateReportForIntegrationLogs(TimeStartandEnd, TimeStartandEnd, Convert.ToInt32(Request.Form["IntegrationType"]), Convert.ToInt32(Request.Form["IntegrationCategory"]),
+                                                               Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
+
+                generateDocumentForIntegrationLogs(table);
+            }
+
+            else
+            {
+                table = reportGenerate.ParamToGenerateReportForSystemLogs(TimeStartandEnd, TimeStartandEnd, Convert.ToInt32(Request.Form["IntegrationType"]), Convert.ToInt32(Request.Form["IntegrationCategory"]),
+                                                               Convert.ToInt32(Request.Form["OperationWebServices"]), Convert.ToInt32(Request.Form["DatabaseParameter"]));
+
+                generateDocumentForSystemLogs(table);
+            }
+            
+        }
+
+        private void generateDocumentForIntegrationLogs(DataTable table)
         {
             ////                   
             Encrypt decrypt = new Encrypt();
             var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add("Integration");
+            var worksheet = workbook.Worksheets.Add("Integration Logs");
 
             worksheet.Cell("A1").Value = "Reference Code";
-            worksheet.Cell("B1").Value = "Status";
-            worksheet.Cell("C1").Value = "Category Integration";
-            worksheet.Cell("D1").Value = "Type Integration";
-            worksheet.Cell("E1").Value = "Operation Web Services";
-            worksheet.Cell("F1").Value = "Database Name";
-            worksheet.Cell("G1").Value = "Date Integration";
+            worksheet.Cell("B1").Value = "Name Integration";
+            worksheet.Cell("C1").Value = "Status";
+            worksheet.Cell("D1").Value = "Category Integration";
+            worksheet.Cell("E1").Value = "Type Integration";
+            worksheet.Cell("F1").Value = "Operation Web Services";
+            worksheet.Cell("G1").Value = "Database Name";
+            worksheet.Cell("H1").Value = "Date Integration";
          
             int contador = 4;
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 worksheet.Cell("A" + contador).Value = Convert.ToString(table.Rows[i]["ReferenceCode"]);
-                worksheet.Cell("B" + contador).Value = Convert.ToString(table.Rows[i]["Status"]);
-                worksheet.Cell("C" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
-                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
-                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
-                worksheet.Cell("F" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
-                worksheet.Cell("G" + contador).Value = Convert.ToString(table.Rows[i]["Date"]);
+                worksheet.Cell("B" + contador).Value = Convert.ToString(table.Rows[i]["IntegrationName"]);                
+                worksheet.Cell("C" + contador).Value = Convert.ToString(table.Rows[i]["Status"]);
+                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
+                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
+                worksheet.Cell("F" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
+                worksheet.Cell("G" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                worksheet.Cell("H" + contador).Value = Convert.ToString(table.Rows[i]["Date"]);
                 contador++; 
             }
             
             worksheet.Columns().AdjustToContents();        
-            string path = "C:/Users/cturcios/Desktop/ReporteIntegration" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
             
+            workbook.SaveAs(path);
+
+            //downloadExcel(path);            
+            ////
+        }
+
+        private void generateDocumentForSystemLogs(DataTable table)
+        {
+            ////                   
+            Encrypt decrypt = new Encrypt();
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("System Logs");
+
+            worksheet.Cell("A1").Value = "Description";
+            worksheet.Cell("B1").Value = "Name Integration";
+            worksheet.Cell("C1").Value = "Error Date";
+            worksheet.Cell("D1").Value = "Category Integration";
+            worksheet.Cell("E1").Value = "Type Integration";
+            worksheet.Cell("F1").Value = "Operation Web Services";
+            worksheet.Cell("G1").Value = "Database Name";
+            worksheet.Cell("H1").Value = "Date Integration";
+
+            int contador = 4;
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                worksheet.Cell("A" + contador).Value = Convert.ToString(table.Rows[i]["Description"]);
+                worksheet.Cell("B" + contador).Value = Convert.ToString(table.Rows[i]["IntegrationName"]);
+                worksheet.Cell("C" + contador).Value = Convert.ToString(table.Rows[i]["ErrorDate"]);
+                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
+                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
+                worksheet.Cell("F" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
+                worksheet.Cell("G" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                worksheet.Cell("H" + contador).Value = Convert.ToString(table.Rows[i]["IntegrationDate"]);
+                contador++;
+            }
+
+            worksheet.Columns().AdjustToContents();
+            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+
             workbook.SaveAs(path);
 
             //downloadExcel(path);            
