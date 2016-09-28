@@ -163,7 +163,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\document.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
