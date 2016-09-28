@@ -2,7 +2,8 @@
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listUsers = [];
-    $scope.deleteUser = disableUser;
+    $scope.disableUser = disableUser;
+    $scope.enableUser = enableUser;
     $scope.editUser = editUser;
 
     getUsers();
@@ -18,7 +19,6 @@
 
         $http.get('Users/getUsers', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                console.log(resp);
                 $scope.listUsers = resp;
             } else {
                 $scope.message = resp.message;
@@ -38,17 +38,38 @@
 
         var data = $.param({});
 
-        $http.delete('Configuration/disableUser?id=' + UserId, data, config).success(function (resp) {
+        $http.get('Users/disableUser?id=' + UserId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
-            getListUsers();
+            getUsers();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
     }
 
-    function editUser(id) {
-        $location.url('/main/users/formUser/' + id);
+    function enableUser(UserId) {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Users/enableUser?id=' + UserId, data, config).success(function (resp) {
+            $scope.message = resp.message;
+            $scope.typeMessage = resp.type;
+            getUsers();
+        }).error(function (resp) {
+            $state.transitionTo('main.errors.internalServerError');
+        });
+    }
+
+    function editUser(id, usersType) {
+        if(usersType == 'Local')
+            $location.url('/main/users/formLocalUser/' + id);
+        else
+            $location.url('/main/users/formADUser/' + id);
     }
 }
 ListUsersController.$inject = ['$scope', '$http', '$location', '$state'];

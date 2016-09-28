@@ -9,6 +9,7 @@ using IntegrationTool.Models;
 
 namespace IntegrationTool.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private UsersModel userModel;
@@ -19,6 +20,24 @@ namespace IntegrationTool.Controllers
         // ================================================================================================================
         [HttpGet]
         public ActionResult listUsers()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formLocalUser()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult formADUser()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult changePassword()
         {
             return View();
         }
@@ -40,6 +59,194 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the users. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getUser(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                User user = userModel.getUser(id);
+
+                resp = serializeObject(user);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the user. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void searchUser(string search)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                User user = userModel.searchUser(search);
+
+                resp = serializeObject(user);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be find the user. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getUserTypes()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<UsersType> userTypes = userModel.getUserTypes();
+
+                resp = serializeObject(userTypes);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the user types. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getResources()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<Resource> resources = userModel.getResources();
+
+                resp = serializeObject(resources);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the resources. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Almacenar datos relacionados con la gestón de usuarios en el sistema.
+        // ================================================================================================================
+        [HttpPut]
+        public void saveUser()
+        {
+            string resp = "";
+            try
+            {
+                string[] permissionsIds = Request.Form["Permissions"].Split('|');
+
+                connectModel();
+                userModel.saveUser(Request.Form["UserTypeId"], Request.Form["Name"], Request.Form["Username"], Request.Form["Email"], Request.Form["Password"], permissionsIds);
+
+                resp = "{\"type\":\"success\", \"message\":\"User created succesfully..\"}";
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be created the user. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        // ================================================================================================================
+        // Actualizar datos relacionados con la gestón de usuarios en el sistema.
+        // ================================================================================================================
+        [HttpPost]
+        public void updateUser()
+        {
+            string resp = "";
+            try
+            {   
+                string[] permissionsIds = Request.Form["Permissions"].Split('|');
+
+                connectModel();
+                userModel.updateUser(Request.Form["UserId"], Request.Form["UserTypeId"], Request.Form["Name"], 
+                                        Request.Form["Username"], Request.Form["Email"], Request.Form["Password"], 
+                                        permissionsIds);
+
+                resp = "{\"type\":\"success\", \"message\":\"User updated succesfully.\"}";
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be updated the user. Please try again.\"}";
+            }
+            response(resp);
+        }
+
+        [HttpPost]
+        public void updatePassword()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                bool isUpdated = userModel.changePassword(Request.Form["UserId"], Request.Form["Password"], Request.Form["NewPassword"]);
+
+                if(isUpdated)
+                    resp = "{\"type\":\"success\", \"message\":\"Password changed succesfully.\"}";
+                else
+                    resp = "{\"type\":\"danger\", \"message\":\"Password incorrect.\"}";
+            }
+            catch (Exception e)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be changed the password. Please try again.\"}";
+            }
+            response(resp);
+        }
+
+
+        // ================================================================================================================
+        // Cambiar estados de usuarios.
+        // ================================================================================================================
+        [HttpGet]
+        public void disableUser(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                userModel.disableUser(id);
+
+                resp = "{\"type\":\"success\", \"message\":\"User disable successfully.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be disable user. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void enableUser(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                userModel.enableUser(id);
+
+                resp = "{\"type\":\"success\", \"message\":\"User enable successfully.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be enable user. Please try again.\"}";
             }
 
             response(resp);

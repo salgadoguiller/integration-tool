@@ -29,6 +29,9 @@ IntegrationToolApp.controller('LayoutController', LayoutController);
 IntegrationToolApp.controller('ReportController', ReportController);
 
 IntegrationToolApp.controller('ListUsersController', ListUsersController);
+IntegrationToolApp.controller('FormLocalUserController', FormLocalUserController);
+IntegrationToolApp.controller('FormADUserController', FormADUserController);
+IntegrationToolApp.controller('ChangePasswordController', ChangePasswordController);
 
 IntegrationToolApp.controller('AlertController', AlertController);
 IntegrationToolApp.directive('feedback', feedBackMessagesDirective);
@@ -261,6 +264,21 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/list',
         templateUrl: '/Users/listUsers',
         controller: 'ListUsersController'
+    })
+    .state('main.users.formLocalUser', {
+        url: '/formLocalUser/:id',
+        templateUrl: '/Users/formLocalUser',
+        controller: 'FormLocalUserController'
+    })
+    .state('main.users.formADUser', {
+        url: '/formADUser/:id',
+        templateUrl: '/Users/formADUser',
+        controller: 'FormADUserController'
+    })
+    .state('main.users.changePassword', {
+        url: '/changePassword',
+        templateUrl: '/Users/changePassword',
+        controller: 'ChangePasswordController'
     });
 
 }

@@ -55,10 +55,6 @@
       <HintPath>..\packages\ClosedXML.0.80.1\lib\net40-client\ClosedXML.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\..\ClosedXML.dll</HintPath>
     </Reference>
@@ -289,6 +285,9 @@
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
+    <Content Include="Content\Scripts\Controllers\ChangePasswordController.js" />
+    <Content Include="Content\Scripts\Controllers\FormLocalUserController.js" />
+    <Content Include="Content\Scripts\Controllers\FormADUserController.js" />
     <Content Include="Content\Scripts\Controllers\ListUsersController.js" />
     <Content Include="Content\Scripts\Controllers\ReportController.js" />
     <Content Include="Content\Scripts\Controllers\LayoutController.js" />
@@ -314,12 +313,7 @@
     <Content Include="Content\Scripts\Controllers\AlertController.js" />
     <Content Include="Content\Scripts\Directives\FeedbackMessages.js" />
     <Content Include="Content\Scripts\IntegrationToolApp.js" />
-    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
-    <Content Include="Content\Scripts\moduleAngular\nya-bs-select.min.js" />
-    <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
-    <Content Include="Content\Scripts\Plugins\7daterangepicker.js" />
-    <Content Include="Content\Scripts\Plugins\8bootstrap-select.min.js" />
     <Content Include="Content\Scripts\Plugins\4dataTables.bootstrap.min.js" />
     <Content Include="Content\Scripts\Plugins\fastclick.min.js" />
     <Content Include="Content\Scripts\Plugins\3jquery.dataTables.min.js" />
@@ -328,7 +322,6 @@
     <Content Include="Content\Scripts\Plugins\jquery.slimscroll.min.js" />
     <Content Include="Content\Scripts\Plugins\5moment.min.js" />
     <Content Include="Content\Stylesheets\Styles\bootstrap-select.min.css" />
-    <Content Include="Content\Scripts\Services\AuthenticationService.js" />
     <Content Include="Content\Stylesheets\Styles\dataTables.bootstrap.css" />
     <Content Include="Content\Stylesheets\Styles\daterangepicker.css" />
     <Content Include="Content\Stylesheets\Styles\fullcalendar.min.css" />
@@ -484,9 +477,6 @@
     <Content Include="Views\Account\viewLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Main\layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Report\getReport.cshtml" />
     <Content Include="Views\Errors\forbidden.cshtml" />
     <Content Include="Views\Errors\forbidden403.cshtml" />
@@ -534,6 +524,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Errors\internalServerError500.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\formLocalUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\changePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\formADUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

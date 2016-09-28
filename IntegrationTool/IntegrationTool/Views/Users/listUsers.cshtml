@@ -9,7 +9,8 @@
             Users
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-cog"></i> Users</li>
+            <li class="breadcrumb-item"><i class="fa fa-cog"></i>Users</li>
+            <li class="breadcrumb-item active"> List Users </li>
         </ol>
         </div>
     </section>
@@ -23,7 +24,8 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Users</h3>
-              <a href="/#/main/users/formUser/-1" class="pull-right btn btn-xs btn-success">Add</a>
+              <a href="/#/main/users/formLocalUser/-1" class="pull-right btn btn-xs btn-success">Add Local User</a>
+              <a href="/#/main/users/formADUser/-1" class="pull-right btn btn-xs btn-success">Add Active Directory User</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -35,6 +37,7 @@
                   <th>Email</th>
                   <th>User Type</th>
                   <th>Permissions</th>
+                  <th>Status</th>
                   <th>Options</th>
                 </tr>
                 </thead>
@@ -45,10 +48,12 @@
                     <td>{{user.Email}}</td>
                     <td>{{user.UsersType.Type}}</td>
                     <td><span ng-repeat="permission in user.Permissions"> {{permission.Resource.Name}}<br /></span></td>
+                    <td>{{user.Status.Name}}</td>
                     <td>
                         <div ng-controller="AlertController">
-                            <button class="btn btn-xs btn-success" ng-click="editUser(user.UserId)">Edit</button> 
-                            <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="disableUser(user.UserId)" sweet-on-cancel="return">Disable</button>
+                            <button class="btn btn-xs btn-success" ng-click="editUser(user.UserId, user.UsersType.Type)">Edit</button> 
+                            <button ng-if="user.Status.Name == 'Enable'" class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="disableUser(user.UserId)" sweet-on-cancel="return">Disable</button>
+                            <button ng-if="user.Status.Name == 'Disable'" class="btn btn-xs btn-primary" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="enableUser(user.UserId)" sweet-on-cancel="return">Enable</button>
                         </div>
                     </td>
                 </tr>
@@ -60,6 +65,7 @@
                   <th>Email</th>
                   <th>User Type</th>
                   <th>Permissions</th>
+                  <th>Status</th>
                   <th>Options</th>
                 </tr>
                 </tfoot>
