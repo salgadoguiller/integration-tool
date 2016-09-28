@@ -81,6 +81,21 @@ namespace IntegrationTool.Models
                             " where " + integrationCategoryDecision + " and " + integrationTypeDecision + " and " + operationWebServicesDecision + " and " + DatabaseParameterDecision+
                             " and " + RangeDateIntegrationDecision;
 
+<<<<<<< HEAD
+=======
+
+            switch (IntegrationType)
+            {
+                case 0:
+                    integrationTypeDecision = "1=1";
+                    break;
+                default:
+                    integrationTypeDecision = "IntegrationsType.IntegrationTypeId ="+IntegrationType;
+                    break;             
+            }
+
+
+>>>>>>> de04621c0a9f286b607caa5386910a77e142969e
             OpenConnection();
             var table = DataTable(query);
             CloseConnection();
