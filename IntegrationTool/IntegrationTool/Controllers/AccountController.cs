@@ -41,29 +41,36 @@ namespace IntegrationTool.Controllers
             */
 
             string resp = "";
-            if (Membership.ValidateUser(Request.Form["Username"], Request.Form["Password"]))
+
+            // Usuarios Locales
+            if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
             {
-                try
-                {
-                    User user = accountModel.getUser(Request.Form["Username"]);
-                    resp = verifyStatus(user);
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    resp = "{\"type\":\"danger\", \"message\":\"User don´t have permissions.\"}";
-                }
+                User user = accountModel.getUser(Request.Form["Username"]);
+                if (validatePassword(user))
+                    resp = responseByStatus(user);
+                else
+                    resp = "{\"type\":\"danger\", \"message\":\"User or password incorrect. Please try again.\"}";
             }
+            // Usuarios Active Directory
             else
             {
-                if (accountModel.validateLocalUser(Request.Form["Username"], Request.Form["Password"]))
+                if (Membership.ValidateUser(Request.Form["Username"], Request.Form["Password"]))
                 {
-                    User user = accountModel.getUser(Request.Form["Username"]);
-                    resp = verifyStatus(user);
+                    try
+                    {
+                        User user = accountModel.getUser(Request.Form["Username"]);
+                        resp = responseByStatus(user);
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        resp = "{\"type\":\"danger\", \"message\":\"User don´t have permissions.\"}";
+                    }
                 }
                 else
                 {
                     resp = "{\"type\":\"danger\", \"message\":\"User or password incorrect. Please try again.\"}";
                 }
+                
             }
 
             response(resp);
@@ -99,20 +106,37 @@ namespace IntegrationTool.Controllers
                 });
         }
 
-        private string verifyStatus(User user)
+        private bool verifyStatus(User user)
         {
-            string resp = "";
             if (user.Status.Name == "Enable")
             {
-                addAuthCookie(Request.Form["Username"]);
-                resp = serializeObject(user);
+                return true;
             }
             else
             {
-                resp = "{\"type\":\"danger\", \"message\":\"User is disable.\"}";
+                return false;
             }
+        }
 
-            return resp;
+        private string responseByStatus(User user)
+        {
+            if (verifyStatus(user))
+            {
+                addAuthCookie(Request.Form["Username"]);
+                return serializeObject(user);
+            }
+            else
+            {
+                return "{\"type\":\"danger\", \"message\":\"User is disable.\"}";
+            }
+        }
+
+        private bool validatePassword(User user)
+        {
+            if (user.Password == "ActiveDirectory")
+                return false;
+            else
+                return true;
         }
 
         private void addAuthCookie(string username)
