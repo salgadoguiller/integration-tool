@@ -176,14 +176,13 @@ CREATE TABLE FlatFilesParameters (
 
 
 -- -----------------------------------------------------
--- Table FlatFiles
+-- Table PathReports
 -- -----------------------------------------------------
-CREATE TABLE FlatFiles (
-  FlatFileId INT NOT NULL IDENTITY(1,1),
-  Name VARCHAR(100) NOT NULL,
-  CONSTRAINT PK_FlatFiles
-    PRIMARY KEY (FlatFileId));
-
+CREATE TABLE PathReports (
+  PathReportId INT NOT NULL IDENTITY(1,1),
+  Location VARCHAR(100) NOT NULL,
+  CONSTRAINT PK_PathReport
+    PRIMARY KEY (PathReportId));
 
 -- -----------------------------------------------------
 -- Table IntegrationCategories
@@ -293,6 +292,18 @@ CREATE TABLE ActiveDirectoryParameters (
   ADDomain VARCHAR(80) NOT NULL,
   CONSTRAINT PK_ActiveDirectoryParameter
     PRIMARY KEY (ActiveDirectoryId));
+
+
+-- -----------------------------------------------------
+-- Table ActiveDirectoryParameters
+-- -----------------------------------------------------
+CREATE TABLE ActiveDirectoryParameters (
+  ActiveDirectoryId INT NOT NULL IDENTITY(1,1),
+  ADPath VARCHAR(MAX) NOT NULL,
+  ADDomain VARCHAR(80) NOT NULL,
+  CONSTRAINT PK_ActiveDirectoryParameter
+    PRIMARY KEY (ActiveDirectoryId));
+
 
 
 -- -----------------------------------------------------

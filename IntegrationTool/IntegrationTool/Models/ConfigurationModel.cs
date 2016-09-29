@@ -45,6 +45,13 @@ namespace IntegrationTool.Models
             return flatFiles;
         }
 
+        public List<PathReport> getPathReports()
+        {
+            List<PathReport> pathReports = (from pr in ConfigurationDB.PathReports
+                                                  select pr).ToList();
+            return pathReports;
+        }
+
         public List<DatabaseParameter> getDatabases()
         {
             List<DatabaseParameter> databases = (from db in ConfigurationDB.DatabaseParameters
@@ -96,6 +103,12 @@ namespace IntegrationTool.Models
         {
             FlatFilesParameter flatFile = ConfigurationDB.FlatFilesParameters.Where(param => param.FlatFileParameterId == id).ToList()[0];
             return flatFile;
+        }
+
+        public PathReport getPathReport(int id)
+        {
+            PathReport pathReport = ConfigurationDB.PathReports.Where(param => param.PathReportId == id).ToList()[0];
+            return pathReport;
         }
 
         public Query getQuery(int id)
@@ -163,6 +176,16 @@ namespace IntegrationTool.Models
             flatFile.Location = location;
 
             ConfigurationDB.FlatFilesParameters.Add(flatFile);
+            ConfigurationDB.SaveChanges();
+        }
+
+        public void savePathReports(string location)
+        {
+            PathReport pathReport = new PathReport();
+
+            pathReport.Location = location;
+
+            ConfigurationDB.PathReports.Add(pathReport);
             ConfigurationDB.SaveChanges();
         }
 

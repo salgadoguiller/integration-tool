@@ -5,6 +5,7 @@
     $scope.deleteFlatFile = deleteFlatFile;
     $scope.editFlatFile = editFlatFile;
 
+
     getListFlatFiles();
 
     function getListFlatFiles() {
@@ -19,6 +20,7 @@
         $http.get('Configuration/getListFlatFiles', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listFlatFiles = resp;
+              
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;

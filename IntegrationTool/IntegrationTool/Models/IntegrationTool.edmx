@@ -18,6 +18,7 @@
           <EntitySet Name="IntegrationsType" EntityType="IntegrationToolModel.Store.IntegrationsType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Keys" EntityType="IntegrationToolModel.Store.Keys" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OperationsWebServices" EntityType="IntegrationToolModel.Store.OperationsWebServices" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PathReports" EntityType="IntegrationToolModel.Store.PathReports" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Permissions" EntityType="IntegrationToolModel.Store.Permissions" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Queries" EntityType="IntegrationToolModel.Store.Queries" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QueryParameters" EntityType="IntegrationToolModel.Store.QueryParameters" store:Type="Tables" Schema="dbo" />
@@ -228,6 +229,13 @@
           <Property Name="OperationWebServiceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Identifier" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PathReports">
+          <Key>
+            <PropertyRef Name="PathReportId" />
+          </Key>
+          <Property Name="PathReportId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -607,6 +615,7 @@
           <EntitySet Name="IntegrationsTypes" EntityType="IntegrationToolModel.IntegrationsType" />
           <EntitySet Name="Keys" EntityType="IntegrationToolModel.Key" />
           <EntitySet Name="OperationsWebServices" EntityType="IntegrationToolModel.OperationsWebService" />
+          <EntitySet Name="PathReports" EntityType="IntegrationToolModel.PathReport" />
           <EntitySet Name="Permissions" EntityType="IntegrationToolModel.Permission" />
           <EntitySet Name="Queries" EntityType="IntegrationToolModel.Query" />
           <EntitySet Name="QueryParameters" EntityType="IntegrationToolModel.QueryParameter" />
@@ -843,6 +852,13 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Integrations" Relationship="IntegrationToolModel.FK_IntegrationsOperationsWebServices_OperationWebServiceId" FromRole="OperationsWebServices" ToRole="Integrations" />
+        </EntityType>
+        <EntityType Name="PathReport">
+          <Key>
+            <PropertyRef Name="PathReportId" />
+          </Key>
+          <Property Name="PathReportId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -1349,6 +1365,14 @@
                 <ScalarProperty Name="OperationWebServiceId" ColumnName="OperationWebServiceId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PathReports">
+            <EntityTypeMapping TypeName="IntegrationToolModel.PathReport">
+              <MappingFragment StoreEntitySet="PathReports">
+                <ScalarProperty Name="PathReportId" ColumnName="PathReportId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

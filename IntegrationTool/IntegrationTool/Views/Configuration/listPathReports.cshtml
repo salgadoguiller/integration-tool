@@ -2,19 +2,18 @@
     <br />
     <feedback type=typeMessage message=message></feedback>
 
-  
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="col-md-10 col-md-offset-1">
         <h1>
-            List Servers SMTP
+            List Path Report
         </h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-cog"></i> Configuration</li>
-            <li class="breadcrumb-item active"> List Servers SMTP</li>
+            <li class="breadcrumb-item active"> List Path Reports</li>
         </ol>
         </div>
-    </section>  
+    </section> 
     
     <!-- Main content -->
     <section class="content">
@@ -24,41 +23,32 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Servers SMTP</h3>
-              <a href="/#/main/configuration/formServerSMTP/-1" class="pull-right btn btn-xs btn-success">Add</a>
+              <h3 class="box-title">Path Report</h3>
+                <a href="/#/main/configuration/formPathReport/-1" class="pull-right btn btn-xs btn-success">Add</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Name Server</th>
-                  <th>Port</th>
-                  <th>Username</th>
-                  <th>Password</th>
+                  <th>Location</th>
                   <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="serverSMTP in listServersSMTP">
-                  <td>{{serverSMTP.NameServerSMTP}}</td>
-                  <td>{{serverSMTP.Port}}</td>
-                  <td>{{serverSMTP.UsernameSMTP}}</td>
-                  <td>{{serverSMTP.PasswordSMTP}}</td>
+                <tr ng-repeat="pathReport in listPathReports">
+                  <td>{{pathReport.Location}}</td>                  
                   <td>
                     <div ng-controller="AlertController">
-                        <button class="btn btn-xs btn-success" ng-click="editServerSMTP(serverSMTP.ServerSMTPParametersId)">Edit</button>
-                        <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deleteServerSMTP(serverSMTP.ServerSMTPParametersId)" sweet-on-cancel="return">Delete</button>
+                        <button class="btn btn-xs btn-success" ng-click="editPathReport(pathReport.PathReportId)">Edit</button> 
+                        <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="deletePathReport(pathReport.PathReportId)" sweet-on-cancel="return">Delete</button>
                     </div>
                   </td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Name Server</th>
-                  <th>Port</th>
-                  <th>Username</th>
-                  <th>Password</th>
+                  <th>Location</th>                 
                   <th>Options</th>
                 </tr>
                 </tfoot>
@@ -74,7 +64,6 @@
     </section>
     <!-- /.content -->
 </div>
-
 
 
 

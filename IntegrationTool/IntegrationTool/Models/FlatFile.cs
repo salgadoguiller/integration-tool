@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class FlatFile
     {
         public FlatFile()
         {
             this.Integrations = new HashSet<Integration>();
         }
-
+    
         public int FlatFileId { get; set; }
         public string Name { get; set; }
 
