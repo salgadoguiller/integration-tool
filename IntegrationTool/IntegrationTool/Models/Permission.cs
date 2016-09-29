@@ -12,7 +12,7 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Permission
     {
         [JsonIgnore]
@@ -28,4 +28,3 @@ namespace IntegrationTool.Models
         public virtual User User { get; set; }
     }
 }
-

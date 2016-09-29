@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class UsersType
     {
         public UsersType()
         {
             this.Users = new HashSet<User>();
         }
-
+    
         public int UserTypeId { get; set; }
         public string Type { get; set; }
 

@@ -319,8 +319,7 @@ namespace IntegrationTool.Controllers
             documento.Add(aTable);
             //Se cierra el documento para que pueda ser visualizado por el usuario
             documento.Close();
-          
-            
+                    
             //downloadAdjuntos(path);       
         }
 

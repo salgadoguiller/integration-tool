@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class IntegrationCategory
     {
         public IntegrationCategory()
         {
             this.Integrations = new HashSet<Integration>();
         }
-
+    
         public int IntegrationCategoryId { get; set; }
         public string Name { get; set; }
 
@@ -27,4 +27,3 @@ namespace IntegrationTool.Models
         public virtual ICollection<Integration> Integrations { get; set; }
     }
 }
-

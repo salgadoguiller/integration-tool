@@ -3,6 +3,7 @@
 IntegrationToolApp.controller('FormActiveDirectoryController', FormActiveDirectoryController);
 IntegrationToolApp.controller('FormDataBaseController', FormDataBaseController);
 IntegrationToolApp.controller('FormFlatFileController', FormFlatFileController);
+IntegrationToolApp.controller('FormPathReportController', FormPathReportController);
 IntegrationToolApp.controller('FormQueryController', FormQueryController);
 IntegrationToolApp.controller('FormServerSMTPController', FormServerSMTPController);
 IntegrationToolApp.controller('FormWebServiceController', FormWebServiceController);
@@ -10,6 +11,7 @@ IntegrationToolApp.controller('FormWebServiceController', FormWebServiceControll
 IntegrationToolApp.controller('ListActiveDirectoriesController', ListActiveDirectoriesController);
 IntegrationToolApp.controller('ListDatabasesController', ListDatabasesController);
 IntegrationToolApp.controller('ListFlatFilesController', ListFlatFilesController);
+IntegrationToolApp.controller('ListPathReportsController', ListPathReportsController);
 IntegrationToolApp.controller('ListQueriesController', ListQueriesController);
 IntegrationToolApp.controller('ListServerSMTPController', ListServerSMTPController);
 IntegrationToolApp.controller('ListWebServicesController', ListWebServicesController);
@@ -137,6 +139,11 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         templateUrl: '/Configuration/listFlatFiles',
         controller: 'ListFlatFilesController'
     })
+   .state('main.configuration.listPathReports', {
+        url: '/listPathReports',
+        templateUrl: '/Configuration/listPathReports',
+        controller: 'ListPathReportsController'
+    })
     .state('main.configuration.listQueries', {
         url: '/listQueries',
         templateUrl: '/Configuration/listQueries',
@@ -171,6 +178,11 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/formFlatFile/:id',
         templateUrl: '/Configuration/formFlatFile',
         controller: 'FormFlatFileController'
+    })
+    .state('main.configuration.formPathReport', {
+        url: '/formPathReport/:id',
+        templateUrl: '/Configuration/formPathReport',
+        controller: 'FormPathReportController'
     })
     .state('main.configuration.formQuery', {
         url: '/formQuery/:id',

@@ -12,7 +12,7 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Calendar
     {
         public int CalendarId { get; set; }

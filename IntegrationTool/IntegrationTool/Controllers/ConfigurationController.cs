@@ -49,6 +49,12 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public ActionResult formPathReport()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult formQuery()
         {
             return View();
@@ -77,6 +83,12 @@ namespace IntegrationTool.Controllers
 
         [HttpGet]
         public ActionResult listFlatFiles()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult listPathReports()
         {
             return View();
         }
@@ -219,6 +231,25 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Configuration Flat File Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPut]
+        public void savePathReport()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.savePathReports(encryptor.encryptData(Request.Form["Location"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Path Report Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Path Report Unsuccessful. Please try again.\"}";
             }
 
             response(resp);
@@ -502,6 +533,30 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public void getListPathReports()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                List<PathReport> pathReports = systemConfigurationModel.getPathReports();
+
+                foreach (PathReport pathReport in pathReports)
+                {
+                    pathReport.Location = encryptor.decryptData(pathReport.Location);
+                }
+
+                resp = serializeObject(pathReports);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the path Report. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
         public void getListServersSMTP()
         {
             string resp = "";
@@ -670,6 +725,27 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the flat file. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
+        public void getPathReport(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                 PathReport pathReport = systemConfigurationModel.getPathReport(id);
+
+                 pathReport.Location = encryptor.decryptData(pathReport.Location);
+
+                 resp = serializeObject(pathReport);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the Path Report. Please try again.\"}";
             }
 
             response(resp);

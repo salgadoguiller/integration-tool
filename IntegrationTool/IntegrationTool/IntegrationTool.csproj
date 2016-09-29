@@ -224,6 +224,9 @@
     <Compile Include="Models\OperationsWebService.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PathReport.cs">
+      <DependentUpon>IntegrationTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Permission.cs">
       <DependentUpon>IntegrationTool.tt</DependentUpon>
     </Compile>
@@ -284,6 +287,8 @@
     <Content Include="Content\Images\Icon-user.png" />
     <Content Include="Content\Scripts\Controllers\ConfigIntegrationManualController.js" />
     <Content Include="Content\Scripts\Controllers\ChangePasswordController.js" />
+    <Content Include="Content\Scripts\Controllers\FormPathReportController.js" />
+    <Content Include="Content\Scripts\Controllers\ListPathReportsController.js" />
     <Content Include="Content\Scripts\Controllers\FormLocalUserController.js" />
     <Content Include="Content\Scripts\Controllers\FormADUserController.js" />
     <Content Include="Content\Scripts\Controllers\ListUsersController.js" />
@@ -489,27 +494,6 @@
     <Content Include="Views\Users\listUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\IntegrationTool.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\IntegrationTool.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\IntegrationTool.edmx.diagram">
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\IntegrationTool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntegrationTool.edmx</DependentUpon>
-      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Logs\listIntegrationLogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -533,6 +517,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Users\formADUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\IntegrationTool.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IntegrationTool.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\IntegrationTool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IntegrationTool.edmx.diagram">
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\IntegrationTool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegrationTool.edmx</DependentUpon>
+      <LastGenOutput>IntegrationTool.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\listPathReports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\formPathReport.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

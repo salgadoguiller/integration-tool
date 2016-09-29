@@ -23,7 +23,7 @@ namespace IntegrationTool.Models
     
         public int StatusId { get; set; }
         public string Name { get; set; }
-    
+
         [JsonIgnore]
         public virtual ICollection<Integration> Integrations { get; set; }
         [JsonIgnore]

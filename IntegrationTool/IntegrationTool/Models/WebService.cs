@@ -12,14 +12,14 @@ namespace IntegrationTool.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class WebService
     {
         public WebService()
         {
             this.Integrations = new HashSet<Integration>();
         }
-
+    
         public int WebServiceId { get; set; }
         public string Endpoint { get; set; }
         public string Username { get; set; }
