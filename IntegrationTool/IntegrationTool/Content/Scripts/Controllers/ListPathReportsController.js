@@ -19,8 +19,7 @@
 
         $http.get('Configuration/getListPathReports', data, config).success(function (resp) {
             if (resp.type !== 'danger') {
-                $scope.listPathReports = resp;
-              
+                $scope.listPathReports = resp;            
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
@@ -49,7 +48,7 @@
     }
 
     function editPathReport(id) {
-        $location.url('/main/configuration/formFlatFile/' + id);
+        $location.url('/main/configuration/formPathReport/' + id);
     }
 }
 

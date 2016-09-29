@@ -238,7 +238,7 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         controller: 'ListSystemLogsController'
     })
     .state('main.logs.listIntegrationLogs', {
-        url: '/listIntegrationLogs',
+        url: '/listIntegrationLogs/:id',
         templateUrl: '/Logs/listIntegrationLogs',
         controller: 'ListIntegrationLogsController'
     })

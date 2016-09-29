@@ -25,10 +25,17 @@ namespace IntegrationTool.Models
             return systemLogs;
         }
 
-        public List<IntegrationLog> getIntegrationLogs()
+        public List<IntegrationLog> getIntegrationLogs(int id)
         {
-            List<IntegrationLog> IntegrationLogs = (from il in LogsConfigurationDB.IntegrationLogs
-                                          select il).ToList();
+             List<IntegrationLog> IntegrationLogs = null;
+
+            if(id != -1)
+                IntegrationLogs =LogsConfigurationDB.IntegrationLogs.Where(param=>param.IntegrationId==id).ToList();
+
+            else
+                IntegrationLogs = (from il in LogsConfigurationDB.IntegrationLogs select il).ToList();
+            
+                
             return IntegrationLogs;
         }
 

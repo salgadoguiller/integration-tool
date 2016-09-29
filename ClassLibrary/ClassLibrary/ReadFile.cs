@@ -12,7 +12,7 @@ namespace ClassLibrary
         public string Read(string pathLog,int integrationId)
         {
             StreamReader file = new StreamReader(pathLog);
-
+            
             string line="";
             string line2="";
 

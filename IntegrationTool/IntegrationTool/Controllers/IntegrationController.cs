@@ -369,7 +369,7 @@ namespace IntegrationTool.Controllers
 
                 resp = serializeObject(integrations);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the manual integration. Please try again.\"}";
             }
