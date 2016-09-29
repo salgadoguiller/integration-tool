@@ -71,13 +71,13 @@ namespace IntegrationTool.Controllers
 
 
         [HttpGet]
-        public void getListSystemLogs()
+        public void getListSystemLogs(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
-                List<SystemLog> systemLogs = logsConfigurationModel.getSystemLogs();
+                List<SystemLog> systemLogs = logsConfigurationModel.getSystemLogs(id);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(systemLogs,
                     new JsonSerializerSettings()

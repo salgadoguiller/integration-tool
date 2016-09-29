@@ -18,10 +18,16 @@ namespace IntegrationTool.Models
         // Obtener parametros del sistema.
         // ================================================================================================================      
 
-        public List<SystemLog> getSystemLogs()
+        public List<SystemLog> getSystemLogs(int id)
         {
-            List<SystemLog> systemLogs = (from sl in LogsConfigurationDB.SystemLogs
-                        select sl).ToList();
+            List<SystemLog> systemLogs = null;
+
+            if(id != -1)
+                systemLogs = LogsConfigurationDB.SystemLogs.Where(param => param.IntegrationId == id).ToList();
+
+            else
+                systemLogs = (from sl in LogsConfigurationDB.SystemLogs select sl).ToList();
+
             return systemLogs;
         }
 

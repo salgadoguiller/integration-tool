@@ -4,7 +4,8 @@
     $scope.manualIntegrations = [];
     $scope.editManualIntegration = editManualIntegration;
     $scope.executeIntegration = executeIntegration;
-    $scope.viewLog = viewLog;
+    $scope.viewIntegrationLog = viewIntegrationLog;
+    $scope.viewSystemLog = viewSystemLog;
 
     $scope.isloading = true;
 
@@ -68,9 +69,14 @@
         $location.url('/main/integrations/configurationManual/' + id);
     }
 
-    function viewLog(id)
+    function viewIntegrationLog(id)
     {
         $location.url('/main/logs/listIntegrationLogs/' + id);
+    }
+
+    function viewSystemLog(id)
+    {
+        $location.url('/main/logs/listSystemLogs/' + id);
     }
 }
 
