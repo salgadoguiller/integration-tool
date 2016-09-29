@@ -253,6 +253,23 @@ namespace ClassLibrary
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
             CloseConnection();
+
+            updateNameFileIdInTableIntegration(NameFile);
+        }
+
+        //13
+        private void updateNameFileIdInTableIntegration(string NameFile)
+        {
+            string query = "select FlatFiles.FlatFileId from FlatFiles where Name ='"+NameFile+"'";
+            DataTable table = DataTable(query);
+
+            int FlatFileId = Convert.ToInt32(table.Rows[0]["FlatFileId"]);
+            string query2 = "UPDATE Integrations SET FlatFileId=" + FlatFileId + " WHERE IntegrationId="+integrationId;
+
+            OpenConnection();
+            SqlCommand sqlCommand = new SqlCommand(query2, connection);
+            sqlCommand.ExecuteNonQuery();
+            CloseConnection();
         }
 
         public void insertLog(string query)

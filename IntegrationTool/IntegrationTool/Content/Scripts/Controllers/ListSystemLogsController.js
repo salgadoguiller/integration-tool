@@ -1,4 +1,4 @@
-﻿var ListSystemLogsController = function ($scope, $http, $location, $state) {
+﻿var ListSystemLogsController = function ($scope, $http, $location, $stateParams, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listSystemLogs = [];
@@ -14,7 +14,7 @@
 
         var data = $.param({});
 
-        $http.get('Logs/getListSystemLogs', data, config).success(function (resp) {
+        $http.get('Logs/getListSystemLogs?id=' + $stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {
                 $scope.listSystemLogs = resp;
             } else {
@@ -27,4 +27,4 @@
     }
 }
 
-ListSystemLogsController.$inject = ['$scope', '$http', '$location', '$state'];
+ListSystemLogsController.$inject = ['$scope', '$http', '$location', '$stateParams', '$state'];

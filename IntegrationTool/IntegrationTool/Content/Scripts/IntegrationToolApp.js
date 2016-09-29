@@ -233,7 +233,7 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         template: '<div ui-view></div>'
     })
     .state('main.logs.listSystemLogs', {
-        url: '/listSystemLogs',
+        url: '/listSystemLogs/:id',
         templateUrl: '/Logs/listSystemLogs',
         controller: 'ListSystemLogsController'
     })

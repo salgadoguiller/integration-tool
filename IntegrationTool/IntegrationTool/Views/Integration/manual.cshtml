@@ -63,7 +63,9 @@
                             <div ng-controller="AlertController">
                                 <button class="btn btn-xs btn-success" ng-click="editManualIntegration(integration.IntegrationId);">Re-Use</button> 
                                 <button class="btn btn-xs btn-danger" sweetalert sweet-options="{{sweet.option}}" sweet-on-confirm="executeIntegration(integration.IntegrationId)" sweet-on-cancel="return">Execute</button>
-                                <button class="btn btn-xs btn-primary" ng-click="viewLog(integration.IntegrationId)">View Log</button>
+                                <button class="btn btn-xs btn-warning" ng-click="viewSystemLog(integration.IntegrationId)">System Log</button>
+                                <button class="btn btn-xs btn-primary" ng-click="viewIntegrationLog(integration.IntegrationId)">Integ. Log</button>
+                                                          
                             </div>
                         </td>
                     </tr>
