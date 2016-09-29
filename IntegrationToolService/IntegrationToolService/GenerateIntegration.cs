@@ -19,7 +19,7 @@ namespace IntegrationToolService
         private Curl curl = new Curl();
         private  WriteFileController writeFileController= new WriteFileController();
         private string emails = "";
-        private string location = "";
+        //private string location = "";
             
         public GenerateIntegration(string server = "172.20.33.13", string databaseName = "IntegrationTool", string userId="SISUser",string password="test2016!")
         {
@@ -58,7 +58,7 @@ namespace IntegrationToolService
             {
                 Console.WriteLine(e.Message);
             }                 
-        }      
+        }   
 
         //1
         public void ObtainQueryToVerifyTimeToExecutionIntegration()
@@ -75,6 +75,33 @@ namespace IntegrationToolService
             CloseConnection();
           
             VerifyTimeToExecutionIntegration(table, datetimeNow);         
+        }
+
+        //
+        private bool ObtainStateIntegration(int integrationId)
+        {
+            int Enable = 1;
+            
+
+            string query =
+                "select StatusId from Integrations where IntegrationId ='"+integrationId+"'";
+
+            OpenConnection();
+            var table = DataTable(query);
+            CloseConnection();
+
+            int status = Convert.ToInt32(table.Rows[0]["StatusId"]);
+
+            return VerfiyStateIntegration(Enable, status);                               
+        }
+
+        private static bool VerfiyStateIntegration(int Enable, int status)
+        {
+            if (status == Enable)
+                return true;
+
+            else
+                return false;
         }
 
         //2
@@ -101,12 +128,15 @@ namespace IntegrationToolService
         {
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                DateTime ExecutionEndDate = Convert.ToDateTime(table.Rows[i]["ExecutionEndDate"]);            
-                
-                if(compareEndDatetime(datetimeNow,ExecutionEndDate))
+                if (ObtainStateIntegration(Convert.ToInt32(table.Rows[i]["IntegrationId"])))
                 {
-                    NextExecutionDate(table, datetimeNow, i);
-                }                
+                    DateTime ExecutionEndDate = Convert.ToDateTime(table.Rows[i]["ExecutionEndDate"]);
+
+                    if (compareEndDatetime(datetimeNow, ExecutionEndDate))
+                    {
+                        NextExecutionDate(table, datetimeNow, i);
+                    }
+                }                     
             }
         }
 

@@ -104,8 +104,8 @@ namespace ClassLibrary
             string[] splitNameAndFullPath = fullPathMoreNameFile.Split('|');
             parseWebServicesResult(webServicesParameters, splitNameAndFullPath[0]);
             insertNameFile(splitNameAndFullPath[1]);
-            Thread.Sleep(1000);
-            insertLog(readFile.Read(pathLog, integrationId));         
+            Thread.Sleep(2000);
+            insertLog(readFile.Read(pathLog, integrationId,this));         
         }
 
         //7

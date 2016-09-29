@@ -9,28 +9,40 @@ namespace ClassLibrary
 {
     class ReadFile
     {
-        public string Read(string pathLog,int integrationId)
+        public string Read(string pathLog,int integrationId,Integration integration)
         {
-            StreamReader file = new StreamReader(pathLog);
-            
-            string line="";
-            string line2="";
-
-            // Read the file and display it line by line.
-        
-            while ((line = file.ReadLine()) != null)
+            try
             {
-                line2 += line + "%";                           
+               StreamReader file = new StreamReader(pathLog);
+
+               string line = "";
+               string line2 = "";
+
+               // Read the file and display it line by line.
+
+               while ((line = file.ReadLine()) != null)
+               {
+                    line2 += line + "%";
+               }
+
+               line2 = line2.Replace("'", "");
+               string[] ContentFile = line2.Split('%');
+
+               if (ContentFile[1].Equals("200"))
+                   return ReturnSuccessStatus(integrationId, file, ContentFile);
+
+               else
+                   return ReturnErrorStatus(integrationId, file, line2);
+
             }
-       
-            line2 = line2.Replace("'","");                  
-            string [] ContentFile = line2.Split('%');
-          
-            if (ContentFile[1].Equals("200"))           
-                return ReturnSuccessStatus(integrationId, file, ContentFile);
-            
-            else           
-                return ReturnErrorStatus(integrationId, file, line2);                  
+            catch (System.IO.IOException e)
+            {
+                string message = e.Message;
+                message = message.Replace("'", "");
+                string queryToLog = "insert into SystemLogs (Description,ErrorDate, IntegrationId) values('Class SqlServer: " + message + "','" + DateTime.Now + "'," + integration.integrationId + ")";
+                integration.insertLog(queryToLog);
+                return "";
+            }                  
         }
 
         private static string ReturnSuccessStatus(int integrationId, StreamReader file, string[] ContentFile)
