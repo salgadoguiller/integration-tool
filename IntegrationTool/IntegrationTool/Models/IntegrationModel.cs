@@ -18,8 +18,8 @@ namespace IntegrationTool.Models
         // Almacenar integraciones en el sistema.
         // ================================================================================================================
         public int saveIntegrationManual(int userId, string integrationName, int webServiceId, int databaseParametersId,
-                                            int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
+                                            int flatFileParameterId, int integrationTypeId, int queryId,
+                                            int operationWebServiceId, List<QueryParameter> queryParameters,
                                             string curlParameters = null)
         {
             Integration integration = new Integration();
@@ -31,11 +31,12 @@ namespace IntegrationTool.Models
             integration.WebServiceId = webServiceId;
             integration.OperationWebServiceId = operationWebServiceId;
             integration.DatabaseParametersId = databaseParametersId;
-            integration.FlatFileId = flatFileId;
+            integration.FlatFileId = integrationDB.FlatFiles.Where(param => param.Name == "Default").ToList()[0].FlatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
             integration.IntegrationTypeId = integrationTypeId;
             integration.QueryId = queryId;
-            integration.IntegrationCategoryId = integrationCategoryId;
+            integration.IntegrationCategoryId = integrationDB.IntegrationCategories.Where(param => param.Name == "Manual").ToList()[0].IntegrationCategoryId;
+            integration.StatusId = integrationDB.Status.Where(param => param.Name == "Enable").ToList()[0].StatusId;
 
             integration.QueryParameters = queryParameters;
 
@@ -46,8 +47,8 @@ namespace IntegrationTool.Models
         }
 
         public void saveIntegrationSchedule(int userId, string integrationName, int webServiceId, int databaseParametersId,
-                                            int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
+                                            int flatFileParameterId, int integrationTypeId, int queryId,
+                                            int operationWebServiceId, List<QueryParameter> queryParameters,
                                             DateTime executionStartDate, DateTime executionEndDate, int recurenceId, int statusId, string emails = null,
                                             string curlParameters = null)
         {
@@ -60,11 +61,11 @@ namespace IntegrationTool.Models
             integration.WebServiceId = webServiceId;
             integration.OperationWebServiceId = operationWebServiceId;
             integration.DatabaseParametersId = databaseParametersId;
-            integration.FlatFileId = flatFileId;
+            integration.FlatFileId = integrationDB.FlatFiles.Where(param => param.Name == "Default").ToList()[0].FlatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
             integration.IntegrationTypeId = integrationTypeId;
             integration.QueryId = queryId;
-            integration.IntegrationCategoryId = integrationCategoryId;
+            integration.IntegrationCategoryId = integrationDB.IntegrationCategories.Where(param => param.Name != "Manual").ToList()[0].IntegrationCategoryId;
             integration.StatusId = statusId;
 
             integration.QueryParameters = queryParameters;
@@ -86,8 +87,8 @@ namespace IntegrationTool.Models
         // Actualizar integraciones en el sistema.
         // ================================================================================================================
         public void updateIntegrationSchedule(int integrationId, int userId, string integrationName, int webServiceId, int databaseParametersId,
-                                            int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
-                                            int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
+                                            int flatFileParameterId, int integrationTypeId, int queryId,
+                                            int operationWebServiceId, List<QueryParameter> queryParameters,
                                             DateTime executionStartDate, DateTime executionEndDate, int recurenceId, int statusId, string emails = null,
                                             string curlParameters = null)
         {
@@ -100,11 +101,11 @@ namespace IntegrationTool.Models
             integration.WebServiceId = webServiceId;
             integration.OperationWebServiceId = operationWebServiceId;
             integration.DatabaseParametersId = databaseParametersId;
-            integration.FlatFileId = flatFileId;
+            integration.FlatFileId = integrationDB.FlatFiles.Where(param => param.Name == "Default").ToList()[0].FlatFileId;
             integration.FlatFileParameterId = flatFileParameterId;
             integration.IntegrationTypeId = integrationTypeId;
             integration.QueryId = queryId;
-            integration.IntegrationCategoryId = integrationCategoryId;
+            integration.IntegrationCategoryId = integrationDB.IntegrationCategories.Where(param => param.Name != "Manual").ToList()[0].IntegrationCategoryId;
             integration.StatusId = statusId;
 
             integration.QueryParameters = queryParameters;
