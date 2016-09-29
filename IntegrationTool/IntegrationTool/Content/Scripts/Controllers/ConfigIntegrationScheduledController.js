@@ -1,6 +1,7 @@
-﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state, Authentication) {
+﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state, Authentication, $location) {
     $scope.typeMessage = 0;
     $scope.message = "";
+    $scope.type = $stateParams.id;
     $scope.request = {};
     $scope.integrationsType = [];
     $scope.queries = [];
@@ -17,6 +18,16 @@
     $scope.getQueries = getQueries;
     $scope.getQuery = getQuery;
     $scope.getDatabase = getDatabase;
+    $scope.viewSystemLog = viewSystemLog;
+    $scope.viewIntegrationLog = viewIntegrationLog;
+
+    function viewIntegrationLog() {
+        $location.url('/main/logs/listIntegrationLogs/' + $stateParams.id);
+    }
+
+    function viewSystemLog() {
+        $location.url('/main/logs/listSystemLogs/' + $stateParams.id);
+    }
 
     getIntegrationsType();
     getWebServices();
@@ -383,4 +394,4 @@
     }
 }
 
-ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication'];
+ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication', '$location'];
