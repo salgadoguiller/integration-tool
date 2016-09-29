@@ -25,6 +25,8 @@ namespace ClassLibrary
                     {
                         file.WriteLine(resultParse[i]);
                     }
+
+                    file.Close();
                 }
             }
             catch (DirectoryNotFoundException e)

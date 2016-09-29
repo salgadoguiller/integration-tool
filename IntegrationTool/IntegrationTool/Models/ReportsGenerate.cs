@@ -116,7 +116,7 @@ namespace IntegrationTool.Models
                            
             string query = "SELECT  dbo.IntegrationCategories.Name, dbo.IntegrationsType.Name AS TypeIntegration, dbo.OperationsWebServices.Name AS OperationWebServices,"+
                            " dbo.DatabaseParameters.Name AS DatabaseName, dbo.IntegrationLogs.ReferenceCode,"+
-                           " dbo.IntegrationLogs.Date, dbo.IntegrationLogs.Status,dbo.Integrations.IntegrationName"+
+                           " dbo.IntegrationLogs.Date, dbo.IntegrationLogs.Status,dbo.Integrations.IntegrationName,Integrations.IntegrationDate" +
                            " FROM dbo.Integrations INNER JOIN"+
                            " dbo.IntegrationCategories ON dbo.Integrations.IntegrationCategoryId = dbo.IntegrationCategories.IntegrationCategoryId INNER JOIN"+
                            " dbo.IntegrationsType ON dbo.Integrations.IntegrationTypeId = dbo.IntegrationsType.IntegrationTypeId INNER JOIN"+
@@ -142,7 +142,7 @@ namespace IntegrationTool.Models
                     RangeDateIntegrationDecision = "1=1";
                     break;
                 default:
-                    RangeDateIntegrationDecision = "dbo.IntegrationLogs.Date BETWEEN'" + Convert.ToDateTime(DateStart) + "' and '" + Convert.ToDateTime(DateEnd) + "'";
+                    RangeDateIntegrationDecision = "Integrations.IntegrationDate BETWEEN'" + Convert.ToDateTime(DateStart) + "' and '" + Convert.ToDateTime(DateEnd) + "'";
                     break;
             }
             return RangeDateIntegrationDecision;

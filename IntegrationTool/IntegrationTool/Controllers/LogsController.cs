@@ -39,14 +39,14 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
-        public void getListIntegrationLogs()
+        public void getListIntegrationLogs(int id)
         {
             string resp = "";
             try
             {
                 connectModel();
 
-                List<IntegrationLog> integrationLogs = logsConfigurationModel.getIntegrationLogs();
+                List<IntegrationLog> integrationLogs = logsConfigurationModel.getIntegrationLogs(id);
 
                 resp = Newtonsoft.Json.JsonConvert.SerializeObject(integrationLogs,
                     new JsonSerializerSettings()

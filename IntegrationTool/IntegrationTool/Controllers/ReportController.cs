@@ -268,7 +268,7 @@ namespace IntegrationTool.Controllers
             documento.Open();
                   
             //Le decimos que nuestro documento actualmente tendra 8 celdas (posible cambio en futuro)
-            iTextSharp.text.pdf.PdfPTable aTable = new iTextSharp.text.pdf.PdfPTable(8);           
+            iTextSharp.text.pdf.PdfPTable aTable = new iTextSharp.text.pdf.PdfPTable(9);           
             //Se hace una instancia de la clase que es la encargada de hacer la consulta a la base de datos para retornar los contratos
            
             
@@ -298,22 +298,24 @@ namespace IntegrationTool.Controllers
 
             GenerateHeaders(aTable, headers, "Name Integration");
             GenerateHeaders(aTable, headers, "Status");
+            GenerateHeaders(aTable, headers, "Date");
             GenerateHeaders(aTable, headers, "Category Integration");
             GenerateHeaders(aTable, headers, "Type Integration");
             GenerateHeaders(aTable, headers, "Operation Web Services");
             GenerateHeaders(aTable, headers, "Database Name");
-            GenerateHeaders(aTable, headers, "Date Integration");
+            GenerateHeaders(aTable, headers, "Date Create Integration");
           
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 aTable.AddCell(Convert.ToString(table.Rows[i]["ReferenceCode"]));
                 aTable.AddCell(Convert.ToString(table.Rows[i]["IntegrationName"]));
                 aTable.AddCell(Convert.ToString(table.Rows[i]["Status"]));
+                aTable.AddCell(Convert.ToString(table.Rows[i]["Date"]));
                 aTable.AddCell(Convert.ToString(table.Rows[i]["Name"]));
                 aTable.AddCell(Convert.ToString(table.Rows[i]["TypeIntegration"]));
                 aTable.AddCell(Convert.ToString(table.Rows[i]["OperationWebServices"]));
                 aTable.AddCell(decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"])));
-                aTable.AddCell(Convert.ToString(table.Rows[i]["Date"]));             
+                aTable.AddCell(Convert.ToString(table.Rows[i]["IntegrationDate"]));             
             }
          
 
@@ -432,11 +434,12 @@ namespace IntegrationTool.Controllers
             worksheet.Cell("A1").Value = "Reference Code";
             worksheet.Cell("B1").Value = "Name Integration";
             worksheet.Cell("C1").Value = "Status";
-            worksheet.Cell("D1").Value = "Category Integration";
-            worksheet.Cell("E1").Value = "Type Integration";
-            worksheet.Cell("F1").Value = "Operation Web Services";
-            worksheet.Cell("G1").Value = "Database Name";
-            worksheet.Cell("H1").Value = "Date Integration";
+            worksheet.Cell("D1").Value = "Date";
+            worksheet.Cell("E1").Value = "Category Integration";
+            worksheet.Cell("F1").Value = "Type Integration";
+            worksheet.Cell("G1").Value = "Operation Web Services";
+            worksheet.Cell("H1").Value = "Database Name";
+            worksheet.Cell("I1").Value = "Date Integration";
          
             int contador = 4;
             for (int i = 0; i < table.Rows.Count; i++)
@@ -444,11 +447,12 @@ namespace IntegrationTool.Controllers
                 worksheet.Cell("A" + contador).Value = Convert.ToString(table.Rows[i]["ReferenceCode"]);
                 worksheet.Cell("B" + contador).Value = Convert.ToString(table.Rows[i]["IntegrationName"]);                
                 worksheet.Cell("C" + contador).Value = Convert.ToString(table.Rows[i]["Status"]);
-                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
-                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
-                worksheet.Cell("F" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
-                worksheet.Cell("G" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
-                worksheet.Cell("H" + contador).Value = Convert.ToString(table.Rows[i]["Date"]);
+                worksheet.Cell("D" + contador).Value = Convert.ToString(table.Rows[i]["Date"]);
+                worksheet.Cell("E" + contador).Value = Convert.ToString(table.Rows[i]["Name"]);
+                worksheet.Cell("F" + contador).Value = Convert.ToString(table.Rows[i]["TypeIntegration"]);
+                worksheet.Cell("G" + contador).Value = Convert.ToString(table.Rows[i]["OperationWebServices"]);
+                worksheet.Cell("H" + contador).Value = decrypt.decryptData(Convert.ToString(table.Rows[i]["DatabaseName"]));
+                worksheet.Cell("I" + contador).Value = Convert.ToString(table.Rows[i]["IntegrationDate"]);
                 contador++; 
             }
             

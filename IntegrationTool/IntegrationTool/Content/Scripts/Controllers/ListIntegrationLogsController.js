@@ -1,4 +1,4 @@
-﻿var ListIntegrationLogsController = function ($scope, $http, $location, $state) {
+﻿var ListIntegrationLogsController = function ($scope, $http, $location, $stateParams, $state) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationLogs = [];
@@ -14,7 +14,7 @@
 
         var data = $.param({});
 
-        $http.get('Logs/getListIntegrationLogs', data, config).success(function (resp) {
+        $http.get('Logs/getListIntegrationLogs?id='+$stateParams.id, data, config).success(function (resp) {
             if (resp.type !== 'danger') {              
                 $scope.listIntegrationLogs = resp;
             } else {
@@ -27,4 +27,4 @@
     }
 }
 
-ListIntegrationLogsController.$inject = ['$scope', '$http', '$location', '$state'];
+ListIntegrationLogsController.$inject = ['$scope', '$http', '$location', '$stateParams', '$state'];
