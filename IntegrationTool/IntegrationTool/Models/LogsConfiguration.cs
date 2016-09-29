@@ -31,5 +31,25 @@ namespace IntegrationTool.Models
                                           select il).ToList();
             return IntegrationLogs;
         }
+
+        public string getWebServiceUser(int integrationId)
+        {
+            return LogsConfigurationDB.Integrations.Where(param => param.IntegrationId == integrationId).ToList()[0].WebService.Username;
+        }
+
+        public string getWebServicePassword(int integrationId)
+        {
+            return LogsConfigurationDB.Integrations.Where(param => param.IntegrationId == integrationId).ToList()[0].WebService.Password;
+        }
+
+        public string getWebServiceEndPoint(int integrationId)
+        {
+            return LogsConfigurationDB.Integrations.Where(param => param.IntegrationId == integrationId).ToList()[0].WebService.Endpoint;
+        }
+
+        public string getPath(int integrationId)
+        {
+            return LogsConfigurationDB.Integrations.Where(param => param.IntegrationId == integrationId).ToList()[0].FlatFilesParameter.Location;
+        }
     }
 }

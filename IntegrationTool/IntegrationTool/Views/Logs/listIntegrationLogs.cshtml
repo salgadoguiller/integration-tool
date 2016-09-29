@@ -38,17 +38,21 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <tr ng-repeat="integrationLogs in listIntegrationLogs">
                   <td>{{integrationLogs.ReferenceCode}}</td>
                   <td>{{integrationLogs.Status}}</td> 
                   <td>{{integrationLogs.Integration.IntegrationName}}</td>                   
                   <td>{{integrationLogs.Date}}</td>  
-                   <td>
-                    <div ng-controller="AlertController">
-                      <button class="btn btn-xs btn-success" ng-click="editActiveDirectory(activeDirectory.ActiveDirectoryId)">View more Details</button> 
-                    </div> 
-                   </td>                                            
+                  <td>
+                      <div ng-if="integrationLogs.Status == 200">
+                        <div ng-controller="AlertController">
+                            <button class="btn btn-xs btn-success" ng-click="viewDetails(integrationLogs.IntegrationId, integrationLogs.Integration.IntegrationName, integrationLogs.ReferenceCode)">View more Details</button> 
+                        </div> 
+                      </div>
+                      <div ng-if="integrationLogs.Status == 403 || integrationLogs.Status == 500">
+                          <button class="btn btn-xs btn-default">View more Details</button> 
+                      </div>
+                  </td>                                            
                 </tr>
                 </tbody>
                 <tfoot>

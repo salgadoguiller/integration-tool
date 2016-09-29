@@ -57,7 +57,7 @@ namespace IntegrationTool.Controllers
 
                 connectModel();
 
-                int integrationId = integrationConfigurationModel.saveIntegrationManual(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                int integrationId = integrationConfigurationModel.saveIntegrationManual(Convert.ToInt32(Request.Form["UserId"]),
                                                             Request.Form["IntegrationName"],
                                                             Convert.ToInt32(Request.Form["WebServiceId"]),
                                                             Convert.ToInt32(Request.Form["DatabaseParametersId"]),
@@ -98,7 +98,7 @@ namespace IntegrationTool.Controllers
                 DateTime executionStartDate = DateTime.ParseExact(Request.Form["ExecutionStartDate"], format, CultureInfo.CurrentCulture);
                 DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
 
-                integrationConfigurationModel.saveIntegrationSchedule(/*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                integrationConfigurationModel.saveIntegrationSchedule(Convert.ToInt32(Request.Form["UserId"]),
                                                             Request.Form["IntegrationName"],
                                                             Convert.ToInt32(Request.Form["WebServiceId"]),
                                                             Convert.ToInt32(Request.Form["DatabaseParametersId"]),
@@ -112,6 +112,7 @@ namespace IntegrationTool.Controllers
                                                             executionStartDate,
                                                             executionEndDate,
                                                             Convert.ToInt32(Request.Form["RecurrenceId"]),
+                                                            Convert.ToInt32(Request.Form["StatusId"]),
                                                             Request.Form["Emails"],
                                                             Request.Form["CurlParameters"]);
 
@@ -145,7 +146,7 @@ namespace IntegrationTool.Controllers
                 DateTime executionEndDate = DateTime.ParseExact(Request.Form["ExecutionEndDate"], format, CultureInfo.CurrentCulture);
 
                 integrationConfigurationModel.updateIntegrationSchedule(Convert.ToInt32(Request.Form["IntegrationId"]),
-                                                            /*Convert.ToInt32(Request.Form["UserId"])*/ 1,
+                                                            Convert.ToInt32(Request.Form["UserId"]),
                                                             Request.Form["IntegrationName"],
                                                             Convert.ToInt32(Request.Form["WebServiceId"]),
                                                             Convert.ToInt32(Request.Form["DatabaseParametersId"]),
@@ -159,6 +160,7 @@ namespace IntegrationTool.Controllers
                                                             executionStartDate,
                                                             executionEndDate,
                                                             Convert.ToInt32(Request.Form["RecurrenceId"]),
+                                                            Convert.ToInt32(Request.Form["StatusId"]),
                                                             Request.Form["Emails"],
                                                             Request.Form["CurlParameters"]);
 
@@ -395,18 +397,37 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpGet]
+        public void getStatus()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                IList<Status> status = integrationConfigurationModel.getStatus();
+
+                resp = serializeObject(status);
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpGet]
         public void executeIntegration(int id)
         {
             string resp = "";
-            //try
-            //{
+            try
+            {
                 executeIntegrationManual(id);
                 resp = "{\"type\":\"success\", \"message\":\"Integration successful executed.\"}";
-            //}
-            //catch (Exception)
-            //{
-              //  resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
-            //}
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be loaded the integration selected. Please try again.\"}";
+            }
 
             response(resp);
         }
@@ -446,7 +467,14 @@ namespace IntegrationTool.Controllers
                 {
                     QueryParameter qp = new QueryParameter();
                     qp.Name = Request.Form.AllKeys[index];
-                    qp.Value = "'" + Request.Form[qp.Name] + "'";
+                    string[] values = Request.Form[qp.Name].Split('|');
+
+                    string value = "";
+                    foreach(string v in values)
+                    {
+                        value += "'" +  v + "',";
+                    }
+                    qp.Value = value.TrimEnd(',');
 
                     queryParameters.Add(qp);
                 }

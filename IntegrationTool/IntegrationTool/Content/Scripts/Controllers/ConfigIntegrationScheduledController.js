@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state) {
+﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state, Authentication) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -10,6 +10,7 @@
     $scope.flatFiles = [];
     $scope.recurrences = [];
     $scope.params = [];
+    $scope.status = [];
     $scope.query;
     $scope.database;
     $scope.sendRequest = sendRequest;
@@ -23,6 +24,7 @@
     getDatabases();
     getFlatFiles();
     getRecurrences();
+    getStatus();
 
     if ($stateParams.id != -1) {
         getIntegration($stateParams.id);
@@ -57,6 +59,7 @@
         resp.DatabaseParametersId = resp.DatabaseParametersId + '';
         resp.FlatFileParameterId = resp.FlatFileParameterId + '';
         resp.QueryId = resp.QueryId + '';
+        resp.StatusId = resp.StatusId + '';
 
         getDatabase(resp.DatabaseParametersId);
         getQueries(resp.IntegrationTypeId);
@@ -117,6 +120,8 @@
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         }
+
+        req.UserId = Authentication.user.UserId;
 
         var data = $.param(req);
 
@@ -355,6 +360,27 @@
             $state.transitionTo('main.errors.internalServerError');
         });
     }
+
+    function getStatus() {
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({});
+
+        $http.get('Integration/getStatus', data, config).success(function (resp) {
+            if (resp.type !== 'danger') {
+                $scope.status = resp;
+            } else {
+                $scope.message = resp.message;
+                $scope.typeMessage = resp.type;
+            }
+        }).error(function (resp) {
+            $state.transitionTo('main.errors.internalServerError');
+        });
+    }
 }
 
-ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state'];
+ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication'];

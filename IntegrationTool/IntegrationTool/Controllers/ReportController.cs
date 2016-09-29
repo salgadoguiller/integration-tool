@@ -254,7 +254,7 @@ namespace IntegrationTool.Controllers
             string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
-            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateNow + ".pdf";
+            string path = "C:/Users/gcrescencio/Desktop/ReportIntegrationLogs" + DateNow + ".pdf";
               
             //Creamos la instancia para generar el archivo PDF
             //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
@@ -335,7 +335,7 @@ namespace IntegrationTool.Controllers
             string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
-            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateNow + ".pdf";
+            string path = "C:/Users/gcrescencio/Desktop/ReportSystemLogs" + DateNow + ".pdf";
 
             //Creamos la instancia para generar el archivo PDF
             //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
@@ -449,7 +449,7 @@ namespace IntegrationTool.Controllers
             }
             
             worksheet.Columns().AdjustToContents();        
-            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+            string path = "C:/Users/gcrescencio/Desktop/ReportIntegrationLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
             
             workbook.SaveAs(path);
 
@@ -489,7 +489,7 @@ namespace IntegrationTool.Controllers
             }
 
             worksheet.Columns().AdjustToContents();
-            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+            string path = "C:/Users/gcrescencio/Desktop/ReportSystemLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
 
             workbook.SaveAs(path);
 

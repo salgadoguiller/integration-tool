@@ -23,6 +23,7 @@ IntegrationToolApp.controller('ManualIntegrationController', ManualIntegrationCo
 IntegrationToolApp.controller('SheduleIntegrationsController', SheduleIntegrationsController);
 
 IntegrationToolApp.controller('ListIntegrationLogsController', ListIntegrationLogsController);
+IntegrationToolApp.controller('LogDetailsController', LogDetailsController);
 IntegrationToolApp.controller('ListSystemLogsController', ListSystemLogsController);
 
 IntegrationToolApp.controller('LoginController', LoginController);
@@ -240,6 +241,11 @@ var configFunction = function ($routeProvider, $stateProvider, $urlRouterProvide
         url: '/listIntegrationLogs',
         templateUrl: '/Logs/listIntegrationLogs',
         controller: 'ListIntegrationLogsController'
+    })
+    .state('main.logs.viewDetails', {
+        url: '/viewDetails/:integrationId/:integrationName/:referenceCode',
+        templateUrl: '/Logs/viewDetails',
+        controller: 'LogDetailsController'
     })
     // Rutas de errores.
     .state('main.errors', {

@@ -2,6 +2,7 @@
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationLogs = [];
+    $scope.viewDetails = viewDetails;
 
     getListIntegrationLogs();
 
@@ -24,6 +25,10 @@
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
+    }
+
+    function viewDetails(integrationId, integrationName, referenceCode) {
+        $location.url('/main/logs/viewDetails/' + integrationId + '/' + integrationName + '/' + referenceCode);
     }
 }
 

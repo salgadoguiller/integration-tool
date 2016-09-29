@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationManualController = function ($scope, $http, $stateParams, $state) {
+﻿var ConfigIntegrationManualController = function ($scope, $http, $stateParams, $state, Authentication) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -105,7 +105,7 @@
             }
         }
 
-        console.log(req);
+        req.UserId = Authentication.user.UserId;
 
         var data = $.param(req);
 
@@ -287,4 +287,4 @@
     }
 }
 
-ConfigIntegrationManualController.$inject = ['$scope', '$http', '$stateParams', '$state'];
+ConfigIntegrationManualController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication'];

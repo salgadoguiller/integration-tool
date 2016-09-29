@@ -48,7 +48,7 @@ namespace IntegrationTool.Models
         public void saveIntegrationSchedule(int userId, string integrationName, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
-                                            DateTime executionStartDate, DateTime executionEndDate, int recurenceId, string emails = null,
+                                            DateTime executionStartDate, DateTime executionEndDate, int recurenceId, int statusId, string emails = null,
                                             string curlParameters = null)
         {
             Integration integration = new Integration();
@@ -65,6 +65,7 @@ namespace IntegrationTool.Models
             integration.IntegrationTypeId = integrationTypeId;
             integration.QueryId = queryId;
             integration.IntegrationCategoryId = integrationCategoryId;
+            integration.StatusId = statusId;
 
             integration.QueryParameters = queryParameters;
 
@@ -87,7 +88,7 @@ namespace IntegrationTool.Models
         public void updateIntegrationSchedule(int integrationId, int userId, string integrationName, int webServiceId, int databaseParametersId,
                                             int flatFileId, int flatFileParameterId, int integrationTypeId, int queryId,
                                             int integrationCategoryId, int operationWebServiceId, List<QueryParameter> queryParameters,
-                                            DateTime executionStartDate, DateTime executionEndDate, int recurenceId, string emails = null,
+                                            DateTime executionStartDate, DateTime executionEndDate, int recurenceId, int statusId, string emails = null,
                                             string curlParameters = null)
         {
             Integration integration = integrationDB.Integrations.Where(param => param.IntegrationId == integrationId).ToList()[0];
@@ -104,6 +105,7 @@ namespace IntegrationTool.Models
             integration.IntegrationTypeId = integrationTypeId;
             integration.QueryId = queryId;
             integration.IntegrationCategoryId = integrationCategoryId;
+            integration.StatusId = statusId;
 
             integration.QueryParameters = queryParameters;
 
@@ -160,6 +162,12 @@ namespace IntegrationTool.Models
         {
             Integration integration = integrationDB.Integrations.Where(param => param.IntegrationId == id).ToList()[0];
             return integration;
+        }
+
+        public List<Status> getStatus()
+        {
+            List<Status> status = integrationDB.Status.ToList();
+            return status;
         }
     }
 }
