@@ -17,6 +17,12 @@ namespace IntegrationTool.Models
         // ================================================================================================================
         // Obtener parametros del sistema.
         // ================================================================================================================      
+        public List<PathReport> getPathReport()
+        {
+            List<PathReport> pathReport = (from pr in ReportsConfigurationDB.PathReports
+                                                             select pr).ToList();
+            return pathReport;
+        }
 
         public List<IntegrationCategory> getCategoryIntegration()
         {           

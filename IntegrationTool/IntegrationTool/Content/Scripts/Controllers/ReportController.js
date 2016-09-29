@@ -115,7 +115,6 @@
     }
 
     function sendRequest(req) {
-      
 
         $('#submit').button('loading');
         setTimeout(function ()
@@ -128,18 +127,22 @@
         $scope.request.value2 = $scope.value;
         $scope.request.Report = $scope.Report.name;
 
-                    
+        var mime = setMimeForFiles();
+            
         var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
+            headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'},
+            responseType: 'arraybuffer' 
         }
 
         var data = $.param(req);     
        
         $http.post('Report/getDocumentReport', data, config).success(function (resp) {
-            $scope.message = resp.message;
-            $scope.typeMessage = resp.type;
+            console.log(resp);
+                    
+            var file = new Blob([resp], { type: mime });
+            var fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+
             $scope.request = {};
            
         }).error(function (resp) {
@@ -147,6 +150,17 @@
             $scope.typeMessage = "danger";
         });
         
+    }
+
+    function setMimeForFiles()
+    {
+        var mime = "";
+        if ($scope.request.Report == "Excel")
+            mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        else
+            mime = "application/pdf";
+
+        return mime;
     }
   
     function enableCard()

@@ -162,7 +162,7 @@ namespace IntegrationTool.Controllers
 
                 resp = "{\"type\":\"success\", \"message\":\"User created succesfully..\"}";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be created the user. Please try again.\"}";
             }
@@ -188,7 +188,7 @@ namespace IntegrationTool.Controllers
 
                 resp = "{\"type\":\"success\", \"message\":\"User updated succesfully.\"}";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be updated the user. Please try again.\"}";
             }
@@ -209,7 +209,7 @@ namespace IntegrationTool.Controllers
                 else
                     resp = "{\"type\":\"danger\", \"message\":\"Password incorrect.\"}";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be changed the password. Please try again.\"}";
             }

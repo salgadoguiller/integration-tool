@@ -156,7 +156,7 @@ namespace IntegrationTool.Controllers
         public void getDocumentReport()
         {
             string resp = "";
-            string verificacion ="";
+           
             
             ReportsGenerate reportGenerate = new ReportsGenerate();
             DataTable table = new DataTable();
@@ -173,7 +173,7 @@ namespace IntegrationTool.Controllers
                 resp = "{\"type\":\"danger\", \"message\":\"Report Generate "+ex.Message+" Unsuccessful. Please try again.\"}";
               
             }
-            response(resp);
+            //response(resp);
             
         }
 
@@ -253,8 +253,10 @@ namespace IntegrationTool.Controllers
             //y que lo que diferencie a cada reporte de contrato sea la fecha y hora en que se han generado
             string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
-            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateNow + ".pdf";
+            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )
+
+            string path = obtainPathReportsFromDatabase();
+            path += "/ReportIntegrationLogs" + DateNow + ".pdf";
               
             //Creamos la instancia para generar el archivo PDF
             //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
@@ -320,7 +322,8 @@ namespace IntegrationTool.Controllers
             //Se cierra el documento para que pueda ser visualizado por el usuario
             documento.Close();
                     
-            //downloadAdjuntos(path);       
+            //downloadAdjuntos(path);  
+            downloadPDF(path);
         }
 
 
@@ -334,8 +337,12 @@ namespace IntegrationTool.Controllers
             //y que lo que diferencie a cada reporte de contrato sea la fecha y hora en que se han generado
             string DateNow = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )          
-            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateNow + ".pdf";
+            //Se crea el path (direccion y nombre con el cual se guardara el reporte generado )   
+
+            string path = obtainPathReportsFromDatabase();
+            path += "/ReportSystemLogs" + DateNow + ".pdf";
+
+          
 
             //Creamos la instancia para generar el archivo PDF
             //Le pasamos el documento creado arriba y con capacidad para abrir o Crear y de nombre Mi_Primer_PDF
@@ -401,10 +408,8 @@ namespace IntegrationTool.Controllers
             //Se cierra el documento para que pueda ser visualizado por el usuario
             documento.Close();
 
-            // downloadAdjuntos(path);
-
-           
-
+            //downloadAdjuntos(path);
+            downloadPDF(path);
         }
 
         private static void GenerateHeaders(iTextSharp.text.pdf.PdfPTable aTable, PdfPCell headers,string NameHeader)
@@ -416,7 +421,6 @@ namespace IntegrationTool.Controllers
             headers.BorderColor = new iTextSharp.text.BaseColor(0, 0, 0);
             headers.Colspan = 1;
             aTable.AddCell(headers);
-            //return headers;
         }    
 
         private void generateDocumentForIntegrationLogsExcel(DataTable table)
@@ -448,12 +452,14 @@ namespace IntegrationTool.Controllers
                 contador++; 
             }
             
-            worksheet.Columns().AdjustToContents();        
-            string path = "C:/Users/cturcios/Desktop/ReportIntegrationLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
-            
+            worksheet.Columns().AdjustToContents();
+
+            string path = obtainPathReportsFromDatabase();
+            path += "/ReportIntegrationLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+                       
             workbook.SaveAs(path);
 
-            //downloadExcel(path);            
+            downloadExcel(path);            
             ////
         }
 
@@ -489,12 +495,34 @@ namespace IntegrationTool.Controllers
             }
 
             worksheet.Columns().AdjustToContents();
-            string path = "C:/Users/cturcios/Desktop/ReportSystemLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+
+            string path = obtainPathReportsFromDatabase();
+            path += "/ReportSystemLogs" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
 
             workbook.SaveAs(path);
 
-            //downloadExcel(path);            
+            downloadExcel(path);            
             ////
+        }
+
+        private string obtainPathReportsFromDatabase()
+        {
+            string path="";
+            try
+            {
+                connectModel();
+                List<PathReport> pathReport = ReportsConfigurationModel.getPathReport();
+              
+                foreach(PathReport paths in pathReport)
+                {
+                    path = decrypt.decryptData(paths.Location);
+                    break;
+                }
+            }
+            catch (Exception)
+            {}
+
+            return path;
         }
 
         private void downloadExcel(string path)
@@ -507,5 +535,17 @@ namespace IntegrationTool.Controllers
             Response.TransmitFile(path);
             Response.End();
         }
+
+        private void downloadPDF(string path)
+        {
+            Response.Clear();
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Response.ContentType = "application/pdf";
+            Response.Flush();
+            Response.TransmitFile(path);
+            Response.End();
+        }
+
     }
 }

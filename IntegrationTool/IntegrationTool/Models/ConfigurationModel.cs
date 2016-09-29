@@ -253,6 +253,13 @@ namespace IntegrationTool.Models
             ConfigurationDB.SaveChanges();
         }
 
+        public void updatePathReport(int id, string location)
+        {
+            PathReport pathReport = ConfigurationDB.PathReports.Where(param => param.PathReportId == id).ToList()[0];
+            pathReport.Location = location;
+            ConfigurationDB.SaveChanges();
+        }
+
         public void updateQuery(int id, string queryString, string queryName, string description, int integrationTypeId)
         {
             Query query = ConfigurationDB.Queries.Where(param => param.QueryId == id).ToList()[0];
@@ -312,6 +319,14 @@ namespace IntegrationTool.Models
             FlatFilesParameter flatFile = ConfigurationDB.FlatFilesParameters.Where(param => param.FlatFileParameterId == flatFileIdId).ToList()[0];
 
             ConfigurationDB.FlatFilesParameters.Remove(flatFile);
+            ConfigurationDB.SaveChanges();
+        }
+
+        public void deletePathReport(int pathReportId)
+        {
+            PathReport pathReport = ConfigurationDB.PathReports.Where(param => param.PathReportId == pathReportId).ToList()[0];
+
+            ConfigurationDB.PathReports.Remove(pathReport);
             ConfigurationDB.SaveChanges();
         }
 

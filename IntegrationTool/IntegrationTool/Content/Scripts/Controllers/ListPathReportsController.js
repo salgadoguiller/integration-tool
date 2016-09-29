@@ -49,7 +49,7 @@
     }
 
     function editPathReport(id) {
-        $location.url('/main/configuration/formFlatFile/' + id);
+        $location.url('/main/configuration/formPathReport/' + id);
     }
 }
 

@@ -66,7 +66,7 @@
     }
 
     function post(data, config, form) {
-        $http.post('Configuration/updateFlatFile', data, config).success(function (resp) {
+        $http.post('Configuration/updatePathReport', data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
             $scope.request = {};

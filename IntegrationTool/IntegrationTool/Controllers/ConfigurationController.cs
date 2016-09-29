@@ -394,6 +394,26 @@ namespace IntegrationTool.Controllers
         }
 
         [HttpPost]
+        public void updatePathReport()
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.updatePathReport(Convert.ToInt32(Request.Form["PathReportId"]),
+                                                        encryptor.encryptData(Request.Form["Location"]));
+
+                resp = "{\"type\":\"success\", \"message\":\"Configuration Path Report Successful.\"}";
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Configuration Path Report Unsuccessful. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpPost]
         public void updateQuery()
         {
             string resp = "";
@@ -883,6 +903,26 @@ namespace IntegrationTool.Controllers
             catch (Exception)
             {
                 resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the flat file. Please try again.\"}";
+            }
+
+            response(resp);
+        }
+
+        [HttpDelete]
+        public void deletePathReport(int id)
+        {
+            string resp = "";
+            try
+            {
+                connectModel();
+                systemConfigurationModel.deletePathReport(id);
+
+                resp = "{\"type\":\"success\", \"message\":\"Path Report deleted Successfully.\"}";
+
+            }
+            catch (Exception)
+            {
+                resp = "{\"type\":\"danger\", \"message\":\"Can not be deleted the Path Report. Please try again.\"}";
             }
 
             response(resp);
