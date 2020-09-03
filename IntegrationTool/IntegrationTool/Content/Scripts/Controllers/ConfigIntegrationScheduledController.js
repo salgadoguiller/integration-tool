@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state, Authentication, $location) {
+﻿var ConfigIntegrationScheduledController = function ($scope, $http, $stateParams, $state, Authentication, $location, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.type = $stateParams.id;
@@ -20,14 +20,6 @@
     $scope.getDatabase = getDatabase;
     $scope.viewSystemLog = viewSystemLog;
     $scope.viewIntegrationLog = viewIntegrationLog;
-
-    function viewIntegrationLog() {
-        $location.url('/main/logs/listIntegrationLogs/' + $stateParams.id);
-    }
-
-    function viewSystemLog() {
-        $location.url('/main/logs/listSystemLogs/' + $stateParams.id);
-    }
 
     getIntegrationsType();
     getWebServices();
@@ -56,6 +48,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -113,6 +106,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -123,6 +117,7 @@
         if (!form.$valid) {
             $scope.message = "Error: Invalid form, please try again.";
             $scope.typeMessage = "danger";
+            $window.scrollTo(0, 0);
             return false;
         }
 
@@ -152,6 +147,7 @@
             $scope.query = null;
             form.$setPristine();
             form.$setUntouched();
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -163,6 +159,7 @@
             $scope.typeMessage = resp.type;
             form.$setPristine();
             form.$setUntouched();
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -183,6 +180,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -206,6 +204,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -227,6 +226,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -248,6 +248,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -270,6 +271,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -303,6 +305,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -324,6 +327,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -345,6 +349,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -366,6 +371,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -387,11 +393,20 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
     }
+
+    function viewIntegrationLog() {
+        $location.url('/main/logs/listIntegrationLogs/' + $stateParams.id);
+    }
+
+    function viewSystemLog() {
+        $location.url('/main/logs/listSystemLogs/' + $stateParams.id);
+    }
 }
 
-ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication', '$location'];
+ConfigIntegrationScheduledController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication', '$location', '$window'];

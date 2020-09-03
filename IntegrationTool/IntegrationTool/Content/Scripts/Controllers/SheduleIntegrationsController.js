@@ -24,6 +24,7 @@
             else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');

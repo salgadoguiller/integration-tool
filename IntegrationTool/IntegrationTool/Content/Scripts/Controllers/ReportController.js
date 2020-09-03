@@ -1,4 +1,4 @@
-﻿var ReportController = function ($scope, $http, $location) {
+﻿var ReportController = function ($scope, $http, $location, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.value = "";
@@ -38,6 +38,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
@@ -61,6 +62,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
@@ -84,6 +86,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
@@ -107,6 +110,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
@@ -136,9 +140,7 @@
 
         var data = $.param(req);     
        
-        $http.post('Report/getDocumentReport', data, config).success(function (resp) {
-            console.log(resp);
-                    
+        $http.post('Report/getDocumentReport', data, config).success(function (resp) {                    
             var file = new Blob([resp], { type: mime });
             var fileURL = URL.createObjectURL(file);
             window.open(fileURL);
@@ -148,6 +150,7 @@
         }).error(function (resp) {
             $scope.message = "Error: " + resp;
             $scope.typeMessage = "danger";
+            $window.scrollTo(0, 0);
         });
         
     }
@@ -280,4 +283,4 @@
     });      
 }
 
-ReportController.$inject = ['$scope', '$http', '$location'];
+ReportController.$inject = ['$scope', '$http', '$location', '$window'];

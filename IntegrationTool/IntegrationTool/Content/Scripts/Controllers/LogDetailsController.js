@@ -1,4 +1,4 @@
-﻿var LogDetailsController = function ($scope, $http, $stateParams, $state) {
+﻿var LogDetailsController = function ($scope, $http, $stateParams, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.details = {};
@@ -36,6 +36,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
                 $scope.error = true;
             }
             $scope.isloading = false;
@@ -44,4 +45,4 @@
         });
     }
 }
-LogDetailsController.$inject = ['$scope', '$http', '$stateParams', '$state'];
+LogDetailsController.$inject = ['$scope', '$http', '$stateParams', '$state', '$window'];

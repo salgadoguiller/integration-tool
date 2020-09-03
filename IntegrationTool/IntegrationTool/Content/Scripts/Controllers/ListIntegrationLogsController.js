@@ -1,4 +1,4 @@
-﻿var ListIntegrationLogsController = function ($scope, $http, $location, $stateParams, $state) {
+﻿var ListIntegrationLogsController = function ($scope, $http, $location, $stateParams, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listIntegrationLogs = [];
@@ -21,6 +21,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -32,4 +33,4 @@
     }
 }
 
-ListIntegrationLogsController.$inject = ['$scope', '$http', '$location', '$stateParams', '$state'];
+ListIntegrationLogsController.$inject = ['$scope', '$http', '$location', '$stateParams', '$state', '$window'];

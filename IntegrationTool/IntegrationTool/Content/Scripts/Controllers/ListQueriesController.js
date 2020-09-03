@@ -1,4 +1,4 @@
-﻿var ListQueriesController = function ($scope, $http, $location, $state) {
+﻿var ListQueriesController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listQueries = [];
@@ -22,6 +22,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -40,6 +41,7 @@
         $http.delete('Configuration/deleteQuery?id=' + QueryId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getlistQueries();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -50,4 +52,4 @@
         $location.url('/main/configuration/formQuery/' + id);
     }
 }
-ListQueriesController.$inject = ['$scope', '$http', '$location', '$state'];
+ListQueriesController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

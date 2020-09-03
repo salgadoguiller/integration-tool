@@ -1,4 +1,4 @@
-﻿var ListPathReportsController = function ($scope, $http, $location, $state) {
+﻿var ListPathReportsController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listPathReports = [];
@@ -23,6 +23,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -41,6 +42,7 @@
         $http.delete('Configuration/deletePathReport?id=' + PathReportId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getListPathReports();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -52,4 +54,4 @@
     }
 }
 
-ListPathReportsController.$inject = ['$scope', '$http', '$location', '$state'];
+ListPathReportsController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

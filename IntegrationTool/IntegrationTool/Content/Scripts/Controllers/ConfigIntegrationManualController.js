@@ -1,4 +1,4 @@
-﻿var ConfigIntegrationManualController = function ($scope, $http, $stateParams, $state, Authentication) {
+﻿var ConfigIntegrationManualController = function ($scope, $http, $stateParams, $state, Authentication, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -41,6 +41,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -86,6 +87,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -96,6 +98,7 @@
         if (!form.$valid) {
             $scope.message = "Error: Invalid form, please try again.";
             $scope.typeMessage = "danger";
+            $window.scrollTo(0,0);
             return false;
         }
 
@@ -120,6 +123,7 @@
             }
             form.$setPristine();
             form.$setUntouched();
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -140,6 +144,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -163,6 +168,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -184,6 +190,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -205,6 +212,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -227,6 +235,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -259,6 +268,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -280,6 +290,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -287,4 +298,4 @@
     }
 }
 
-ConfigIntegrationManualController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication'];
+ConfigIntegrationManualController.$inject = ['$scope', '$http', '$stateParams', '$state', 'Authentication', '$window'];

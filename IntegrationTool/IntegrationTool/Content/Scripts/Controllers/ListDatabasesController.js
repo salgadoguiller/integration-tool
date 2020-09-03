@@ -1,4 +1,4 @@
-﻿var ListDatabasesController = function ($scope, $http, $location, $state) {
+﻿var ListDatabasesController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listDatabases = [];
@@ -24,6 +24,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -42,6 +43,7 @@
         $http.delete('Configuration/deleteDataBase?id=' + DatabaseParametersId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getListDatabases();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -52,4 +54,4 @@
         $location.url('/main/configuration/formDatabase/' + id);
     }
 }
-ListDatabasesController.$inject = ['$scope', '$http', '$location', '$state'];
+ListDatabasesController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

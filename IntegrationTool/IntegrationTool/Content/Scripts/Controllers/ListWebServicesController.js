@@ -1,4 +1,4 @@
-﻿var ListWebServicesController = function ($scope, $http, $location, $state) {
+﻿var ListWebServicesController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listWebServices = [];
@@ -22,6 +22,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -40,6 +41,7 @@
         $http.delete('Configuration/deleteWebService?id=' + WebServiceId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getListWebServices();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -50,4 +52,4 @@
         $location.url('/main/configuration/formWebService/' + id);
     }
 }
-ListWebServicesController.$inject = ['$scope', '$http', '$location', '$state'];
+ListWebServicesController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

@@ -1,4 +1,4 @@
-﻿var FormLocalUserController = function ($scope, $http, $stateParams, $state) {
+﻿var FormLocalUserController = function ($scope, $http, $stateParams, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.request = {};
@@ -36,6 +36,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -57,6 +58,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -78,6 +80,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -88,6 +91,7 @@
         if (!form.$valid) {
             $scope.message = "Error: Invalid form, please try again.";
             $scope.typeMessage = "danger";
+            $window.scrollTo(0, 0);
             return false;
         }
 
@@ -127,6 +131,7 @@
             $scope.request = {};
             form.$setPristine();
             form.$setUntouched();
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -140,6 +145,7 @@
             loadInfo();
             form.$setPristine();
             form.$setUntouched();
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -153,4 +159,4 @@
     }
 }
 
-FormLocalUserController.$inject = ['$scope', '$http', '$stateParams', '$state'];
+FormLocalUserController.$inject = ['$scope', '$http', '$stateParams', '$state', '$window'];

@@ -1,4 +1,4 @@
-﻿var ListServerSMTPController = function ($scope, $http, $location, $state) {
+﻿var ListServerSMTPController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listServersSMTP = [];
@@ -22,6 +22,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -40,6 +41,7 @@
         $http.delete('Configuration/deleteServerSMTP?id=' + ServerSMTPParametersId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getListServersSMTP();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -51,4 +53,4 @@
     }
 }
 
-ListServerSMTPController.$inject = ['$scope', '$http', '$location', '$state'];
+ListServerSMTPController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

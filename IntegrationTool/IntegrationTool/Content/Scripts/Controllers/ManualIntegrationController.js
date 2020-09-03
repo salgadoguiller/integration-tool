@@ -1,4 +1,4 @@
-﻿var ManualIntegrationController = function ($scope, $http, $location, $state) {
+﻿var ManualIntegrationController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.manualIntegrations = [];
@@ -42,6 +42,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -60,6 +61,7 @@
         $http.get('Integration/executeIntegration?id=' + id, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
         });
@@ -80,4 +82,4 @@
     }
 }
 
-ManualIntegrationController.$inject = ['$scope', '$http', '$location', '$state'];
+ManualIntegrationController.$inject = ['$scope', '$http', '$location', '$state', '$window'];

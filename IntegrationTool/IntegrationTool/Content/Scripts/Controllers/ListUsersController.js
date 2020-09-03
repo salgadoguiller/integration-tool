@@ -1,4 +1,4 @@
-﻿var ListUsersController = function ($scope, $http, $location, $state) {
+﻿var ListUsersController = function ($scope, $http, $location, $state, $window) {
     $scope.typeMessage = 0;
     $scope.message = "";
     $scope.listUsers = [];
@@ -23,6 +23,7 @@
             } else {
                 $scope.message = resp.message;
                 $scope.typeMessage = resp.type;
+                $window.scrollTo(0, 0);
             }
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -41,6 +42,7 @@
         $http.get('Users/disableUser?id=' + UserId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getUsers();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -59,6 +61,7 @@
         $http.get('Users/enableUser?id=' + UserId, data, config).success(function (resp) {
             $scope.message = resp.message;
             $scope.typeMessage = resp.type;
+            $window.scrollTo(0, 0);
             getUsers();
         }).error(function (resp) {
             $state.transitionTo('main.errors.internalServerError');
@@ -72,4 +75,4 @@
             $location.url('/main/users/formADUser/' + id);
     }
 }
-ListUsersController.$inject = ['$scope', '$http', '$location', '$state'];
+ListUsersController.$inject = ['$scope', '$http', '$location', '$state', '$window'];
